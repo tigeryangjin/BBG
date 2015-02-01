@@ -1,0 +1,12 @@
+--sa_tran_item三个字段：
+--OVERRIDE_REASON
+--This column will be populated when an items price has been overridden at the POS
+--to define why it was overridden.,
+--ORIG_UNIT_RETAIL(原售价)
+--This column will be populated when the items price was overridden at the POS and
+--the items original unit retail is known.,
+--STANDARD_ORIG_UNIT_RETAIL
+--This column will be populated when the items price was overridden at the POS and
+--the items original unit retail is known. The value stored in this column will be
+--held in the standard unit of measure.
+select * from sa_tran_item t where t.store='120033' and t.day=20 and t.orig_unit_retail is not null;

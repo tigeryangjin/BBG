@@ -1,0 +1,70 @@
+--1:商品-地点存在二条999999999999999的记录
+CREATE TABLE RADM.jin_inv_fix_tmp AS
+  SELECT /*+PARALLEL(T,20) PARALLEL(A,20)*/
+   T.ROW_WID,
+   T.PROD_SCD1_WID,
+   T.ORG_SCD1_WID,
+   T.FROM_DT_WID,
+   T.TO_DT_WID,
+   A.NEW_TO_DT_WID
+    FROM RADM.W_RTL_INV_IT_LC_DY_F T,
+         (SELECT /*+PARALLEL(F,20)*/
+           F.ROW_WID,
+           '1' ||
+           TO_CHAR(LEAD(TO_DATE(SUBSTR(F.FROM_DT_WID, 2, 8), 'YYYYMMDD'))
+                   OVER(PARTITION BY F.PROD_SCD1_WID,
+                        F.ORG_SCD1_WID ORDER BY
+                        TO_DATE(SUBSTR(F.FROM_DT_WID, 2, 8), 'YYYYMMDD')) - 1,
+                   'YYYYMMDD') || '000' NEW_TO_DT_WID
+            FROM RADM.W_RTL_INV_IT_LC_DY_F F) A
+   WHERE T.ROW_WID = A.ROW_WID
+     AND T.TO_DT_WID = 999999999999999
+     AND T.TO_DT_WID <> A.NEW_TO_DT_WID
+     AND A.NEW_TO_DT_WID <> 1000;
+		 
+DROP TABLE RADM.jin_inv_fix_tmp;
+
+SELECT /*+PARALLEL(T,20)*/
+ T.PROD_SCD1_WID ITEM, T.ORG_SCD1_WID LOC
+  FROM RADM.W_RTL_INV_IT_LC_DY_F T
+ WHERE T.TO_DT_WID = '999999999999999'
+ GROUP BY T.PROD_SCD1_WID, T.ORG_SCD1_WID
+HAVING COUNT(*) > 1;
+
+--2:日期不连续
+CREATE TABLE RADM.jin_inv_fix_tmp AS
+  SELECT /*+PARALLEL(T,20) PARALLEL(A,20)*/
+   T.ROW_WID,
+   T.PROD_SCD1_WID,
+   T.ORG_SCD1_WID,
+   T.FROM_DT_WID,
+   T.TO_DT_WID,
+   A.NEW_TO_DT_WID
+    FROM RADM.W_RTL_INV_IT_LC_DY_F T,
+         (SELECT /*+PARALLEL(F,20)*/
+           F.ROW_WID,
+           '1' ||
+           TO_CHAR(LEAD(TO_DATE(SUBSTR(F.FROM_DT_WID, 2, 8), 'YYYYMMDD'))
+                   OVER(PARTITION BY F.PROD_SCD1_WID,
+                        F.ORG_SCD1_WID ORDER BY
+                        TO_DATE(SUBSTR(F.FROM_DT_WID, 2, 8), 'YYYYMMDD')) - 1,
+                   'YYYYMMDD') || '000' NEW_TO_DT_WID
+            FROM RADM.W_RTL_INV_IT_LC_DY_F F) A
+   WHERE T.ROW_WID = A.ROW_WID
+     AND T.TO_DT_WID = 999999999999999;
+
+DROP TABLE RADM.jin_inv_fix_tmp;
+
+--3:修复日期不连续问题
+UPDATE /*+PARALLEL(T,20)*/ RADM.W_RTL_INV_IT_LC_DY_F T
+   SET T.TO_DT_WID =
+       (SELECT /*+PARALLEL(A,20)*/
+         A.NEW_TO_DT_WID
+          FROM RADM.JIN_INV_FIX_TMP A
+         WHERE T.ROW_WID = A.ROW_WID)
+ WHERE EXISTS (SELECT /*+PARALLEL(B,20)*/
+         1
+          FROM RADM.JIN_INV_FIX_TMP B
+         WHERE T.ROW_WID = B.ROW_WID
+           AND T.TO_DT_WID <> B.NEW_TO_DT_WID);
+COMMIT;

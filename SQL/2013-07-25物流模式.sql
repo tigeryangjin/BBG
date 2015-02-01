@@ -1,0 +1,41 @@
+﻿select distinct 0 as c1,
+     D1.c1 as c2,
+     D1.c2 as c3,
+     D1.c3 as c4,
+     cast(NULL as  DOUBLE PRECISION  ) as c5
+from 
+     (select distinct T1010474.DESC_CHINESE as c1,
+               concat(concat(cast(T14449.PROD_NUM as  VARCHAR ( 20 ) ), '-'), T18745.PRODUCT_NAME) as c2,
+               concat(concat(cast(cast(T964463.ORG_NUM as  INTEGER  ) as  VARCHAR ( 20 ) ), '-'), T953980.ORG_NAME) as c3
+          from 
+               BBG_RA_ITEM_LOC_SUPP_D T1010474 /* Dim_BBG_RA_ITEM_LOC_SUPP_D */ ,
+               (SELECT
+  DATASOURCE_NUM_ID,
+  INTEGRATION_ID,
+  ORG_DESCR,
+  ORG_NAME,
+  LANGUAGE_CODE
+
+FROM 
+  W_INT_ORG_D_TL
+
+WHERE
+  LANGUAGE_CODE = 'ZHS') T953980,
+               W_INT_ORG_DH T964333 /* Dim_W_INT_ORG_DH_Retail_As_Was */ ,
+               W_INT_ORG_D T964463 /* Dim_W_INT_ORG_D_Retail_As_Was */ ,
+               W_MCAL_DAY_DV T960506 /* Dim_W_MCAL_DAY_D_Retail_Gregorian_Calendar */ ,
+               (SELECT T.*
+  FROM W_PRODUCT_D T, W_PRODUCT_ATTR_D A
+ WHERE T.SCD1_WID = A.SCD1_WID
+   AND A.PRODUCT_ATTR12_NAME = A.PRODUCT_ATTR11_NAME) T14449,
+               (SELECT DATASOURCE_NUM_ID,
+       INTEGRATION_ID,
+       PRODUCT_DESCR,
+       PRODUCT_NAME,
+       LANGUAGE_CODE
+  FROM W_PRODUCT_D_TL
+ WHERE LANGUAGE_CODE = 'ZHS') T18745,
+               BBG_RA_RTV_IT_LC_SUPP_DY_F T1012014 /* Fact_BBG_RA_RTV_IT_LC_SUPP_DY_F */ 
+          where  ( T953980.DATASOURCE_NUM_ID = T964463.DATASOURCE_NUM_ID and T953980.INTEGRATION_ID = T964463.INTEGRATION_ID and T964463.ROW_WID = T1012014.ORG_WID and T960506.ROW_WID = T1012014.DT_WID and T14449.DATASOURCE_NUM_ID = T18745.DATASOURCE_NUM_ID and T14449.INTEGRATION_ID = T18745.INTEGRATION_ID and T14449.ROW_WID = T1012014.PROD_WID and T960506.MCAL_CAL_WID = 1.0 and T1010474.ROW_WID = T1012014.BBG_ITEM_LOC_SUPP_WID and  TRUNC(T960506.MCAL_DAY_DT) = TO_DATE('2013-07-23' , 'YYYY-MM-DD') and concat(concat(cast(T14449.PROD_NUM as  VARCHAR ( 20 ) ), '-'), T18745.PRODUCT_NAME) = '800022240-éç±äžœ120gå å·çæ' and concat(concat(cast(cast(T964463.ORG_NUM as  INTEGER  ) as  VARCHAR ( 20 ) ), '-'), T953980.ORG_NAME) = '120055-èŽºåååº' and T964333.ROW_WID = T1012014.ORG_DH_WID and T964333.SCD1_WID = T964463.SCD1_WID and '2010' < T960506.CAL_YEAR ) 
+     ) D1
+order by c3, c4, c2

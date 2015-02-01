@@ -1,0 +1,73 @@
+-- Create table
+create table RABATCHER.BBG_RA_SLS_DP_BM_DY_TMP
+(
+  prod_dh_wid              NUMBER(10) not null,
+  dt_wid                   VARCHAR2(24) not null,
+  rtl_type_wid             NUMBER(10) not null,
+  business_mode            VARCHAR2(6) not null,
+  sls_qty                  NUMBER,
+  sls_amt_lcl              NUMBER,
+  sls_profit_amt_lcl       NUMBER,
+  sls_tax_amt_lcl          NUMBER,
+  sls_emp_disc_amt_lcl     NUMBER,
+  sls_manual_mkdn_amt_lcl  NUMBER,
+  sls_manual_mkup_amt_lcl  NUMBER,
+  ret_qty                  NUMBER,
+  ret_amt_lcl              NUMBER,
+  ret_profit_amt_lcl       NUMBER,
+  ret_tax_amt_lcl          NUMBER,
+  ret_emp_disc_amt_lcl     NUMBER,
+  ret_manual_mkdn_amt_lcl  NUMBER,
+  ret_manual_mkup_amt_lcl  NUMBER,
+  sls_manual_count         NUMBER,
+  sls_scan_count           NUMBER,
+  ret_manual_count         NUMBER,
+  ret_scan_count           NUMBER,
+  integration_id           VARCHAR2(246 CHAR),
+  global1_exchange_rate    NUMBER,
+  global2_exchange_rate    NUMBER,
+  global3_exchange_rate    NUMBER,
+  loc_exchange_rate        NUMBER,
+  bbg_retail_type_wid      NUMBER(10) not null,
+  bbg_customer_count       NUMBER,
+  bbg_service_satisfaction NUMBER,
+  bbg_reference_do1        VARCHAR2(250),
+  bbg_reference_do2        VARCHAR2(250),
+  bbg_reference_do3        VARCHAR2(250),
+  bbg_reference_do4        VARCHAR2(250),
+  bbg_reference_do5        VARCHAR2(250),
+  bbg_reference_fo1        NUMBER,
+  bbg_reference_fo2        NUMBER,
+  bbg_reference_fo3        NUMBER,
+  bbg_reference_fo4        NUMBER,
+  bbg_reference_fo5        NUMBER,
+  bbg_reference_fo6        NUMBER,
+  bbg_reference_fo7        NUMBER,
+  bbg_reference_fo8        NUMBER,
+  bbg_reference_fo9        NUMBER,
+  bbg_reference_fo10       NUMBER
+)
+tablespace RETAIL_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate indexes 
+create unique index PK_BBG_RA_SLS_DP_BM_DY_TMP on RABATCHER.BBG_RA_SLS_DP_BM_DY_TMP (PROD_DH_WID, DT_WID, RTL_TYPE_WID, BBG_RETAIL_TYPE_WID, BUSINESS_MODE)
+  tablespace RETAIL_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );

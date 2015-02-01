@@ -1,0 +1,44 @@
+select t2.loc 物流中心编码,
+       MAX((select w.wh_name from wh w where w.wh=t2.loc)) 物流中心名称,
+       im.dept 大类, 
+       sum(t2.qty) 库存数量, 
+       sum(t2.qm_cost) 库存金额
+  from (select t.loc,
+               t.item,
+               t.qty,
+               t.qm_cost,
+               case
+                 when t1.total_cost = 0 then
+                  ''
+                 else
+                  to_char(round(((t.qm_cost + t.qch_cost) / 2) /
+                                t1.total_cost,
+                                4))
+               end as day_total
+          from (select ils1.loc,
+                       ils1.item,
+                       sum(ils1.stock_on_hand + ils1.in_transit_qty) qty,
+                       sum((ils1.stock_on_hand + ils1.in_transit_qty) *
+                           ils1.av_cost) qm_cost,
+                       sum((ils2.stock_on_hand + ils2.in_transit_qty) *
+                           ils2.av_cost) qch_cost
+                  from item_loc_soh_hist             ils1,
+                       rmshist.item_loc_soh_20130831 ils2
+                 where ils1.item = ils2.item(+)
+                   and ils1.loc = ils2.loc(+)
+                   and ils1.loc_type='W'
+                   and ils1.stock_on_hand + ils1.in_transit_qty <> 0
+                   and ils1.soh_bak_date = &PM_ENDDATE
+                 group by ils1.loc, ils1.item) t,
+               (select th.location, th.item, round(sum(th.total_cost)/30,4) total_cost
+  from tran_data_history th
+ where th.loc_type = 'W'
+   and th.tran_code = 32
+   and th.tran_date between &PM_STDATE and &PM_ENDDATE
+   group by th.location, th.item) t1
+         where t.loc = t1.location(+)
+           and t.item = t1.item(+)) t2,
+       item_master im
+ where t2.item = im.item
+   and t2.day_total>60
+ group by t2.loc, im.dept;

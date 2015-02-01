@@ -1,0 +1,15 @@
+SELECT * FROM ALL_ALL_TABLES WHERE TABLE_NAME LIKE '%ITEM%LOC%'
+
+SELECT * FROM BBG_RA_ITEM_LOC_D WHERE ITEM=800022240 AND LOC=120055;
+SELECT * FROM BBG_RA_ITEM_LOC_SUPP_D WHERE ITEM=800022240 AND LOC=120055;
+
+SELECT
+   0 s_0,
+   "Retail As-Was"."BBG Item Loc Supp"."Desc Chinese" s_1,
+   "Retail As-Was"."Item As Was"."Item" s_2,
+   "Retail As-Was"."Organization As Was"."Loc" s_3
+FROM "Retail As-Was"
+WHERE
+(("Item As Was"."Item" = '800022240-金爱丽120g加州牛排') AND ("Organization As Was"."Loc" = '120055-贺嘉土店'))
+ORDER BY 1, 3 ASC NULLS LAST, 4 ASC NULLS LAST, 2 ASC NULLS LAST
+FETCH FIRST 10000000 ROWS ONLY

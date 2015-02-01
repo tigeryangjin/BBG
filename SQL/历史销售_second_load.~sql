@@ -1,0 +1,11 @@
+--1.统计分析表
+BEGIN
+  SYS.DBMS_STATS.GATHER_TABLE_STATS (
+     OwnName           => 'RADM'
+    ,TabName           => 'BBG_RA_CONTRACT_TYPE_DS'
+    ,Estimate_Percent  => 10
+    ,Method_Opt        => 'FOR ALL COLUMNS SIZE 1'
+    ,Degree            => 4
+    ,Cascade           => FALSE
+    ,No_Invalidate  => FALSE);
+END;
