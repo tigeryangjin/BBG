@@ -1,0 +1,1057 @@
+--创建W_RTL_SUPPCM_IT_LC_DY_MV
+DROP MATERIALIZED VIEW RADM.W_RTL_SUPPCM_IT_LC_DY_MV;
+CREATE MATERIALIZED VIEW RADM.W_RTL_SUPPCM_IT_LC_DY_MV AS
+  SELECT * FROM W_RTL_SUPPCM_IT_LC_DY_FV;
+
+--2014.7.14第二次核查
+--核查合并_--以此为准-2014-06-20
+DROP MATERIALIZED VIEW RADM.JIN_RMS_RA_SUPPCM_DIFF;
+CREATE MATERIALIZED VIEW RADM.JIN_RMS_RA_SUPPCM_DIFF AS
+SELECT RMS.ORDER_NO,
+       RMS.ITEM,
+       RMS.ORDERED_QTY RMS_ORD_QTY,
+       RMS.RECEIVED_QTY RMS_REC_QTY,
+       NVL(RA.ORDERED_QTY, 0) RA_ORD_QTY,
+       NVL(RA.RECEIVED_QTY, 0) RA_REC_QTY,
+       RMS.ORDERED_AMT RMS_ORD_AMT,
+       RMS.RECEIVED_AMT RMS_REC_AMT,
+       NVL(RA.ORDERED_AMT, 0) RA_ORD_AMT,
+       NVL(RA.RECEIVED_AMT, 0) RA_REC_AMT,
+			 SYSDATE W_INSERT_DT
+  FROM (SELECT T.ORDER_NO,
+               T.ITEM,
+               NVL(T.QTY_ORDERED, 0) + NVL(T.QTY_CANCELLED, 0) ORDERED_QTY,
+               (NVL(T.QTY_ORDERED, 0) + NVL(T.QTY_CANCELLED, 0)) *
+               T.UNIT_COST ORDERED_AMT,
+               SUM(NVL(K.QTY_RECEIVED, 0)) RECEIVED_QTY,
+               SUM(NVL(K.UNIT_COST, 0) * NVL(K.QTY_RECEIVED, 0)) RECEIVED_AMT
+          FROM RMS.ORDLOC@RA_RMS_DBLINK   T,
+               RMS.SHIPSKU@RA_RMS_DBLINK  K,
+               RMS.SHIPMENT@RA_RMS_DBLINK N
+         WHERE K.SHIPMENT = N.SHIPMENT
+           AND N.ORDER_NO = T.ORDER_NO
+           AND K.ITEM = T.ITEM
+           AND N.RECEIVE_DATE < TO_DATE(TO_CHAR(SYSDATE,'YYYY-MM-DD'),'YYYY-MM-DD') 
+           AND EXISTS (SELECT 1
+                  FROM RMS.CMX_ORDHEAD@RA_RMS_DBLINK F
+                 WHERE T.ORDER_NO = F.ORDER_NO)
+         GROUP BY T.ORDER_NO,
+                  T.ITEM,
+                  T.QTY_ORDERED,
+                  T.QTY_CANCELLED,
+                  T.UNIT_COST) RMS,
+       (SELECT CM.PURCHASE_ORDER_ID ORDER_NO,
+               P.PROD_NUM ITEM,
+               NVL(CM.ORDERED_QTY, 0) ORDERED_QTY,
+               NVL(CM.RECEIVED_QTY, 0) RECEIVED_QTY,
+               NVL(CM.BBG_REFERENCE_FO1, 0) ORDERED_AMT,
+               NVL(CM.BBG_REFERENCE_FO2, 0) RECEIVED_AMT
+          FROM RADM.W_RTL_SUPPCM_IT_LC_DY_MV CM, W_PRODUCT_D P
+         WHERE CM.PROD_WID = P.ROW_WID
+        ) RA
+ WHERE RMS.ORDER_NO = RA.ORDER_NO(+)
+   AND RMS.ITEM = RA.ITEM(+)
+   AND (NVL(RMS.ORDERED_QTY, 0) <> NVL(RA.ORDERED_QTY, 0) OR
+       NVL(RMS.RECEIVED_QTY, 0) <> NVL(RA.RECEIVED_QTY, 0) OR
+       (NVL(RMS.ORDERED_AMT, 0) - NVL(RA.ORDERED_AMT, 0)) > 0.01 OR
+       (NVL(RMS.RECEIVED_AMT, 0) - NVL(RA.RECEIVED_AMT, 0)) > 0.01);
+
+SELECT COUNT(*) FROM RADM.JIN_RMS_RA_SUPPCM_DIFF T;
+--订货数量差异
+SELECT * FROM RADM.JIN_RMS_RA_SUPPCM_DIFF T WHERE T.RMS_ORD_QTY<>T.RA_ORD_QTY;
+--收货数量差异
+SELECT * FROM RADM.JIN_RMS_RA_SUPPCM_DIFF T WHERE T.RMS_REC_QTY<>T.RA_REC_QTY;
+--订货金额差异
+SELECT * FROM RADM.JIN_RMS_RA_SUPPCM_DIFF T WHERE T.RMS_ORD_AMT-T.RA_ORD_AMT>0.01;
+--收货金额差异
+SELECT * FROM RADM.JIN_RMS_RA_SUPPCM_DIFF T WHERE T.RMS_REC_AMT-T.RA_REC_AMT>0.01 AND T.RA_ORD_QTY<>0 ;
+--RMS
+SELECT * FROM RMS.ORDHEAD H WHERE H.ORDER_NO = 2319790;
+SELECT * FROM RMS.ORDLOC L WHERE L.ORDER_NO = 2319790;
+SELECT * FROM RMS.CMX_ORDHEAD T WHERE T.ORDER_NO = 2319790;
+SELECT * FROM RMS.SHIPMENT T WHERE T.ORDER_NO = 2319790;
+SELECT * FROM RMS.SHIPSKU T WHERE T.SHIPMENT = 1679744;
+
+--RMS ORDHEAD STATUS
+SELECT *
+  FROM RMS.ORDHEAD H
+ WHERE H.STATUS = 'C'
+ ORDER BY H.WRITTEN_DATE DESC;
+
+SELECT *
+  FROM RMS.ORDLOC L
+ WHERE L.QTY_ORDERED > L.QTY_RECEIVED
+ ORDER BY L.QTY_ORDERED - L.QTY_RECEIVED DESC;
+--订单失效日期
+SELECT * FROM RMS.CMX_ORDHEAD T WHERE T.ORDER_NO = 1166798;
+
+SELECT * FROM RMS.SHIPMENT SM WHERE SM.ORDER_NO = 2056080;
+SELECT *
+  FROM RMS.SHIPSKU SS
+ WHERE EXISTS (SELECT 1
+          FROM RMS.SHIPMENT SM
+         WHERE SS.SHIPMENT = SM.SHIPMENT
+           AND SM.ORDER_NO = 2056080);
+
+SELECT *
+  FROM RMS.SHIPMENT SM
+ WHERE SM.RECEIVE_DATE BETWEEN DATE '2013-12-04' AND DATE
+ '2013-12-10'
+   AND SM.TO_LOC = '110001'
+   AND EXISTS (SELECT 1
+          FROM RMS.SHIPSKU SS
+         WHERE SS.SHIPMENT = SM.SHIPMENT
+           AND SS.ITEM = '800187952');
+SELECT *
+  FROM RMS.SHIPSKU SS
+ WHERE SS.ITEM = '800187952'
+   AND EXISTS
+ (SELECT 1
+          FROM RMS.SHIPMENT SM
+         WHERE SS.SHIPMENT = SM.SHIPMENT
+           AND SM.RECEIVE_DATE BETWEEN DATE '2013-12-04' AND DATE
+         '2013-12-10'
+           AND SM.TO_LOC = '110001');
+
+--RA
+/*
+订货量:  Ordered Qty      W_RTL_SUPPCM_IT_LC_DY_F.ORDERED_QTY
+订购金额:Ordered Amount   W_RTL_SUPPCM_IT_LC_DY_F.BBG_REFERENCE_FO1
+收货量:  Received Qty     W_RTL_SUPPCM_IT_LC_DY_F.RECEIVED_QTY
+收货金额:Received Amount  W_RTL_SUPPCM_IT_LC_DY_F.BBG_REFERENCE_FO2
+*/
+SELECT *
+  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_F T
+ WHERE T.PURCHASE_ORDER_ID = '1613070';
+SELECT *
+  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_MV T
+ WHERE T.PURCHASE_ORDER_ID = 1613070;
+SELECT *
+  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_F T
+ WHERE T.ORDERED_QTY = 0
+ ORDER BY T.DT_WID DESC;
+
+SELECT * FROM RA_RMS.W_RTL_SUPPCM_A_TMP;
+SELECT * FROM RA_RMS.W_RTL_SUPPCM_B_TMP;
+SELECT * FROM RA_RMS.W_RTL_SUPPCM_C_TMP;
+SELECT * FROM RA_RMS.W_RTL_SUPPCM_D_TMP;
+SELECT * FROM RA_RMS.W_RTL_SUPPCM_E_TMP;
+SELECT * FROM RA_RMS.W_RTL_SUPPCM_F_TMP;
+SELECT * FROM RADM.W_RTL_SUPPCM_IT_LC_DY_FS;
+SELECT * FROM RA_RMS.W_RTL_SUPPCM_TS_B_TMP;
+
+SELECT COUNT(*) FROM RADM.W_RTL_SUPPCM_IT_LC_DY_FS;
+SELECT *
+  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_FS T
+ WHERE T.Ship_Early_Count IS NOT NULL;
+
+SELECT T.ORDERED_QTY,
+       T.BBG_REFERENCE_FO1,
+       T.BBG_REFERENCE_FO1 / T.ORDERED_QTY,
+       T.RECEIVED_QTY,
+       T.BBG_REFERENCE_FO2,
+       T.BBG_REFERENCE_FO2 / T.RECEIVED_QTY,
+       t.*
+  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_F@RMS_RA T
+ WHERE T.PURCHASE_ORDER_ID IN (1166798, 1143088)
+   AND T.PROD_WID = 301934
+   AND T.DT_WID BETWEEN '120131204000' AND '120131210000';
+
+SELECT * FROM W_PRODUCT_D@RMS_RA T WHERE T.PROD_NUM = '800187952';
+
+SELECT SUM(T.RECEIVED_QTY) / SUM(T.ORDERED_QTY)
+  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_F T
+ WHERE T.DT_WID > '120130508000';
+
+SELECT SUM(T.RECEIVED_QTY) / SUM(T.ORDERED_QTY)
+  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_F T
+ WHERE T.;
+--RA到货率
+select distinct 0 as c1, D1.c2 / nullif(D1.c1, 0) as c2
+  from (select sum(T963294.ORDERED_QTY) as c1,
+               sum(T963294.RECEIVED_QTY) as c2
+          from W_MCAL_DAY_DV           T960506 /* Dim_W_MCAL_DAY_D_Retail_Gregorian_Calendar */,
+               W_RTL_SUPPCM_IT_LC_DY_F T963294 /* Fact_W_RTL_SUPPCM_IT_LC_DY_F */
+         where (T960506.ROW_WID = T963294.DT_WID and
+               T960506.MCAL_CAL_WID = 1.0 and '2010' < T960506.CAL_YEAR and
+               TRUNC(T960506.MCAL_DAY_DT) >=
+               TO_DATE('2013-05-08', 'YYYY-MM-DD'))) D1;
+---------------------------------------------------------------
+CREATE VIEW W_RTL_SUPPCM_IT_LC_DY_FV AS
+  SELECT MAX(T.ROW_WID) ROW_WID,
+         MAX(T.ORG_WID) ORG_WID,
+         MAX(T.ORG_SCD1_WID) ORG_SCD1_WID,
+         MAX(T.ORG_DH_WID) ORG_DH_WID,
+         T.PROD_WID,
+         T.PROD_SCD1_WID,
+         MAX(T.DT_WID) DT_WID,
+         MAX(T.SUPPLIER_WID) SUPPLIER_WID,
+         T.PURCHASE_ORDER_ID,
+         MAX(T.SHIPMENT_ID) SHIPMENT_ID,
+         MAX(T.ORDERED_QTY) ORDERED_QTY,
+         SUM(T.RECEIVED_QTY) RECEIVED_QTY,
+         MAX(T.EXPECTED_QTY) EXPECTED_QTY,
+         MAX(T.PO_MET_COUNT) PO_MET_COUNT,
+         MAX(T.PO_UNDER_COUNT) PO_UNDER_COUNT,
+         MAX(T.PO_OVER_COUNT) PO_OVER_COUNT,
+         MAX(T.PO_ABSENT_COUNT) PO_ABSENT_COUNT,
+         MAX(T.SHIP_EARLY_COUNT) SHIP_EARLY_COUNT,
+         MAX(T.SHIP_LATE_COUNT) SHIP_LATE_COUNT,
+         MAX(T.SHIP_ON_TIME_COUNT) SHIP_ON_TIME_COUNT,
+         MAX(T.DAYS_EARLY_SHIP) DAYS_EARLY_SHIP,
+         MAX(T.DAYS_LATE_SHIP) DAYS_LATE_SHIP,
+         MAX(T.ASN_MET_COUNT) ASN_MET_COUNT,
+         MAX(T.ASN_UNDER_COUNT) ASN_UNDER_COUNT,
+         MAX(T.ASN_OVER_COUNT) ASN_OVER_COUNT,
+         MAX(T.DOC_CURR_CODE) DOC_CURR_CODE,
+         MAX(T.LOC_CURR_CODE) LOC_CURR_CODE,
+         MAX(T.LOC_EXCHANGE_RATE) LOC_EXCHANGE_RATE,
+         MAX(T.GLOBAL1_EXCHANGE_RATE) GLOBAL1_EXCHANGE_RATE,
+         MAX(T.GLOBAL2_EXCHANGE_RATE) GLOBAL2_EXCHANGE_RATE,
+         MAX(T.GLOBAL3_EXCHANGE_RATE) GLOBAL3_EXCHANGE_RATE,
+         MAX(T.CREATED_BY_WID) CREATED_BY_WID,
+         MAX(T.CHANGED_BY_WID) CHANGED_BY_WID,
+         MAX(T.CREATED_ON_DT) CREATED_ON_DT,
+         MAX(T.CHANGED_ON_DT) CHANGED_ON_DT,
+         MAX(T.AUX1_CHANGED_ON_DT) AUX1_CHANGED_ON_DT,
+         MAX(T.AUX2_CHANGED_ON_DT) AUX2_CHANGED_ON_DT,
+         MAX(T.AUX3_CHANGED_ON_DT) AUX3_CHANGED_ON_DT,
+         MAX(T.AUX4_CHANGED_ON_DT) AUX4_CHANGED_ON_DT,
+         MAX(T.DELETE_FLG) DELETE_FLG,
+         MAX(T.W_INSERT_DT) W_INSERT_DT,
+         MAX(T.W_UPDATE_DT) W_UPDATE_DT,
+         MAX(T.DATASOURCE_NUM_ID) DATASOURCE_NUM_ID,
+         MAX(T.ETL_PROC_WID) ETL_PROC_WID,
+         MAX(T.INTEGRATION_ID) INTEGRATION_ID,
+         MAX(T.TENANT_ID) TENANT_ID,
+         MAX(T.X_CUSTOM) X_CUSTOM,
+         MAX(T.BBG_ITEM_LOC_WID) BBG_ITEM_LOC_WID,
+         MAX(T.BBG_ITEM_LOC_SUPP_WID) BBG_ITEM_LOC_SUPP_WID,
+         MAX(T.BBG_REFERENCE_DO1) BBG_REFERENCE_DO1,
+         MAX(T.BBG_REFERENCE_DO2) BBG_REFERENCE_DO2,
+         MAX(T.BBG_REFERENCE_DO3) BBG_REFERENCE_DO3,
+         MAX(T.BBG_REFERENCE_DO4) BBG_REFERENCE_DO4,
+         MAX(T.BBG_REFERENCE_DO5) BBG_REFERENCE_DO5,
+         MAX(T.BBG_REFERENCE_FO1) BBG_REFERENCE_FO1,
+         SUM(T.BBG_REFERENCE_FO2) BBG_REFERENCE_FO2,
+         MAX(T.BBG_REFERENCE_FO3) BBG_REFERENCE_FO3,
+         MAX(T.BBG_REFERENCE_FO4) BBG_REFERENCE_FO4,
+         MAX(T.BBG_REFERENCE_FO5) BBG_REFERENCE_FO5,
+         MAX(T.BBG_REFERENCE_FO6) BBG_REFERENCE_FO6,
+         MAX(T.BBG_REFERENCE_FO7) BBG_REFERENCE_FO7,
+         MAX(T.BBG_REFERENCE_FO8) BBG_REFERENCE_FO8,
+         MAX(T.BBG_REFERENCE_FO9) BBG_REFERENCE_FO9,
+         MAX(T.BBG_REFERENCE_FO10) BBG_REFERENCE_FO10
+    FROM W_RTL_SUPPCM_IT_LC_DY_F T
+   GROUP BY T.PROD_WID, T.PROD_SCD1_WID, T.PURCHASE_ORDER_ID;
+-------------------------------------------------------------------------  
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table W_RTL_SUPPCM_IT_LC_DY_F drop constraint PK_W_RTL_SUPPCM_IT_LC_DY_F cascade drop index;
+alter table W_RTL_SUPPCM_IT_LC_DY_F add constraint PK_W_RTL_SUPPCM_IT_LC_DY_F primary key(ORG_DH_WID,
+                                                                                          PROD_WID,
+                                                                                          --DT_WID,
+                                                                                          BBG_REFERENCE_DO2,
+                                                                                          SUPPLIER_WID,
+                                                                                          PURCHASE_ORDER_ID,
+                                                                                          SHIPMENT_ID,
+                                                                                          BBG_ITEM_LOC_WID,
+                                                                                          BBG_ITEM_LOC_SUPP_WID)
+  using index tablespace RETAIL_DATA pctfree 10 initrans 2 maxtrans 255 storage(initial 64K next 1M
+                                                                                minextents 1
+                                                                                maxextents
+                                                                                unlimited);
+
+--------------------------------------------------------------------------------------------------
+--W_RTL_SUPPCM_IT_LC_DY_F的BBG_REFERENCE_DO1批量更新成订单失效日期
+UPDATE W_RTL_SUPPCM_IT_LC_DY_F F
+   SET F.BBG_REFERENCE_DO1 =
+       (SELECT TO_DATE(TO_CHAR(H.EXPIRED_DATE, 'YYYYMMDD'), 'YYYYMMDD')
+          FROM RMS.CMX_ORDHEAD@RA_RMS_DBLINK H
+         WHERE F.PURCHASE_ORDER_ID = H.ORDER_NO)
+ WHERE EXISTS (SELECT 1
+          FROM RMS.CMX_ORDHEAD@RA_RMS_DBLINK A
+         WHERE F.PURCHASE_ORDER_ID = H.ORDER_NO)
+   AND F.BBG_REFERENCE_DO1 IS NULL;
+-------------------------------------------------------------------------------------------------------
+--W_RTL_SUPPCM_IT_LC_DY_F的BBG_REFERENCE_DO3批量更新成订单审批日期
+UPDATE W_RTL_SUPPCM_IT_LC_DY_F F
+   SET F.BBG_REFERENCE_DO3 =
+       (SELECT TO_DATE(TO_CHAR(H.ORIG_APPROVAL_DATE, 'YYYYMMDD'), 'YYYYMMDD')
+          FROM RMS.ORDHEAD@RA_RMS_DBLINK H
+         WHERE F.PURCHASE_ORDER_ID = H.ORDER_NO)
+ WHERE F.PURCHASE_ORDER_ID = '2158329';
+--------------------------------------------------------------------------------------------------------
+--W_RTL_SUPPCM_IT_LC_DY_F的DT_WID批量更新成订单失效日期
+UPDATE RADM.W_RTL_SUPPCM_IT_LC_DY_F F
+   SET F.DT_WID =
+       (SELECT '1' || TO_CHAR(H.EXPIRED_DATE, 'YYYYMMDD') || '000'
+          FROM RADM.CMX_ORDHEAD H
+         WHERE F.PURCHASE_ORDER_ID = H.ORDER_NO)
+ WHERE EXISTS (SELECT 1
+          FROM RADM.CMX_ORDHEAD A
+         WHERE A.ORDER_NO = F.PURCHASE_ORDER_ID)
+   AND F.PURCHASE_ORDER_ID = '2158329';
+----------------------------------------------------------------------------------------------------------
+SELECT *
+  FROM W_RTL_SUPPCM_IT_LC_DY_F T
+ WHERE T.PURCHASE_ORDER_ID = '2158329';
+-----------------------------------------------------------------------------------------------------------
+
+UPDATE W_RTL_SUPPCM_IT_LC_DY_F F
+   SET F.BBG_REFERENCE_DO2 = TO_DATE(SUBSTR(F.DT_WID, 2, 8), 'YYYYMMDD')
+ WHERE F.BBG_REFERENCE_DO2 IS NULL
+   AND F.PURCHASE_ORDER_ID = '2158329';
+
+SELECT * FROM W_RTL_SUPPCM_IT_LC_DY_F T WHERE T.BBG_REFERENCE_DO2 IS NULL;
+---------------------------------------------------------------------------------------------------------------
+--ra跟踪SQL
+SELECT DISTINCT 0 AS c1, D1.c2 AS c2, D1.c1 AS c3
+  FROM (SELECT SUM(T963294.ORDERED_QTY) AS c1,
+               T1038118.BBG_REFERENCE_DO1 AS c2
+          FROM W_RTL_SUPPCM_IT_LC_DY_FV T1038118 /* Dim_W_RTL_SUPPCM_IT_LC_DY_F */,
+               W_RTL_SUPPCM_IT_LC_DY_FV T963294 /* Fact_W_RTL_SUPPCM_IT_LC_DY_F */
+         WHERE (T963294.ROW_WID = T1038118.ROW_WID AND
+               T1038118.BBG_REFERENCE_DO1 BETWEEN
+               TO_DATE('2014-04-01', 'YYYY-MM-DD') AND
+               TO_DATE('2014-04-30', 'YYYY-MM-DD'))
+         GROUP BY T1038118.BBG_REFERENCE_DO1) D1
+ ORDER BY c2;
+--
+SELECT DISTINCT 0 AS c1, D1.c2 AS c2, D1.c1 AS c3
+  FROM (SELECT SUM(T963294.ORDERED_QTY) AS c1,
+               T1038118.BBG_REFERENCE_DO1 AS c2
+          FROM W_RTL_SUPPCM_IT_LC_DY_A T1038118 /* Dim_W_RTL_SUPPCM_IT_LC_DY_F */,
+               W_RTL_SUPPCM_IT_LC_DY_A T963294 /* Fact_W_RTL_SUPPCM_IT_LC_DY_F */
+         WHERE (T963294.ROW_WID = T1038118.ROW_WID AND
+               T1038118.BBG_REFERENCE_DO1 BETWEEN
+               TO_DATE('2014-03-01', 'YYYY-MM-DD') AND
+               TO_DATE('2014-03-31', 'YYYY-MM-DD'))
+         GROUP BY T1038118.BBG_REFERENCE_DO1) D1
+ ORDER BY c2;
+--
+SELECT DISTINCT 0 AS c1, D1.c2 AS c2, D1.c1 AS c3
+  FROM (SELECT SUM(T1038118.ORDERED_QTY) AS c1,
+               T1038118.BBG_REFERENCE_DO1 AS c2
+          FROM W_RTL_SUPPCM_IT_LC_DY_FV T1038118
+         WHERE T1038118.BBG_REFERENCE_DO1 BETWEEN
+               TO_DATE('2014-04-01', 'YYYY-MM-DD') AND
+               TO_DATE('2014-04-30', 'YYYY-MM-DD')
+         GROUP BY T1038118.BBG_REFERENCE_DO1) D1
+ ORDER BY c2;
+--
+SELECT DISTINCT 0 AS c1, D1.c2 AS c2, D1.c1 AS c3
+  FROM (SELECT SUM(T1038118.ORDERED_QTY) AS c1,
+               T1038118.BBG_REFERENCE_DO1 AS c2
+          FROM W_RTL_SUPPCM_IT_LC_DY_A T1038118
+         WHERE T1038118.BBG_REFERENCE_DO1 BETWEEN
+               TO_DATE('2014-01-01', 'YYYY-MM-DD') AND
+               TO_DATE('2014-01-31', 'YYYY-MM-DD')
+         GROUP BY T1038118.BBG_REFERENCE_DO1) D1
+ ORDER BY c2;
+
+-------------------------------------------------------------------------------------------------------------
+--创建W_RTL_SUPPCM_IT_LC_DY_MV
+DROP MATERIALIZED VIEW RADM.W_RTL_SUPPCM_IT_LC_DY_MV;
+CREATE MATERIALIZED VIEW RADM.W_RTL_SUPPCM_IT_LC_DY_MV AS
+  SELECT * FROM W_RTL_SUPPCM_IT_LC_DY_FV;
+--根据订单审批日期创建视图
+CREATE OR REPLACE VIEW RADM.W_RTL_SUPPCM_IT_LC_AD_FV AS
+  SELECT T.ROW_WID,
+         T.ORG_WID,
+         T.ORG_SCD1_WID,
+         T.ORG_DH_WID,
+         T.PROD_WID,
+         T.PROD_SCD1_WID,
+         TO_NUMBER('1' || TO_CHAR(T.BBG_REFERENCE_DO3, 'YYYYMMDD') || '000') DT_WID,
+         T.SUPPLIER_WID,
+         T.PURCHASE_ORDER_ID,
+         T.SHIPMENT_ID,
+         T.ORDERED_QTY,
+         T.RECEIVED_QTY,
+         T.EXPECTED_QTY,
+         T.PO_MET_COUNT,
+         T.PO_UNDER_COUNT,
+         T.PO_OVER_COUNT,
+         T.PO_ABSENT_COUNT,
+         T.SHIP_EARLY_COUNT,
+         T.SHIP_LATE_COUNT,
+         T.SHIP_ON_TIME_COUNT,
+         T.DAYS_EARLY_SHIP,
+         T.DAYS_LATE_SHIP,
+         T.ASN_MET_COUNT,
+         T.ASN_UNDER_COUNT,
+         T.ASN_OVER_COUNT,
+         T.DOC_CURR_CODE,
+         T.LOC_CURR_CODE,
+         T.LOC_EXCHANGE_RATE,
+         T.GLOBAL1_EXCHANGE_RATE,
+         T.GLOBAL2_EXCHANGE_RATE,
+         T.GLOBAL3_EXCHANGE_RATE,
+         T.CREATED_BY_WID,
+         T.CHANGED_BY_WID,
+         T.CREATED_ON_DT,
+         T.CHANGED_ON_DT,
+         T.AUX1_CHANGED_ON_DT,
+         T.AUX2_CHANGED_ON_DT,
+         T.AUX3_CHANGED_ON_DT,
+         T.AUX4_CHANGED_ON_DT,
+         T.DELETE_FLG,
+         T.W_INSERT_DT,
+         T.W_UPDATE_DT,
+         T.DATASOURCE_NUM_ID,
+         T.ETL_PROC_WID,
+         T.INTEGRATION_ID,
+         T.TENANT_ID,
+         T.X_CUSTOM,
+         T.BBG_ITEM_LOC_WID,
+         T.BBG_ITEM_LOC_SUPP_WID,
+         T.BBG_REFERENCE_DO1,
+         T.BBG_REFERENCE_DO2,
+         T.BBG_REFERENCE_DO3,
+         T.BBG_REFERENCE_DO4,
+         T.BBG_REFERENCE_DO5,
+         T.BBG_REFERENCE_FO1,
+         T.BBG_REFERENCE_FO2,
+         T.BBG_REFERENCE_FO3,
+         T.BBG_REFERENCE_FO4,
+         T.BBG_REFERENCE_FO5,
+         T.BBG_REFERENCE_FO6,
+         T.BBG_REFERENCE_FO7,
+         T.BBG_REFERENCE_FO8,
+         T.BBG_REFERENCE_FO9,
+         T.BBG_REFERENCE_FO10
+    FROM RADM.W_RTL_SUPPCM_IT_LC_DY_MV T;
+--根据订单失效日期创建视图
+CREATE OR REPLACE VIEW RADM.W_RTL_SUPPCM_IT_LC_ED_FV AS
+  SELECT T.ROW_WID,
+         T.ORG_WID,
+         T.ORG_SCD1_WID,
+         T.ORG_DH_WID,
+         T.PROD_WID,
+         T.PROD_SCD1_WID,
+         T.DT_WID,
+         T.SUPPLIER_WID,
+         T.PURCHASE_ORDER_ID,
+         T.SHIPMENT_ID,
+         T.ORDERED_QTY,
+         T.RECEIVED_QTY,
+         T.EXPECTED_QTY,
+         T.PO_MET_COUNT,
+         T.PO_UNDER_COUNT,
+         T.PO_OVER_COUNT,
+         T.PO_ABSENT_COUNT,
+         T.SHIP_EARLY_COUNT,
+         T.SHIP_LATE_COUNT,
+         T.SHIP_ON_TIME_COUNT,
+         T.DAYS_EARLY_SHIP,
+         T.DAYS_LATE_SHIP,
+         T.ASN_MET_COUNT,
+         T.ASN_UNDER_COUNT,
+         T.ASN_OVER_COUNT,
+         T.DOC_CURR_CODE,
+         T.LOC_CURR_CODE,
+         T.LOC_EXCHANGE_RATE,
+         T.GLOBAL1_EXCHANGE_RATE,
+         T.GLOBAL2_EXCHANGE_RATE,
+         T.GLOBAL3_EXCHANGE_RATE,
+         T.CREATED_BY_WID,
+         T.CHANGED_BY_WID,
+         T.CREATED_ON_DT,
+         T.CHANGED_ON_DT,
+         T.AUX1_CHANGED_ON_DT,
+         T.AUX2_CHANGED_ON_DT,
+         T.AUX3_CHANGED_ON_DT,
+         T.AUX4_CHANGED_ON_DT,
+         T.DELETE_FLG,
+         T.W_INSERT_DT,
+         T.W_UPDATE_DT,
+         T.DATASOURCE_NUM_ID,
+         T.ETL_PROC_WID,
+         T.INTEGRATION_ID,
+         T.TENANT_ID,
+         T.X_CUSTOM,
+         T.BBG_ITEM_LOC_WID,
+         T.BBG_ITEM_LOC_SUPP_WID,
+         T.BBG_REFERENCE_DO1,
+         T.BBG_REFERENCE_DO2,
+         T.BBG_REFERENCE_DO3,
+         T.BBG_REFERENCE_DO4,
+         T.BBG_REFERENCE_DO5,
+         T.BBG_REFERENCE_FO1,
+         T.BBG_REFERENCE_FO2,
+         T.BBG_REFERENCE_FO3,
+         T.BBG_REFERENCE_FO4,
+         T.BBG_REFERENCE_FO5,
+         T.BBG_REFERENCE_FO6,
+         T.BBG_REFERENCE_FO7,
+         T.BBG_REFERENCE_FO8,
+         T.BBG_REFERENCE_FO9,
+         T.BBG_REFERENCE_FO10
+    FROM RADM.W_RTL_SUPPCM_IT_LC_DY_MV T;
+--根据订单收货日期创建视图
+CREATE OR REPLACE VIEW RADM.W_RTL_SUPPCM_IT_LC_TD_FV AS
+  SELECT T.ROW_WID,
+         T.ORG_WID,
+         T.ORG_SCD1_WID,
+         T.ORG_DH_WID,
+         T.PROD_WID,
+         T.PROD_SCD1_WID,
+         TO_NUMBER('1' || TO_CHAR(T.BBG_REFERENCE_DO2, 'YYYYMMDD') || '000') DT_WID,
+         T.SUPPLIER_WID,
+         T.PURCHASE_ORDER_ID,
+         T.SHIPMENT_ID,
+         T.ORDERED_QTY,
+         T.RECEIVED_QTY,
+         T.EXPECTED_QTY,
+         T.PO_MET_COUNT,
+         T.PO_UNDER_COUNT,
+         T.PO_OVER_COUNT,
+         T.PO_ABSENT_COUNT,
+         T.SHIP_EARLY_COUNT,
+         T.SHIP_LATE_COUNT,
+         T.SHIP_ON_TIME_COUNT,
+         T.DAYS_EARLY_SHIP,
+         T.DAYS_LATE_SHIP,
+         T.ASN_MET_COUNT,
+         T.ASN_UNDER_COUNT,
+         T.ASN_OVER_COUNT,
+         T.DOC_CURR_CODE,
+         T.LOC_CURR_CODE,
+         T.LOC_EXCHANGE_RATE,
+         T.GLOBAL1_EXCHANGE_RATE,
+         T.GLOBAL2_EXCHANGE_RATE,
+         T.GLOBAL3_EXCHANGE_RATE,
+         T.CREATED_BY_WID,
+         T.CHANGED_BY_WID,
+         T.CREATED_ON_DT,
+         T.CHANGED_ON_DT,
+         T.AUX1_CHANGED_ON_DT,
+         T.AUX2_CHANGED_ON_DT,
+         T.AUX3_CHANGED_ON_DT,
+         T.AUX4_CHANGED_ON_DT,
+         T.DELETE_FLG,
+         T.W_INSERT_DT,
+         T.W_UPDATE_DT,
+         T.DATASOURCE_NUM_ID,
+         T.ETL_PROC_WID,
+         T.INTEGRATION_ID,
+         T.TENANT_ID,
+         T.X_CUSTOM,
+         T.BBG_ITEM_LOC_WID,
+         T.BBG_ITEM_LOC_SUPP_WID,
+         T.BBG_REFERENCE_DO1,
+         T.BBG_REFERENCE_DO2,
+         T.BBG_REFERENCE_DO3,
+         T.BBG_REFERENCE_DO4,
+         T.BBG_REFERENCE_DO5,
+         T.BBG_REFERENCE_FO1,
+         T.BBG_REFERENCE_FO2,
+         T.BBG_REFERENCE_FO3,
+         T.BBG_REFERENCE_FO4,
+         T.BBG_REFERENCE_FO5,
+         T.BBG_REFERENCE_FO6,
+         T.BBG_REFERENCE_FO7,
+         T.BBG_REFERENCE_FO8,
+         T.BBG_REFERENCE_FO9,
+         T.BBG_REFERENCE_FO10
+    FROM RADM.W_RTL_SUPPCM_IT_LC_DY_MV T;
+
+SELECT *
+  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_FV T
+ WHERE T.PURCHASE_ORDER_ID = 841440
+   AND T.PROD_WID = 256285;
+SELECT *
+  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_F T
+ WHERE T.PURCHASE_ORDER_ID = 841440
+   AND T.PROD_WID = 256285;
+SELECT T.PURCHASE_ORDER_ID, T.PROD_WID, COUNT(*)
+  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_F T
+ GROUP BY T.PURCHASE_ORDER_ID, T.PROD_WID
+HAVING COUNT(*) > 3;
+SELECT *
+  FROM RADM.W_RTL_SUPPCMUF_LC_DY_F T
+ WHERE /*T.W_UPDATE_DT>SYSDATE-20 AND*/
+ T.W_INSERT_DT <> T.W_UPDATE_DT;
+;
+SELECT TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD'), 'YYYYMMDD') FROM DUAL;
+-----------------------------------------------------------------------------------------------------------
+--RA目录显示
+/*
+--失效日期 订货量
+CN_Retail_As-Was_Supplier_Compliance_Ordered_Qty
+CD_Retail_As-Was_Supplier_Compliance_Ordered_Qty
+--失效日期 收货量
+CN_Retail_As-Was_Supplier_Compliance_Received_Qty
+CD_Retail_As-Was_Supplier_Compliance_Received_Qty
+--审批日期 订货量
+CN_Retail_As-Was_Supplier_Compliance_Ordered_Qty_AD
+CD_Retail_As-Was_Supplier_Compliance_Ordered_Qty_AD
+--审批日期 收货量
+CN_Retail_As-Was_Supplier_Compliance_Received_Qty_AD
+CD_Retail_As-Was_Supplier_Compliance_Received_Qty_AD
+--进货日期 订货量
+CN_Retail_As-Was_Supplier_Compliance_Ordered_Qty_TD
+CD_Retail_As-Was_Supplier_Compliance_Ordered_Qty_TD
+--进货日期 收货量
+CN_Retail_As-Was_Supplier_Compliance_Received_Qty_TD
+CD_Retail_As-Was_Supplier_Compliance_Received_Qty_TD
+--**********************************************************
+--审批日期 订货金额 OK
+CN_Retail_As-Was_Supplier_Compliance_Ordered_Amount_AD
+CD_Retail_As-Was_Supplier_Compliance_Ordered_Amount_AD
+--收货日期 订货金额 OK
+CN_Retail_As-Was_Supplier_Compliance_Ordered_Amount_TD
+CD_Retail_As-Was_Supplier_Compliance_Ordered_Amount_TD
+--失效日期 订货金额 OK
+CN_Retail_As-Was_Supplier_Compliance_Ordered_Amount
+CD_Retail_As-Was_Supplier_Compliance_Ordered_Amount
+--失效日期 收货金额 OK
+CN_Retail_As-Was_Supplier_Compliance_Received_Amount
+CD_Retail_As-Was_Supplier_Compliance_Received_Amount
+--审批日期 收货金额 OK
+CN_Retail_As-Was_Supplier_Compliance_Received_Amount_AD
+CD_Retail_As-Was_Supplier_Compliance_Received_Amount_AD
+--收货日期 收货金额 OK
+CN_Retail_As-Was_Supplier_Compliance_Received_Amount_TD
+CD_Retail_As-Was_Supplier_Compliance_Received_Amount_TD
+*/
+SELECT *
+  FROM RADM.W_LOCALIZED_STRING_G T
+ WHERE T.MSG_NUM LIKE '%Retail_As-Was_Supplier_Compliance_Received_Amount%'
+--and t.lang_id = 'zh-cn'
+   FOR UPDATE;
+
+-------------------------------------------------------------------------------------------------------
+--订货收货数据核查
+SELECT T.ORDER_NO,
+       T.ITEM,
+       NVL(T.QTY_ORDERED, 0) + NVL(T.QTY_CANCELLED, 0) QTY_ORDERED,
+       NVL(T.QTY_RECEIVED, 0) QTY_RECEIVED
+  FROM RMS.ORDLOC@RA_RMS_DBLINK T
+ WHERE T.ORDER_NO = 2207314;
+
+SELECT CM.PURCHASE_ORDER_ID ORDER_NO,
+       P.PROD_NUM           ITEM,
+       CM.ORDERED_QTY,
+       CM.RECEIVED_QTY
+  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_MV CM, W_PRODUCT_D P
+ WHERE CM.PROD_WID = P.ROW_WID
+   AND CM.PURCHASE_ORDER_ID = 2207314;
+
+--核查合并_--以此为准-2014-06-20
+SELECT RMS.ORDER_NO,
+       RMS.ITEM,
+       RMS.QTY_ORDERED  RMS_ORD,
+       RA.ORDERED_QTY   RA_ORD,
+       RMS.QTY_RECEIVED RMS_REC,
+       RA.RECEIVED_QTY  RA_REC
+  FROM (SELECT T.ORDER_NO,
+               T.ITEM,
+               NVL(T.QTY_ORDERED, 0) + NVL(T.QTY_CANCELLED, 0) QTY_ORDERED,
+               --NVL(T.QTY_RECEIVED, 0) QTY_RECEIVED
+               (SELECT SUM(NVL(K.QTY_RECEIVED, 0))
+                  FROM RMS.SHIPSKU@RA_RMS_DBLINK  K,
+                       RMS.SHIPMENT@RA_RMS_DBLINK N
+                 WHERE K.SHIPMENT = N.SHIPMENT
+                   AND N.ORDER_NO = T.ORDER_NO
+                   AND K.ITEM = T.ITEM
+                   AND N.RECEIVE_DATE <= DATE '2014-06-18') QTY_RECEIVED
+          FROM RMS.ORDLOC@RA_RMS_DBLINK T
+         WHERE EXISTS (SELECT 1
+                  FROM RMS.CMX_ORDHEAD@RA_RMS_DBLINK F
+                 WHERE T.ORDER_NO = F.ORDER_NO
+                   AND F.EXPIRED_DATE <= DATE '2014-06-18')
+        /*AND T.ORDER_NO = 2209036*/
+        ) RMS,
+       (SELECT CM.PURCHASE_ORDER_ID ORDER_NO,
+               P.PROD_NUM           ITEM,
+               CM.ORDERED_QTY,
+               CM.RECEIVED_QTY
+          FROM RADM.W_RTL_SUPPCM_IT_LC_DY_MV CM, W_PRODUCT_D P
+         WHERE CM.PROD_WID = P.ROW_WID
+        /*AND CM.PURCHASE_ORDER_ID = 2209036*/
+        ) RA
+ WHERE RMS.ORDER_NO = RA.ORDER_NO(+)
+   AND RMS.ITEM = RA.ITEM(+)
+   AND (NVL(RMS.QTY_ORDERED, 0) <> NVL(RA.ORDERED_QTY, 0) OR
+       NVL(RMS.QTY_RECEIVED, 0) <> NVL(RECEIVED_QTY, 0));
+
+--逐条修护
+SELECT OH.ORDER_NO,
+       OH.ORIG_APPROVAL_DATE,
+       COH.EXPIRED_DATE,
+       OL.ITEM,
+       P.ROW_WID,
+       OL.QTY_ORDERED + NVL(OL.QTY_CANCELLED, 0),
+       OL.QTY_RECEIVED
+  FROM RMS.ORDHEAD@RA_RMS_DBLINK     OH,
+       RMS.ORDLOC@RA_RMS_DBLINK      OL,
+       RMS.CMX_ORDHEAD@RA_RMS_DBLINK COH,
+       RADM.W_PRODUCT_D              P
+ WHERE OH.ORDER_NO = OL.ORDER_NO
+   AND OH.ORDER_NO = COH.ORDER_NO
+   AND P.PROD_NUM = OL.ITEM
+   AND OH.ORDER_NO = 691529
+AND OL.ITEM IN (89354)
+ ORDER BY P.ROW_WID;
+
+SELECT T.PURCHASE_ORDER_ID,
+       T.BBG_REFERENCE_DO3,
+       T.BBG_REFERENCE_DO1,
+       T.PROD_WID,
+       T.ORDERED_QTY,
+       T.RECEIVED_QTY
+  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_F T
+ WHERE T.PURCHASE_ORDER_ID = 691529
+AND EXISTS (SELECT 1
+ FROM RADM.W_PRODUCT_D P
+WHERE P.ROW_WID = T.PROD_WID
+  AND P.PROD_NUM IN (89354))
+ ORDER BY T.PROD_WID
+   FOR UPDATE;
+-----修改订货数量和收货数量-----------------------------------------------------------
+
+--修改订货数量
+UPDATE RADM.W_RTL_SUPPCM_IT_LC_DY_F A
+   SET A.ORDERED_QTY =
+       (SELECT NVL(B.QTY_ORDERED, 0) + NVL(B.QTY_CANCELLED, 0)
+          FROM RMS.ORDLOC@RA_RMS_DBLINK B, RADM.W_PRODUCT_D C
+         WHERE A.PURCHASE_ORDER_ID = B.ORDER_NO
+           AND C.ROW_WID = A.PROD_WID
+           AND C.PROD_NUM = B.ITEM)
+ WHERE /*A.PURCHASE_ORDER_ID IN (2319790)
+   AND*/
+ EXISTS (SELECT 1
+    FROM RADM.JIN_RMS_RA_SUPPCM_DIFF T
+   WHERE A.PURCHASE_ORDER_ID = T.ORDER_NO
+     AND T.RMS_ORD_QTY <> T.RA_ORD_QTY)
+/*AND A.BBG_REFERENCE_DO1 < DATE '2014-06-19'*/
+;
+
+--修改收货数量
+UPDATE RADM.W_RTL_SUPPCM_IT_LC_DY_F A
+   SET A.RECEIVED_QTY =
+       (SELECT K.QTY_RECEIVED
+          FROM RMS.ORDLOC@RA_RMS_DBLINK   B,
+               RADM.W_PRODUCT_D           C,
+               RMS.SHIPSKU@RA_RMS_DBLINK  K,
+               RMS.SHIPMENT@RA_RMS_DBLINK N
+         WHERE K.SHIPMENT = N.SHIPMENT
+           AND B.ORDER_NO = N.ORDER_NO
+           AND A.PURCHASE_ORDER_ID = B.ORDER_NO
+           AND A.SHIPMENT_ID = N.SHIPMENT
+           AND C.ROW_WID = A.PROD_WID
+           AND C.PROD_NUM = B.ITEM
+           AND B.ITEM = K.ITEM)
+ WHERE EXISTS (SELECT DISTINCT T.ORDER_NO
+          FROM RADM.JIN_RMS_RA_SUPPCM_DIFF T
+         WHERE T.Rms_Rec_Qty <> T.Ra_Rec_Qty
+           AND T.ORDER_NO = A.PURCHASE_ORDER_ID)
+   AND EXISTS (SELECT 1
+          FROM RMS.ORDHEAD@RA_RMS_DBLINK D
+         WHERE A.PURCHASE_ORDER_ID = D.ORDER_NO)
+   AND EXISTS (SELECT 1
+          FROM RMS.SHIPMENT@RA_RMS_DBLINK Z
+         WHERE Z.SHIPMENT = A.SHIPMENT_ID)
+/*AND A.BBG_REFERENCE_DO1 < DATE '2014-06-19'*/
+;
+
+
+SELECT * FROM RMS.ORDLOC@RA_RMS_DBLINK T WHERE T.ORDER_NO = 1829267;
+SELECT * FROM RMS.ORDLOC@RA_RMS_DBLINK T WHERE T.QTY_CANCELLED IS NULL;
+--------------------------------------------------------------------------------------------------
+--RMS.ORDLOC订货数量：QTY_ORDERED+QTY_CANCELLED，但目前RA取值为：QTY_PRESCALED,需要修复已经传入RA的订单数据。
+UPDATE RADM.W_RTL_SUPPCM_IT_LC_DY_F A
+   SET A.ORDERED_QTY =
+       (SELECT NVL(B.QTY_ORDERED, 0) + NVL(B.QTY_CANCELLED, 0)
+          FROM RMS.ORDLOC@RA_RMS_DBLINK B, RADM.W_PRODUCT_D C
+         WHERE A.PURCHASE_ORDER_ID = B.ORDER_NO
+           AND C.ROW_WID = A.PROD_WID
+           AND C.PROD_NUM = B.ITEM)
+ WHERE A.DT_WID BETWEEN 120140101000 AND 120140611000
+   AND EXISTS (SELECT 1
+          FROM RMS.ORDHEAD@RA_RMS_DBLINK D
+         WHERE A.PURCHASE_ORDER_ID = D.ORDER_NO);
+
+
+			 
+--修改W_RTL_SUPPCM_IT_LC_DY_F.bbg_reference_fo1:订货金额。来源：RA_RMS.W_RTL_SUPPCM_C_TMP.BBG_ORDERED_AMOUNT
+UPDATE RADM.W_RTL_SUPPCM_IT_LC_DY_F F
+   SET F.BBG_REFERENCE_FO1 =
+       (SELECT C.RMS_ORD_AMT
+          FROM RADM.JIN_RMS_RA_SUPPCM_DIFF C, RADM.W_PRODUCT_D P
+         WHERE F.PURCHASE_ORDER_ID = C.ORDER_NO
+           AND F.PROD_WID = P.ROW_WID
+           AND P.PROD_NUM = C.ITEM)
+ WHERE EXISTS (SELECT 1
+          FROM RADM.JIN_RMS_RA_SUPPCM_DIFF C, RADM.W_PRODUCT_D P
+         WHERE F.PURCHASE_ORDER_ID = C.ORDER_NO
+           AND F.PROD_WID = P.ROW_WID
+           AND P.PROD_NUM = C.ITEM
+           AND NVL(F.BBG_REFERENCE_FO1, 0) <> C.RMS_ORD_AMT);
+					 
+--RADM.W_RTL_SUPPCM_IT_LC_DY_F收货金额修复-------------------------------------------------------------------
+
+SELECT * FROM RMS.SHIPMENT T;
+SELECT * FROM RMS.SHIPSKU T;
+--收货金额差异查找
+CREATE TABLE RMS.YJ_RECEIVED_AMOUNT_DIFF AS
+  SELECT F.PURCHASE_ORDER_ID,
+         F.SHIPMENT_ID,
+         F.BBG_REFERENCE_DO3,
+         P.PROD_NUM,
+         C.QTY_RECEIVED * C.UNIT_COST RECEIVED_AMOUNT,
+         F.BBG_REFERENCE_FO2
+    FROM RMS.SHIPSKU                         C,
+         RMS.SHIPMENT                        M,
+         RADM.W_PRODUCT_D@rms_ra             P,
+         RADM.W_RTL_SUPPCM_IT_LC_DY_F@RMS_RA F
+   WHERE F.PURCHASE_ORDER_ID = M.ORDER_NO
+     AND C.SHIPMENT = M.SHIPMENT
+     AND M.SHIPMENT = F.SHIPMENT_ID
+     AND F.PROD_WID = P.ROW_WID
+     AND P.PROD_NUM = C.ITEM
+     AND F.BBG_REFERENCE_FO2 <> ROUND(C.QTY_RECEIVED * C.UNIT_COST, 4);
+DROP TABLE RMS.YJ_RECEIVED_AMOUNT_DIFF;
+
+--收货金额差异修复
+UPDATE RADM.W_RTL_SUPPCM_IT_LC_DY_F A
+   SET A.BBG_REFERENCE_FO2 =
+       (SELECT K.QTY_RECEIVED * K.UNIT_COST
+          FROM RMS.ORDLOC@RA_RMS_DBLINK   B,
+               RADM.W_PRODUCT_D           C,
+               RMS.SHIPSKU@RA_RMS_DBLINK  K,
+               RMS.SHIPMENT@RA_RMS_DBLINK N
+         WHERE K.SHIPMENT = N.SHIPMENT
+           AND B.ORDER_NO = N.ORDER_NO
+           AND A.PURCHASE_ORDER_ID = B.ORDER_NO
+           AND A.SHIPMENT_ID = N.SHIPMENT
+           AND C.ROW_WID = A.PROD_WID
+           AND C.PROD_NUM = B.ITEM
+           AND B.ITEM = K.ITEM)
+ WHERE A.PURCHASE_ORDER_ID IN
+       (SELECT DISTINCT T.ORDER_NO
+          FROM RADM.JIN_RMS_RA_SUPPCM_DIFF T
+         WHERE T.RMS_REC_AMT - T.RA_REC_AMT > 0.01
+           AND T.RA_ORD_QTY <> 0)
+   AND EXISTS (SELECT 1
+          FROM RMS.ORDHEAD@RA_RMS_DBLINK D
+         WHERE A.PURCHASE_ORDER_ID = D.ORDER_NO)
+   AND EXISTS (SELECT 1
+          FROM RMS.SHIPMENT@RA_RMS_DBLINK Z
+         WHERE Z.SHIPMENT = A.SHIPMENT_ID)
+				 AND A.PURCHASE_ORDER_ID=2319790
+/*AND A.BBG_REFERENCE_DO1 < DATE '2014-06-19'*/
+;
+
+SELECT *
+  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_F T
+ WHERE T.PURCHASE_ORDER_ID = 329758;
+
+SELECT *
+  FROM RA_RMS.W_RTL_SUPPCM_C_TMP@RA_RMS_DBLINK T
+ WHERE T.PO_NUM = 1622472;
+
+SELECT T.PROD_IT_NUM, T.PO_NUM, COUNT(*)
+  FROM RA_RMS.W_RTL_SUPPCM_C_TMP@RA_RMS_DBLINK T
+ GROUP BY T.PROD_IT_NUM, T.PO_NUM
+HAVING COUNT(*) > 1;
+--修护2013-05-08之前的订货量
+UPDATE RADM.W_RTL_SUPPCM_IT_LC_DY_F A
+   SET A.ORDERED_QTY = A.EXPECTED_QTY
+ WHERE A.DT_WID BETWEEN 120110101000 AND 120130507000
+   AND A.EXPECTED_QTY IS NOT NULL
+   AND A.ORDERED_QTY IS NULL;
+SELECT *
+  FROM RADM.BBG_RA_SUPPCM_REF_V T
+ WHERE T.ordered_qty <> T.expected_qty;
+
+--
+--订单号：1094096，ITEM=800040165(PROD_WID=285057),订货数量=0，取消数量=30，RA没有这条记录。
+--同一商品多次收货订单号
+SELECT SM.ORDER_NO, SK.ITEM, COUNT(*)
+  FROM RMS.SHIPMENT SM, RMS.SHIPSKU SK
+ WHERE SM.SHIPMENT = SK.SHIPMENT
+   AND SM.RECEIVE_DATE > DATE '2014-06-01'
+   AND SM.ORDER_NO IS NOT NULL
+ GROUP BY SM.ORDER_NO, SK.ITEM
+HAVING COUNT(*) > 1;
+--未导入RA的订单或商品
+DROP MATERIALIZED VIEW RMS.YJ_NO_SHIPSKU;
+CREATE MATERIALIZED VIEW RMS.YJ_NO_SHIPSKU AS
+  SELECT DISTINCT OH.ORIG_APPROVAL_DATE, OH.ORDER_NO, OL.ITEM
+    FROM RMS.ORDHEAD OH, RMS.ORDLOC OL
+   WHERE OH.ORDER_NO = OL.ORDER_NO
+     AND OH.ORIG_APPROVAL_DATE IS NOT NULL
+        --AND OH.STATUS = 'C'
+        --AND OH.ORDER_NO=1094096
+     AND NOT EXISTS
+   (SELECT 1
+            FROM RADM.W_RTL_SUPPCM_IT_LC_DY_MV@RMS_RA M,
+                 RADM.W_PRODUCT_D@RMS_RA              P
+           WHERE M.PROD_WID = P.ROW_WID
+             AND OH.ORDER_NO = M.PURCHASE_ORDER_ID
+             AND OL.ITEM = P.PROD_NUM)
+     AND OH.ORIG_APPROVAL_DATE <
+         TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD'), 'YYYYMMDD');
+--RADM.W_RTL_SUPPCM_IT_LC_DY_FS删除ORDERED_QTY为NULL的记录。
+DELETE RADM.W_RTL_SUPPCM_IT_LC_DY_FS T WHERE T.ORDERED_QTY IS NULL;
+COMMIT;
+--清除日志
+TRUNCATE TABLE RADM.C_LOAD_DATES;
+--RADM.W_RTL_SUPPCM_IT_LC_DY_F表有重复数据，BBG_ITEM_LOC_SUPP_WID有一条值超出时间范围，需要删除，
+--例子：订单号：1651269
+DELETE RADM.W_RTL_SUPPCM_IT_LC_DY_F T
+--SELECT *
+--  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_F T
+ WHERE NOT EXISTS (SELECT 1
+          FROM RADM.BBG_RA_ITEM_LOC_SUPP_D S
+         WHERE T.BBG_ITEM_LOC_SUPP_WID = S.ROW_WID
+           AND TO_DATE(SUBSTR(T.DT_WID, 2, 8), 'YYYYMMDD') BETWEEN
+               S.EFFECTIVE_FROM_DT AND S.EFFECTIVE_TO_DT)
+   AND EXISTS (SELECT 1
+          FROM RADM.YJ_ORDERNO O
+         WHERE T.PURCHASE_ORDER_ID = O.ORDER_NO);
+
+SELECT T.DT_WID, S.EFFECTIVE_FROM_DT, S.EFFECTIVE_TO_DT
+  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_F T, RADM.BBG_RA_ITEM_LOC_SUPP_D S
+ WHERE T.BBG_ITEM_LOC_SUPP_WID = S.ROW_WID
+   AND T.PURCHASE_ORDER_ID = 1651269;
+
+SELECT * FROM RA_RMS.IF_TRAN_DATA;
+
+SELECT * FROM RA_RMS.IF_TRAN_DATA_V;
+
+SELECT *
+  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_FS T
+ WHERE T.PURCHASE_ORDER_ID = 1030563; --19870
+SELECT COUNT(*) FROM RADM.W_RTL_SUPPCM_IT_LC_DY_FS; --19870
+SELECT * FROM RMS.ORDHEAD T WHERE T.ORIG_APPROVAL_DATE IS NULL;
+SELECT * FROM RMS.ORDHEAD T WHERE T.ORDER_NO = 1030563;
+SELECT * FROM RMS.ORDLOC T WHERE T.ORDER_NO = 1030563;
+SELECT * FROM RMS.SHIPMENT T WHERE T.ORDER_NO = 1030563;
+--SELECT * FROM RMS.SHIPSKU T WHERE T.SHIPMENT IN (2119197);
+SELECT *
+  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_F@RMS_RA T
+ WHERE T.PURCHASE_ORDER_ID = 1030563;
+SELECT *
+  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_MV@RMS_RA T
+ WHERE T.PURCHASE_ORDER_ID = 1030563;
+SELECT *
+  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_FV@RMS_RA T
+ WHERE T.PURCHASE_ORDER_ID = 1030563;
+
+SELECT * FROM RADM.W_PRODUCT_D T WHERE T.PROD_NUM = '101019173'; --1034195
+
+SELECT * FROM RMS.ORDLOC T WHERE T.UNIT_COST <> T.UNIT_COST_INIT;
+--RMS到货率----------------------------------------------------------------------------------------
+SELECT A.月份,
+       A.DEPT,
+       SUM(A.订货数量) 订货数量,
+       SUM(A.收货数量) 收货数量,
+       SUM(A.订货金额) 订货金额,
+       SUM(A.收货金额) 收货金额
+  FROM (SELECT SUBSTR(TO_CHAR(T.orig_approval_date, 'YYYYMMDD'), 1, 6) 月份,
+               T.SUPPLIER 供应商名称,
+               (SELECT SUP_NAME FROM SUPS WHERE SUPPLIER = T.SUPPLIER) 供应商名称,
+               T.LOC 收货机构,
+               (SELECT LOC_NAME FROM LOC_V WHERE LOC = T.LOC) 收货机构名称,
+               T.ITEM 商品编码,
+               T.DEPT,
+               (SELECT ITEM_DESC FROM ITEM_MASTER WHERE ITEM = T.ITEM) 商品名称,
+               T.QTY_ORDERED 订货数量,
+               T.QTY_RECEIVED 收货数量,
+               T.AMT_ORDERED 订货金额,
+               NVL(T.AMT_RECEIVED, 0) 收货金额,
+               DECODE(T.AMT_ORDERED,
+                      0,
+                      0,
+                      NVL(T.AMT_RECEIVED, 0) / T.AMT_ORDERED) 到货率
+          FROM (SELECT oh.order_no,
+                       MAX(OH.SUPPLIER) SUPPLIER,
+                       MAX(oh.orig_approval_date) orig_approval_date,
+                       od.location LOC,
+                       od.item,
+                       IM.DEPT,
+                       AVG(od.qty_ordered + NVL(od.qty_cancelled, 0)) QTY_ORDERED,
+                       AVG(nvl(od.qty_received, 0)) QTY_RECEIVED,
+                       AVG(NVL(od.qty_cancelled, 0)) QTY_CANCELED,
+                       avg(NVL((SELECT unit_cost
+                                 FROM shipsku
+                                WHERE shipment = sh.shipment
+                                  AND item = od.item),
+                               od.unit_cost) *
+                           (od.qty_ordered + NVL(od.qty_cancelled, 0))) AMT_ORDERED,
+                       SUM((SELECT unit_cost * QTY_RECEIVED
+                             FROM shipsku
+                            WHERE shipment = sh.shipment
+                              AND item = od.item)) AMT_RECEIVED
+                  FROM ORDHEAD OH, ORDLOC OD, SHIPMENT SH, ITEM_MASTER IM
+                 WHERE OH.Order_No = od.order_no
+                   AND oH.order_no = sh.order_no(+)
+                   AND OD.ITEM = IM.ITEM
+                      --AND IM.DEPT = 23
+                   AND OH.ORIG_APPROVAL_DATE BETWEEN DATE
+                 '2014-04-01'
+                   AND DATE '2014-04-30' + 1
+                --AND OH.SUPPLIER = DECODE(&PM_SUP, '', OH.SUPPLIER, &PM_SUP)
+                 GROUP BY oh.order_no, od.location, od.item, IM.DEPT) T) A
+ GROUP BY A.月份, A.DEPT;
+--RA跟踪语句
+/* Formatted on 2014/6/18 20:38:34 (QP5 v5.256.13226.35510) */
+/* 242937b5 */
+
+SELECT DISTINCT 0 AS c1,
+                D1.c3 AS c2,
+                D1.c4 AS c3,
+                D1.c1 AS c4,
+                D1.c2 AS c5,
+                D1.c2 / NULLIF(D1.c1, 0) AS c6,
+                D1.c5 AS c7
+  FROM (SELECT SUM(T963294.ORDERED_QTY) AS c1,
+               SUM(T963294.RECEIVED_QTY) AS c2,
+               T960506.PER_NAME_MONTH AS c3,
+               CAST(T955085.LVL6ANC_PRODCAT_ID AS INTEGER) AS c4,
+               T960506.CAL_MONTH_WID AS c5
+          FROM W_MCAL_DAY_DV T960506 /* Dim_W_MCAL_DAY_D_Retail_Gregorian_Calendar */,
+               (SELECT T.*
+                  FROM W_PRODUCT_D T, W_PRODUCT_ATTR_D A
+                 WHERE T.SCD1_WID = A.SCD1_WID
+                   AND A.PRODUCT_ATTR12_NAME = A.PRODUCT_ATTR11_NAME) T14449,
+               W_PROD_CAT_DH T955085 /* Dim_W_PROD_CAT_DH_As_Was */,
+               W_RTL_SUPPCM_IT_LC_DY_FV T963294 /* Fact_W_RTL_SUPPCM_IT_LC_ED_F */
+         WHERE (T960506.ROW_WID = T963294.DT_WID AND
+               T960506.MCAL_CAL_WID = 1.0 AND
+               T960506.PER_NAME_MONTH = '2014 / 05' AND
+               T14449.ROW_WID = T963294.PROD_WID AND
+               T14449.PROD_CAT5_WID_AS_WAS = T955085.ROW_WID AND
+               '2010' < T960506.CAL_YEAR)
+         GROUP BY T960506.CAL_MONTH_WID,
+                  T960506.PER_NAME_MONTH,
+                  CAST(T955085.LVL6ANC_PRODCAT_ID AS INTEGER)) D1
+ ORDER BY c2, c3;
+---需要优化语句
+SELECT D1.c1 AS c1, D1.c2 AS c2, D1.c3 AS c3, D1.c4 AS c4, D1.c5 AS c5
+  FROM (SELECT SUM(T963294.ORDERED_QTY) AS c1,
+               SUM(T963294.RECEIVED_QTY) AS c2,
+               T960506.PER_NAME_MONTH AS c3,
+               CAST(T955085.LVL6ANC_PRODCAT_ID AS INTEGER) AS c4,
+               T960506.CAL_MONTH_WID AS c5,
+               ROW_NUMBER() OVER(PARTITION BY T960506.CAL_MONTH_WID, CAST(T955085.LVL6ANC_PRODCAT_ID AS INTEGER) ORDER BY T960506.CAL_MONTH_WID ASC, CAST(T955085.LVL6ANC_PRODCAT_ID AS INTEGER) ASC) AS c6
+          FROM W_MCAL_DAY_DV T960506 /* Dim_W_MCAL_DAY_D_Retail_Gregorian_Calendar */,
+               (SELECT T.*
+                  FROM W_PRODUCT_D T, W_PRODUCT_ATTR_D A
+                 WHERE T.SCD1_WID = A.SCD1_WID
+                   AND A.PRODUCT_ATTR12_NAME = A.PRODUCT_ATTR11_NAME) T14449,
+               W_PROD_CAT_DH T955085 /* Dim_W_PROD_CAT_DH_As_Was */,
+               W_RTL_SUPPCM_IT_LC_DY_FV T963294 /* Fact_W_RTL_SUPPCM_IT_LC_ED_F */
+         WHERE (T960506.ROW_WID = T963294.DT_WID AND
+               T960506.MCAL_CAL_WID = 1.0 AND
+               T960506.PER_NAME_MONTH = '2014 / 01' AND
+               T14449.ROW_WID = T963294.PROD_WID AND
+               T14449.PROD_CAT5_WID_AS_WAS = T955085.ROW_WID AND
+               '2010' < T960506.CAL_YEAR)
+         GROUP BY T960506.CAL_MONTH_WID,
+                  T960506.PER_NAME_MONTH,
+                  CAST(T955085.LVL6ANC_PRODCAT_ID AS INTEGER)) D1
+ WHERE (D1.c6 = 1);

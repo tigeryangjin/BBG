@@ -1,0 +1,315 @@
+--原SQL--高晶
+--CREATE OR REPLACE VIEW RA_RMS.IF_TRAN_DATA_V AS
+SELECT ITEM,
+       DEPT,
+       CLASS,
+       SUBCLASS,
+       PACK_IND,
+       LOC_TYPE,
+       LOCATION,
+       TRAN_DATE,
+       TRAN_CODE,
+       ADJ_CODE,
+       UNITS,
+       TOTAL_COST,
+       TOTAL_RETAIL,
+       REF_NO_1,
+       REF_NO_2,
+       GL_REF_NO,
+       OLD_UNIT_RETAIL,
+       NEW_UNIT_RETAIL,
+       PGM_NAME,
+       SALES_TYPE,
+       VAT_RATE,
+       AV_COST,
+       REF_PACK_NO,
+       TRAN_DATA_TIMESTAMP
+  FROM RMS.IF_TRAN_DATA
+UNION
+SELECT V.ITEM               ITEM,
+       NULL                 DEPT,
+       NULL                 CLASS,
+       NULL                 SUBCLASS,
+       NULL                 PACK_IND,
+       NULL                 LOC_TYPE,
+       D.LOCATION           LOCATION,
+       T.ORIG_APPROVAL_DATE TRAN_DATE,
+       20                   TRAN_CODE,
+       NULL                 ADJ_CODE,
+       NULL                 UNITS,
+       NULL                 TOTAL_COST,
+       NULL                 TOTAL_RETAIL,
+       T.ORDER_NO           REF_NO_1,
+       NULL                 REF_NO_2,
+       NULL                 GL_REF_NO,
+       NULL                 OLD_UNIT_RETAIL,
+       NULL                 NEW_UNIT_RETAIL,
+       NULL                 PGM_NAME,
+       NULL                 SALES_TYPE,
+       NULL                 VAT_RATE,
+       NULL                 AV_COST,
+       NULL                 REF_PACK_NO,
+       NULL                 TRAN_DATA_TIMESTAMP
+  FROM ORDHEAD         T,
+       ORDLOC          D,
+       V_PACKSKU_QTY   V,
+       RMS.ITEM_MASTER ITEM_MASTER,
+       RMS.ITEM_MASTER ITEM_MASTER1
+ WHERE T.ORDER_NO = D.ORDER_NO
+   AND T.STATUS = 'A'
+   AND (ITEM_MASTER.ITEM = D.ITEM)
+   AND (ITEM_MASTER.ITEM_XFORM_IND != 'Y')
+   AND (D.ITEM = V.PACK_NO)
+   AND (V.ITEM = ITEM_MASTER1.ITEM)
+   AND T.ORIG_APPROVAL_DATE =
+       (SELECT TO_DATE(T.PARAM_VALUE, 'YYYY-MM-DD')
+          FROM RA_RMS.RA_SRC_CURR_PARAM_G T
+         WHERE T.PARAM_NAME = 'VDATE')
+   AND ITEM_MASTER.PACK_IND = 'Y'
+   AND NOT EXISTS (SELECT 1
+          FROM RMS.IF_TRAN_DATA IF
+         WHERE IF.TRAN_CODE = 20
+           AND IF.ITEM = V.ITEM
+           AND D.ITEM = ITEM_MASTER.ITEM
+           AND ITEM_MASTER.ITEM = V.PACK_NO
+           AND IF.REF_NO_1 = D.ORDER_NO
+           AND IF.LOCATION = D.LOCATION
+           AND T.ORIG_APPROVAL_DATE = IF.TRAN_DATE
+           AND D.ORDER_NO = T.ORDER_NO)
+UNION
+SELECT D.ITEM               ITEM,
+       NULL                 DEPT,
+       NULL                 CLASS,
+       NULL                 SUBCLASS,
+       NULL                 PACK_IND,
+       NULL                 LOC_TYPE,
+       D.LOCATION           LOCATION,
+       T.ORIG_APPROVAL_DATE TRAN_DATE,
+       20                   TRAN_CODE,
+       NULL                 ADJ_CODE,
+       NULL                 UNITS,
+       NULL                 TOTAL_COST,
+       NULL                 TOTAL_RETAIL,
+       T.ORDER_NO           REF_NO_1,
+       NULL                 REF_NO_2,
+       NULL                 GL_REF_NO,
+       NULL                 OLD_UNIT_RETAIL,
+       NULL                 NEW_UNIT_RETAIL,
+       NULL                 PGM_NAME,
+       NULL                 SALES_TYPE,
+       NULL                 VAT_RATE,
+       NULL                 AV_COST,
+       NULL                 REF_PACK_NO,
+       NULL                 TRAN_DATA_TIMESTAMP
+  FROM ORDHEAD T, ORDLOC D, RMS.ITEM_MASTER ITEM_MASTER
+ WHERE T.ORDER_NO = D.ORDER_NO
+   AND T.STATUS = 'A'
+   AND (ITEM_MASTER.ITEM = D.ITEM)
+   AND ITEM_MASTER.PACK_IND != 'Y'
+   AND (ITEM_MASTER.ITEM_XFORM_IND != 'Y')
+   AND T.ORIG_APPROVAL_DATE =
+       (SELECT TO_DATE(T.PARAM_VALUE, 'YYYY-MM-DD')
+          FROM RA_RMS.RA_SRC_CURR_PARAM_G T
+         WHERE T.PARAM_NAME = 'VDATE')
+   AND NOT EXISTS (SELECT 1
+          FROM RMS.IF_TRAN_DATA IF
+         WHERE IF.TRAN_CODE = 20
+           AND IF.ITEM = D.ITEM
+           AND IF.REF_NO_1 = D.ORDER_NO
+           AND IF.LOCATION = D.LOCATION
+           AND T.ORDER_NO = D.ORDER_NO
+           AND T.ORIG_APPROVAL_DATE = IF.TRAN_DATE);
+
+--修改后------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE VIEW RA_RMS.IF_TRAN_DATA AS
+  SELECT ITEM, ----此视图用于RA的到货率接口使用：SDE_RetailSupplierComplianceFact
+         DEPT,
+         CLASS,
+         SUBCLASS,
+         PACK_IND,
+         LOC_TYPE,
+         LOCATION,
+         TRAN_DATE,
+         TRAN_CODE,
+         ADJ_CODE,
+         UNITS,
+         TOTAL_COST,
+         TOTAL_RETAIL,
+         REF_NO_1,
+         REF_NO_2,
+         GL_REF_NO,
+         OLD_UNIT_RETAIL,
+         NEW_UNIT_RETAIL,
+         PGM_NAME,
+         SALES_TYPE,
+         VAT_RATE,
+         AV_COST,
+         REF_PACK_NO,
+         TRAN_DATA_TIMESTAMP
+    FROM RMS.IF_TRAN_DATA
+  UNION
+  SELECT V.ITEM ITEM,
+         NULL DEPT,
+         NULL CLASS,
+         NULL SUBCLASS,
+         NULL PACK_IND,
+         NULL LOC_TYPE,
+         D.LOCATION LOCATION,
+         TO_DATE(TO_CHAR(T.ORIG_APPROVAL_DATE, 'YYYYMMDD'), 'YYYY-MM-DD') TRAN_DATE,
+         20 TRAN_CODE,
+         NULL ADJ_CODE,
+         NULL UNITS,
+         NULL TOTAL_COST,
+         NULL TOTAL_RETAIL,
+         T.ORDER_NO REF_NO_1,
+         NULL REF_NO_2,
+         NULL GL_REF_NO,
+         NULL OLD_UNIT_RETAIL,
+         NULL NEW_UNIT_RETAIL,
+         NULL PGM_NAME,
+         NULL SALES_TYPE,
+         NULL VAT_RATE,
+         NULL AV_COST,
+         NULL REF_PACK_NO,
+         NULL TRAN_DATA_TIMESTAMP
+    FROM ORDHEAD         T,
+         ORDLOC          D,
+         V_PACKSKU_QTY   V,
+         RMS.ITEM_MASTER ITEM_MASTER,
+         RMS.ITEM_MASTER ITEM_MASTER1
+   WHERE T.ORDER_NO = D.ORDER_NO
+     AND T.STATUS = 'A'
+     AND (ITEM_MASTER.ITEM = D.ITEM)
+     AND (ITEM_MASTER.ITEM_XFORM_IND != 'Y')
+     AND (D.ITEM = V.PACK_NO)
+     AND (V.ITEM = ITEM_MASTER1.ITEM)
+     AND TO_DATE(TO_CHAR(T.ORIG_APPROVAL_DATE, 'YYYYMMDD'), 'YYYY-MM-DD') =
+        --(SELECT TO_DATE(T.PARAM_VALUE, 'YYYY-MM-DD') - 1 
+         (SELECT TO_DATE(T.PARAM_VALUE, 'YYYY-MM-DD')
+            FROM RA_RMS.RA_SRC_CURR_PARAM_G T
+           WHERE T.PARAM_NAME = 'VDATE')
+     AND ITEM_MASTER.PACK_IND = 'Y'
+     AND NOT EXISTS (SELECT 1
+            FROM RMS.IF_TRAN_DATA IF
+           WHERE IF.TRAN_CODE = 20
+             AND IF.ITEM = V.ITEM
+             AND D.ITEM = ITEM_MASTER.ITEM
+             AND ITEM_MASTER.ITEM = V.PACK_NO
+             AND IF.REF_NO_1 = D.ORDER_NO
+             AND IF.LOCATION = D.LOCATION)
+  UNION
+  SELECT D.ITEM ITEM,
+         NULL DEPT,
+         NULL CLASS,
+         NULL SUBCLASS,
+         NULL PACK_IND,
+         NULL LOC_TYPE,
+         D.LOCATION LOCATION,
+         TO_DATE(TO_CHAR(T.ORIG_APPROVAL_DATE, 'YYYYMMDD'), 'YYYY-MM-DD') TRAN_DATE,
+         20 TRAN_CODE,
+         NULL ADJ_CODE,
+         NULL UNITS,
+         NULL TOTAL_COST,
+         NULL TOTAL_RETAIL,
+         T.ORDER_NO REF_NO_1,
+         NULL REF_NO_2,
+         NULL GL_REF_NO,
+         NULL OLD_UNIT_RETAIL,
+         NULL NEW_UNIT_RETAIL,
+         NULL PGM_NAME,
+         NULL SALES_TYPE,
+         NULL VAT_RATE,
+         NULL AV_COST,
+         NULL REF_PACK_NO,
+         NULL TRAN_DATA_TIMESTAMP
+    FROM ORDHEAD T, ORDLOC D, RMS.ITEM_MASTER ITEM_MASTER
+   WHERE T.ORDER_NO = D.ORDER_NO
+     AND T.STATUS = 'A'
+     AND (ITEM_MASTER.ITEM = D.ITEM)
+     AND ITEM_MASTER.PACK_IND != 'Y'
+     AND (ITEM_MASTER.ITEM_XFORM_IND != 'Y')
+     AND TO_DATE(TO_CHAR(T.ORIG_APPROVAL_DATE, 'YYYYMMDD'), 'YYYY-MM-DD') =
+        --(SELECT TO_DATE(T.PARAM_VALUE, 'YYYY-MM-DD') - 1
+         (SELECT TO_DATE(T.PARAM_VALUE, 'YYYY-MM-DD')
+            FROM RA_RMS.RA_SRC_CURR_PARAM_G T
+           WHERE T.PARAM_NAME = 'VDATE')
+     AND NOT EXISTS (SELECT 1
+            FROM RMS.IF_TRAN_DATA IF
+           WHERE IF.TRAN_CODE = 20
+             AND IF.ITEM = D.ITEM
+             AND IF.REF_NO_1 = D.ORDER_NO
+             AND IF.LOCATION = D.LOCATION);
+
+--from if_tran_data_v
+select * from ra_rms.if_tran_data_v t where t.TRAN_CODE=20 and t.REF_NO_1 = '2122991';
+
+--测试数据
+SELECT * --DISTINCT T.ORDER_NO
+  FROM ORDHEAD T, ORDLOC D, RMS.ITEM_MASTER ITEM_MASTER
+ WHERE T.ORDER_NO = D.ORDER_NO
+   AND D.ITEM = ITEM_MASTER.ITEM
+   AND T.STATUS = 'A'
+   AND ITEM_MASTER.PACK_IND != 'Y'
+   AND (ITEM_MASTER.ITEM_XFORM_IND != 'Y')
+   AND TO_DATE(TO_CHAR(T.ORIG_APPROVAL_DATE, 'YYYYMMDD'), 'YYYY-MM-DD') =
+      --(SELECT TO_DATE(T.PARAM_VALUE, 'YYYY-MM-DD') - 1
+       (SELECT TO_DATE(G.PARAM_VALUE, 'YYYY-MM-DD')
+          FROM RA_RMS.RA_SRC_CURR_PARAM_G G
+         WHERE G.PARAM_NAME = 'VDATE')
+   AND NOT EXISTS (SELECT 1
+          FROM RMS.IF_TRAN_DATA IF
+         WHERE IF.TRAN_CODE = 20
+           AND IF.ITEM = D.ITEM
+           AND IF.REF_NO_1 = D.ORDER_NO
+           AND IF.LOCATION = D.LOCATION)
+   AND T.ORDER_NO = '2124401';
+
+--查找不在IF_TRAN_DATA中的订单
+SELECT DISTINCT T.ORDER_NO
+  FROM RMS.ORDHEAD T
+ WHERE T.STATUS = 'A'
+   AND TO_DATE(TO_CHAR(T.ORIG_APPROVAL_DATE, 'YYYYMMDD'), 'YYYY-MM-DD') = DATE
+ '2014-05-19'
+   AND NOT EXISTS
+ (SELECT 1 FROM RMS.IF_TRAN_DATA I WHERE T.ORDER_NO = I.REF_NO_1);
+--查找在IF_TRAN_DATA中收货的订单，但不是全部商品
+SELECT DISTINCT T.ORDER_NO
+  FROM RMS.ORDHEAD T
+ WHERE T.STATUS = 'A'
+   AND TO_DATE(TO_CHAR(T.ORIG_APPROVAL_DATE, 'YYYYMMDD'), 'YYYY-MM-DD') = DATE
+ '2014-05-19'
+   AND  EXISTS
+ (SELECT 1 FROM RMS.IF_TRAN_DATA I WHERE T.ORDER_NO = I.REF_NO_1);
+ 
+--ALL
+SELECT COUNT(DISTINCT T.ORDER_NO)
+  FROM RMS.ORDHEAD T
+ WHERE T.STATUS = 'A'
+   AND TO_DATE(TO_CHAR(T.ORIG_APPROVAL_DATE, 'YYYYMMDD'), 'YYYY-MM-DD') = DATE
+ '2014-05-13';
+--IN TRAN
+SELECT COUNT(DISTINCT T.ORDER_NO)
+  FROM RMS.ORDHEAD T
+ WHERE T.STATUS = 'A'
+   AND TO_DATE(TO_CHAR(T.ORIG_APPROVAL_DATE, 'YYYYMMDD'), 'YYYY-MM-DD') = DATE
+ '2014-05-13'
+   AND T.ORDER_NO IN (SELECT DISTINCT T.REF_NO_1
+                        FROM RMS.IF_TRAN_DATA T
+                       WHERE T.TRAN_CODE = 20);
+--NOT IN TRAN
+SELECT DISTINCT T.ORDER_NO
+  FROM RMS.ORDHEAD T
+ WHERE T.STATUS = 'A'
+   AND TO_DATE(TO_CHAR(T.ORIG_APPROVAL_DATE, 'YYYYMMDD'), 'YYYY-MM-DD') = DATE
+ '2014-05-13'
+   AND T.ORDER_NO NOT IN (SELECT DISTINCT T.REF_NO_1
+                            FROM RMS.IF_TRAN_DATA T
+                           WHERE T.TRAN_CODE = 20);
+
+SELECT * FROM RMS.IF_TRAN_DATA T WHERE T.REF_NO_1 = '2154710';
+SELECT * FROM RMS.ORDHEAD T WHERE T.ORDER_NO = '2154710';
+SELECT * FROM RMS.ORDLOC T WHERE T.ORDER_NO = '2154710';
+SELECT * FROM RMS.SHIPMENT T WHERE T.ORDER_NO = '2154710';
+SELECT * FROM RMS.SHIPSKU T WHERE T.SHIPMENT IN( '2035878','2043019');
+SELECT * FROM RADM.W_RTL_SUPPCM_IT_LC_DY_F@RMS_RA T WHERE T.PURCHASE_ORDER_ID='2154710';
+SELECT * FROM RADM.W_RTL_SUPPCM_IT_LC_DY_FV@RMS_RA T WHERE T.PURCHASE_ORDER_ID='2154710';
