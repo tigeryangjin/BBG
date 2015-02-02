@@ -1,0 +1,182 @@
+--库存
+select to_char(ils.soh_bak_date, 'yyyy') 年份,
+       to_char(ils.soh_bak_date, 'MM') 月份,
+       ils.loc 门店编码,
+       im.dept 大类编码,
+       sum((ils.stock_on_hand + ils.in_transit_qty) * ils.av_cost)/30 平均库存成本 
+  from item_loc_soh_hist ils, item_master im
+ where ils.soh_bak_date between &PM_STDTAE and &PM_ENDDATE
+   and ils.item = im.item
+   and ils.loc_type='S'
+ group by to_char(ils.soh_bak_date, 'yyyy'),
+          to_char(ils.soh_bak_date, 'MM'),
+          ils.loc,
+          im.dept;
+          
+--历史销售         
+select substr(t.business_date, 1, 4) 年份,
+       substr(t.business_date, 5, 2) 月份,
+       t.loc 门店编码,
+       count(t.seq_no) 客流,
+       sum(t.amount)/count(t.seq_no) 平均客单价
+       from (select sl.sd0101 business_date,
+       substr(sl.shopid, 2, 2) || '0' || substr(sl.shopid, 4, 3) loc,
+       sl.sd0106 seq_no,
+       sum(sl.amt) amount
+  from saledetail sl
+  where sl.sd0101 between &PM_STDATE and &PM_ENDDATE
+  group by sl.sd0101,sl.shopid,sl.sd0106) t
+  group by substr(t.business_date, 1, 4),
+       substr(t.business_date, 5, 2),
+       t.loc;
+
+
+ insert into bbg_ys_t_businessdata_retek
+        (corp_code,
+         shop_code,
+         account_code,
+       --  branch_code,
+         year,
+         period,
+         businessdata
+         )
+select '1',t.loc, 'RET002',substr(t.business_date, 1, 4) ,
+       substr(t.business_date, 5, 2) ,      
+       sum(t.amount)/count(t.seq_no) 
+       from (select sl.sd0101 business_date,
+       substr(sl.shopid, 2, 2) || '0' || substr(sl.shopid, 4, 3) loc,
+       sl.sd0106 seq_no,
+       sum(sl.amt) amount
+  from saledetail sl
+  where to_date(sl.sd0101,'yyyy-mm-dd') between to_date('2011-2-1','yyyy-mm-dd') and to_date('2011-2-28','yyyy-mm-dd')
+  group by sl.sd0101,sl.shopid,sl.sd0106) t
+  group by substr(t.business_date, 1, 4),
+       substr(t.business_date, 5, 2),
+       t.loc;
+commit;
+
+
+insert into bbg_ys_t_businessdata_retek
+        (corp_code,
+         shop_code,
+         account_code,
+       --  branch_code,
+         year,
+         period,
+         businessdata
+         )
+select '1',t.loc, 'RET003',substr(t.business_date, 1, 4) ,
+       substr(t.business_date, 5, 2) ,      
+        count(t.seq_no) , 
+       from (select sl.sd0101 business_date,
+       substr(sl.shopid, 2, 2) || '0' || substr(sl.shopid, 4, 3) loc,
+       sl.sd0106 seq_no,
+       sum(sl.amt) amount
+  from saledetail sl
+  where to_date(sl.sd0101,'yyyy-mm-dd') between to_date('2013-1-1','yyyy-mm-dd') and to_date('2013-1-31','yyyy-mm-dd')
+  group by sl.sd0101,sl.shopid,sl.sd0106) t
+  group by substr(t.business_date, 1, 4),
+       substr(t.business_date, 5, 2),
+       t.loc;
+commit;
+
+
+
+insert into bbg_ys_t_businessdata_retek
+  (corp_code,
+   shop_code,
+   account_code,
+   year,
+   period,
+   businessdata)
+
+select '1',t.loc ,'RET002',substr(t.business_date, 1, 4) ,
+       substr(t.business_date, 5, 2) ,
+       sum(t.amount) / count(t.seq_no) 
+  from (select sl.sd0101 business_date,
+               substr(sl.shopid, 2, 2) || '0' || substr(sl.shopid, 4, 3) loc,
+               sl.sd0106 seq_no,
+               sum(sl.amt) amount
+          from saledetail sl
+         where to_date(sl.sd0101, 'yyyy-mm-dd') between
+                 to_date('2013-1-1', 'yyyy-mm-dd') and
+                 to_date('2013-1-31', 'yyyy-mm-dd')
+         group by sl.sd0101, sl.shopid, sl.sd0106) t
+ group by substr(t.business_date, 1, 4),
+          substr(t.business_date, 5, 2),
+          t.loc;
+
+
+--新系统销售
+ select to_char(t.business_date,'yyyy') 年份,
+        to_char(t.business_date,'MM') 月份,
+        t.store 门店编码,
+        count(t.tran_seq_no) 客流, 
+        sum(t.sale_total)/count(t.tran_seq_no) 平均客单价
+  from (select sd.business_date,
+               st.store,
+               st.tran_seq_no,
+               --st.dept,
+               sum(st.qty * (st.unit_retail-nvl(std.unit_discount_amt,0))) sale_total
+          from sa_tran_item st, SA_TRAN_HEAD sh, SA_STORE_DAY sd,sa_tran_disc std
+         where st.store = sh.store
+           and st.day = sh.day
+           and st.tran_seq_no = sh.tran_seq_no
+           and sh.store_day_seq_no = sd.store_day_seq_no
+           and sh.store = sd.store
+           and sh.day = sd.day
+           and st.store = std.store(+)
+           and st.day = std.day(+)
+           and st.tran_seq_no = std.tran_seq_no(+)
+           and st.item_seq_no = std.item_seq_no(+)
+           and sd.business_date between &PM_STDATE and &PM_ENDDATE
+         group by sd.business_date,st.store, st.tran_seq_no) t
+ group by to_char(t.business_date,'yyyy'),to_char(t.business_date,'MM'),t.store;
+
+
+insert into bbg_ys_t_businessdata_retek
+  (corp_code,
+   shop_code,
+   account_code,
+   year,
+   period,
+   businessdata)
+select '1',t.store,'RET002',to_char(t.business_date,'yyyy') ,
+        to_char(t.business_date,'MM') ,
+         sum(t.sale_total)/count(t.tran_seq_no) 
+  from (select sd.business_date,
+               st.store,
+               st.tran_seq_no,
+               --st.dept,
+               sum(st.qty * (st.unit_retail-nvl(std.unit_discount_amt,0))) sale_total
+          from sa_tran_item@ra_rms_dblink st, SA_TRAN_HEAD@ra_rms_dblink sh, SA_STORE_DAY@ra_rms_dblink sd,sa_tran_disc@ra_rms_dblink std
+         where st.store = sh.store
+           and st.day = sh.day
+           and st.tran_seq_no = sh.tran_seq_no
+           and sh.store_day_seq_no = sd.store_day_seq_no
+           and sh.store = sd.store
+           and sh.day = sd.day
+           and st.store = std.store(+)
+           and st.day = std.day(+)
+           and st.tran_seq_no = std.tran_seq_no(+)
+           and st.item_seq_no = std.item_seq_no(+)
+           and sd.business_date  between to_date('2013-8-1','yyyy-mm-dd') and to_date('2013-8-31','yyyy-mm-dd')
+         group by sd.business_date,st.store, st.tran_seq_no) t
+ group by to_char(t.business_date,'yyyy'),to_char(t.business_date,'MM'),t.store;
+commit;
+
+insert into EPM_DATA_WAREHOUSE.YS_T_BUSINESSDATA_RETEK@ra_hytest
+  select t.corp_code||t.shop_code||t.account_code||t.year||t.period||decode(t.branch_code,null,'1',t.branch_code),
+         t.corp_code,
+         t.shop_code,
+         t.account_code,
+         t.branch_code,
+         t.seg01_code,
+         t.seg02_code,
+         t.seg03_code,
+         t.year,
+         t.period,
+         t.businessdata,
+         t.modifytime
+    from bbg_ys_t_businessdata_retek t where t.account_code in ('RET002');
+     commit;
