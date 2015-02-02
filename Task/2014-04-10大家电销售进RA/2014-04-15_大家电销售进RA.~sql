@@ -1,5 +1,17 @@
+--********************************************************************************************
+--接口定义
+--********************************************************************************************
 --商品资料接口
 SELECT * FROM BBG_RA_PRODUCT_JL_V@RA_JL;
+--商品地点接口
+SELECT * FROM BBG_RA_ITEM_LOC_JL_V@RA_JL;
+--销售接口
+SELECT * FROM BBG_RA_SLS_TRX_JL_V@RA_JL;
+--供应商销售接口
+SELECT * FROM BBG_RA_SUPP_SLS_JL_V@RA_JL;
+
+--*********************************************************************************************
+
 --RA中创建金力商品资料视图
 CREATE OR REPLACE VIEW BBG_RA_PRODUCT_JL_REF_V AS
   SELECT * FROM BBG_RA_PRODUCT_JL_V@RA_JL;
