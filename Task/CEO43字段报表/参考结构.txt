@@ -1,0 +1,120 @@
+select supps.supplier 一级供应商编码,
+       supps.sup_name 一级供应商名称,
+       ct.supplier 二级供应商编码,
+       supp.sup_name 二级供应商名称,
+       ct.contract_no 二级供应商合同号,
+       substr(ct.supplier, 0, 2) 合同大类,
+       (select uv.uda_value_desc from uda_values uv where uv.uda_id=3 and uv.uda_value=ct.brand_code) 经营主要品牌,
+       (select cd.code_desc from cmx_code_detail cd where cd.code=ct.contract_type and cd.code_type='BSTP' and cd.lang=8) 合同类型,
+       ct.items_num 及时正常SKU数,
+       supp.qty 经营门店数,
+       xh.rk_cost 入库金额,
+       xh.ch_cost 退货金额,
+       xh.rk_cost-xh.ch_cost 净入库金额,
+       xh.zh_qty 正常销量,
+       xh.zh_retail 正常销售金额,
+       xh.zh_cost 正常销售成本,
+       xh.cx_qty 促销销量,
+       xh.cx_retail 促销销售金额,
+       xh.cx_cost 促销销售成本,
+       xh.hj_retail 合计销售金额,
+       xh.hj_cost 合计销售成本,
+       xh.zh_retail-xh.zh_cost 正常毛利额,
+       case
+         when xh.zh_retail<>0 then (xh.zh_retail-xh.zh_cost)/xh.zh_retail
+           else null
+            end as 正常毛利率,
+       xh.cx_retail-xh.cx_cost 促销毛利额,
+       case
+         when xh.cx_retail<>0 then (xh.cx_retail-xh.cx_cost)/xh.cx_retail
+           else null
+             end as 促销毛利率,
+       case
+         when ct.status='C' then '终止'
+           when ct.status='A' then '正在执行'
+             when ct.status='S' then '录入'
+             else null
+               end as 合同状态,
+       td.terms_desc 方式,
+       dm.cost_code 费用代码,
+       dm.amount 费用金额
+  from cmx_contract ct,sups supp,sups supps,terms_head td,
+       (select ccr.contract_no,ccr.supplier,ccr.cost_code,sum( round(
+        CASE
+          WHEN CCO.INCOME_TYPE IN ('F', 'O') AND CCR.Cal_Type<>'J' THEN
+           decode(ccr.type,'CC',CCR.REAL_DIF,'C',CCR.Real_Amount)  * (1 + CCO.VAT_RATE / 100)
+          WHEN CCO.INCOME_TYPE = 'P'
+               AND CCO.SPECAIL_EXPENSE_IND = 'Y' THEN
+           decode(ccr.type,'CC',CCR.REAL_DIF,'C',CCR.Real_Amount)  * (1 + CCO.VAT_RATE / 100)
+          WHEN CCO.INCOME_TYPE = 'P'
+               AND CCO.SPECAIL_EXPENSE_IND = 'N' THEN
+           decode(ccr.type,'CC',CCR.REAL_DIF,'C',CCR.Real_Amount)  * (1 + CC.VAT_RATE / 100)
+           WHEN CCR.Cal_Type = 'J' THEN
+            decode(ccr.type,'CC',CCR.REAL_DIF,'C',CCR.Real_Amount)
+       END,2) ) AMOUNT
+       from cmx_contract_result ccr,CMX_CONTRACT         CC ,CMX_CONTRACT_OPTIONS CCO
+       where (nvl(ccr.Real_Amount,0) <>0 or nvl(ccr.real_dif,0) <>0 )
+   and process_flag='P' and ccr.contract_id=cc.contract_id(+) 
+   and ccr.cost_code=cco.cost_code and post_date>to_date('20130507','yyyymmdd')
+   and trunc(nvl(ccr.approve_date,ccr.creation_date)) between &PM_STDATE and &PM_ENDDATE
+   group by trunc(nvl(ccr.approve_date,ccr.creation_date)),ccr.contract_no,ccr.supplier,ccr.cost_code) dm,
+       (select il.primary_supp, count(distinct il.loc) qty
+          from item_loc il
+         group by il.primary_supp) supp,
+        (select il.primary_supp supplier,
+       sum(case
+         when th.tran_code=20 then th.total_cost
+           else 0 
+             end) rk_cost,
+       sum(case
+         when th.tran_code=24 then th.total_cost
+           else 0
+             end) ch_cost,
+       sum(case
+          when th.tran_code=1 and th.sales_type='R' then th.total_retail
+            else 0
+              end) zh_retail,
+       sum(case
+          when th.tran_code=1 and th.sales_type='R' then th.units
+            else 0
+              end) zh_qty,
+       sum(case
+          when th.tran_code=1 and th.sales_type='R' then th.total_cost
+            else 0
+              end) zh_cost,
+       sum(case
+          when th.tran_code=1 and th.sales_type='P' then th.total_retail
+            else 0
+              end) cx_retail,
+       sum(case
+          when th.tran_code=1 and th.sales_type='P' then th.units
+            else 0
+              end) cx_qty,
+       sum(case
+          when th.tran_code=1 and th.sales_type='P' then th.total_cost
+            else 0
+              end) cx_cost,
+       sum(case
+          when th.tran_code=1 then th.total_retail
+            else 0
+              end) hj_retail,
+       sum(case
+          when th.tran_code=1 then th.total_cost
+            else 0
+              end) hj_cost
+       from tran_data_history th,item_loc il
+       where th.tran_code in ('20','24','1')
+         and th.loc_type='S'
+         and th.item=il.item
+         and th.location=il.loc
+         and th.tran_date between &PM_STDATE and &PM_ENDDATE
+         group by il.primary_supp) xh
+  where ct.supplier=supp.primary_supp(+)
+    and ct.supplier=xh.supplier(+)
+    and ct.supplier=dm.supplier
+    and ct.contract_no=dm.contract_no
+    and ct.supplier=supp.supplier
+    and supp.supplier_parent=supps.supplier
+    and supp.terms=td.terms
+    and ct.status='A'
+    and ct.year=2013;
