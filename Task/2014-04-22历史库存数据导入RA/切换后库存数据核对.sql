@@ -1,0 +1,232 @@
+--*********************************************************************************
+--单品库存核对
+--*********************************************************************************
+--RA
+--AVCOST
+--W_RTL_INV_IT_LC_DY_FV
+--单品库存汇总表
+
+SELECT * FROM RADM.W_RTL_INV_IT_LC_DY_F T WHERE T.INV_SOH_QTY > 0;
+
+DROP MATERIALIZED VIEW RADM.RA_INV_IT_LC_DY_CHECK;
+
+CREATE MATERIALIZED VIEW RADM.RA_INV_IT_LC_DY_CHECK AS
+  SELECT PROD.PROD_NUM          ITEM,
+         ORG.ORG_NUM            LOC,
+         T.INV_SOH_QTY,
+         T.INV_SOH_COST_AMT_LCL
+    FROM RADM.W_RTL_INV_IT_LC_DY_FV T, W_PRODUCT_D PROD, W_INT_ORG_D ORG
+   WHERE T.ORG_WID = ORG.ROW_WID
+     AND T.PROD_WID = PROD.ROW_WID
+     AND PROD.CURRENT_FLG = 'Y'
+     AND T.DT_WID = '1' || TO_CHAR(SYSDATE - 1, 'YYYYMMDD') || '000';
+--RMS-----------------------------------------------------------------------------------
+--SOURE
+SELECT T.ITEM, T.LOC, T.STOCK_ON_HAND, T.STOCK_ON_HAND * T.AV_COST COST
+  FROM RMSHIST.ITEM_LOC_SOH_HIST@RA_RMS_DBLINK T
+ WHERE T.SOH_BAK_DATE = DATE '2014-05-03'
+   AND T.STOCK_ON_HAND <> 0;
+
+SELECT T.ITEM, T.LOC,
+  FROM RMSHIST.ITEM_LOC_SOH_HIST T
+ WHERE T.SOH_BAK_DATE = DATE '2014-05-03';
+
+SELECT T.ITEM, T.LOC, COUNT(*)
+  FROM RMS.ITEM_LOC_SOH T
+ GROUP BY T.ITEM, T.LOC
+HAVING COUNT(*) > 1;
+
+--CHECK
+DROP MATERIALIZED VIEW RADM.RMS_RA_INV_CHECK_DIFF;
+
+CREATE MATERIALIZED VIEW RADM.RMS_RA_INV_CHECK_DIFF AS
+  SELECT RMS.ITEM,
+         RMS.LOC,
+         RMS.LOC_TYPE,
+         RMS.STOCK_ON_HAND RMS_SOH,
+         RA.INV_SOH_QTY RA_SOH,
+         RMS.STOCK_ON_HAND - RA.INV_SOH_QTY DIFF_SOH,
+         RMS.COST RMS_COST,
+         RA.INV_SOH_COST_AMT_LCL RA_COST,
+         RMS.COST - RA.INV_SOH_COST_AMT_LCL DIFF_COST,
+         SYSDATE W_INSERT_DT
+    FROM (SELECT T.ITEM,
+                 T.LOC,
+                 T.LOC_TYPE,
+                 T.STOCK_ON_HAND,
+                 T.STOCK_ON_HAND * T.AV_COST COST
+            FROM RMSHIST.ITEM_LOC_SOH_HIST@RA_RMS_DBLINK T
+           WHERE T.SOH_BAK_DATE =
+                 TO_DATE(TO_CHAR(SYSDATE - 1, 'YYYYMMDD'), 'YYYYMMDD')) RMS,
+         RADM.RA_INV_IT_LC_DY_CHECK RA
+   WHERE RMS.ITEM = RA.ITEM(+)
+     AND RMS.LOC = RA.LOC(+)
+     AND (RMS.STOCK_ON_HAND <> RA.INV_SOH_QTY /*OR
+                                                                                                                                                                                                                                                                                                                         RMS.COST <> RA.INV_SOH_COST_AMT_LCL*/
+         )
+  /*   AND EXISTS (SELECT 1
+   FROM RMS.IF_TRAN_DATA@RA_RMS_DBLINK TRAN
+  WHERE TRAN.ITEM = RMS.ITEM
+    AND TRAN.LOCATION = RMS.LOC)*/
+  ;
+
+--CHEKC ITEM_LOC
+SELECT * FROM RADM.W_PRODUCT_D T WHERE T.PROD_NUM = '100090437';
+SELECT * FROM RADM.W_INT_ORG_D T WHERE T.ORG_NUM = '120002';
+--W_RTL_INV_IT_LC_DY_F
+SELECT *
+  FROM RADM.W_RTL_INV_IT_LC_DY_F T
+ WHERE T.PROD_WID = 376266
+   AND T.ORG_WID = 125;
+--ITEM_LOC_SOH_HIST
+SELECT *
+  FROM RMSHIST.ITEM_LOC_SOH_HIST@RA_RMS_DBLINK T
+ WHERE T.ITEM = 800336677
+   and t.loc = 120138;
+--W_RTL_INV_IT_LC_DY_FV
+SELECT *
+  FROM RADM.W_RTL_INV_IT_LC_DY_FV T
+ WHERE T.PROD_WID = 432272
+   AND T.ORG_WID = 40
+   AND T.DT_WID = '120140505000';
+
+--有差异,并且在IF_TRAN_DATA中
+SELECT *
+  FROM RADM.YJ_RMS_RA_INV_DIFF@RMS_RA T
+ WHERE EXISTS (SELECT 1
+          FROM RMS.IF_TRAN_DATA D
+         WHERE T.ITEM = D.ITEM
+           AND T.LOC = D.LOCATION);
+
+--处理W_RTL_INV_IT_LC_DY_F表TO_DT_WID有二条999999999999的记录
+
+SELECT T.PROD_WID, T.ORG_WID
+  FROM RADM.W_RTL_INV_IT_LC_DY_F T
+ WHERE T.TO_DT_WID = '999999999999999'
+ GROUP BY T.PROD_WID, T.ORG_WID, T.TO_DT_WID
+HAVING COUNT(*) > 1;
+
+SELECT T.PROD_WID,
+       T.ORG_WID,
+       T.FROM_DT_WID,
+       T.TO_DT_WID,
+       CASE
+         WHEN B.NEW_TO_DT_WID IS NOT NULL THEN
+          TO_NUMBER('1' || TO_CHAR(B.NEW_TO_DT_WID, 'YYYYMMDD') || '000')
+         WHEN B.NEW_TO_DT_WID IS NULL THEN
+          999999999999999
+       END NEW_TO_DT_WID
+  FROM (SELECT ROW_WID,
+               LEAD(TO_DATE(SUBSTR(From_DT_WID, 2, 8), 'YYYYMMDD')) Over(Partition By PROD_WID, ORG_WID Order By TO_DATE(SUBSTR(From_DT_WID, 2, 8), 'YYYYMMDD')) - 1 NEW_TO_DT_WID
+          FROM RADM.W_RTL_INV_IT_LC_DY_F
+         WHERE PROD_WID = 441522
+           AND ORG_WID = 64) B,
+       W_RTL_INV_IT_LC_DY_F T
+ WHERE T.ROW_WID = B.ROW_WID
+   AND T.PROD_WID = 441522
+   AND T.ORG_WID = 64;
+--UPDATE   
+UPDATE RADM.W_RTL_INV_IT_LC_DY_F T
+   SET T.TO_DT_WID =
+       (SELECT CASE
+                 WHEN B.NEW_TO_DT_WID IS NOT NULL THEN
+                  TO_NUMBER('1' || TO_CHAR(B.NEW_TO_DT_WID, 'YYYYMMDD') ||
+                            '000')
+                 WHEN B.NEW_TO_DT_WID IS NULL THEN
+                  999999999999999
+               END NEW_TO_DT_WID
+          FROM (SELECT ROW_WID,
+                       LEAD(TO_DATE(SUBSTR(From_DT_WID, 2, 8), 'YYYYMMDD')) Over(Partition By PROD_WID, ORG_WID Order By TO_DATE(SUBSTR(From_DT_WID, 2, 8), 'YYYYMMDD')) - 1 NEW_TO_DT_WID
+                  FROM RADM.W_RTL_INV_IT_LC_DY_F
+                 WHERE PROD_WID = 740415
+                   AND ORG_WID = 168) B
+         WHERE T.ROW_WID = B.ROW_WID)
+ WHERE T.PROD_WID = 740415
+   AND T.ORG_WID = 168
+   AND T.TO_DT_WID = 999999999999999;
+
+--是用存储过程批量修护
+/*begin
+  -- Call the procedure
+  yj_update_w_rtl_inv_it_lc_dy_f;
+end;*/
+-----------------------------------------------------------------------
+--单品库存汇总表处理
+SELECT *
+  FROM ALL_ALL_TABLES T
+ WHERE T.table_name LIKE '%W_RTL_INV%'
+   AND T.owner = 'RADM';
+
+--*********************************************************************************
+--供应商库存核对
+--*********************************************************************************
+--RMS
+SELECT * FROM RMS.CMX_SUPP_INV@RA_RMS_DBLINK;
+--RA
+SELECT *
+  FROM RADM.BBG_RA_SUPP_INV_IT_LC_DY_FV T
+ WHERE T.DT_WID = 120140518000;
+--CHECK
+CREATE MATERIALIZED VIEW RADM.RA_SUPP_INV_IT_LC_DY_CHECK AS
+  SELECT PROD.PROD_NUM    ITEM,
+         ORG.ORG_NUM      LOC,
+         P.SUPPLIER_NUM,
+         FV.SUPP_INV_QTY,
+         FV.SUPP_INV_COST
+    FROM RADM.BBG_RA_SUPP_INV_IT_LC_DY_FV FV,
+         W_PRODUCT_D                      PROD,
+         W_INT_ORG_D                      ORG,
+         W_PARTY_ORG_D                    P
+   WHERE FV.PROD_WID = PROD.ROW_WID
+     AND FV.ORG_WID = ORG.ROW_WID
+     AND FV.SUPPLIER_WID = P.ROW_WID
+     AND PROD.CURRENT_FLG = 'Y'
+     AND FV.DT_WID = '1' || TO_CHAR(SYSDATE - 1, 'YYYYMMDD') || '000'
+     AND FV.SUPP_INV_QTY <> 0;
+
+--CREATE MATERIALIZED VIEW RADM.RMS_RA_INV_CHECK_DIFF AS
+SELECT RMS.ITEM,
+       RMS.LOC,
+       RMS.SUPPLIER,
+       --RMS.LOC_TYPE,
+       RMS.SOH RMS_SOH,
+       RA.SUPP_INV_QTY RA_SOH,
+       RMS.SOH - RA.SUPP_INV_QTY DIFF_SOH,
+       RMS.COST RMS_COST,
+       RA.SUPP_INV_COST RA_COST,
+       RMS.COST - RA.SUPP_INV_COST DIFF_COST,
+       SYSDATE W_INSERT_DT
+  FROM (SELECT T.ITEM,
+               T.LOC,
+               T.SUPPLIER,
+               --T.LOC_TYPE,
+               SUM(T.SOH) SOH,
+               SUM(T.SOH * T.WAC) COST
+          FROM RMS.CMX_SUPP_INV@RA_RMS_DBLINK T
+         WHERE T.SOH <> 0
+         GROUP BY T.ITEM, T.LOC, T.SUPPLIER) RMS,
+       RADM.RA_SUPP_INV_IT_LC_DY_CHECK RA
+ WHERE RMS.ITEM = RA.ITEM(+)
+   AND RMS.LOC = RA.LOC(+)
+   AND RMS.SUPPLIER = RA.SUPPLIER_NUM(+)
+   AND (RMS.SOH <> RA.SUPP_INV_QTY /*OR RMS.COST <> RA.INV_SOH_COST_AMT_LCL*/
+       );
+--CHECK ITEM_LOC_SUPPLIER ITEM:8000000197 LOC:120196 SUPPLIER:37000154
+--RMS
+SELECT *
+  FROM RMS.CMX_SUPP_INV@RA_RMS_DBLINK T
+ WHERE T.ITEM = 800334737
+   AND T.LOC = 120106
+   AND T.SUPPLIER = 29001927;
+--RA
+SELECT * FROM RADM.W_PRODUCT_D T WHERE T.PROD_NUM = '800000197';
+SELECT * FROM RADM.W_INT_ORG_D T WHERE T.ORG_NUM = '120196';
+SELECT * FROM RADM.W_PARTY_D T WHERE T.INTEGRATION_ID = '29001927';
+SELECT *
+  FROM BBG_RA_SUPP_INV_IT_LC_DY_F T
+ WHERE T.PROD_WID = 261665
+   AND T.ORG_WID = 40006;
+SELECT *
+  FROM RADM.BBG_RA_SUPP_INV_IT_LC_DY_FV T
+ WHERE T.PROD_WID = 261665
+   AND T.ORG_WID = 40006;

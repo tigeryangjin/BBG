@@ -1,0 +1,240 @@
+--RA商品库存数据每月最后一天写入临时表-----------------------------------------------------------------------
+CREATE TABLE RADM.INV_DT_WID AS
+SELECT SUBSTR(V.DT_WID, 2, 6) MONTH, MAX(V.DT_WID) DT_WID
+  FROM W_RTL_INV_IT_LC_DY_FV V
+ WHERE V.DT_WID >= 120120101000
+   AND V.DT_WID <= 120130430000
+ GROUP BY SUBSTR(V.DT_WID, 2, 6);
+ 
+--RMS商品库存数据提取-----------------------------------------------------------------------
+SELECT IM.DEPT,
+       T.LOC,
+			 T.LOC||'|'||IM.DEPT,
+       SUM(T.STOCK_ON_HAND * T.AV_COST) AVCOST
+  FROM RMSHIST.ITEM_LOC_SOH_HIST T, RMS.ITEM_MASTER IM
+ WHERE T.ITEM = IM.ITEM
+   AND T.SOH_BAK_DATE = DATE '2013-12-31'
+ GROUP BY IM.DEPT, T.LOC
+ ORDER BY T.LOC, IM.DEPT;
+-- 此语句与海波龙结果最接近
+SELECT IM.DEPT,
+       T.LOC,
+       T.LOC || '|' || IM.DEPT,
+       SUM((T.STOCK_ON_HAND + T.IN_TRANSIT_QTY) * T.AV_COST) AVCOST
+  FROM RMSHIST.ITEM_LOC_SOH_HIST T, RMS.ITEM_MASTER IM
+ WHERE T.ITEM = IM.ITEM
+   AND T.SOH_BAK_DATE = DATE '2013-12-31'
+ GROUP BY IM.DEPT, T.LOC
+ ORDER BY T.LOC, IM.DEPT;
+--
+ SELECT IM.DEPT,
+        T.LOC,
+				T.LOC||'|'||IM.DEPT,
+        SUM(T.STOCK_ON_HAND + T.IN_TRANSIT_QTY * T.AV_COST) / 30 AVCOST
+   FROM RMSHIST.ITEM_LOC_SOH_HIST T, RMS.ITEM_MASTER IM
+  WHERE T.ITEM = IM.ITEM
+    AND T.SOH_BAK_DATE BETWEEN DATE '2013-12-01' AND DATE
+  '2013-12-31'
+  GROUP BY IM.DEPT, T.LOC
+  ORDER BY T.LOC, IM.DEPT;
+
+--ra门店-大类-月份2012.1～2013.4----------------------------------------------------------
+SELECT SUBSTR(V.DT_WID, 2, 6) MONTH,
+       O.ORG_NUM LOC,
+       T.PROD_DP_NUM DEPT,
+			 SUBSTR(V.DT_WID, 2, 6)||'|'||O.ORG_NUM||'|'||T.PROD_DP_NUM total,
+       --SUM(V.INV_SOH_QTY) SOH_QTY,
+       SUM(NVL(V.INV_SOH_COST_AMT_LCL,0)+NVL(V.INV_IN_TRAN_COST_AMT_LCL,0)) SOH_AMT
+  FROM W_RTL_INV_IT_LC_DY_FV         V,
+       RABATCHER.W_PRODUCT_D_RTL_TMP T,
+       RABATCHER.W_INT_ORG_D_RTL_TMP O
+ WHERE /*V.DT_WID >= 120120131000
+   AND V.DT_WID <= 120130501000
+   AND*/
+ V.PROD_WID = T.PROD_IT_WID
+ AND V.ORG_WID = O.ORG_WID
+ AND EXISTS (SELECT 1
+    FROM (SELECT MONTH,DT_WID
+            FROM inv_dt_wid V
+           ) A
+   WHERE A.DT_WID = V.DT_WID)
+   GROUP BY SUBSTR(V.DT_WID, 2, 6),
+       O.ORG_NUM,
+       T.PROD_DP_NUM;
+			 
+--ra门店-大类-月份2013.12
+SELECT SUBSTR(V.DT_WID, 2, 6) MONTH,
+       O.ORG_NUM LOC,
+       T.PROD_DP_NUM DEPT,
+       O.ORG_NUM || '|' || T.PROD_DP_NUM,
+       --SUM(V.INV_SOH_QTY) SOH_QTY,
+       SUM(V.INV_SOH_COST_AMT_LCL + V.INV_IN_TRAN_COST_AMT_LCL) SOH_AMT
+  FROM W_RTL_INV_IT_LC_DY_FV         V,
+       RABATCHER.W_PRODUCT_D_RTL_TMP T,
+       RABATCHER.W_INT_ORG_D_RTL_TMP O
+ WHERE /*V.DT_WID >= 120120131000
+   AND V.DT_WID <= 120130501000
+   AND*/
+ V.PROD_WID = T.PROD_IT_WID
+ AND V.ORG_WID = O.ORG_WID
+ AND V.DT_WID = 120131231000
+ GROUP BY SUBSTR(V.DT_WID, 2, 6), O.ORG_NUM, T.PROD_DP_NUM;
+
+--*********************************************************************************
+--RA历史库存修护（与海波龙大类一致）
+--只修复FROM_DT_WID等于月份第一天，TO_DT_WID等于月份最后一天的最大的库存成本的商品
+--原库存成本值写入BBG_REFERENCE_F09字段
+--*********************************************************************************
+--差异清单导入RADM
+CREATE TABLE RADM.JIN_HBL_RA_INV_COST 
+(MONTH VARCHAR2(6),
+LOC NUMBER,
+DEPT NUMBER,
+RA_INV_COST NUMBER,
+HBL_INV_COST NUMBER,
+DIFF NUMBER);
+
+DROP TABLE RADM.JIN_HBL_RA_INV_COST;
+
+SELECT * FROM RADM.JIN_HBL_RA_INV_COST FOR UPDATE;
+
+SELECT COUNT(*) FROM RADM.JIN_HBL_RA_INV_COST;
+
+SELECT * FROM RADM.JIN_HBL_RA_INV_COST T WHERE T.MONTH=201301 ORDER BY T.DIFF;
+
+SELECT * FROM RADM.W_RTL_INV_IT_LC_DY_F T WHERE T.FROM_DT_WID=120120101000 AND T.TO_DT_WID=120120430000;
+--历史库存1-4月份库存数量为1的商品（例子）
+SELECT * FROM RADM.JIN_HBL_RA_INV_COST T ORDER BY T.DIFF;
+SELECT * FROM RADM.W_RTL_INV_IT_LC_DY_F T WHERE T.PROD_SCD1_WID=265157 AND T.ORG_SCD1_WID=83;
+select * from BBG_RA_INV_REF t where t.org_num=120070 and t.item=800009722;
+
+SELECT * FROM RADM.W_PRODUCT_D T WHERE T.ROW_WID=265157;
+select * from radm.w_int_org_d t where t.row_wid=9;
+
+SELECT DISTINCT SUBSTR(T.FROM_DT_WID, 2, 6) FROM_MONTH,
+                T.FROM_DT_WID,
+                SUBSTR(T.TO_DT_WID, 2, 6) TO_MONTH,
+                T.TO_DT_WID
+  FROM RADM.W_RTL_INV_IT_LC_DY_F T WHERE T.TO_DT_WID<120130507000;
+
+SELECT * FROM RADM.JIN_HBL_RA_INV_COST T ORDER BY T.DIFF;	
+
+--1、查找W_RTL_INV_IT_LC_DY_F中，本月最大库存成本记录。按DEPT,LOC汇总
+CREATE MATERIALIZED VIEW RADM.JIN_HBL_RA_INV_DIFF_MN AS 
+SELECT HBL.MONTH,
+       RA.FROM_DT_WID,
+       RA.TO_DT_WID,
+       RA.PROD_WID,
+       RA.ORG_WID,
+       HBL.LOC,
+       HBL.DEPT,
+       HBL.HBL_INV_COST,
+       HBL.DIFF,
+       HBL.RA_INV_COST,
+       RA.INV_SOH_COST_AMT_LCL
+  FROM RADM.JIN_HBL_RA_INV_COST HBL,
+       (SELECT A.LOC,
+               A.ORG_WID,
+               A.ITEM,
+               A.PROD_WID,
+               A.DEPT,
+               A.MONTH,
+               A.FROM_DT_WID,
+               A.TO_DT_WID,
+               A.INV_SOH_QTY,
+               A.INV_SOH_COST_AMT_LCL
+          FROM (SELECT O.ORG_NUM LOC,
+                       F.ORG_WID,
+                       P.PROD_IT_NUM ITEM,
+                       F.PROD_WID,
+                       P.PROD_DP_NUM DEPT,
+                       SUBSTR(F.FROM_DT_WID, 2, 6) MONTH,
+                       F.FROM_DT_WID,
+                       F.TO_DT_WID,
+                       F.INV_SOH_QTY,
+                       F.INV_SOH_COST_AMT_LCL,
+                       ROW_NUMBER() OVER(PARTITION BY P.PROD_DP_NUM, O.ORG_NUM ORDER BY F.INV_SOH_COST_AMT_LCL DESC) PM
+                  FROM RADM.W_RTL_INV_IT_LC_DY_F     F,
+                       RABATCHER.W_INT_ORG_D_RTL_TMP O,
+                       RABATCHER.W_PRODUCT_D_RTL_TMP P
+                 WHERE F.PROD_WID = P.PROD_IT_WID
+                   AND F.ORG_WID = O.ORG_WID
+                   AND F.FROM_DT_WID = 120130101000
+                   AND F.TO_DT_WID = 120130131000) A
+         WHERE A.PM = 1) RA
+ WHERE HBL.MONTH = RA.MONTH
+   AND HBL.LOC = RA.LOC
+   AND HBL.DEPT = RA.DEPT
+   AND HBL.MONTH = '201301';
+
+
+
+DROP MATERIALIZED VIEW RADM.JIN_HBL_RA_INV_DIFF_MN;
+
+select COUNT(*) from RADM.JIN_HBL_RA_INV_DIFF_MN t;
+select * from RADM.JIN_HBL_RA_INV_DIFF_MN t;
+SELECT * FROM RADM.W_RTL_INV_IT_LC_DY_F;
+
+
+
+--2、UPDATE W_RTL_INV_IT_LC_DY_F, 原INV_SOH_COST_AMT_LCL写入BBG_REFERENCE_F09字段
+UPDATE W_RTL_INV_IT_LC_DY_F F
+   SET F.BBG_REFERENCE_FO9    = F.INV_SOH_COST_AMT_LCL,
+       F.INV_SOH_COST_AMT_LCL = F.INV_SOH_COST_AMT_LCL +
+                                (SELECT D.DIFF
+                                   FROM RADM.JIN_HBL_RA_INV_DIFF_MN D
+                                  WHERE F.FROM_DT_WID = D.FROM_DT_WID
+                                    AND F.TO_DT_WID = D.TO_DT_WID
+                                    AND F.PROD_WID = D.Prod_Wid
+                                    AND F.ORG_WID = D.ORG_WID)
+ WHERE EXISTS (SELECT 1
+          FROM RADM.JIN_HBL_RA_INV_DIFF_MN D
+         WHERE F.FROM_DT_WID = D.FROM_DT_WID
+           AND F.TO_DT_WID = D.TO_DT_WID
+           AND F.PROD_WID = D.Prod_Wid
+           AND F.ORG_WID = D.ORG_WID
+           AND F.BBG_REFERENCE_FO9 IS NULL);
+					 
+--3、验证数据数据准确性
+--差异清单表核对
+SELECT * FROM RADM.JIN_HBL_RA_INV_COST T WHERE T.MONTH=201301 AND T.LOC=120070 AND T.DEPT=22;
+
+SELECT * FROM RADM.JIN_HBL_RA_INV_DIFF_MN T WHERE T.MONTH=201301 AND T.LOC=120070 AND T.DEPT=22;
+
+--RA历史库存数据源
+select distinct t.day_dt from BBG_RA_INV_REF t where t.org_num=120070; 
+
+select distinct t.day_dt from BBG_RA_INV_REF t ;
+
+--修改W_RTL_INV_IT_LC_DY_F后检查
+SELECT T.*
+  FROM RADM.W_RTL_INV_IT_LC_DY_F     T,
+       RABATCHER.W_INT_ORG_D_RTL_TMP O,
+       RABATCHER.W_PRODUCT_D_RTL_TMP P
+ WHERE T.PROD_WID = P.PROD_IT_WID
+   AND T.ORG_WID = O.ORG_WID
+   AND O.ORG_NUM = 120070
+	 AND P.PROD_DP_NUM=22
+   AND T.FROM_DT_WID = 120130101000
+   AND T.TO_DT_WID = 120130131000
+   FOR UPDATE;
+--RA大类库存检查，修改之前：20990.6932,修改之后：81656.44，LOC:120167,MONTH:201301,DEPT:31
+SELECT SUBSTR(V.DT_WID, 2, 6) MONTH,
+       O.ORG_NUM LOC,
+       T.PROD_DP_NUM DEPT,
+       SUM(NVL(V.INV_SOH_COST_AMT_LCL, 0) +
+           NVL(V.INV_IN_TRAN_COST_AMT_LCL, 0)) SOH_AMT
+  FROM W_RTL_INV_IT_LC_DY_FV         V,
+       RABATCHER.W_PRODUCT_D_RTL_TMP T,
+       RABATCHER.W_INT_ORG_D_RTL_TMP O
+ WHERE V.PROD_WID = T.PROD_IT_WID
+   AND V.ORG_WID = O.ORG_WID
+   AND EXISTS (SELECT 1
+          FROM (SELECT MONTH, DT_WID FROM inv_dt_wid) A
+         WHERE A.DT_WID = V.DT_WID)
+   AND O.ORG_NUM = 120167
+   AND T.PROD_DP_NUM = 31
+	 AND V.DT_WID=120130131000
+ GROUP BY SUBSTR(V.DT_WID, 2, 6), O.ORG_NUM, T.PROD_DP_NUM; 
+
+
