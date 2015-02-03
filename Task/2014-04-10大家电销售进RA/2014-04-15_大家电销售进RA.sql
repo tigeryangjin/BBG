@@ -12,9 +12,7 @@ SELECT * FROM BBG_RA_SUPP_SLS_JL_V@RA_JL;
 
 --*********************************************************************************************
 
---RA中创建金力商品资料视图
-CREATE OR REPLACE VIEW BBG_RA_PRODUCT_JL_REF_V AS
-  SELECT * FROM BBG_RA_PRODUCT_JL_V@RA_JL;
+
 --检查商品资料是否重复
 SELECT * FROM BBG_RA_PRODUCT_JL_REF_V T WHERE EXISTS(SELECT 1 FROM W_PRODUCT_D D WHERE D.PROD_NUM=T.PROD_NUM);
 --C_ODI_PARAM
