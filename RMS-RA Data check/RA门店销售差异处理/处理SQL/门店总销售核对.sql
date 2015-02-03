@@ -1,0 +1,110 @@
+SELECT T.TRAN_DATE, T.LOCATION,
+--t.ITEM,
+       SUM(T.UNITS) QTY,
+       SUM(T.TOTAL_RETAIL / (1 + (CASE
+             WHEN T.TRAN_CODE = 3 THEN
+              T.VAT_RATE / 100
+             ELSE
+              0
+           END))) AMT,
+       SUM(T.TOTAL_COST / (1 + (CASE
+             WHEN T.TRAN_CODE = 3 THEN
+              (SELECT VAT_RATE / 100
+                 FROM VAT_ITEM
+                WHERE ACTIVE_DATE =
+                      (SELECT MAX(V.ACTIVE_DATE)
+                         FROM VAT_ITEM V
+                        WHERE V.ITEM = T.ITEM
+                          AND V.VAT_REGION = 1000
+                          AND V.VAT_TYPE IN ('C', 'B')
+                          AND V.ACTIVE_DATE <= T.TRAN_DATE)
+                  AND ITEM = T.ITEM
+                  AND VAT_REGION = 1000
+                  AND VAT_TYPE IN ('C', 'B'))
+             ELSE
+              0
+           END))) COST,
+       SUM(T.TOTAL_RETAIL / (1 + (CASE
+             WHEN T.TRAN_CODE = 3 THEN
+              T.VAT_RATE / 100
+             ELSE
+              0
+           END))) - SUM(T.TOTAL_COST / (1 + (CASE
+                          WHEN T.TRAN_CODE = 3 THEN
+                           (SELECT VAT_RATE / 100
+                              FROM VAT_ITEM
+                             WHERE ACTIVE_DATE =
+                                   (SELECT MAX(V.ACTIVE_DATE)
+                                      FROM VAT_ITEM V
+                                     WHERE V.ITEM = T.ITEM
+                                       AND V.VAT_REGION = 1000
+                                       AND V.VAT_TYPE IN ('C', 'B')
+                                       AND V.ACTIVE_DATE <= T.TRAN_DATE)
+                               AND ITEM = T.ITEM
+                               AND VAT_REGION = 1000
+                               AND VAT_TYPE IN ('C', 'B'))
+                          ELSE
+                           0
+                        END))) PROFIT,
+       SUM(T.TOTAL_COST / (1 + (CASE
+             WHEN T.TRAN_CODE = 3 THEN
+              (SELECT VAT_RATE / 100
+                 FROM VAT_ITEM
+                WHERE ACTIVE_DATE =
+                      (SELECT MAX(V.ACTIVE_DATE)
+                         FROM VAT_ITEM V
+                        WHERE V.ITEM = T.ITEM
+                          AND V.VAT_REGION = 1000
+                          AND V.VAT_TYPE IN ('C', 'B')
+                          AND V.ACTIVE_DATE <= T.TRAN_DATE)
+                  AND ITEM = T.ITEM
+                  AND VAT_REGION = 1000
+                  AND VAT_TYPE IN ('C', 'B'))
+             ELSE
+              0
+           END))) COST,
+       (SUM(T.TOTAL_RETAIL / (1 + (CASE
+              WHEN T.TRAN_CODE = 3 THEN
+               T.VAT_RATE / 100
+              ELSE
+               0
+            END))) - SUM(T.TOTAL_COST / (1 + (CASE
+                            WHEN T.TRAN_CODE = 3 THEN
+                             (SELECT VAT_RATE / 100
+                                FROM VAT_ITEM
+                               WHERE ACTIVE_DATE =
+                                     (SELECT MAX(V.ACTIVE_DATE)
+                                        FROM VAT_ITEM V
+                                       WHERE V.ITEM = T.ITEM
+                                         AND V.VAT_REGION = 1000
+                                         AND V.VAT_TYPE IN ('C', 'B')
+                                         AND V.ACTIVE_DATE <= T.TRAN_DATE)
+                                 AND ITEM = T.ITEM
+                                 AND VAT_REGION = 1000
+                                 AND VAT_TYPE IN ('C', 'B'))
+                            ELSE
+                             0
+                          END)))) / SUM(T.TOTAL_RETAIL / (1 + (CASE
+                                          WHEN T.TRAN_CODE = 3 THEN
+                                           T.VAT_RATE / 100
+                                          ELSE
+                                           0
+                                        END))) PROFIT_RATE
+  FROM RA_RMS.TRAN_DATA_HISTORY_PACK_V T
+ WHERE T.TRAN_CODE IN (2, 3)
+      --AND T.TOTAL_RETAIL<>0
+   AND T.TRAN_DATE BETWEEN DATE '2014-12-24' AND DATE '2014-12-24'
+--AND T.DEPT IN ('27')
+--AND T.LOCATION IN ('120036','120063','120113','120144','120191')
+--AND T.LOCATION = '120194'
+--and t.ITEM in ('800002917','700005803')
+ GROUP BY T.LOCATION, T.TRAN_DATE--,t.ITEM
+ ORDER BY T.LOCATION, T.TRAN_DATE;
+
+--上面的语句放入BBG_RA_SALES_DATA_V视图中
+--DEPT部门、QTY数量、AMT销售金额、COST成本、PROFIT毛利、PROFIT_RAT毛利率
+/* SELECT * FROM RA_RMS.BBG_RA_SALES_DATA_V
+ ORDER BY DEPT;*/
+
+/* SELECT * FROM RA_RMS.TRAN_DATA_HISTORY_PACK_V T WHERE T.DEPT='18' AND T.LOCATION='120036' AND T.TRAN_DATE=DATE '2013-09-04'
+  AND T.TRAN_CODE=2 ;*/
