@@ -1,0 +1,145 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE pack SYSTEM "GenericActions.dtd">
+<one_off_actions>
+    <globalcmd name="change_dir">
+        <perl name="change_dir" module="CWD" perlcmd="chdir" override="true" param_num="1" />
+    </globalcmd>
+    <globalcmd name="copy">
+        <perl name="copy" module="File::Copy" perlcmd="copy" param_num="2" />
+    </globalcmd>
+    <globalcmd name="archive_lib">
+        <apply>
+            <system command="ar" parameters='-rc %1 %2' />
+        </apply>
+        <backup>
+            <system command="ar" parameters='-x %1 %2' />
+        </backup>
+    </globalcmd>
+    <globalcmd name="archive_jar">
+        <apply>
+            <system command="jar" path='%ORACLE_HOME%/jdk/bin' parameters='-uf %1 %2 -m %3' />
+        </apply>
+        <backup>
+            <system command="jar" path='%ORACLE_HOME%/jdk/bin' parameters='-xf %1 %2' />
+        </backup>
+    </globalcmd>
+    <globalcmd name="make">
+        <apply>
+            <perl name="change_dir" parameters='%1' />
+            <system name="make" parameters='-f %2 %3' />
+        </apply>
+        <backup>
+           <perl name="copy" parameters='%4' />
+        </backup>
+    </globalcmd>
+
+    <os osname="AIX-Based Systems (64-bit)" id="38">
+        <action name="archive_lib">
+            <apply>
+                <system command="ar" parameters='-rc -X32_64 %1 %2' />
+            </apply>
+            <backup>
+                <system command="ar" parameters='-x -X32_64 %1 %2' />
+            </backup>
+        </action>
+    </os>
+    <os osname="AIX-Based Systems (64-bit) 5L" id="212">
+        <action name="archive_lib">
+            <apply>
+                <system command="ar" parameters='-rc -X32_64 %1 %2' />
+            </apply>
+            <backup>
+                <system command="ar" parameters='-x -X32_64 %1 %2' />
+            </backup>
+        </action>
+    </os>
+    <os osname="Digital Alpha Open VMS" product_id="89">
+    </os>
+
+    <opack>
+        <action>
+            <name>ARCHIVE_LIST</name>
+            <datatype>StringList</datatype>
+            <parse_method>parseArchiveList</parse_method>
+            <opatch_action>archive</opatch_action>
+            <validity_check>-e</validity_check>
+            <validity_check>-f</validity_check>
+            <validity_check>-r</validity_check>
+        </action>
+        <action>
+            <name>JAR_LIST</name>
+            <datatype>StringList</datatype>
+            <parse_method>parseJarList</parse_method>
+            <opatch_action>jar</opatch_action>
+            <validity_check>-e</validity_check>
+            <validity_check>-f</validity_check>
+            <validity_check>-r</validity_check>
+        </action>
+        <action>
+            <name>COPY_LIST</name>
+            <datatype>StringList</datatype>
+            <parse_method>parseCopyList</parse_method>
+            <opatch_action>copy</opatch_action>
+            <validity_check>-e</validity_check>
+            <validity_check>-f</validity_check>
+            <validity_check>-r</validity_check>
+        </action>
+        <action>
+            <name>MAKE_TRIPLETS</name>
+            <datatype>StringList</datatype>
+            <parse_method>parseMakeTriplets</parse_method>
+            <opatch_action>make</opatch_action>
+        </action>
+        <action>
+            <name>ONEWAYCOPY_LIST</name>
+            <datatype>StringList</datatype>
+            <parse_method>parseOneWayCopyList</parse_method>
+            <opatch_action>onewaycopy</opatch_action>
+            <validity_check>-e</validity_check>
+            <validity_check>-f</validity_check>
+            <validity_check>-r</validity_check>
+        </action>
+        <action>
+            <name>HOTPATCH_LIST</name>
+            <datatype>StringList</datatype>
+            <parse_method>parseHotPatchList</parse_method>
+            <opatch_action>hotpatch</opatch_action>
+            <validity_check>-e</validity_check>
+            <validity_check>-f</validity_check>
+            <validity_check>-r</validity_check>
+        </action>
+        <action>
+            <name>SQL_LIST</name>
+            <datatype>StringList</datatype>
+            <parse_method>parseSqlList</parse_method>
+            <opatch_action>sql</opatch_action>
+            <validity_check>-e</validity_check>
+            <validity_check>-f</validity_check>
+            <validity_check>-r</validity_check>
+        </action>
+        <action>
+            <name>SQL_PROC_LIST</name>
+            <datatype>StringList</datatype>
+            <parse_method>parseSqlProcList</parse_method>
+            <opatch_action>sql_proc</opatch_action>
+            <validity_check>-e</validity_check>
+            <validity_check>-f</validity_check>
+            <validity_check>-r</validity_check>
+        </action>
+        <action>
+            <name>PORTAL_PATCH</name>
+            <datatype>StringList</datatype>
+            <parse_method>parsePortalList</parse_method>
+            <opatch_action>portal</opatch_action>
+            <validity_check>-e</validity_check>
+            <validity_check>-f</validity_check>
+            <validity_check>-r</validity_check>
+        </action>
+        <action>
+            <name>PLUGIN_LIST</name>
+            <datatype>StringList</datatype>
+            <parse_method>parsePluginActionList</parse_method>
+            <opatch_action>plugin</opatch_action>
+        </action>
+    </opack>
+</one_off_actions>
