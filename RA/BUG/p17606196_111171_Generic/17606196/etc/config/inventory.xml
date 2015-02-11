@@ -1,0 +1,49 @@
+<oneoff_inventory>
+    <opack_version version="11.1.0.4.0"/>
+    <patch_id number="17606196"/>
+    <unique_patch_id>16912692</unique_patch_id>
+    <minimum_opatch_version>11.1.0.8.3</minimum_opatch_version>
+    <date_of_patch year="2013" month="Oct" day="23" time="06:06:04 hrs" zone="PST8PDT"/>
+    <base_bugs>
+        <bug number="16371801" description="QA: IE10: GAUGES VIEW OVERLAPPED WITH OTHER VIEWS"/>
+        <bug number="16371553" description="QA: IE10: SIGN IN PANEL IS NOT AT CENTER POSITION"/>
+        <bug number="16455904" description="QA: IE10: SLIDER PROMPTS CANT SLIDE TO LOWEST LIMIT"/>
+        <bug number="16389210" description="QA: CAN NOT CREATE OR OPEN A SCORECARD WN IE10"/>
+        <bug number="16389347" description="QA:UNABLE TO OPEN OR CREATE A KPI WATCHLIST UITH IE10 BROWSER"/>
+        <bug number="15935506" description="IE10 NOT ABLE TO CREATE OR EDIT AN ANALYSIS IN ANSWERS"/>
+        <bug number="16390205" description="QA: IE10: RESIZE COLUMN SELECTS ALL TEXT IN TABLE/PIVOT VIEW"/>
+        <bug number="16371672" description="QA: IE10: FREEZE HEADER: LONG SCROLL SHOWS TRIMBUFFER ERROR"/>
+        <bug number="16068402" description="GRAPHS NOT SHOWN ON IE WHEN OBIEE IS BEHIND A REVERSE PROXY"/>
+        <bug number="16402964" description="QA:IE10: NEW CONDITION THROWN ERROR'OBJECT DOESN'T SUPPORT PROPERTY OR METHOD'"/>
+        <bug number="16391455" description="QA:NEW AGENT PAGE IS NOT DISPLAYED ISING IE10 BROWSER"/>
+        <bug number="16382198" description="QA: IE10: ANALYSIS PROMPT FOR HIERARCHY: VALUE TEXTBOX NOT FULL SIZE BUT WORK OK"/>
+        <bug number="16667503" description="QA: PROMPTS: RESET TO LAST APPLIED VALUE IS NOT WORKING"/>
+        <bug number="16382296" description="QA: IE10: MAP VIEW SHOWS SERIES OF ERRORS"/>
+    </base_bugs>
+    <required_components>
+        <component internal_name="oracle.bi.bifndn" version="11.1.1.7.0" opt_req="R"/>
+    </required_components>
+    <os_platforms>
+        <platform name="Generic Platform 1" id="0"/>
+    </os_platforms>
+    <executables></executables>
+    <instance_shutdown>true</instance_shutdown>
+    <instance_shutdown_message></instance_shutdown_message>
+    <online_rac_installable>false</online_rac_installable>
+    <run_as_root>false</run_as_root>
+    <sql_migrate>false</sql_migrate>
+    <wls_prereq_oneoffs></wls_prereq_oneoffs>
+    <prereq_oneoffs>
+        <prereq oneoff_id="16842070"/>
+    </prereq_oneoffs>
+    <coreq_oneoffs></coreq_oneoffs>
+    <overlay_oneoffs>
+        <overlay oneoff_id="16842070"/>
+    </overlay_oneoffs>
+    <patch_type value="singleton"/>
+    <product_family value="fmw"/>
+    <auto>true</auto>
+    <applicable_product value=""/>
+    <products></products>
+    <update_components></update_components>
+</oneoff_inventory>

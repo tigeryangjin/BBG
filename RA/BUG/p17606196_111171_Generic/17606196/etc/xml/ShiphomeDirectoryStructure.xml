@@ -1,0 +1,48 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE pack SYSTEM "ShiphomeDirectoryStructure.dtd">
+<one_off_directory_structure>
+    <directories>
+            <directory>%SH%/files</directory>
+            <directory>%SH%/etc/config</directory>
+            <directory>%SH%/etc/xml</directory>
+    </directories>
+    <files>
+        <copy type="readme">
+            <from>%BASE_DIR%/README.txt</from>
+            <to>%SH%/README.txt</to>
+            <mandatory>N</mandatory>
+        </copy>
+        <copy type="readme">
+            <from>%BASE_DIR%/README.html</from>
+            <to>%SH%/README.html</to>
+            <mandatory>N</mandatory>
+        </copy>
+        <copy type="generic_actions">
+             <from></from>
+             <to>%SH%/etc/xml/GenericActions.xml</to>
+             <mandatory>Y</mandatory>
+        </copy>
+        <copy type="shiphome_directory_structure">
+             <from></from>
+             <to>%SH%/etc/xml/ShiphomeDirectoryStructure.xml</to>
+             <mandatory>Y</mandatory>
+        </copy>
+        <copy type="patches">
+            <from>%BASE_DIR%</from>
+            <to>%SH%/files</to>
+            <mandatory>N</mandatory>
+        </copy>
+        <create type="inventory">
+            <to>%SH%/etc/config/inventory.xml</to>
+            <method>createInventoryFile</method>
+        </create>
+        <create type="actions">
+            <to>%SH%/etc/config/actions.xml</to>
+            <method>createActionsFile</method>
+        </create>
+        <create type="deploy">
+            <to>%SH%/etc/config/deploy.xml</to>
+            <method>createDeploymentFile</method>
+        </create>
+    </files>
+</one_off_directory_structure>
