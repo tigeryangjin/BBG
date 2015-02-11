@@ -2,7 +2,7 @@
 --接口定义
 --********************************************************************************************
 --商品资料接口
-SELECT * FROM BBG_RA_PRODUCT_JL_V@RMS_JL;
+SELECT * FROM BBG_RA_PRODUCT_JL_V@RA_JL;
 --商品地点接口
 SELECT * FROM BBG_RA_ITEM_LOC_JL_V@RMS_JL;
 --销售接口
@@ -12,6 +12,7 @@ SELECT * FROM BBG_RA_SUPP_SLS_JL_V@RMS_JL;
 
 --*********************************************************************************************
 --金力系统数据导入RA创建package
+--RA_RMS下
 CREATE OR REPLACE PACKAGE CMX_JL2RA_SQL AS
 END CMX_JL2RA_SQL;
 
@@ -19,8 +20,27 @@ CREATE OR REPLACE PACKAGE BODY CMX_JL2RA_SQL AS
 END CMX_JL2RA_SQL;
 
 
+--*******************************************************************************************************
+--*******************************************************************************************************
+--金力商品资料删除
 
---金力商品导入
+SELECT *
+  FROM RADM.W_PRODUCT_ATTR_D P
+ WHERE EXISTS (SELECT 1
+          FROM BBG_RA_PRODUCT_JL_V@RA_JL J
+         WHERE P.INTEGRATION_ID = J.PROD_NUM);
+SELECT *
+  FROM RADM.W_PRODUCT_D_TL P
+ WHERE EXISTS (SELECT 1
+          FROM BBG_RA_PRODUCT_JL_V@RA_JL J
+         WHERE P.INTEGRATION_ID = J.PROD_NUM);
+
+SELECT *
+  FROM RADM.W_PRODUCT_D P
+ WHERE EXISTS (SELECT 1
+          FROM BBG_RA_PRODUCT_JL_V@RA_JL J
+         WHERE P.INTEGRATION_ID = J.PROD_NUM);
+--1.金力商品导入
 --RA_RMS.W_RTL_ITEM_D_TMP for SDE_RetailItemDimension
 --在ra_rms创建金力商品视图：RA_RMS.BBG_RA_PRODUCT_JL_REF_V
 CREATE OR REPLACE VIEW RA_RMS.BBG_RA_PRODUCT_JL_REF_V AS
@@ -150,3 +170,49 @@ INSERT INTO RA_RMS.W_RTL_ITEM_D_TMP D
 
 SELECT * FROM RADM.W_RTL_IT_SUPPLIER_DS;
 SELECT * FROM BBG_RA_PRODUCT_JL_V@RMS_JL;
+
+--2.金力商品地点维度导入RA
+
+CREATE OR REPLACE PACKAGE CMX_JL2RA_SQL AS
+END CMX_JL2RA_SQL;
+
+CREATE OR REPLACE PACKAGE BODY CMX_JL2RA_SQL AS
+END CMX_JL2RA_SQL;
+--在ra_rms创建金力商品视图：RA_RMS.BBG_RA_PRODUCT_JL_REF_V
+CREATE OR REPLACE VIEW RA_RMS.BBG_RA_ITEM_LOC_JL_V AS
+SELECT * FROM BBG_RA_
+
+INSERT INTO RADM.BBG_RA_ITEM_LOC_DS@RMS_JL IL
+  (IL.ITEM,
+   IL.LOC,
+   IL.NBB,
+   IL.NBO,
+   IL.SALE_TYPE,
+   IL.STANDARD_GROSS_MARGIN,
+   IL.PROMO_GROSS_MARGIN,
+   IL.BUSINESS_MODE,
+   IL.ZC_IND,
+   IL.ZG_IND,
+   IL.HERO_ITEM_IND,
+   IL.NEW_ITEM_FLAG,
+   IL.REF_NO1,
+   IL.REF_NO2,
+   IL.REF_NO3,
+   IL.REF_NO4,
+   IL.SRC_EFF_FROM_DT,
+   IL.SRC_EFF_TO_DT,
+   IL.EFFECTIVE_FROM_DT,
+   IL.EFFECTIVE_TO_DT,
+   IL.CURRENT_FLG,
+   IL.W_INSERT_DT,
+   IL.W_UPDATE_DT,
+   IL.DATASOURCE_NUM_ID,
+   IL.ETL_PROC_WID,
+   IL.INTEGRATION_ID,
+   IL.X_CUSTOM)
+  SELECT * FROM DUAL;
+
+SELECT * FROM BBG_RA_ITEM_LOC_JL_V@RMS_JL;
+SELECT * FROM RADM.BBG_RA_ITEM_LOC_DS@RMS_RA;
+
+
