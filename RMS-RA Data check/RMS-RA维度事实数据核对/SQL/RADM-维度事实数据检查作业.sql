@@ -1,27 +1,44 @@
---维度和实施条目数核对---------------------------------------------------------------------
+--1.维度和实施条目数核对---------------------------------------------------------------------
 SELECT *
   FROM TABLE_CHECK_DIMENSION
  WHERE RUN_DATE = &RUN_DATE
  ORDER BY TABLE_NAME;
 SELECT * FROM TABLE_CHECK_FACT WHERE RUN_DATE = &RUN_DATE ORDER BY ROW_WID;
---供应商销售核查(RMS-RA)--------------------------------------------------------------------
+--2.供应商销售核查(RMS-RA)--------------------------------------------------------------------
 SELECT *
   FROM RADM.JIN_RMS_RA_SUPP_SLS_CHECK T
  WHERE SUBSTR(TO_CHAR(T.DAY_DT, 'YYYYMMDD'), 1, 6) = &MONTH
  ORDER BY T.DAY_DT DESC;
---每日库存核对(RMS-RA)---------------------------------------------------------------------
+--3.每日库存核对(RMS-RA)---------------------------------------------------------------------
 select * from RADM.RMS_RA_INV_CHECK_DIFF t;
---订单差异核查(RMS-RA)---------------------------------------------------------------------
+--4.订单差异核查(RMS-RA)---------------------------------------------------------------------
 SELECT * FROM RADM.JIN_RMS_RA_SUPPCM_DIFF T ORDER BY T.ORDER_NO;
---库存调整核查(RMS-RA)--------------------------------------------------------------------
+--5.库存调整核查(RMS-RA)--------------------------------------------------------------------
 SELECT * FROM RADM.JIN_RA_RMS_INVADJ_CHECK;
---前台销售:数量为0.001,金额小于1分钱,引起商品成本差异的数据检查---------------------------
+--6.前台销售:数量为0.001,金额小于1分钱,引起商品成本差异的数据检查---------------------------
 SELECT *
   FROM RADM.JIN_RMS_IT_LC_COST_DIFF T
  WHERE SUBSTR(TO_CHAR(T.TRAN_DATE, 'YYYYMMDD'), 1, 6) = &MONTH
  ORDER BY T.TRAN_DATE DESC;
+--6.小类:金力有,rms无
+SELECT *
+  FROM (SELECT DISTINCT 'SBC' || '|' || SUBSTR(T.PROD_CAT5, 6, 2) || '|' ||
+                        SUBSTR(T.PROD_CAT5, 9, 3) || '|' ||
+                        SUBSTR(T.PROD_CAT5, 13, 4) SBC,
+                        T.PROD_CAT5
+          FROM BBG_RA_PRODUCT_JL_V@Ra_Jl T
+         ORDER BY SUBSTR(T.PROD_CAT5, 13, 4)) JL
+ WHERE NOT EXISTS (SELECT 1
+          FROM (SELECT 'SBC' || '|' || S.DEPT || '|' || S.CLASS || '|' ||
+                       S.SUBCLASS SBC
+                  FROM SUBCLASS@RA_RMS_DBLINK S
+                 WHERE S.DEPT LIKE '7%'
+                 ORDER BY S.SUBCLASS) RMS
+         WHERE RMS.SBC = JL.SBC);
 
 --****************************************************************************************
+--****************************************************************************************
+/*
 --BBG_RA_SLSFC_DP_LC_DY_FS销售预算重复处理
 SELECT T.PROD_DH_WID, T.ORG_DH_WID, T.DT_WID, COUNT(*)
   FROM RABATCHER.BBG_RA_SLSFC_DP_LC_DY_TMP T
@@ -46,7 +63,7 @@ select * from RADM.RMS_RA_INV_CHECK_DIFF t;
 SELECT * FROM RADM.W_PRODUCT_D T WHERE T.PROD_NUM = '800367536';
 SELECT * FROM RADM.W_INT_ORG_D T WHERE T.ORG_NUM = '120065';
 --W_RTL_INV_IT_LC_DY_F表二条999999999999999
-SELECT /*+PARALLEL(T,20)*/
+SELECT \*+PARALLEL(T,20)*\
  T.PROD_SCD1_WID ITEM, T.ORG_SCD1_WID LOC
   FROM RADM.W_RTL_INV_IT_LC_DY_F T
  WHERE T.TO_DT_WID = '999999999999999'
@@ -55,7 +72,7 @@ HAVING COUNT(*) > 1
  ORDER BY T.PROD_SCD1_WID, T.ORG_SCD1_WID;
 
 --W_RTL_INV_IT_LC_DY_F
-SELECT /*+PARALLEL(T,20)*/
+SELECT \*+PARALLEL(T,20)*\
  *
   FROM RADM.W_RTL_INV_IT_LC_DY_F T
  WHERE T.PROD_SCD1_WID = 400017
@@ -104,8 +121,8 @@ SELECT *
                       '3319430',
                       '3321087',
                       '3331615')
-   AND T.ITEM IN (/*'800412810',*/ '800223816');
-SELECT /*+PARALLEL(T,20)*/
+   AND T.ITEM IN (\*'800412810',*\ '800223816');
+SELECT \*+PARALLEL(T,20)*\
  *
   FROM RMS.TRAN_DATA_HISTORY@RA_RMS_DBLINK T
  WHERE T.REF_NO_2 = '2529755';
@@ -233,3 +250,5 @@ VALUES
    null,
    null,
    null);
+
+*/
