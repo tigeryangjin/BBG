@@ -1,0 +1,12 @@
+SELECT * FROM RAINY_USER WHERE USER_ID='R7705114819';
+
+insert into rainy_user_merch(user_id,merch) values('R7705114819','27');
+
+--Department¥Û¿‡    
+INSERT INTO sec_user_group
+  SELECT sg.group_id , ru.user_id
+    FROM rainy_user ru , rainy_user_merch rul , sec_group sg
+   WHERE ru.user_id = rul.user_id
+     AND sg.group_name LIKE '%Department%' || rul.merch || '%'
+     AND RU.USER_ID IN ('R7705114819' )
+     group by sg.group_id,ru.user_id;

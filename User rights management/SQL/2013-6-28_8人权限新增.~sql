@@ -1,0 +1,148 @@
+SELECT * FROM RAINY_USER WHERE USER_ID='R8210020279' FOR UPDATE;
+SELECT * FROM RAINY_USER WHERE USER_ID='R7906220525' FOR UPDATE;
+
+--新建人员
+insert into rainy_user(user_id,user_name,id) values('R9012084276','言杜','922');
+insert into rainy_user(user_id,user_name,id) values('R8309267903','陈君梅','924');
+insert into rainy_user(user_id,user_name,id) values('R8604130018','邹申红','925');
+insert into rainy_user(user_id,user_name,id) values('R8906023531','冯锦靖','926');
+insert into rainy_user(user_id,user_name,id) values('R6901012566','周步湘','928');
+insert into rainy_user(user_id,user_name,id) values('R8204157015','王巍','929');
+
+--用户密码自动生成，前二位子母大写，中间三位子母小写，最后跟3位数字
+select upper(dbms_random.string ('u' ,2 ))||dbms_random.string ('l' ,3 )|| trunc(dbms_random.value (0 ,10 ))||trunc (dbms_random.value (0 ,10 ))||trunc (dbms_random.value (0 ,10 ))
+from dual
+
+--修改密码
+update rainy_user t
+set t.password =( select upper(dbms_random.string ('u' , 2 ))||dbms_random.string ('l' , 3 )|| trunc(dbms_random.value (0 ,10 ))||trunc ( dbms_random.value ( 0 ,10 ))|| trunc (dbms_random.value (0 , 10 ))
+                   from rainy_user a
+                  where t.user_id = a.user_id )
+where t.password is null
+
+--创建DB用户
+--语句在sys用户下执行
+SELECT
+ 'create user ' || rs.user_id || ' identified by ' || rs.password ||
+ ' default tablespace RETEK_DATA
+temporary tablespace TEMP
+quota unlimited on RETEK_DATA
+quota unlimited on RETEK_INDEX' || ' ; '    || chr ( 13) ||
+ 'grant alter session,     analyze any, create any view,       create library,create procedure, create sequence,
+       create session,  create synonym,    create table,       create trigger,     create view,      create job,delete any table,
+   drop any procedure,   drop any view,  drop any table,execute any procedure,execute any type,insert any table,
+  select any sequence,select any table,update any table,select any dictionary
+to ' || rs.user_id || ' ;' || chr ( 13 ) ||
+ 
+  'grant select on sys.dba_role_privs to ' || rs.user_id || ';' ||chr( 13) ||
+  'grant select on sys.dba_jobs to '       || rs.user_id || ';' ||chr( 13) ||
+  'grant select on sys.dba_roles to '      || rs.user_id || ';' ||chr( 13) ||
+  'grant execute on dbms_rls to '          || rs.user_id || ';' ||chr( 13) ||
+  'grant execute on sys.dbms_crypto to '   || rs.user_id || ';' ||chr( 13) ||
+  'grant select on sys.dba_sys_privs to '  || rs.user_id || ';' ||chr( 13) ||
+  'grant execute on sys.dbms_alert to '    || rs.user_id || ';' ||chr( 13) ||
+  'grant execute on sys.dbms_lock to '     || rs.user_id || ';' ||chr( 13) ||
+  'grant execute on sys.dbms_system to '   || rs.user_id || ';' ||chr( 13) ||
+  'grant AQ_ADMINISTRATOR_ROLE to '        || rs.user_id || ';' ||chr( 13) ||
+  'grant execute on DBMS_AQ to '           || rs.user_id || ';' ||chr( 13) ||
+  'grant execute on DBMS_AQADM to '        || rs.user_id || ';'
+  FROM rainy_user rs
+  WHERE RS.USER_ID IN ('R9012084276','R8309267903','R8604130018','R8906023531','R6901012566','R8204157015');
+  
+--移除原职位权限
+--查询出来的语句在sys用户下执行
+SELECT 'revoke ' || rr.role_ext || ' from ' || ru.user_id || ';'
+  FROM rainy_role          rr ,
+       rainy_user          ru ,
+       rainy_user_position rup ,
+       rainy_position_role rpr 
+ WHERE rr.appl = 'RMS'
+   AND rup.user_id = ru.user_id
+   AND rup.position_id = rpr.position_id
+   AND rpr.role_id = rr.role_id
+   AND RU.USER_ID IN ('R8210020279');
+   
+--删除表中用户数据，权限清除后需要删除的表
+DELETE FROM RSM_USER_ROLE WHERE user_id IN ('R8210020279' );
+DELETE FROM SEC_USER_GROUP WHERE USER_ID IN ('R8210020279' );
+DELETE FROM RAINY_USER_LOC WHERE USER_ID IN ('R8210020279' );
+DELETE FROM RAINY_USER_MERCH WHERE USER_ID IN ('R8210020279' );
+DELETE FROM RAINY_USER_POSITION WHERE USER_ID IN ('R8210020279' );
+--
+insert into rainy_user_position(user_id,position_id) values('R9012084276',2);
+insert into rainy_user_position(user_id,position_id) values('R9012084276',102);
+insert into rainy_user_position(user_id,position_id) values('R8210020279',3);
+insert into rainy_user_position(user_id,position_id) values('R8210020279',96);
+insert into rainy_user_position(user_id,position_id) values('R8210020279',102);
+insert into rainy_user_position(user_id,position_id) values('R8309267903',102);
+insert into rainy_user_position(user_id,position_id) values('R8604130018',102);
+insert into rainy_user_position(user_id,position_id) values('R8906023531',102);
+insert into rainy_user_position(user_id,position_id) values('R6901012566',102);
+insert into rainy_user_position(user_id,position_id) values('R8204157015',82);
+
+--
+insert into rainy_user_merch(user_id,merch) values('R9012084276','ALL');
+insert into rainy_user_merch(user_id,merch) values('R8210020279','ALL');
+insert into rainy_user_merch(user_id,merch) values('R8309267903','ALL');
+insert into rainy_user_merch(user_id,merch) values('R8604130018','ALL');
+insert into rainy_user_merch(user_id,merch) values('R8906023531','ALL');
+insert into rainy_user_merch(user_id,merch) values('R6901012566','ALL');
+insert into rainy_user_merch(user_id,merch) values('R8204157015','21');
+insert into rainy_user_merch(user_id,merch) values('R8204157015','22');
+insert into rainy_user_merch(user_id,merch) values('R8204157015','23');
+insert into rainy_user_merch(user_id,merch) values('R8204157015','24');
+insert into rainy_user_merch(user_id,merch) values('R8204157015','25');
+insert into rainy_user_merch(user_id,merch) values('R8204157015','26');
+insert into rainy_user_merch(user_id,merch) values('R8204157015','27');
+insert into rainy_user_merch(user_id,merch) values('R8204157015','29');
+insert into rainy_user_merch(user_id,merch) values('R8204157015','30');
+insert into rainy_user_merch(user_id,merch) values('R8204157015','31');
+insert into rainy_user_merch(user_id,merch) values('R8204157015','33');
+
+--
+insert into rainy_user_loc (user_id,loc)values('R9012084276','ALL');
+insert into rainy_user_loc (user_id,loc)values('R8210020279','ALL');
+insert into rainy_user_loc (user_id,loc)values('R8309267903','ALL');
+insert into rainy_user_loc (user_id,loc)values('R8604130018','ALL');
+insert into rainy_user_loc (user_id,loc)values('R8906023531','ALL');
+insert into rainy_user_loc (user_id,loc)values('R6901012566','ALL');
+insert into rainy_user_loc (user_id,loc)values('R8204157015','ALL');
+
+--添加新职位权限
+--RMS系统权限
+--查询出来的数据用sys用户名执行
+SELECT 'grant ' || rr.role_ext || ' to ' || ru.user_id || ';'
+  FROM rainy_role          rr  ,
+       rainy_user          ru  ,
+       rainy_user_position rup ,
+       rainy_position_role rpr 
+ WHERE rr.appl = 'RMS'
+   AND rup.user_id = ru.user_id
+   AND rup.position_id = rpr.position_id
+   AND rpr.role_id = rr.role_id
+   AND RU.USER_ID IN ('R9012084276','R8309267903','R8604130018','R8906023531','R6901012566','R8204157015','8210020279');
+
+--新建用户插入用户属性表，lang字段8表示中文，1表示英文
+SELECT 'insert into user_attrib(user_id,user_name,lang) values(' || chr( 39) ||
+       ru.user_id || chr( 39) || ',' || chr (39 ) || ru.user_name || chr( 39) || ',' || 8 || ')' ||';'
+  FROM rainy_user ru ;
+
+insert into user_attrib( user_id, user_name, lang) 
+select user_id,user_name, '8' 
+from rainy_user 
+where USER_ID IN ('R9012084276','R8309267903','R8604130018','R8906023531','R6901012566','R8204157015')
+and user_id not in ( select user_id from user_attrib );
+
+
+
+
+
+
+--有一人权限、大类、地点没有变化，
+'R9012084276'
+'R8210020279'--权限清除
+'R8309267903'
+'R8604130018'
+'R8906023531'
+'R6901012566'
+'R8204157015'

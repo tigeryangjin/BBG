@@ -1,0 +1,68 @@
+--有三人权限调整：其中郭永红是岗位增加需权限维护，刘彩虹是新增人员，钟萍7512205328已离司需关闭权限。
+--R7512205328离职
+--R7610241444新建
+--R8210267147增加岗位
+SELECT * FROM RAINY_USER WHERE USER_ID='R8210267147' FOR UPDATE;
+
+insert into rainy_user(user_id,user_name,id) values('R7610241444','刘彩红','937');
+
+--修改密码
+update rainy_user t
+set t.password =( select upper(dbms_random.string ('u' , 2 ))||dbms_random.string ('l' , 3 )|| trunc(dbms_random.value (0 ,10 ))||trunc ( dbms_random.value ( 0 ,10 ))|| trunc (dbms_random.value (0 , 10 ))
+                   from rainy_user a
+                  where t.user_id = a.user_id )
+where t.password is null
+
+--创建DB用户
+--语句在sys用户下执行
+SELECT
+ 'create user ' || rs.user_id || ' identified by ' || rs.password ||
+ ' default tablespace RETEK_DATA
+temporary tablespace TEMP
+quota unlimited on RETEK_DATA
+quota unlimited on RETEK_INDEX' || ' ; '    || chr ( 13) ||
+ 'grant alter session,     analyze any, create any view,       create library,create procedure, create sequence,
+       create session,  create synonym,    create table,       create trigger,     create view,      create job,delete any table,
+   drop any procedure,   drop any view,  drop any table,execute any procedure,execute any type,insert any table,
+  select any sequence,select any table,update any table,select any dictionary
+to ' || rs.user_id || ' ;' || chr ( 13 ) ||
+ 
+  'grant select on sys.dba_role_privs to ' || rs.user_id || ';' ||chr( 13) ||
+  'grant select on sys.dba_jobs to '       || rs.user_id || ';' ||chr( 13) ||
+  'grant select on sys.dba_roles to '      || rs.user_id || ';' ||chr( 13) ||
+  'grant execute on dbms_rls to '          || rs.user_id || ';' ||chr( 13) ||
+  'grant execute on sys.dbms_crypto to '   || rs.user_id || ';' ||chr( 13) ||
+  'grant select on sys.dba_sys_privs to '  || rs.user_id || ';' ||chr( 13) ||
+  'grant execute on sys.dbms_alert to '    || rs.user_id || ';' ||chr( 13) ||
+  'grant execute on sys.dbms_lock to '     || rs.user_id || ';' ||chr( 13) ||
+  'grant execute on sys.dbms_system to '   || rs.user_id || ';' ||chr( 13) ||
+  'grant AQ_ADMINISTRATOR_ROLE to '        || rs.user_id || ';' ||chr( 13) ||
+  'grant execute on DBMS_AQ to '           || rs.user_id || ';' ||chr( 13) ||
+  'grant execute on DBMS_AQADM to '        || rs.user_id || ';'
+  FROM rainy_user rs
+  WHERE RS.USER_ID='R7610241444' ;
+  
+--移除原职位权限
+--查询出来的语句在sys用户下执行
+SELECT 'revoke ' || rr.role_ext || ' from ' || ru.user_id || ';'
+  FROM rainy_role          rr ,
+       rainy_user          ru ,
+       rainy_user_position rup ,
+       rainy_position_role rpr 
+ WHERE rr.appl = 'RMS'
+   AND rup.user_id = ru.user_id
+   AND rup.position_id = rpr.position_id
+   AND rpr.role_id = rr.role_id
+   AND RU.USER_ID IN ( 'R7512205328','R8210267147');
+   
+--删除表中用户数据，权限清除后需要删除的表
+DELETE FROM RSM_USER_ROLE WHERE user_id IN ('R7512205328','R8210267147');
+DELETE FROM SEC_USER_GROUP WHERE USER_ID IN ('R7512205328','R8210267147');
+DELETE FROM RAINY_USER_LOC WHERE USER_ID IN ('R7512205328','R8210267147');
+DELETE FROM RAINY_USER_MERCH WHERE USER_ID IN ('R7512205328','R8210267147' );
+DELETE FROM RAINY_USER_POSITION WHERE USER_ID IN ('R7512205328','R8210267147' );
+
+
+
+
+

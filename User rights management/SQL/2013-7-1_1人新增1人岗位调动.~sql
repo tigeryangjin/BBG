@@ -1,0 +1,140 @@
+SELECT * FROM RAINY_USER WHERE USER_ID IN ('R8209171564','R8801150566','R7711102104') FOR UPDATE;
+
+insert into rainy_user(user_id,user_name,id) values('R8801150566','陈茜','931');
+insert into rainy_user(user_id,user_name,id) values('R7711102104','吴艳','932');
+
+
+--用户密码自动生成，前二位子母大写，中间三位子母小写，最后跟3位数字
+select upper(dbms_random.string ('u' ,2 ))||dbms_random.string ('l' ,3 )|| trunc(dbms_random.value (0 ,10 ))||trunc (dbms_random.value (0 ,10 ))||trunc (dbms_random.value (0 ,10 ))
+from dual
+
+--修改密码
+update rainy_user t
+set t.password =( select upper(dbms_random.string ('u' , 2 ))||dbms_random.string ('l' , 3 )|| trunc(dbms_random.value (0 ,10 ))||trunc ( dbms_random.value ( 0 ,10 ))|| trunc (dbms_random.value (0 , 10 ))
+                   from rainy_user a
+                  where t.user_id = a.user_id )
+where t.password is null
+
+--创建DB用户
+--语句在sys用户下执行
+SELECT
+ 'create user ' || rs.user_id || ' identified by ' || rs.password ||
+ ' default tablespace RETEK_DATA
+temporary tablespace TEMP
+quota unlimited on RETEK_DATA
+quota unlimited on RETEK_INDEX' || ' ; '    || chr ( 13) ||
+ 'grant alter session,     analyze any, create any view,       create library,create procedure, create sequence,
+       create session,  create synonym,    create table,       create trigger,     create view,      create job,delete any table,
+   drop any procedure,   drop any view,  drop any table,execute any procedure,execute any type,insert any table,
+  select any sequence,select any table,update any table,select any dictionary
+to ' || rs.user_id || ' ;' || chr ( 13 ) ||
+ 
+  'grant select on sys.dba_role_privs to ' || rs.user_id || ';' ||chr( 13) ||
+  'grant select on sys.dba_jobs to '       || rs.user_id || ';' ||chr( 13) ||
+  'grant select on sys.dba_roles to '      || rs.user_id || ';' ||chr( 13) ||
+  'grant execute on dbms_rls to '          || rs.user_id || ';' ||chr( 13) ||
+  'grant execute on sys.dbms_crypto to '   || rs.user_id || ';' ||chr( 13) ||
+  'grant select on sys.dba_sys_privs to '  || rs.user_id || ';' ||chr( 13) ||
+  'grant execute on sys.dbms_alert to '    || rs.user_id || ';' ||chr( 13) ||
+  'grant execute on sys.dbms_lock to '     || rs.user_id || ';' ||chr( 13) ||
+  'grant execute on sys.dbms_system to '   || rs.user_id || ';' ||chr( 13) ||
+  'grant AQ_ADMINISTRATOR_ROLE to '        || rs.user_id || ';' ||chr( 13) ||
+  'grant execute on DBMS_AQ to '           || rs.user_id || ';' ||chr( 13) ||
+  'grant execute on DBMS_AQADM to '        || rs.user_id || ';'
+  FROM rainy_user rs
+  WHERE RS.USER_ID in ('R7711102104','R8801150566') ;
+  
+--移除原职位权限
+--查询出来的语句在sys用户下执行
+SELECT 'revoke ' || rr.role_ext || ' from ' || ru.user_id || ';'
+  FROM rainy_role          rr ,
+       rainy_user          ru ,
+       rainy_user_position rup ,
+       rainy_position_role rpr 
+ WHERE rr.appl = 'RMS'
+   AND rup.user_id = ru.user_id
+   AND rup.position_id = rpr.position_id
+   AND rpr.role_id = rr.role_id
+   AND RU.USER_ID IN ( 'R8209171564');
+   
+--删除表中用户数据，权限清除后需要删除的表
+DELETE FROM RSM_USER_ROLE WHERE user_id IN ('R8209171564' );
+DELETE FROM SEC_USER_GROUP WHERE USER_ID IN ('R8209171564' );
+DELETE FROM RAINY_USER_LOC WHERE USER_ID IN ('R8209171564' );
+DELETE FROM RAINY_USER_MERCH WHERE USER_ID IN ('R8209171564' );
+DELETE FROM RAINY_USER_POSITION WHERE USER_ID IN ('R8209171564' );
+
+--
+insert into rainy_user_position(user_id,position_id) values('R8209171564',102);
+insert into rainy_user_position(user_id,position_id) values('R8801150566',10);
+insert into rainy_user_position(user_id,position_id) values('R7711102104',85);
+--
+insert into rainy_user_merch(user_id,merch) values('R8209171564','ALL');
+insert into rainy_user_merch(user_id,merch) values('R8801150566','42');
+insert into rainy_user_merch(user_id,merch) values('R7711102104','12');
+insert into rainy_user_merch(user_id,merch) values('R7711102104','13');
+insert into rainy_user_merch(user_id,merch) values('R7711102104','14');
+insert into rainy_user_merch(user_id,merch) values('R7711102104','15');
+insert into rainy_user_merch(user_id,merch) values('R7711102104','16');
+insert into rainy_user_merch(user_id,merch) values('R7711102104','17');
+insert into rainy_user_merch(user_id,merch) values('R7711102104','18');
+insert into rainy_user_merch(user_id,merch) values('R7711102104','19');
+insert into rainy_user_merch(user_id,merch) values('R7711102104','21');
+insert into rainy_user_merch(user_id,merch) values('R7711102104','22');
+insert into rainy_user_merch(user_id,merch) values('R7711102104','23');
+insert into rainy_user_merch(user_id,merch) values('R7711102104','24');
+insert into rainy_user_merch(user_id,merch) values('R7711102104','25');
+insert into rainy_user_merch(user_id,merch) values('R7711102104','26');
+insert into rainy_user_merch(user_id,merch) values('R7711102104','29');
+
+--
+insert into rainy_user_loc (user_id,loc)values('R8209171564','ALL');
+insert into rainy_user_loc (user_id,loc)values('R8801150566','ALL');
+insert into rainy_user_loc (user_id,loc)values('R7711102104','120100');
+
+--
+--添加新职位权限
+--RMS系统权限
+--查询出来的数据用sys用户名执行
+SELECT 'grant ' || rr.role_ext || ' to ' || ru.user_id || ';'
+  FROM rainy_role          rr  ,
+       rainy_user          ru  ,
+       rainy_user_position rup ,
+       rainy_position_role rpr 
+ WHERE rr.appl = 'RMS'
+   AND rup.user_id = ru.user_id
+   AND rup.position_id = rpr.position_id
+   AND rpr.role_id = rr.role_id
+   AND RU.USER_ID IN ('R8209171564','R8801150566','R7711102104');
+   
+--新建用户插入用户属性表，lang字段8表示中文，1表示英文
+SELECT 'insert into user_attrib(user_id,user_name,lang) values(' || chr( 39) ||
+       ru.user_id || chr( 39) || ',' || chr (39 ) || ru.user_name || chr( 39) || ',' || 8 || ')' ||';'
+  FROM rainy_user ru ;
+
+insert into user_attrib( user_id, user_name, lang) 
+select user_id,user_name, '8' 
+from rainy_user 
+where  USER_ID in ('R7711102104','R8801150566') 
+and user_id not in ( select user_id from user_attrib );
+
+--插入sec_user_group表，分二种情况插入
+--Location地点
+INSERT INTO sec_user_group
+  SELECT sg.group_id , ru.user_id
+    FROM rainy_user ru , rainy_user_loc rul , sec_group sg
+   WHERE ru.user_id = rul.user_id
+     AND sg.group_name LIKE '%Location%' || rul.loc || '%'
+     AND RU.USER_ID IN ('R8209171564','R8801150566','R7711102104');
+--Department大类    
+INSERT INTO sec_user_group
+  SELECT sg.group_id , ru.user_id
+    FROM rainy_user ru , rainy_user_merch rul , sec_group sg
+   WHERE ru.user_id = rul.user_id
+     AND sg.group_name LIKE '%Department%' || rul.merch || '%'
+     AND RU.USER_ID IN ('R8209171564','R8801150566','R7711102104')
+     group by sg.group_id,ru.user_id;
+
+
+
+

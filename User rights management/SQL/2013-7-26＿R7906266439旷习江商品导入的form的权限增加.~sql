@@ -1,0 +1,5 @@
+--R7906266439旷习江商品导入的form的权限增加
+
+SELECT * FROM RAINY_ROLE WHERE APPL='RMS' AND ROLE_DESC LIKE '%商品%导入%'
+
+insert into NAV_ELEMENT_MODE_ROLE values('cmx_item_import','--DEFAULT--','ITEM_RELATED','ITEMUPDATEIMPM');
