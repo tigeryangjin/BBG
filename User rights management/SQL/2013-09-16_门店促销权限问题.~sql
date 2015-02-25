@@ -1,0 +1,54 @@
+SELECT * FROM RAINY_USER T WHERE T.USER_ID='R6412110027';
+SELECT * FROM RAINY_USER_POSITION T WHERE T.USER_ID='R2720818128';
+--查看某一岗位的权限明细
+SELECT * FROM RAINY_ROLE RR
+WHERE EXISTS (SELECT 1 FROM RAINY_POSITION_ROLE RPR WHERE RR.ROLE_ID = RPR.ROLE_ID AND RPR.POSITION_ID=86 )
+AND RR.ROLE_EXT='STPRCCB';
+
+STPRCCM
+STPRCCA
+
+STPRCCB 门店价格变更-审批
+
+
+SELECT * FROM DBA_ROLE_PRIVS WHERE GRANTED_ROLE ='STPRCCB';
+SELECT * FROM DBA_ROLE_PRIVS T WHERE T.GRANTEE='R2720818128' AND T.GRANTED_ROLE='STPRCCB';
+
+SELECT t.rowid,t.* FROM RAINY_USER T;
+SELECT t.rowid,t.* FROM RAINY_USER_POSITION T;
+
+GRANT STPRCCA TO R2720818128;
+GRANT STPRCCB TO R2720818128;
+
+REVOKE STPRCCB FROM R2720818128;
+REVOKE STPRCCA FROM R2720818128;
+
+
+Select /*+ ordered */ decode(sa.grantee#, 1, 'PUBLIC', u1.name), u2.name,
+       decode(min(option$), 1, 'YES', 'NO'),
+       decode(min(u1.defrole), 0, 'NO', 1, 'YES',
+              2, decode(min(ud.role#),null,'NO','YES'),
+              3, decode(min(ud.role#),null,'YES','NO'), 'NO')
+from Sys.sysauth$ sa, Sys.user$ u1, Sys.user$ u2, Sys.defrole$ ud
+where sa.grantee#=ud.user#(+)
+  and sa.privilege#=ud.role#(+) and u1.user#=sa.grantee#
+  and u2.user#=Sa.privilege#
+   And U2.name  Like 'STP%'
+ -- And U2.name In('STPRCCB' ,'STPRCCA') ---没有这两个权限
+  And  decode(sa.grantee#, 1, 'PUBLIC', u1.name) ='R2720818128'
+group by decode(sa.grantee#,1,'PUBLIC',u1.name),u2.name;
+
+SELECT * FROM RAINY_USER_LOC T WHERE T.LOC='120033' AND EXISTS(SELECT 1 FROM RAINY_USER_POSITION R WHERE R.POSITION_ID=84 );
+SELECT * FROM RAINY_USER_POSITION WHERE USER_ID='R6412110027';
+SELECT * from rainy_user_loc where user_id='R6412110027';
+
+SELECT * FROM DBA_ROLE_PRIVS T WHERE T.GRANTEE='R6412110027' AND T.GRANTED_ROLE='STPRCCB';
+SELECT * FROM DBA_ROLE_PRIVS T WHERE T.GRANTEE='R6412110027' AND T.GRANTED_ROLE='STPRCCA';
+
+SELECT * FROM NAV_ELEMENT_MODE_ROLE T WHERE T.ROLE LIKE 'STPR%';
+
+SELECT * FROM sec_form_action_role T WHERE T.ROLE LIKE 'STPR%';
+--
+insert into NAV_ELEMENT_MODE_ROLE values('cmx_storepc_find','--DEFAULT--','CMX_BBGNBB','STPRCCB');
+
+SELECT *　FROM NAV_ELEMENT_MODE T WHERE T.element='cmx_storepc_find';

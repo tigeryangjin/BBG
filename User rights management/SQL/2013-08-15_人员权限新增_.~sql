@@ -1,0 +1,66 @@
+insert into rainy_user(user_id,user_name,id) values('R8912040788','唐小芳','2082');
+insert into rainy_user(user_id,user_name,id) values('R8703030029','周静','2083');
+
+--修改密码
+update rainy_user t
+set t.password =( select upper(dbms_random.string ( 'u' , 2 ))||dbms_random.string ('l' , 3 )|| trunc(dbms_random.value ( 0 ,10 ))||trunc ( dbms_random.value ( 0 ,10 ))|| trunc (dbms_random.value (0 , 10 ))
+                   from rainy_user a
+                  where t.user_id = a.user_id )
+where t.password is null
+
+
+
+--创建DB用户
+--语句在sys用户下执行
+SELECT
+ 'create user ' || ru.user_id || ' identified by ' || ru.password ||
+ ' default tablespace RETEK_DATA
+temporary tablespace TEMP
+quota unlimited on RETEK_DATA
+quota unlimited on RETEK_INDEX' || ' ; '    || chr ( 13 ) ||
+ 'grant alter session,     analyze any, create any view,       create library,create procedure, create sequence,
+       create session,  create synonym,    create table,       create trigger,     create view,      create job,delete any table,
+   drop any procedure,   drop any view,  drop any table,execute any procedure,execute any type,insert any table,
+  select any sequence,select any table,update any table,select any dictionary
+to ' || ru.user_id || ' ;' || chr ( 13 ) ||
+ 
+  'grant select on sys.dba_role_privs to ' || ru.user_id || ';' ||chr( 13) ||
+  'grant select on sys.dba_jobs to '       || ru.user_id || ';' ||chr ( 13) ||
+  'grant select on sys.dba_roles to '      || ru.user_id || ';' ||chr ( 13) ||
+  'grant execute on dbms_rls to '          || ru.user_id || ';' ||chr ( 13) ||
+  'grant execute on sys.dbms_crypto to '   || ru.user_id || ';' ||chr( 13) ||
+  'grant select on sys.dba_sys_privs to '  || ru.user_id || ';' ||chr( 13) ||
+  'grant execute on sys.dbms_alert to '    || ru.user_id || ';' ||chr ( 13) ||
+  'grant execute on sys.dbms_lock to '     || ru.user_id || ';' ||chr ( 13) ||
+  'grant execute on sys.dbms_system to '   || ru.user_id || ';' ||chr( 13) ||
+  'grant AQ_ADMINISTRATOR_ROLE to '        || ru.user_id || ';' ||chr ( 13) ||
+  'grant execute on DBMS_AQ to '           || ru.user_id || ';' ||chr ( 13) ||
+  'grant execute on DBMS_AQADM to '        || ru.user_id || ';'
+  FROM rainy_user ru
+  WHERE RU.ID BETWEEN 9999 AND 10000 ;
+
+
+
+insert into rainy_user_position(user_id,position_id) values('R8703030029',31);
+insert into rainy_user_position(user_id,position_id) values('R8703030029',32);
+insert into rainy_user_position(user_id,position_id) values('R8912040788',21);
+-------------------------------------------------------------------------------------
+insert into rainy_user_merch(user_id,merch) values('R8912040788','ALL');
+insert into rainy_user_merch(user_id,merch) values('R8703030029','ALL');
+------------------------------------------------------------------------------------
+insert into rainy_user_loc (user_id,loc)values('R8912040788','ALL');
+insert into rainy_user_loc (user_id,loc)values('R8703030029','118004');
+insert into rainy_user_loc (user_id,loc)values('R8703030029','118010');
+insert into rainy_user_loc (user_id,loc)values('R8703030029','120043');
+insert into rainy_user_loc (user_id,loc)values('R8703030029','120044');
+insert into rainy_user_loc (user_id,loc)values('R8703030029','120073');
+insert into rainy_user_loc (user_id,loc)values('R8703030029','120084');
+insert into rainy_user_loc (user_id,loc)values('R8703030029','120088');
+insert into rainy_user_loc (user_id,loc)values('R8703030029','120092');
+insert into rainy_user_loc (user_id,loc)values('R8703030029','120111');
+insert into rainy_user_loc (user_id,loc)values('R8703030029','120127');
+insert into rainy_user_loc (user_id,loc)values('R8703030029','120138');
+insert into rainy_user_loc (user_id,loc)values('R8703030029','120148');
+insert into rainy_user_loc (user_id,loc)values('R8703030029','120152');
+insert into rainy_user_loc (user_id,loc)values('R8703030029','120174');
+insert into rainy_user_loc (user_id,loc)values('R8703030029','120180');

@@ -1,0 +1,11 @@
+SELECT * FROM RAINY_USER T WHERE T.USER_ID='R861117145X';
+
+--ĞŞ¸ÄÃÜÂë
+update rainy_user t
+set t.password =( select upper(dbms_random.string ('u' , 2 ))||dbms_random.string ('l' , 3 )|| trunc(dbms_random.value (0 ,10 ))||trunc ( dbms_random.value ( 0 ,10 ))|| trunc (dbms_random.value (0 , 10 ))
+                   from rainy_user a
+                  where t.user_id = a.user_id )
+where t.USER_ID = 'R861117145X';
+
+
+
