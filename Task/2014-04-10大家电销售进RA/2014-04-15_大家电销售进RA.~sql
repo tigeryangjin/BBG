@@ -2,7 +2,7 @@
 --接口定义
 --********************************************************************************************
 --商品资料接口
-SELECT * FROM BBG_RA_PRODUCT_JL_V@RA_JL;
+SELECT * FROM BBG_RA_PRODUCT_JL_V@RMS_JL;
 --商品地点接口
 SELECT * FROM BBG_RA_ITEM_LOC_JL_V@RMS_JL;
 --销售接口
@@ -20,7 +20,6 @@ END CMX_RMS_JL2RA_SQL;
 
 CREATE OR REPLACE PACKAGE BODY CMX_RMS_JL2RA_SQL AS
 END CMX_RMS_JL2RA_SQL;*/
-
 
 --*******************************************************************************************************
 --*******************************************************************************************************
@@ -48,7 +47,8 @@ SELECT *
  WHERE /*EXISTS (SELECT 1
           FROM BBG_RA_SLS_TRX_JL_V@RA_JL S
          WHERE T.PROD_NUM = S.PROD_IT_NUM)
-   AND */T.PROD_CAT5 IN ('7~78~78~786~786', '7~78~78~787~787');
+   AND */
+ T.PROD_CAT5 IN ('7~78~78~786~786', '7~78~78~787~787');
 
 SELECT *
   FROM BBG_RA_SLS_TRX_JL_V@RA_JL S
@@ -57,8 +57,10 @@ SELECT *
           FROM BBG_RA_PRODUCT_JL_V@RA_JL T
          WHERE T.PROD_NUM = S.PROD_IT_NUM
            AND T.PROD_CAT5 IN ('7~78~78~786~786', '7~78~78~787~787'))
-					 ORDER BY S.DAY_DT DESC;
+ ORDER BY S.DAY_DT DESC;
 
+--*******************************************************************************************************
+--*******************************************************************************************************
 --1.金力商品导入
 --RA_RMS.W_RTL_ITEM_D_TMP for SDE_RetailItemDimension
 --在ra_rms创建金力商品视图：RA_RMS.BBG_RA_PRODUCT_JL_REF_V
@@ -190,18 +192,44 @@ INSERT INTO RA_RMS.W_RTL_ITEM_D_TMP D
 SELECT * FROM RADM.W_RTL_IT_SUPPLIER_DS;
 SELECT * FROM BBG_RA_PRODUCT_JL_V@RMS_JL;
 
+--*******************************************************************************************************
+--*******************************************************************************************************
 --2.金力商品地点维度导入RA
 
-CREATE OR REPLACE PACKAGE CMX_JL2RA_SQL AS
+/*CREATE OR REPLACE PACKAGE CMX_JL2RA_SQL AS
 END CMX_JL2RA_SQL;
 
 CREATE OR REPLACE PACKAGE BODY CMX_JL2RA_SQL AS
-END CMX_JL2RA_SQL;
---在ra_rms创建金力商品视图：RA_RMS.BBG_RA_PRODUCT_JL_REF_V
+END CMX_JL2RA_SQL;*/
+--在ra_rms创建金力商品视图：RA_RMS.BBG_RA_ITEM_LOC_JL_V
 CREATE OR REPLACE VIEW RA_RMS.BBG_RA_ITEM_LOC_JL_V AS
-SELECT * FROM BBG_RA_
+  SELECT * FROM BBG_RA_ITEM_LOC_JL_V@RMS_JL;
 
-INSERT INTO RADM.BBG_RA_ITEM_LOC_DS@RMS_JL IL
+--修改RA_RMS.BBG_RA_ITEM_LOC_D_V视图
+SELECT JL.ITEM,
+       JL.LOC,
+       JL.NBB,
+       JL.NBO,
+       JL.SALE_TYPE,
+       JL.STANDARD_GROSS_MARGIN,
+       JL.PROMO_GROSS_MARGIN,
+       JL.BUSINESS_MODE,
+       JL.ZC_IND,
+       JL.BBG_ZG_IND,
+       JL.HERO_ITEM_IND,
+       JL.START_DATE,
+       JL.END_DATE,
+       JL.NEW_ITEM_FLAG,
+       JL.REF_NO2,
+       JL.REF_NO1,
+       JL.REF_NO3,
+       JL.REF_NO4,
+       JL.SRC_EFF_FROM_DT,
+       JL.SRC_EFF_FROM_DT
+  FROM BBG_RA_ITEM_LOC_JL_V@RMS_JL JL;
+
+--插入BBG_RA_ITEM_LOC_DS
+INSERT INTO RADM.BBG_RA_ITEM_LOC_DS@RMS_RA IL
   (IL.ITEM,
    IL.LOC,
    IL.NBB,
@@ -229,9 +257,35 @@ INSERT INTO RADM.BBG_RA_ITEM_LOC_DS@RMS_JL IL
    IL.ETL_PROC_WID,
    IL.INTEGRATION_ID,
    IL.X_CUSTOM)
-  SELECT * FROM DUAL;
+  SELECT JL.ITEM,
+         JL.LOC,
+         JL.NBB,
+         JL.NBO,
+         JL.SALE_TYPE,
+         JL.STANDARD_GROSS_MARGIN,
+         JL.PROMO_GROSS_MARGIN,
+         JL.BUSINESS_MODE,
+         JL.ZC_IND,
+         JL.BBG_ZG_IND,
+         JL.HERO_ITEM_IND,
+         JL.NEW_ITEM_FLAG,
+         JL.REF_NO1,
+         JL.REF_NO2,
+         JL.REF_NO3,
+         JL.REF_NO4,
+         TRUNC(JL.SRC_EFF_FROM_DT) SRC_EFF_FROM_DT,
+         NULL SRC_EFF_TO_DT,
+         NULL EFFECTIVE_FROM_DT,
+         NULL EFFECTIVE_TO_DT,
+         NULL CURRENT_FLG,
+         NULL W_INSERT_DT,
+         NULL W_UPDATE_DT,
+         1 DATASOURCE_NUM_ID,
+         100 ETL_PROC_WID,
+         JL.ITEM || '~' || JL.LOC INTEGRATION_ID,
+         NULL X_CUSTOM
+    FROM BBG_RA_ITEM_LOC_JL_V@RMS_JL JL;
 
 SELECT * FROM BBG_RA_ITEM_LOC_JL_V@RMS_JL;
+SELECT * FROM BBG_RA_ITEM_LOC_D_V;
 SELECT * FROM RADM.BBG_RA_ITEM_LOC_DS@RMS_RA;
-
-
