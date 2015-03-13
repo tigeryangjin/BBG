@@ -5,7 +5,7 @@ SELECT T.LOCATION,T.ITEM,
               T.VAT_RATE / 100
              ELSE
               0
-           END))) AMT,
+           END))) AMT/*,
        SUM(T.TOTAL_COST / (1 + (CASE
              WHEN T.TRAN_CODE = 3 THEN
               (SELECT VAT_RATE / 100
@@ -88,15 +88,15 @@ SELECT T.LOCATION,T.ITEM,
                                            T.VAT_RATE / 100
                                           ELSE
                                            0
-                                        END))) PROFIT_RATE
+                                        END))) PROFIT_RATE*/
   FROM RA_RMS.TRAN_DATA_HISTORY_PACK_V T
  WHERE T.TRAN_CODE IN (2, 3)
    --AND T.TOTAL_RETAIL<>0
-   AND T.TRAN_DATE = DATE '2014-08-28'
-   --AND T.DEPT IN ('76')
+   AND T.TRAN_DATE = DATE '2015-03-08'
+   AND T.DEPT IN ('29')
   -- AND T.LOCATION IN ('120036','120113','120151','120170')
-   AND T.LOCATION='120033'
-	 and t.ITEM='101507100'
+   AND T.LOCATION='120011'
+	 --and t.ITEM='101507100'
  GROUP BY T.LOCATION,T.ITEM
  ORDER BY T.LOCATION,T.ITEM;
  
