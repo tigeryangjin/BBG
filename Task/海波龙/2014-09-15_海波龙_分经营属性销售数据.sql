@@ -1,4 +1,5 @@
 --RA分经营属性的销售数据
+--2015.3.25正确的应该是关联RADM.W_PROD_CAT_DH,而不是关联RABATCHER.W_PRODUCT_D_RTL_TMP
 --1.促销销售--------------------------------------------------------------------------------------------
 --当期数
 SELECT 'RET11' AS PKEY,
@@ -16,9 +17,7 @@ SELECT 'RET11' AS PKEY,
   FROM (SELECT SUBSTR(A.MN_WID, 1, 4) YEAR,
                SUBSTR(A.MN_WID, 5, 2) PERIOD,
                SUM((NVL(A.SLS_AMT_LCL, 0) - NVL(A.RET_AMT_LCL, 0)) -
-                   (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) -
-                   (NVL(A.SLS_PROFIT_AMT_LCL, 0) -
-                   NVL(A.RET_PROFIT_AMT_LCL, 0))) COST,
+                   (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0))) COST,
                B.ORG_NUM,
                D.LVL6ANC_PRODCAT_ID DEPT,
                D.LVL8ANC_PRODCAT_ID DV
@@ -54,9 +53,7 @@ SELECT 'RET11' AS PKEY,
   FROM (SELECT MAX(SUBSTR(A.MN_WID, 1, 4)) YEAR,
                MAX(SUBSTR(A.MN_WID, 5, 2)) PERIOD,
                SUM((NVL(A.SLS_AMT_LCL, 0) - NVL(A.RET_AMT_LCL, 0)) -
-                   (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) -
-                   (NVL(A.SLS_PROFIT_AMT_LCL, 0) -
-                   NVL(A.RET_PROFIT_AMT_LCL, 0))) COST,
+                   (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0))) COST,
                B.ORG_NUM,
                D.LVL6ANC_PRODCAT_ID DEPT,
                D.LVL8ANC_PRODCAT_ID DV
@@ -87,9 +84,7 @@ SELECT 'RET12' AS PKEY,
   FROM (SELECT SUBSTR(A.MN_WID, 1, 4) YEAR,
                SUBSTR(A.MN_WID, 5, 2) PERIOD,
                SUM((NVL(A.SLS_AMT_LCL, 0) - NVL(A.RET_AMT_LCL, 0)) -
-                   (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) -
-                   (NVL(A.SLS_PROFIT_AMT_LCL, 0) -
-                   NVL(A.RET_PROFIT_AMT_LCL, 0))) COST,
+                   (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0))) COST,
                B.ORG_NUM,
                D.LVL6ANC_PRODCAT_ID DEPT,
                D.LVL8ANC_PRODCAT_ID DV
@@ -123,9 +118,7 @@ SELECT 'RET12' AS PKEY,
   FROM (SELECT MAX(SUBSTR(A.MN_WID, 1, 4)) YEAR,
                MAX(SUBSTR(A.MN_WID, 5, 2)) PERIOD,
                SUM((NVL(A.SLS_AMT_LCL, 0) - NVL(A.RET_AMT_LCL, 0)) -
-                   (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) -
-                   (NVL(A.SLS_PROFIT_AMT_LCL, 0) -
-                   NVL(A.RET_PROFIT_AMT_LCL, 0))) COST,
+                   (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0))) COST,
                B.ORG_NUM,
                D.LVL6ANC_PRODCAT_ID DEPT,
                D.LVL8ANC_PRODCAT_ID DV
@@ -156,9 +149,7 @@ SELECT 'RET13' AS PKEY,
   FROM (SELECT SUBSTR(A.MN_WID, 1, 4) YEAR,
                SUBSTR(A.MN_WID, 5, 2) PERIOD,
                SUM((NVL(A.SLS_AMT_LCL, 0) - NVL(A.RET_AMT_LCL, 0)) -
-                   (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) -
-                   (NVL(A.SLS_PROFIT_AMT_LCL, 0) -
-                   NVL(A.RET_PROFIT_AMT_LCL, 0))) COST,
+                   (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0))) COST,
                B.ORG_NUM,
                D.LVL6ANC_PRODCAT_ID DEPT,
                D.LVL8ANC_PRODCAT_ID DV
@@ -192,9 +183,7 @@ SELECT 'RET13' AS PKEY,
   FROM (SELECT MAX(SUBSTR(A.MN_WID, 1, 4)) YEAR,
                MAX(SUBSTR(A.MN_WID, 5, 2)) PERIOD,
                SUM((NVL(A.SLS_AMT_LCL, 0) - NVL(A.RET_AMT_LCL, 0)) -
-                   (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) -
-                   (NVL(A.SLS_PROFIT_AMT_LCL, 0) -
-                   NVL(A.RET_PROFIT_AMT_LCL, 0))) COST,
+                   (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0))) COST,
                B.ORG_NUM,
                D.LVL6ANC_PRODCAT_ID DEPT,
                D.LVL8ANC_PRODCAT_ID DV
@@ -224,9 +213,7 @@ SELECT 'RET14' AS PKEY,
   FROM (SELECT SUBSTR(A.MN_WID, 1, 4) YEAR,
                SUBSTR(A.MN_WID, 5, 2) PERIOD,
                SUM((NVL(A.SLS_AMT_LCL, 0) - NVL(A.RET_AMT_LCL, 0)) -
-                   (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) -
-                   (NVL(A.SLS_PROFIT_AMT_LCL, 0) -
-                   NVL(A.RET_PROFIT_AMT_LCL, 0))) COST,
+                   (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) ) COST,
                B.ORG_NUM,
                D.LVL6ANC_PRODCAT_ID DEPT,
                D.LVL8ANC_PRODCAT_ID DV
@@ -260,9 +247,7 @@ SELECT 'RET14' AS PKEY,
   FROM (SELECT MAX(SUBSTR(A.MN_WID, 1, 4)) YEAR,
                MAX(SUBSTR(A.MN_WID, 5, 2)) PERIOD,
                SUM((NVL(A.SLS_AMT_LCL, 0) - NVL(A.RET_AMT_LCL, 0)) -
-                   (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) -
-                   (NVL(A.SLS_PROFIT_AMT_LCL, 0) -
-                   NVL(A.RET_PROFIT_AMT_LCL, 0))) COST,
+                   (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0))) COST,
                B.ORG_NUM,
                D.LVL6ANC_PRODCAT_ID DEPT,
                D.LVL8ANC_PRODCAT_ID DV
@@ -306,9 +291,7 @@ insert into bbg_ys_t_businessdata_retek
     FROM (SELECT SUBSTR(A.MN_WID, 1, 4) YEAR,
                  SUBSTR(A.MN_WID, 5, 2) PERIOD,
                  SUM((NVL(A.SLS_AMT_LCL, 0) - NVL(A.RET_AMT_LCL, 0)) -
-                     (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) -
-                     (NVL(A.SLS_PROFIT_AMT_LCL, 0) -
-                     NVL(A.RET_PROFIT_AMT_LCL, 0))) COST,
+                     (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) ) COST,
                  B.ORG_NUM,
                  D.PROD_DP_NUM DEPT,
                  D.PROD_DV_NUM DV
@@ -355,9 +338,7 @@ insert into bbg_ys_t_businessdata_retek
     FROM (SELECT MAX(SUBSTR(A.MN_WID, 1, 4)) YEAR,
                  MAX(SUBSTR(A.MN_WID, 5, 2)) PERIOD,
                  SUM((NVL(A.SLS_AMT_LCL, 0) - NVL(A.RET_AMT_LCL, 0)) -
-                     (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) -
-                     (NVL(A.SLS_PROFIT_AMT_LCL, 0) -
-                     NVL(A.RET_PROFIT_AMT_LCL, 0))) COST,
+                     (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0))) COST,
                  B.ORG_NUM,
                  D.PROD_DP_NUM DEPT,
                  D.PROD_DV_NUM DV
@@ -403,9 +384,7 @@ insert into bbg_ys_t_businessdata_retek
     FROM (SELECT SUBSTR(A.MN_WID, 1, 4) YEAR,
                  SUBSTR(A.MN_WID, 5, 2) PERIOD,
                  SUM((NVL(A.SLS_AMT_LCL, 0) - NVL(A.RET_AMT_LCL, 0)) -
-                     (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) -
-                     (NVL(A.SLS_PROFIT_AMT_LCL, 0) -
-                     NVL(A.RET_PROFIT_AMT_LCL, 0))) COST,
+                     (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) ) COST,
                  B.ORG_NUM,
                  D.PROD_DP_NUM DEPT,
                  D.PROD_DV_NUM DV
@@ -452,9 +431,7 @@ insert into bbg_ys_t_businessdata_retek
     FROM (SELECT MAX(SUBSTR(A.MN_WID, 1, 4)) YEAR,
                  MAX(SUBSTR(A.MN_WID, 5, 2)) PERIOD,
                  SUM((NVL(A.SLS_AMT_LCL, 0) - NVL(A.RET_AMT_LCL, 0)) -
-                     (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) -
-                     (NVL(A.SLS_PROFIT_AMT_LCL, 0) -
-                     NVL(A.RET_PROFIT_AMT_LCL, 0))) COST,
+                     (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0))) COST,
                  B.ORG_NUM,
                  D.PROD_DP_NUM DEPT,
                  D.PROD_DV_NUM DV
@@ -500,9 +477,7 @@ insert into bbg_ys_t_businessdata_retek
     FROM (SELECT SUBSTR(A.MN_WID, 1, 4) YEAR,
                  SUBSTR(A.MN_WID, 5, 2) PERIOD,
                  SUM((NVL(A.SLS_AMT_LCL, 0) - NVL(A.RET_AMT_LCL, 0)) -
-                     (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) -
-                     (NVL(A.SLS_PROFIT_AMT_LCL, 0) -
-                     NVL(A.RET_PROFIT_AMT_LCL, 0))) COST,
+                     (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0))) COST,
                  B.ORG_NUM,
                  D.PROD_DP_NUM DEPT,
                  D.PROD_DV_NUM DV
@@ -549,9 +524,7 @@ insert into bbg_ys_t_businessdata_retek
     FROM (SELECT MAX(SUBSTR(A.MN_WID, 1, 4)) YEAR,
                  MAX(SUBSTR(A.MN_WID, 5, 2)) PERIOD,
                  SUM((NVL(A.SLS_AMT_LCL, 0) - NVL(A.RET_AMT_LCL, 0)) -
-                     (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) -
-                     (NVL(A.SLS_PROFIT_AMT_LCL, 0) -
-                     NVL(A.RET_PROFIT_AMT_LCL, 0))) COST,
+                     (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0))) COST,
                  B.ORG_NUM,
                  D.PROD_DP_NUM DEPT,
                  D.PROD_DV_NUM DV
@@ -596,9 +569,7 @@ insert into bbg_ys_t_businessdata_retek
     FROM (SELECT SUBSTR(A.MN_WID, 1, 4) YEAR,
                  SUBSTR(A.MN_WID, 5, 2) PERIOD,
                  SUM((NVL(A.SLS_AMT_LCL, 0) - NVL(A.RET_AMT_LCL, 0)) -
-                     (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) -
-                     (NVL(A.SLS_PROFIT_AMT_LCL, 0) -
-                     NVL(A.RET_PROFIT_AMT_LCL, 0))) COST,
+                     (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) ) COST,
                  B.ORG_NUM,
                  D.PROD_DP_NUM DEPT,
                  D.PROD_DV_NUM DV
@@ -646,9 +617,7 @@ insert into bbg_ys_t_businessdata_retek
     FROM (SELECT MAX(SUBSTR(A.MN_WID, 1, 4)) YEAR,
                  MAX(SUBSTR(A.MN_WID, 5, 2)) PERIOD,
                  SUM((NVL(A.SLS_AMT_LCL, 0) - NVL(A.RET_AMT_LCL, 0)) -
-                     (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) -
-                     (NVL(A.SLS_PROFIT_AMT_LCL, 0) -
-                     NVL(A.RET_PROFIT_AMT_LCL, 0))) COST,
+                     (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) ) COST,
                  B.ORG_NUM,
                  D.PROD_DP_NUM DEPT,
                  D.PROD_DV_NUM DV

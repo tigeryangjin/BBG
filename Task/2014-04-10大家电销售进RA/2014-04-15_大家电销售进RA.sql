@@ -626,6 +626,29 @@ SELECT *
   FROM BBG_RA_ITEM_LOC_JL_V@RMS_JL
  where item = 2400071022380
    and loc = 139185;
+--删除商品-地点维度的日期(SRC_EFF_FROM_DT,EFFECTIVE_FROM_DT,EFFECTIVE_TO_DT)都一样的数据
+DELETE RADM.BBG_RA_ITEM_LOC_D IL
+ WHERE EXISTS (SELECT 1
+          FROM (SELECT /*+PARALLEL(T,20)*/
+                 T.ITEM,
+                 T.LOC,
+                 T.SRC_EFF_FROM_DT,
+                 T.EFFECTIVE_FROM_DT,
+                 T.EFFECTIVE_TO_DT
+                  FROM BBG_RA_ITEM_LOC_D T
+                 GROUP BY T.ITEM,
+                          T.LOC,
+                          T.SRC_EFF_FROM_DT,
+                          T.EFFECTIVE_FROM_DT,
+                          T.EFFECTIVE_TO_DT
+                HAVING COUNT(*) > 1
+                 ORDER BY ITEM, LOC) A
+         WHERE IL.ITEM = A.ITEM
+           AND IL.LOC = A.LOC
+           AND IL.SRC_EFF_FROM_DT = A.SRC_EFF_FROM_DT
+           AND IL.EFFECTIVE_FROM_DT = A.EFFECTIVE_FROM_DT
+           AND IL.EFFECTIVE_TO_DT = A.EFFECTIVE_TO_DT);
+
 
 ----TMP
 SELECT * FROM RADM.BBG_RA_SLS_TRX_JL_V;
