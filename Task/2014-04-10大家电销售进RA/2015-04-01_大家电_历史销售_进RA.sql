@@ -1,3 +1,49 @@
+--*************************************************************************************************
+--处理商品地点维度缺失(日期范围不对)
+CREATE MATERIALIZED VIEW RADM.JIN_ITEM_LOC_JL_TMP AS
+SELECT S.PROD_IT_NUM ITEM, TO_NUMBER(S.ORG_NUM) LOC, MIN(S.DAY_DT) DAY_DT
+  FROM BBG_RA_SLS_TRX_JL_V@RA_JL S
+ GROUP BY S.PROD_IT_NUM, TO_NUMBER(S.ORG_NUM);
+ 
+--查找销售未落在商品-地点维度中的
+SELECT A.PROD_IT_NUM ITEM, A.ORG_NUM LOC, A.DAY_DT
+  FROM BBG_RA_SLS_TRX_JL_V@RA_JL A
+ WHERE NOT EXISTS
+ (SELECT 1
+          FROM RADM.BBG_RA_ITEM_LOC_D B
+         WHERE A.PROD_IT_NUM = B.ITEM
+           AND A.ORG_NUM = B.LOC
+           AND A.DAY_DT BETWEEN B.EFFECTIVE_FROM_DT AND B.EFFECTIVE_TO_DT);
+--UPDATE RADM.BBG_RA_ITEM_LOC_D				 
+ UPDATE RADM.BBG_RA_ITEM_LOC_D A
+    SET (A.SRC_EFF_FROM_DT, A.EFFECTIVE_FROM_DT) =
+        (SELECT B.DAY_DT, B.DAY_DT
+           FROM RADM.JIN_ITEM_LOC_JL_TMP B
+          WHERE A.ITEM = B.ITEM
+            AND A.LOC = B.LOC)
+  WHERE EXISTS (SELECT 1
+           FROM (SELECT E.ITEM, E.LOC, MIN(E.ROW_WID) ROW_WID
+                   FROM RADM.BBG_RA_ITEM_LOC_D E
+                  GROUP BY E.ITEM, E.LOC) D
+          WHERE A.ITEM = D.ITEM
+            AND A.LOC = D.LOC
+            AND A.ROW_WID = D.ROW_WID);
+--有销售无商品-地点维度
+SELECT /*+PARALLEL(A,20)*/
+DISTINCT A.PROD_IT_NUM ITEM, A.ORG_NUM LOC, A.DAY_DT
+  FROM BBG_RA_SLS_TRX_JL_V@RA_JL A
+ WHERE NOT EXISTS
+ (SELECT /*+PARALLEL(B,20)*/
+         1
+          FROM RADM.BBG_RA_ITEM_LOC_D B
+         WHERE A.PROD_IT_NUM = B.ITEM
+           AND A.ORG_NUM = B.LOC
+           AND A.DAY_DT BETWEEN B.EFFECTIVE_FROM_DT AND B.EFFECTIVE_TO_DT)
+   AND A.DAY_DT IS NOT NULL
+ ORDER BY A.PROD_IT_NUM, A.ORG_NUM;
+--*************************************************************************************************
+
+
 --1.金力销售导入W_RTL_SLS_TRX_IT_LC_DY_FS--------------------------------------------------------
 TRUNCATE TABLE RADM.W_RTL_SLS_TRX_IT_LC_DY_FS;
 TRUNCATE TABLE RABATCHER.W_RTL_SLS_IT_DY_TMP;
