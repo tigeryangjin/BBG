@@ -5,10 +5,20 @@ SELECT *
  ORDER BY TABLE_NAME;
 SELECT * FROM TABLE_CHECK_FACT WHERE RUN_DATE = &RUN_DATE ORDER BY ROW_WID;
 --2.供应商销售核查(RMS-RA)--------------------------------------------------------------------
-SELECT *
+SELECT T.DAY_DT,
+       T.DATASOURCE,
+       T.RMS_SSQ,
+       T.RA_SSQ,
+       T.QTY_DIFF,
+       T.RMS_SSC,
+       T.RA_SSC,
+       T.COST_DIFF,
+       T.RMS_SSA,
+       T.RA_SSA,
+       T.AMT_DIFF
   FROM RADM.JIN_RMS_RA_SUPP_SLS_CHECK T
  WHERE SUBSTR(TO_CHAR(T.DAY_DT, 'YYYYMMDD'), 1, 6) = &MONTH
- ORDER BY T.DAY_DT DESC;
+ ORDER BY T.DAY_DT DESC, T.DATASOURCE;
 --3.每日库存核对(RMS-RA)---------------------------------------------------------------------
 select * from RADM.RMS_RA_INV_CHECK_DIFF t;
 --4.订单差异核查(RMS-RA)---------------------------------------------------------------------
