@@ -1,14 +1,24 @@
---1.维度和实施条目数核对---------------------------------------------------------------------
+--1.维度和事实条目数核对---------------------------------------------------------------------
 SELECT *
   FROM TABLE_CHECK_DIMENSION
  WHERE RUN_DATE = &RUN_DATE
  ORDER BY TABLE_NAME;
 SELECT * FROM TABLE_CHECK_FACT WHERE RUN_DATE = &RUN_DATE ORDER BY ROW_WID;
 --2.供应商销售核查(RMS-RA)--------------------------------------------------------------------
-SELECT *
+SELECT T.DAY_DT,
+       T.DATASOURCE,
+       T.RMS_SSQ,
+       T.RA_SSQ,
+       T.QTY_DIFF,
+       T.RMS_SSC,
+       T.RA_SSC,
+       T.COST_DIFF,
+       T.RMS_SSA,
+       T.RA_SSA,
+       T.AMT_DIFF
   FROM RADM.JIN_RMS_RA_SUPP_SLS_CHECK T
  WHERE SUBSTR(TO_CHAR(T.DAY_DT, 'YYYYMMDD'), 1, 6) = &MONTH
- ORDER BY T.DAY_DT DESC;
+ ORDER BY T.DAY_DT DESC, T.DATASOURCE;
 --3.每日库存核对(RMS-RA)---------------------------------------------------------------------
 select * from RADM.RMS_RA_INV_CHECK_DIFF t;
 --4.订单差异核查(RMS-RA)---------------------------------------------------------------------
@@ -92,7 +102,16 @@ SELECT *
 1 273441 247 2 274461 204 3 347966 4019
 
 --订单差异核查-----------------------------------------------------------------------------------------
-  SELECT * FROM RADM.JIN_RMS_RA_SUPPCM_DIFF T ORDER BY T.ORDER_NO;
+SELECT * FROM RADM.JIN_RMS_RA_SUPPCM_DIFF T ORDER BY T.ORDER_NO;
+
+SELECT *
+  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_F T
+ WHERE T.PURCHASE_ORDER_ID IN ('3351638', '3366011')
+   AND EXISTS (SELECT 1
+          FROM RADM.W_PRODUCT_D P
+         WHERE T.PROD_WID = P.ROW_WID
+           AND P.PROD_NUM = '101655217')
+   FOR UPDATE;
 
 SELECT T.PROD_NUM,T.ROW_WID FROM RADM.W_PRODUCT_D T WHERE T.PROD_NUM IN ('800412810', '800223816');
 SELECT *
@@ -250,5 +269,20 @@ VALUES
    null,
    null,
    null);
+
+--供应商销售差异处理
+SELECT *
+  FROM RADM.BBG_RA_SLS_IT_LC_DY_FS T
+ WHERE NOT EXISTS (SELECT 1
+          FROM RADM.BBG_RA_SUPP_SALES_IT_LC_DY_F S
+         WHERE T.INTEGRATION_ID = S.INTEGRATION_ID);
+--供应商资料在RA中不存在
+SELECT *
+  FROM BBG_RA_SUPP_SLS_JL_V@RA_JL S
+ WHERE S.DAY_DT = TRUNC(SYSDATE - 1)
+   AND NOT EXISTS (SELECT 1
+          FROM RADM.W_PARTY_ORG_D P
+         WHERE S.SUPPLIER_NUM = P.SUPPLIER_NUM);
+
 
 */
