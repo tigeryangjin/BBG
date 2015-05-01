@@ -1,4 +1,18 @@
---1.金力销售导入W_RTL_SLS_TRX_IT_LC_DY_FS--------------------------------------------------------
+--1.修改商品维度的日期----------------------------------------------------------------------------
+UPDATE RABATCHER.W_PRODUCT_D_RTL_TMP T
+   SET T.SRC_EFF_FROM_DT = DATE '2012-01-01'
+ WHERE EXISTS
+ (SELECT O.PROD_IT_NUM, O.SRC_EFF_FROM_DT
+          FROM (SELECT A.PROD_IT_NUM, MIN(A.SRC_EFF_FROM_DT) SRC_EFF_FROM_DT
+                  FROM RABATCHER.W_PRODUCT_D_RTL_TMP A
+                 GROUP BY A.PROD_IT_NUM) O
+         WHERE T.PROD_IT_NUM = O.PROD_IT_NUM
+           AND T.SRC_EFF_FROM_DT = O.SRC_EFF_FROM_DT)
+   AND T.PROD_DV_NUM = 7
+   AND T.PROD_DP_NUM NOT IN (75, 76);
+COMMIT;
+
+--2.金力销售导入W_RTL_SLS_TRX_IT_LC_DY_FS--------------------------------------------------------
 TRUNCATE TABLE RADM.W_RTL_SLS_TRX_IT_LC_DY_FS;
 TRUNCATE TABLE RABATCHER.W_RTL_SLS_IT_DY_TMP;
 TRUNCATE TABLE RABATCHER.W_RTL_SLS_IT_LC_DY_SN_TMP;
@@ -7,6 +21,7 @@ TRUNCATE TABLE RABATCHER.W_RTL_SLS_LC_DY_TMP;
 TRUNCATE TABLE RABATCHER.W_RTL_SLS_SC_LC_DY_CUR_TMP;
 TRUNCATE TABLE RABATCHER.W_RTL_SLS_SC_LC_DY_RC_TMP;
 TRUNCATE TABLE RABATCHER.W_RTL_SLS_SC_LC_DY_TMP;
+TRUNCATE TABLE RADM.C_LOAD_DATES;
 
 INSERT INTO RADM.W_RTL_SLS_TRX_IT_LC_DY_FS
   (SLS_TRX_ID,
@@ -186,26 +201,53 @@ INSERT INTO RADM.W_RTL_SLS_TRX_IT_LC_DY_FS
             FROM BBG_RA_SLS_TRX_JL_V@RA_JL
            WHERE DAY_DT BETWEEN &BDATE AND &EDATE) T;
 
---2.修改商品维度的日期----------------------------------------------------------------------------
-UPDATE RABATCHER.W_PRODUCT_D_RTL_TMP T
-   SET T.SRC_EFF_FROM_DT = DATE '2012-01-01'
- WHERE EXISTS
- (SELECT O.PROD_IT_NUM, O.SRC_EFF_FROM_DT
-          FROM (SELECT A.PROD_IT_NUM, MIN(A.SRC_EFF_FROM_DT) SRC_EFF_FROM_DT
-                  FROM RABATCHER.W_PRODUCT_D_RTL_TMP A
-                 GROUP BY A.PROD_IT_NUM) O
-         WHERE T.PROD_IT_NUM = O.PROD_IT_NUM
-           AND T.SRC_EFF_FROM_DT = O.SRC_EFF_FROM_DT)
-   AND T.PROD_DV_NUM = 7
-   AND T.PROD_DP_NUM NOT IN (75, 76);
-COMMIT;
+--检查日期范围
+SELECT DISTINCT T.DAY_DT FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_FS T ORDER BY T.DAY_DT;
 
 --3.SIL----------------------------------------------------------------------------
+/*
+BBG_SIL_Retail_SalesTransactionFact-->Master_SIL_BBG_Retail_SalesTransactionFact
+*/
+
 
 --4.检查数据----------------------------------------------------------------------------
-SELECT DISTINCT T.DAY_DT FROM RABATCHER.W_RTL_SLS_TRX_IT_LC_DY_TMP T;
+SELECT * FROM RABATCHER.W_RTL_SLS_TRX_IT_LC_DY_TMP;
+--检查行数
+SELECT COUNT(*) FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_FS;
+SELECT /*+PARALLEL(T,20)*/ COUNT(*)
+  FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F T
+ WHERE T.DT_WID BETWEEN &BDTWID AND &EDTWID
+   AND T.BBG_SERVICE_SATISFACTION = 3.5;
+--检查没有插入F的记录
+SELECT *
+  FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_FS T
+ WHERE NOT EXISTS
+ (SELECT /*+PARALLEL(S,20)*/
+         1
+          FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F S
+         WHERE T.INTEGRATION_ID = S.INTEGRATION_ID
+           AND S.DT_WID BETWEEN
+               (SELECT '1' || TO_CHAR(MIN(A.DAY_DT), 'YYYYMMDD') || '000'
+                  FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_FS A) AND
+               (SELECT '1' || TO_CHAR(MAX(B.DAY_DT), 'YYYYMMDD') || '000'
+                  FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_FS B));
+									
+--W_RTL_SLS_TRX_IT_LC_DY_F重复记录
+SELECT /*+PARALLEL(T,20)*/
+ T.INTEGRATION_ID, COUNT(*)
+  FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F T
+ WHERE T.DT_WID BETWEEN &BDTWID AND &EDTWID
+   AND T.BBG_SERVICE_SATISFACTION = 3.5
+ GROUP BY T.INTEGRATION_ID
+HAVING COUNT(*) > 1;
+				 
+--5.如果出现问题,删除	RADM.W_RTL_SLS_TRX_IT_LC_DY_F数据*************************************
+DELETE RADM.W_RTL_SLS_TRX_IT_LC_DY_F T
+ WHERE T.DT_WID BETWEEN &BDTWID AND &EDTWID
+   AND T.BBG_SERVICE_SATISFACTION = 3.5;
+COMMIT;
 
---5.核对数据_汇总----------------------------------------------------------------------------
+--6.核对数据_汇总----------------------------------------------------------------------------
 SELECT J.DAY_DT,
        J.JL_QTY,
        R.RA_QTY,
@@ -333,4 +375,4 @@ SELECT J.DAY_DT,
    AND J.JL_QTY - NVL(R.RA_QTY, 0) > 0;
 
 
---6.PLP----------------------------------------------------------------------------
+--7.PLP----------------------------------------------------------------------------
