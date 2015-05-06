@@ -202,19 +202,21 @@ INSERT INTO RADM.W_RTL_SLS_TRX_IT_LC_DY_FS
            WHERE DAY_DT BETWEEN &BDATE AND &EDATE) T;
 
 --检查日期范围
-SELECT DISTINCT T.DAY_DT FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_FS T ORDER BY T.DAY_DT;
+SELECT DISTINCT T.DAY_DT
+  FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_FS T
+ ORDER BY T.DAY_DT;
 
 --3.SIL----------------------------------------------------------------------------
 /*
 BBG_SIL_Retail_SalesTransactionFact-->Master_SIL_BBG_Retail_SalesTransactionFact
 */
 
-
 --4.检查数据----------------------------------------------------------------------------
 SELECT * FROM RABATCHER.W_RTL_SLS_TRX_IT_LC_DY_TMP;
 --检查行数
 SELECT COUNT(*) FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_FS;
-SELECT /*+PARALLEL(T,20)*/ COUNT(*)
+SELECT /*+PARALLEL(T,20)*/
+ COUNT(*)
   FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F T
  WHERE T.DT_WID BETWEEN &BDTWID AND &EDTWID
    AND T.BBG_SERVICE_SATISFACTION = 3.5;
@@ -231,7 +233,7 @@ SELECT *
                   FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_FS A) AND
                (SELECT '1' || TO_CHAR(MAX(B.DAY_DT), 'YYYYMMDD') || '000'
                   FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_FS B));
-									
+
 --W_RTL_SLS_TRX_IT_LC_DY_F重复记录
 SELECT /*+PARALLEL(T,20)*/
  T.INTEGRATION_ID, COUNT(*)
@@ -240,8 +242,8 @@ SELECT /*+PARALLEL(T,20)*/
    AND T.BBG_SERVICE_SATISFACTION = 3.5
  GROUP BY T.INTEGRATION_ID
 HAVING COUNT(*) > 1;
-				 
---5.如果出现问题,删除	RADM.W_RTL_SLS_TRX_IT_LC_DY_F数据*************************************
+
+--5.如果出现问题,删除 RADM.W_RTL_SLS_TRX_IT_LC_DY_F数据*************************************
 DELETE RADM.W_RTL_SLS_TRX_IT_LC_DY_F T
  WHERE T.DT_WID BETWEEN &BDTWID AND &EDTWID
    AND T.BBG_SERVICE_SATISFACTION = 3.5;
@@ -302,7 +304,8 @@ SELECT J.DAY_DT,
                '1' || TO_CHAR(&EDATE, 'YYYYMMDD') || '000'
            AND T.BBG_SERVICE_SATISFACTION = 3.5
          GROUP BY T.DT_WID) R
- WHERE J.DAY_DT = R.DAY_DT(+);
+ WHERE J.DAY_DT = R.DAY_DT(+)
+ ORDER BY J.DAY_DT;
 
 --核对数据_单品
 SELECT J.DAY_DT,
@@ -372,7 +375,6 @@ SELECT J.DAY_DT,
  WHERE J.DAY_DT = R.DAY_DT(+)
    AND J.PROD_IT_NUM = R.PROD_NUM(+)
    AND J.ORG_NUM = R.ORG_NUM(+)
-   AND J.JL_QTY - NVL(R.RA_QTY, 0) > 0;
-
+   AND ABS(J.JL_NOTAX_AMT - NVL(R.RA_NOTAX_AMT, 0)) > 0;
 
 --7.PLP----------------------------------------------------------------------------
