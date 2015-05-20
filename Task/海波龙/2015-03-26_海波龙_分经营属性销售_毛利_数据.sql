@@ -88,7 +88,7 @@ SELECT 'RET18' AS PKEY,
            AND EXISTS (SELECT 1
                   FROM RADM.BBG_RA_RETAIL_TYPE_D R
                  WHERE A.BBG_RETAIL_TYPE_WID = R.ROW_WID
-                   AND R.RETAIL_TYPE_ID = 21)
+                   AND R.RETAIL_TYPE_ID = (9,21,25))
            AND A.PROD_DH_WID = D.ROW_WID
            and A.MN_WID = 201501
          GROUP BY SUBSTR(A.MN_WID, 1, 4),
@@ -121,7 +121,7 @@ SELECT 'RET18' AS PKEY,
            AND EXISTS (SELECT 1
                   FROM RADM.BBG_RA_RETAIL_TYPE_D R
                  WHERE A.BBG_RETAIL_TYPE_WID = R.ROW_WID
-                   AND R.RETAIL_TYPE_ID = 21)
+                   AND R.RETAIL_TYPE_ID = (9,21,25))
            AND A.PROD_DH_WID = D.ROW_WID
            and A.MN_WID BETWEEN 201501 AND 201502
          GROUP BY B.ORG_NUM, D.LVL6ANC_PRODCAT_ID, D.LVL8ANC_PRODCAT_ID);

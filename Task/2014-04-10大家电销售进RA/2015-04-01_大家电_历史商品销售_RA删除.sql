@@ -389,3 +389,4 @@ when not matched then
      S.BBG_REFERENCE_FO8,
      S.BBG_REFERENCE_FO9,
      S.BBG_REFERENCE_FO10);
+COMMIT;

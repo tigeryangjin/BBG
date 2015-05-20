@@ -617,9 +617,7 @@ insert into bbg_ys_t_businessdata_retek
     FROM (SELECT MAX(SUBSTR(A.MN_WID, 1, 4)) YEAR,
                  MAX(SUBSTR(A.MN_WID, 5, 2)) PERIOD,
                  SUM((NVL(A.SLS_AMT_LCL, 0) - NVL(A.RET_AMT_LCL, 0)) -
-                     (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) -
-                     (NVL(A.SLS_PROFIT_AMT_LCL, 0) -
-                     NVL(A.RET_PROFIT_AMT_LCL, 0))) COST,
+                     (NVL(A.SLS_TAX_AMT_LCL, 0) - NVL(A.RET_TAX_AMT_LCL, 0)) ) COST,
                  B.ORG_NUM,
                  D.PROD_DP_NUM DEPT,
                  D.PROD_DV_NUM DV
