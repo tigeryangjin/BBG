@@ -3381,7 +3381,414 @@ WHEN NOT MATCHED THEN
      S.BBG_REFERENCE_FO10);
 COMMIT;
 --**********************************************************************************
---20.
+--20.RA_INV_IT_LC_DY_CHECK
+--**********************************************************************************
+TRUNCATE TABLE RADM.RA_INV_IT_LC_DY_CHECK;
+
+INSERT INTO RADM.RA_INV_IT_LC_DY_CHECK NOLOGGING
+SELECT /*+ PARALLEL(T,12)*/
+ PROD.PROD_NUM ITEM, ORG.ORG_NUM LOC, T.INV_SOH_QTY, T.INV_SOH_COST_AMT_LCL
+  FROM RADM.W_RTL_INV_IT_LC_DY_FV T, W_PRODUCT_D PROD, W_INT_ORG_D ORG
+ WHERE T.ORG_WID = ORG.ROW_WID
+   AND T.PROD_WID = PROD.ROW_WID
+   AND T.DT_WID = '1' || TO_CHAR(SYSDATE - 1, 'YYYYMMDD') || '000';
+
+CREATE TABLE RADM.RA_INV_IT_LC_DY_CHECK NOLOGGING AS 
+  SELECT  /*+ PARALLEL(T,12)*/  PROD.PROD_NUM          ITEM,
+         ORG.ORG_NUM            LOC,
+         T.INV_SOH_QTY,
+         T.INV_SOH_COST_AMT_LCL
+    FROM RADM.W_RTL_INV_IT_LC_DY_FV T, W_PRODUCT_D PROD, W_INT_ORG_D ORG
+   WHERE T.ORG_WID = ORG.ROW_WID
+     AND T.PROD_WID = PROD.ROW_WID
+     AND T.DT_WID = '1' || TO_CHAR(SYSDATE - 1, 'YYYYMMDD') || '000';
+
+--**********************************************************************************
+--21.RMS_RA_INV_CHECK_DIFF
+--**********************************************************************************
+TRUNCATE TABLE RADM.RMS_RA_INV_CHECK_DIFF;
+
+INSERT INTO RADM.RMS_RA_INV_CHECK_DIFF NOLOGGING
+  SELECT /*+parallel(RMS,12) parallel(RA,12)*/
+   RMS.ITEM,
+   RMS.LOC,
+   RMS.LOC_TYPE,
+   RMS.STOCK_ON_HAND RMS_SOH,
+   RA.INV_SOH_QTY RA_SOH,
+   RMS.STOCK_ON_HAND - RA.INV_SOH_QTY DIFF_SOH,
+   RMS.COST RMS_COST,
+   RA.INV_SOH_COST_AMT_LCL RA_COST,
+   RMS.COST - RA.INV_SOH_COST_AMT_LCL DIFF_COST,
+   SYSDATE W_INSERT_DT
+    FROM (SELECT T.ITEM,
+                 T.LOC,
+                 T.LOC_TYPE,
+                 T.STOCK_ON_HAND,
+                 T.STOCK_ON_HAND * T.AV_COST COST
+            FROM RMSHIST.ITEM_LOC_SOH_HIST@RA_RMS_DBLINK T
+           WHERE T.SOH_BAK_DATE =
+                 TO_DATE(TO_CHAR(SYSDATE - 1, 'YYYYMMDD'), 'YYYYMMDD')) RMS,
+         RADM.RA_INV_IT_LC_DY_CHECK RA
+   WHERE RMS.ITEM = RA.ITEM(+)
+     AND RMS.LOC = RA.LOC(+)
+     AND (RMS.STOCK_ON_HAND <> NVL(RA.INV_SOH_QTY, 0));
+
+CREATE TABLE RADM.RMS_RA_INV_CHECK_DIFF NOLOGGING  AS 
+  SELECT /*+parallel(RMS,12) parallel(RA,12)*/ RMS.ITEM,
+         RMS.LOC,
+   RMS.LOC_TYPE,
+         RMS.STOCK_ON_HAND RMS_SOH,
+         RA.INV_SOH_QTY RA_SOH,
+         RMS.STOCK_ON_HAND - RA.INV_SOH_QTY DIFF_SOH,
+         RMS.COST RMS_COST,
+         RA.INV_SOH_COST_AMT_LCL RA_COST,
+         RMS.COST - RA.INV_SOH_COST_AMT_LCL DIFF_COST,
+   SYSDATE W_INSERT_DT
+    FROM (SELECT T.ITEM,
+                 T.LOC,
+     T.LOC_TYPE,
+                 T.STOCK_ON_HAND,
+                 T.STOCK_ON_HAND * T.AV_COST COST
+            FROM RMSHIST.ITEM_LOC_SOH_HIST@RA_RMS_DBLINK T
+           WHERE T.SOH_BAK_DATE =
+                 TO_DATE(TO_CHAR(SYSDATE - 1, 'YYYYMMDD'), 'YYYYMMDD')
+           ) RMS,
+         RADM.RA_INV_IT_LC_DY_CHECK RA
+   WHERE RMS.ITEM = RA.ITEM(+)
+     AND RMS.LOC = RA.LOC(+)
+     AND (RMS.STOCK_ON_HAND <> NVL(RA.INV_SOH_QTY,0));
+--**********************************************************************************
+--22.W_RTL_SUPPCM_IT_LC_DY_MV
+--**********************************************************************************
+CREATE TABLE RADM.W_RTL_SUPPCM_IT_LC_DY_MV  NOLOGGING  AS 
+  SELECT  /*+ PARALLEL(W_RTL_SUPPCM_IT_LC_DY_FV,12)*/  * FROM W_RTL_SUPPCM_IT_LC_DY_FV;
+	
+TRUNCATE TABLE RADM.W_RTL_SUPPCM_IT_LC_DY_MV;
+
+INSERT INTO RADM.W_RTL_SUPPCM_IT_LC_DY_MV NOLOGGING
+SELECT  /*+ PARALLEL(W_RTL_SUPPCM_IT_LC_DY_FV,12)*/  * FROM W_RTL_SUPPCM_IT_LC_DY_FV;
+
+--**********************************************************************************
+--23.W_RTL_SUPPCM_IT_LC_AD_MV
+--**********************************************************************************
+CREATE TABLE RADM.W_RTL_SUPPCM_IT_LC_AD_MV NOLOGGING  AS 
+SELECT  /*+ PARALLEL(W_RTL_INV_IT_LC_DY_FV,12)*/ * 
+FROM RADM.W_RTL_SUPPCM_IT_LC_AD_FV;
+
+TRUNCATE TABLE RADM.W_RTL_SUPPCM_IT_LC_AD_MV;
+
+INSERT INTO RADM.W_RTL_SUPPCM_IT_LC_AD_MV NOLOGGING
+SELECT /*+ PARALLEL(W_RTL_INV_IT_LC_DY_FV,12)*/
+ *
+  FROM RADM.W_RTL_SUPPCM_IT_LC_AD_FV;
+
+--**********************************************************************************
+--24.W_RTL_SUPPCM_IT_LC_ED_MV
+--**********************************************************************************
+CREATE TABLE RADM.W_RTL_SUPPCM_IT_LC_ED_MV NOLOGGING  AS 
+SELECT /*+ PARALLEL(W_RTL_SUPPCM_IT_LC_ED_FV,12)*/  * 
+FROM RADM.W_RTL_SUPPCM_IT_LC_ED_FV;
+
+TRUNCATE TABLE RADM.W_RTL_SUPPCM_IT_LC_ED_MV;
+
+INSERT INTO RADM.W_RTL_SUPPCM_IT_LC_ED_MV NOLOGGING
+SELECT /*+ PARALLEL(W_RTL_SUPPCM_IT_LC_ED_FV,12)*/  * 
+FROM RADM.W_RTL_SUPPCM_IT_LC_ED_FV;
+
+
+--**********************************************************************************
+--25.W_RTL_SUPPCM_IT_LC_TD_MV
+--**********************************************************************************
+CREATE TABLE RADM.W_RTL_SUPPCM_IT_LC_TD_MV NOLOGGING  AS 
+SELECT /*+ PARALLEL(W_RTL_SUPPCM_IT_LC_TD_FV,12)*/  * 
+FROM RADM.W_RTL_SUPPCM_IT_LC_TD_FV;
+
+TRUNCATE TABLE RADM.W_RTL_SUPPCM_IT_LC_TD_MV;
+
+INSERT INTO RADM.W_RTL_SUPPCM_IT_LC_TD_MV NOLOGGING
+SELECT /*+ PARALLEL(W_RTL_SUPPCM_IT_LC_TD_FV,12)*/  * 
+FROM RADM.W_RTL_SUPPCM_IT_LC_TD_FV;
+--**********************************************************************************
+--26.JIN_RMS_SUPPCM_TMP
+--**********************************************************************************
+CREATE TABLE RADM.JIN_RMS_SUPPCM_TMP NOLOGGING AS
+SELECT /*+PARALLEL(T,12) PARALLEL(K,12) PARALLEL(N,12)*/
+ T.ORDER_NO,
+ T.ITEM,
+ NVL(T.QTY_ORDERED, 0) + NVL(T.QTY_CANCELLED, 0) ORDERED_QTY,
+ (NVL(T.QTY_ORDERED, 0) + NVL(T.QTY_CANCELLED, 0)) * T.UNIT_COST ORDERED_AMT,
+ SUM(NVL(K.QTY_RECEIVED, 0)) RECEIVED_QTY,
+ SUM(NVL(K.UNIT_COST, 0) * NVL(K.QTY_RECEIVED, 0)) RECEIVED_AMT
+  FROM RMS.ORDLOC@RA_RMS_DBLINK   T,
+       RMS.SHIPSKU@RA_RMS_DBLINK  K,
+       RMS.SHIPMENT@RA_RMS_DBLINK N
+ WHERE K.SHIPMENT = N.SHIPMENT
+   AND N.ORDER_NO = T.ORDER_NO
+   AND K.ITEM = T.ITEM
+   AND N.RECEIVE_DATE <
+       TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'), 'YYYY-MM-DD')
+   AND EXISTS (SELECT 1
+          FROM RMS.CMX_ORDHEAD@RA_RMS_DBLINK F
+         WHERE T.ORDER_NO = F.ORDER_NO)
+ GROUP BY T.ORDER_NO, T.ITEM, T.QTY_ORDERED, T.QTY_CANCELLED, T.UNIT_COST;
+
+TRUNCATE TABLE RADM.JIN_RMS_SUPPCM_TMP;
+
+INSERT INTO RADM.JIN_RMS_SUPPCM_TMP NOLOGGING
+SELECT /*+PARALLEL(T,12) PARALLEL(K,12) PARALLEL(N,12)*/
+ T.ORDER_NO,
+ T.ITEM,
+ NVL(T.QTY_ORDERED, 0) + NVL(T.QTY_CANCELLED, 0) ORDERED_QTY,
+ (NVL(T.QTY_ORDERED, 0) + NVL(T.QTY_CANCELLED, 0)) * T.UNIT_COST ORDERED_AMT,
+ SUM(NVL(K.QTY_RECEIVED, 0)) RECEIVED_QTY,
+ SUM(NVL(K.UNIT_COST, 0) * NVL(K.QTY_RECEIVED, 0)) RECEIVED_AMT
+  FROM RMS.ORDLOC@RA_RMS_DBLINK   T,
+       RMS.SHIPSKU@RA_RMS_DBLINK  K,
+       RMS.SHIPMENT@RA_RMS_DBLINK N
+ WHERE K.SHIPMENT = N.SHIPMENT
+   AND N.ORDER_NO = T.ORDER_NO
+   AND K.ITEM = T.ITEM
+   AND N.RECEIVE_DATE <
+       TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'), 'YYYY-MM-DD')
+   AND EXISTS (SELECT 1
+          FROM RMS.CMX_ORDHEAD@RA_RMS_DBLINK F
+         WHERE T.ORDER_NO = F.ORDER_NO)
+ GROUP BY T.ORDER_NO, T.ITEM, T.QTY_ORDERED, T.QTY_CANCELLED, T.UNIT_COST;
+--**********************************************************************************
+--27.JIN_RA_SUPPCM_TMP
+--**********************************************************************************
+CREATE TABLE RADM.JIN_RA_SUPPCM_TMP NOLOGGING AS
+SELECT /*+PARALLEL(CM,12) PARALLEL(P,12)*/
+ CM.PURCHASE_ORDER_ID ORDER_NO,
+ P.PROD_NUM ITEM,
+ NVL(CM.ORDERED_QTY, 0) ORDERED_QTY,
+ NVL(CM.RECEIVED_QTY, 0) RECEIVED_QTY,
+ NVL(CM.BBG_REFERENCE_FO1, 0) ORDERED_AMT,
+ NVL(CM.BBG_REFERENCE_FO2, 0) RECEIVED_AMT
+  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_MV CM, W_PRODUCT_D P
+ WHERE CM.PROD_WID = P.ROW_WID;
+
+TRUNCATE TABLE RADM.JIN_RA_SUPPCM_TMP;
+
+INSERT INTO RADM.JIN_RA_SUPPCM_TMP NOLOGGING
+SELECT /*+PARALLEL(CM,12) PARALLEL(P,12)*/
+ CM.PURCHASE_ORDER_ID ORDER_NO,
+ P.PROD_NUM ITEM,
+ NVL(CM.ORDERED_QTY, 0) ORDERED_QTY,
+ NVL(CM.RECEIVED_QTY, 0) RECEIVED_QTY,
+ NVL(CM.BBG_REFERENCE_FO1, 0) ORDERED_AMT,
+ NVL(CM.BBG_REFERENCE_FO2, 0) RECEIVED_AMT
+  FROM RADM.W_RTL_SUPPCM_IT_LC_DY_MV CM, W_PRODUCT_D P
+ WHERE CM.PROD_WID = P.ROW_WID;
+--**********************************************************************************
+--28.JIN_RMS_RA_SUPPCM_DIFF
+--**********************************************************************************
+CREATE TABLE RADM.JIN_RMS_RA_SUPPCM_DIFF  NOLOGGING  AS 
+SELECT /*+PARALLEL(RMS,12) PARALLEL(RA,12)*/ RMS.ORDER_NO,
+       RMS.ITEM,
+       RMS.ORDERED_QTY RMS_ORD_QTY,
+       NVL(RA.ORDERED_QTY, 0) RA_ORD_QTY,
+       RMS.ORDERED_QTY-NVL(RA.ORDERED_QTY, 0) ORD_QTY_DIFF,
+       RMS.RECEIVED_QTY RMS_REC_QTY,
+       NVL(RA.RECEIVED_QTY, 0) RA_REC_QTY,
+       RMS.RECEIVED_QTY-NVL(RA.RECEIVED_QTY, 0) REC_QTY_DIFF,
+       RMS.ORDERED_AMT RMS_ORD_AMT,
+       NVL(RA.ORDERED_AMT, 0) RA_ORD_AMT,
+       RMS.ORDERED_AMT-NVL(RA.ORDERED_AMT, 0) ORD_AMT_DIFF,
+       RMS.RECEIVED_AMT RMS_REC_AMT,
+       NVL(RA.RECEIVED_AMT, 0) RA_REC_AMT,
+       RMS.RECEIVED_AMT-NVL(RA.RECEIVED_AMT, 0) REC_AMT_DIFF,
+       SYSDATE W_INSERT_DT
+  FROM RADM.JIN_RMS_SUPPCM_TMP RMS,
+       RADM.JIN_RA_SUPPCM_TMP RA
+ WHERE RMS.ORDER_NO = RA.ORDER_NO(+)
+   AND RMS.ITEM = RA.ITEM(+)
+   AND (NVL(RMS.ORDERED_QTY, 0) <> NVL(RA.ORDERED_QTY, 0) OR
+       NVL(RMS.RECEIVED_QTY, 0) <> NVL(RA.RECEIVED_QTY, 0) OR
+       (NVL(RMS.ORDERED_AMT, 0) - NVL(RA.ORDERED_AMT, 0)) > 0.01 OR
+       (NVL(RMS.RECEIVED_AMT, 0) - NVL(RA.RECEIVED_AMT, 0)) > 0.01);
+			 
+TRUNCATE TABLE RADM.JIN_RMS_RA_SUPPCM_DIFF;
+
+INSERT INTO RADM.JIN_RMS_RA_SUPPCM_DIFF NOLOGGING
+SELECT /*+PARALLEL(RMS,12) PARALLEL(RA,12)*/ RMS.ORDER_NO,
+       RMS.ITEM,
+       RMS.ORDERED_QTY RMS_ORD_QTY,
+       NVL(RA.ORDERED_QTY, 0) RA_ORD_QTY,
+       RMS.ORDERED_QTY-NVL(RA.ORDERED_QTY, 0) ORD_QTY_DIFF,
+       RMS.RECEIVED_QTY RMS_REC_QTY,
+       NVL(RA.RECEIVED_QTY, 0) RA_REC_QTY,
+       RMS.RECEIVED_QTY-NVL(RA.RECEIVED_QTY, 0) REC_QTY_DIFF,
+       RMS.ORDERED_AMT RMS_ORD_AMT,
+       NVL(RA.ORDERED_AMT, 0) RA_ORD_AMT,
+       RMS.ORDERED_AMT-NVL(RA.ORDERED_AMT, 0) ORD_AMT_DIFF,
+       RMS.RECEIVED_AMT RMS_REC_AMT,
+       NVL(RA.RECEIVED_AMT, 0) RA_REC_AMT,
+       RMS.RECEIVED_AMT-NVL(RA.RECEIVED_AMT, 0) REC_AMT_DIFF,
+       SYSDATE W_INSERT_DT
+  FROM RADM.JIN_RMS_SUPPCM_TMP RMS,
+       RADM.JIN_RA_SUPPCM_TMP RA
+ WHERE RMS.ORDER_NO = RA.ORDER_NO(+)
+   AND RMS.ITEM = RA.ITEM(+)
+   AND (NVL(RMS.ORDERED_QTY, 0) <> NVL(RA.ORDERED_QTY, 0) OR
+       NVL(RMS.RECEIVED_QTY, 0) <> NVL(RA.RECEIVED_QTY, 0) OR
+       (NVL(RMS.ORDERED_AMT, 0) - NVL(RA.ORDERED_AMT, 0)) > 0.01 OR
+       (NVL(RMS.RECEIVED_AMT, 0) - NVL(RA.RECEIVED_AMT, 0)) > 0.01);
+
+--**********************************************************************************
+--29.JIN_RA_RMS_INVADJ_CHECK
+--**********************************************************************************
+CREATE TABLE RADM.JIN_RA_RMS_INVADJ_CHECK NOLOGGING  AS 
+SELECT /*+PARALLEL(RA,12) PARALLEL(RMS,12)*/ *
+  FROM (SELECT /*+PARALLEL(T,12) PARALLEL(P,12) PARALLEL(O,12) PARALLEL(R,12)*/ TO_DATE(SUBSTR(T.DT_WID, 2, 8), 'YYYYMMDD') RA_DATE,
+               P.PROD_IT_NUM RA_ITEM,
+               O.ORG_NUM RA_LOC,
+               R.REASON RA_REASON,
+               SUM(T.ADJ_QTY) RA_ADJ_QTY,
+               SUM(T.ADJ_COST) RA_ADJ_COST
+          FROM RADM.BBG_RA_INVADJ_IT_LC_DY_F  T,
+               RABATCHER.W_PRODUCT_D_RTL_TMP  P,
+               RABATCHER.W_INT_ORG_D_RTL_TMP  O,
+               RADM.BBG_RA_AJUSTMENT_REASON_D R
+         WHERE T.PROD_WID = P.PROD_IT_WID
+           AND T.ORG_WID = O.ORG_WID
+           AND T.ADJUSTMENT_REASON_WID = R.ROW_WID
+         GROUP BY TO_DATE(SUBSTR(T.DT_WID, 2, 8), 'YYYYMMDD'),
+                  P.PROD_IT_NUM,
+                  O.ORG_NUM,
+                  R.REASON) RA,
+       (SELECT /*+PARALLEL(TH,20)*/ TH.TRAN_DATE RMS_DATE,
+               TH.ITEM RMS_ITEM,
+               TH.LOCATION RMS_LOC,
+               TH.GL_REF_NO RMS_REASON,
+               SUM(TH.UNITS) RMS_ADJ_QTY,
+               SUM(TH.TOTAL_COST) RMS_ADJ_COST
+          FROM RMS.TRAN_DATA_HISTORY@RA_RMS_DBLINK TH
+         WHERE TH.TRAN_CODE = 22
+           AND TH.GL_REF_NO IS NOT NULL
+         GROUP BY TH.TRAN_DATE, TH.ITEM, TH.LOCATION, TH.GL_REF_NO) RMS
+ WHERE RMS.RMS_DATE = RA.RA_DATE(+)
+   AND RMS.RMS_ITEM = RA.RA_ITEM(+)
+   AND RMS.RMS_LOC = RA.RA_LOC(+)
+   AND RMS.RMS_REASON = RA.RA_REASON(+)
+   AND (RMS.RMS_ADJ_QTY <> RA.RA_ADJ_QTY OR
+       RMS.RMS_ADJ_COST <> RA.RA_ADJ_COST);
+			 
+TRUNCATE TABLE RADM.JIN_RA_RMS_INVADJ_CHECK;
+
+INSERT INTO RADM.JIN_RA_RMS_INVADJ_CHECK NOLOGGING
+SELECT /*+PARALLEL(RA,12) PARALLEL(RMS,12)*/
+ *
+  FROM (SELECT /*+PARALLEL(T,12) PARALLEL(P,12) PARALLEL(O,12) PARALLEL(R,12)*/
+         TO_DATE(SUBSTR(T.DT_WID, 2, 8), 'YYYYMMDD') RA_DATE,
+         P.PROD_IT_NUM RA_ITEM,
+         O.ORG_NUM RA_LOC,
+         R.REASON RA_REASON,
+         SUM(T.ADJ_QTY) RA_ADJ_QTY,
+         SUM(T.ADJ_COST) RA_ADJ_COST
+          FROM RADM.BBG_RA_INVADJ_IT_LC_DY_F  T,
+               RABATCHER.W_PRODUCT_D_RTL_TMP  P,
+               RABATCHER.W_INT_ORG_D_RTL_TMP  O,
+               RADM.BBG_RA_AJUSTMENT_REASON_D R
+         WHERE T.PROD_WID = P.PROD_IT_WID
+           AND T.ORG_WID = O.ORG_WID
+           AND T.ADJUSTMENT_REASON_WID = R.ROW_WID
+         GROUP BY TO_DATE(SUBSTR(T.DT_WID, 2, 8), 'YYYYMMDD'),
+                  P.PROD_IT_NUM,
+                  O.ORG_NUM,
+                  R.REASON) RA,
+       (SELECT /*+PARALLEL(TH,20)*/
+         TH.TRAN_DATE RMS_DATE,
+         TH.ITEM RMS_ITEM,
+         TH.LOCATION RMS_LOC,
+         TH.GL_REF_NO RMS_REASON,
+         SUM(TH.UNITS) RMS_ADJ_QTY,
+         SUM(TH.TOTAL_COST) RMS_ADJ_COST
+          FROM RMS.TRAN_DATA_HISTORY@RA_RMS_DBLINK TH
+         WHERE TH.TRAN_CODE = 22
+           AND TH.GL_REF_NO IS NOT NULL
+         GROUP BY TH.TRAN_DATE, TH.ITEM, TH.LOCATION, TH.GL_REF_NO) RMS
+ WHERE RMS.RMS_DATE = RA.RA_DATE(+)
+   AND RMS.RMS_ITEM = RA.RA_ITEM(+)
+   AND RMS.RMS_LOC = RA.RA_LOC(+)
+   AND RMS.RMS_REASON = RA.RA_REASON(+)
+   AND (RMS.RMS_ADJ_QTY <> RA.RA_ADJ_QTY OR
+       RMS.RMS_ADJ_COST <> RA.RA_ADJ_COST);
+
+--**********************************************************************************
+--30.
+--**********************************************************************************
+/*MERGE \*+APPEND*\ INTO  T
+USING()S
+ON()
+WHEN MATCHED THEN
+  UPDATE SET
+  WHEN NOT MATCHED THEN
+INSERT()
+VALUES();*/
+
+--**********************************************************************************
+--31.
+--**********************************************************************************
+/*MERGE \*+APPEND*\ INTO  T
+USING()S
+ON()
+WHEN MATCHED THEN
+  UPDATE SET
+  WHEN NOT MATCHED THEN
+INSERT()
+VALUES();*/
+
+--**********************************************************************************
+--32.
+--**********************************************************************************
+/*MERGE \*+APPEND*\ INTO  T
+USING()S
+ON()
+WHEN MATCHED THEN
+  UPDATE SET
+  WHEN NOT MATCHED THEN
+INSERT()
+VALUES();*/
+
+--**********************************************************************************
+--33.
+--**********************************************************************************
+/*MERGE \*+APPEND*\ INTO  T
+USING()S
+ON()
+WHEN MATCHED THEN
+  UPDATE SET
+  WHEN NOT MATCHED THEN
+INSERT()
+VALUES();*/
+
+--**********************************************************************************
+--34.
+--**********************************************************************************
+/*MERGE \*+APPEND*\ INTO  T
+USING()S
+ON()
+WHEN MATCHED THEN
+  UPDATE SET
+  WHEN NOT MATCHED THEN
+INSERT()
+VALUES();*/
+
+--**********************************************************************************
+--35.
+--**********************************************************************************
+/*MERGE \*+APPEND*\ INTO  T
+USING()S
+ON()
+WHEN MATCHED THEN
+  UPDATE SET
+  WHEN NOT MATCHED THEN
+INSERT()
+VALUES();*/
+
+--**********************************************************************************
+--36.
 --**********************************************************************************
 /*MERGE \*+APPEND*\ INTO  T
 USING()S
