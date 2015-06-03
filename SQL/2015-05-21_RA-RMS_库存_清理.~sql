@@ -1,5 +1,5 @@
 --***********************************************************************************
---RA-供应商库存清理
+--1.RA-供应商库存清理
 --***********************************************************************************
 --RMS
 SELECT *
@@ -187,10 +187,10 @@ SELECT A.ITEM,
        B.SUPP_INV_QTY  RA_SOH,
        B.SUPP_INV_COST RA_COST
   FROM RADM.JIN_SUPP_INV_TMP A, RADM.BBG_RA_SUPP_INV_IT_LC_G B
- WHERE A.ITEM = B.PROD_IT_NUM(+)
-   AND A.LOC = B.ORG_NUM(+)
-   AND A.SUPPLIER = B.SUPPLIER_NUM(+)
-   AND A.SOH <> B.SUPP_INV_QTY;
+ WHERE A.ITEM = B.PROD_IT_NUM
+   AND A.LOC = B.ORG_NUM
+   AND A.SUPPLIER = B.SUPPLIER_NUM
+   AND NVL(A.SOH, 0) <> NVL(B.SUPP_INV_QTY, 0);
 --FIX BBG_RA_SUPP_INV_IT_LC_G
 UPDATE RADM.BBG_RA_SUPP_INV_IT_LC_G A
    SET (A.SUPP_INV_QTY, A.SUPP_INV_COST) =
@@ -236,8 +236,28 @@ UPDATE RADM.BBG_RA_SUPP_INV_IT_LC_DY_F A
            AND A.SUPPLIER_WID = S.ROW_WID
            AND B.SOH <> A.SUPP_INV_QTY);
 
+--BBG_RA_SUPP_INV_IT_LC_G重复处理
+SELECT T.ORG_NUM, T.PROD_IT_NUM, T.SUPPLIER_NUM, COUNT(*)
+  FROM RADM.BBG_RA_SUPP_INV_IT_LC_G T
+ GROUP BY T.ORG_NUM, T.PROD_IT_NUM, T.SUPPLIER_NUM
+HAVING COUNT(*) > 1;
+--UPDATE BBG_RA_SUPP_INV_IT_LC_DY_F
+
+--DELETE BBG_RA_SUPP_INV_IT_LC_G
+DELETE RADM.BBG_RA_SUPP_INV_IT_LC_G A
+ WHERE EXISTS
+ (SELECT 1
+          FROM (SELECT C.ROW_WID
+                  FROM (SELECT D.ORG_NUM,
+                               D.PROD_IT_NUM,
+                               D.SUPPLIER_NUM,
+                               MIN(D.ROW_WID) ROW_WID
+                          FROM RADM.BBG_RA_SUPP_INV_IT_LC_G D
+                         GROUP BY D.ORG_NUM, D.PROD_IT_NUM, D.SUPPLIER_NUM) C) B
+         WHERE A.ROW_WID = B.ROW_WID);
+
 --***********************************************************************************
---RA-商品库存清理
+--2.RA-商品库存清理
 --***********************************************************************************
 --ITEM_LOC_SOH_HIST
 --RADM.W_RTL_INV_IT_LC_DY_F
@@ -257,7 +277,8 @@ SELECT *
 --2,RA有,RMS无
 SELECT *
   FROM RADM.W_RTL_INV_IT_LC_G A
- WHERE NOT EXISTS (SELECT 1
+ WHERE A.INV_SOH_QTY <> 0
+   AND NOT EXISTS (SELECT 1
           FROM ITEM_LOC_SOH_HIST@RA_RMS_DBLINK B
          WHERE B.SOH_BAK_DATE = TRUNC(SYSDATE - 1)
            AND B.ITEM = A.PROD_IT_NUM
@@ -296,8 +317,8 @@ UPDATE RADM.W_RTL_INV_IT_LC_DY_F A
    AND A.INV_SOH_QTY <> 0
    AND NOT EXISTS (SELECT 1
           FROM RADM.ITEM_LOC_SOH_HIST_BAK B,
-               RADM.W_PRODUCT_D                P,
-               RADM.W_INT_ORG_D                O
+               RADM.W_PRODUCT_D           P,
+               RADM.W_INT_ORG_D           O
          WHERE B.SOH_BAK_DATE = TRUNC(SYSDATE - 1)
            AND B.ITEM = P.PROD_NUM
            AND B.LOC = O.ORG_NUM
@@ -305,20 +326,92 @@ UPDATE RADM.W_RTL_INV_IT_LC_DY_F A
            AND A.ORG_WID = O.ROW_WID);
 
 --3,RMS,RA都有
-SELECT B.ITEM,
-       B.LOC,
-       B.STOCK_ON_HAND RMS_SOH,
-       B.STOCK_ON_HAND * B.AV_COST RMS_COST,
-       A.INV_SOH_QTY RA_SOH,
-       A.INV_AVG_COST_AMT_LCL RA_COST
-  FROM RADM.W_RTL_INV_IT_LC_G A, ITEM_LOC_SOH_HIST@RA_RMS_DBLINK B
- WHERE B.SOH_BAK_DATE = TRUNC(SYSDATE - 1)
-   AND B.ITEM = A.PROD_IT_NUM
-   AND B.LOC = A.ORG_NUM
-   AND NVL(B.STOCK_ON_HAND, 0) <> NVL(A.INV_SOH_QTY, 0);
+DROP TABLE RADM.JIN_INV_20150528_TMP;
+CREATE TABLE RADM.JIN_INV_20150528_TMP AS
+  SELECT B.ITEM,
+         B.LOC,
+         B.STOCK_ON_HAND RMS_SOH,
+         B.STOCK_ON_HAND * B.AV_COST RMS_COST,
+         A.INV_SOH_QTY RA_SOH,
+         A.INV_AVG_COST_AMT_LCL RA_COST
+    FROM RADM.W_RTL_INV_IT_LC_G A, ITEM_LOC_SOH_HIST@RA_RMS_DBLINK B
+   WHERE B.SOH_BAK_DATE = TRUNC(SYSDATE - 1)
+     AND B.ITEM = A.PROD_IT_NUM
+     AND B.LOC = A.ORG_NUM
+     AND NVL(B.STOCK_ON_HAND, 0) <> NVL(A.INV_SOH_QTY, 0);
+
+CREATE UNIQUE INDEX PK_JIN_INV_20150528_TMP ON JIN_INV_20150528_TMP(ITEM,
+                                                                    LOC);
 
 --FIX W_RTL_INV_IT_LC_G
+--删除W_RTL_INV_IT_LC_G中,同一item_loc的早一条记录
+DELETE RADM.W_RTL_INV_IT_LC_G D
+ WHERE EXISTS
+ (SELECT 1
+          FROM (SELECT A.PROD_IT_NUM, A.ORG_NUM, MIN(A.ROW_WID) ROW_WID
+                  FROM RADM.W_RTL_INV_IT_LC_G A
+                 WHERE EXISTS (SELECT 1
+                          FROM (SELECT C.PROD_IT_NUM, C.ORG_NUM
+                                  FROM RADM.W_RTL_INV_IT_LC_G C
+                                 GROUP BY C.PROD_IT_NUM, C.ORG_NUM
+                                HAVING COUNT(*) > 1) B
+                         WHERE A.PROD_IT_NUM = B.PROD_IT_NUM
+                           AND A.ORG_NUM = B.ORG_NUM)
+                 GROUP BY A.PROD_IT_NUM, A.ORG_NUM) E
+         WHERE D.ROW_WID = E.ROW_WID);
+
+UPDATE RADM.W_RTL_INV_IT_LC_G A
+   SET A.INV_SOH_QTY          = 0,
+       A.INV_SOH_RTL_AMT_LCL  = 0,
+       A.INV_SOH_COST_AMT_LCL = 0
+ WHERE A.INV_SOH_QTY <> 0
+   AND EXISTS (SELECT 1
+          FROM RADM.JIN_INV_20150528_TMP C
+         WHERE A.PROD_IT_NUM = C.ITEM
+           AND A.ORG_NUM = C.LOC);
 
 --FIX W_RTL_INV_IT_LC_DY_F
+UPDATE RADM.W_RTL_INV_IT_LC_DY_F A
+   SET A.INV_SOH_QTY          = 0,
+       A.INV_SOH_RTL_AMT_LCL  = 0,
+       A.INV_SOH_COST_AMT_LCL = 0
+ WHERE A.TO_DT_WID = 999999999999999
+   AND A.INV_SOH_QTY <> 0
+   AND EXISTS (SELECT 1
+          FROM RADM.JIN_INV_20150528_TMP B,
+               RADM.W_PRODUCT_D          P,
+               RADM.W_INT_ORG_D          O
+         WHERE B.ITEM = P.PROD_NUM
+           AND B.LOC = O.ORG_NUM
+           AND A.PROD_WID = P.ROW_WID
+           AND A.ORG_WID = O.ROW_WID);
 
-SELECT * FROM ITEM_LOC_SOH_HIST@RA_RMS_DBLINK;
+--***********************************************************************************
+--3.商品库存-供应商库存核对
+--***********************************************************************************
+--ITEM INV
+SELECT SUM(T.STOCK_ON_HAND) STOCK_ON_HAND,
+       SUM(T.STOCK_ON_HAND * T.AV_COST) AV_COST,
+       SUM(T.STOCK_ON_HAND * T.UNIT_COST) UNIT_COST
+  FROM ITEM_LOC_SOH_HIST@RA_RMS_DBLINK T
+ WHERE T.SOH_BAK_DATE = TRUNC(SYSDATE - 1);
+
+SELECT SUM(T.INV_SOH_QTY) INV_SOH_QTY,
+       SUM(T.INV_SOH_COST_AMT_LCL) INV_SOH_COST_AMT_LCL
+  FROM RADM.W_RTL_INV_IT_LC_G T;
+
+SELECT SUM(T.INV_SOH_QTY) INV_SOH_QTY,
+       SUM(T.INV_SOH_COST_AMT_LCL) INV_SOH_COST_AMT_LCL
+  FROM RADM.W_RTL_INV_IT_LC_DY_F T
+ WHERE T.TO_DT_WID = 999999999999999;
+
+--SUPP INV
+SELECT SUM(T.SOH) SOH, SUM(T.TOTAL_COST) TOTAL_COST
+  FROM CMX_SUPP_INV@RA_RMS_DBLINK T;
+
+SELECT SUM(T.SUPP_INV_QTY) SUPP_INV_QTY, SUM(T.SUPP_INV_COST) SUPP_INV_COST
+  FROM RADM.BBG_RA_SUPP_INV_IT_LC_G T;
+
+SELECT SUM(T.SUPP_INV_QTY) SUPP_INV_QTY, SUM(T.SUPP_INV_COST) SUPP_INV_COST
+  FROM RADM.BBG_RA_SUPP_INV_IT_LC_DY_F T
+ WHERE T.TO_DT_WID = 999999999999999;
