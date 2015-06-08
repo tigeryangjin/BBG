@@ -45,8 +45,11 @@ SELECT *
                  WHERE S.DEPT LIKE '7%'
                  ORDER BY S.SUBCLASS) RMS
          WHERE RMS.SBC = JL.SBC);
---7.				 
+--7.返厂数据核对(RMS-RA)
+SELECT * FROM RADM.JIN_RMS_RA_RTV_CHECK;
+--8.				 
 SELECT * FROM RADM.W_PARTY_ORG_D T WHERE T.SUPPLIER_NUM='780001';
+
 
 --****************************************************************************************
 --****************************************************************************************
