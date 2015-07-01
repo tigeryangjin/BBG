@@ -42,11 +42,18 @@ SELECT *
                             2,
                             '0') RUN_TIME,
                        (ah_timestamp2 + NUMTODSINTERVAL(8, 'hour')) start_time,
-                       (ah_timestamp4 + NUMTODSINTERVAL(8, 'hour')) end_time
+                       (ah_timestamp4 + NUMTODSINTERVAL(8, 'hour')) end_time,
+                       case
+                         when AH_STATUS = 1900 then
+                          'ENDED_OK-ended normally'
+                         when AH_STATUS = 1800 then
+                          'ENDED_NOT_OK-aborted'
+                       end STATUS
                   FROM ah@rms_uc4
                  WHERE ah_client = 80
                    AND AH_STATUS IN (1800, 1900)
-                   AND TRUNC(ah_timestamp2 + NUMTODSINTERVAL(8, 'hour')) = TRUNC(SYSDATE) 
+                   AND TRUNC(ah_timestamp2 + NUMTODSINTERVAL(8, 'hour')) =
+                       TRUNC(SYSDATE)
                    AND ah_name IN ('PF.ORACLE_ANALYTICS_TOP_LEVEL',
                                    'PF.SDE_DIMENSION_LOAD',
                                    'CMX_RA_DIMENSION_CHECK.KSH',
@@ -64,4 +71,4 @@ SELECT *
                                    'BBG.CMX.RA.F27_RETAIL_CUST',
                                    'BBG_ETL_MONTH_DATA.KSH',
                                    'BATCH_RESA2DW_BACKUP.KSH')) A)
- ORDER BY 1;
+ ORDER BY 1,5;
