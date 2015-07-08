@@ -7,17 +7,51 @@ SELECT T.owner,
        T.inmemory_compression,
        T.inmemory_duplicate
   FROM ALL_ALL_TABLES T
- WHERE T.inmemory = 'ENABLED'
-   AND T.table_name LIKE '%MN%'
+ WHERE /*T.inmemory = 'ENABLED'
+   AND*/
+ T.table_name IN ('BBG_RA_SLS_SC_LC_DY_A',
+                  'W_RTL_SLS_CL_LC_DY_A',
+                  'W_RTL_SLS_CL_LC_DY_CUR_A',
+                  'W_RTL_SLS_DP_LC_DY_A',
+                  'W_RTL_SLS_DP_LC_DY_CUR_A',
+                  'W_RTL_SLS_LC_DY_A',
+                  'W_RTL_SLS_SC_DY_A',
+                  'W_RTL_SLS_SC_DY_CUR_A',
+                  'W_RTL_SLS_SC_LC_DY_A',
+                  'W_RTL_SLS_SC_LC_DY_CUR_A')
  ORDER BY T.inmemory, T.owner, T.table_name;
 
+execute immediate 'ALTER TABLE RADM.W_RTL_SLS_SC_LC_DY_CUR_A NO INMEMORY';
 --2.NO INMEMORY
 SELECT 'ALTER TABLE ' || T.owner || '.' || T.table_name || ' NO INMEMORY;'
   FROM ALL_ALL_TABLES T
- WHERE T.inmemory = 'ENABLED';
+ WHERE T.inmemory = 'ENABLED'
+   AND T.table_name IN ('BBG_RA_SLS_SC_LC_DY_A',
+                        'W_RTL_SLS_CL_LC_DY_A',
+                        'W_RTL_SLS_CL_LC_DY_CUR_A',
+                        'W_RTL_SLS_DP_LC_DY_A',
+                        'W_RTL_SLS_DP_LC_DY_CUR_A',
+                        'W_RTL_SLS_LC_DY_A',
+                        'W_RTL_SLS_SC_DY_A',
+                        'W_RTL_SLS_SC_DY_CUR_A',
+                        'W_RTL_SLS_SC_LC_DY_A',
+                        'W_RTL_SLS_SC_LC_DY_CUR_A')
+ ORDER BY T.table_name;
 
 --3.INMEMORY
 SELECT 'ALTER TABLE ' || T.owner || '.' || T.table_name ||
        ' INMEMORY PRIORITY CRITICAL MEMCOMPRESS FOR CAPACITY HIGH;'
   FROM ALL_ALL_TABLES T
- WHERE T.inmemory = 'ENABLED';
+ WHERE T.inmemory = 'ENABLED'
+   AND T.table_name IN ('BBG_RA_SLS_SC_LC_DY_A',
+                        'W_RTL_SLS_CL_LC_DY_A',
+                        'W_RTL_SLS_CL_LC_DY_CUR_A',
+                        'W_RTL_SLS_DP_LC_DY_A',
+                        'W_RTL_SLS_DP_LC_DY_CUR_A',
+                        'W_RTL_SLS_LC_DY_A',
+                        'W_RTL_SLS_SC_DY_A',
+                        'W_RTL_SLS_SC_DY_CUR_A',
+                        'W_RTL_SLS_SC_LC_DY_A',
+                        'W_RTL_SLS_SC_LC_DY_CUR_A')
+ ORDER BY T.table_name;
+ 

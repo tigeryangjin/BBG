@@ -244,14 +244,14 @@ SELECT --TDH.TRAN_DATE 销售日期,
  SUM(TDH.TOTAL_RETAIL) - SUM(TDH.TOTAL_COST) 毛利额
   FROM RMS.TRAN_DATA_HISTORY TDH
  WHERE TDH.TRAN_DATE BETWEEN &BDATE AND &EDATE
-   AND TDH.ITEM IN ('800003583',
-                    '800237185',
-                    '800002914',
-                    '800394726',
-                    '800394725',
-                    '101183117',
-                    '800343463',
-                    '800343462')
+   AND TDH.ITEM IN (800215920,
+                    800215921,
+                    800416670,
+                    800346241,
+                    800346242,
+                    800416669,
+                    800212743,
+                    800212742)
    AND TDH.TRAN_CODE IN (1, 3)
  GROUP BY TDH.ITEM, TDH.SUBCLASS, TDH.LOCATION --, TDH.TRAN_DATE
  ORDER BY /*TDH.TRAN_DATE,*/ TDH.LOCATION, TDH.ITEM;
@@ -288,12 +288,12 @@ SELECT --TDH.TRAN_DATE 销售日期,
  ORDER BY /*TDH.TRAN_DATE,*/ TDH.LOCATION, TDH.ITEM;
 
 --6.时段销售
-SELECT STI.ITEM 商品编码,
+SELECT STI.STORE 门店编码,
+       (SELECT S.STORE_NAME FROM STORE S WHERE STI.STORE = S.STORE(+)) 门店名称,
+       STI.ITEM 商品编码,
        (SELECT IM.ITEM_DESC
           FROM RMS.ITEM_MASTER IM
          WHERE IM.ITEM(+) = STI.ITEM) 商品名称,
-       STI.STORE 门店编码,
-       (SELECT S.STORE_NAME FROM STORE S WHERE STI.STORE = S.STORE(+)) 门店名称,
        (SELECT IL.PRIMARY_SUPP
           FROM RMS.ITEM_LOC IL
          WHERE IL.ITEM(+) = STI.ITEM
@@ -303,11 +303,10 @@ SELECT STI.ITEM 商品编码,
          where IL.ITEM(+) = STI.ITEM
            AND IL.LOC(+) = STI.STORE
            and su.supplier(+) = IL.PRIMARY_SUPP) 供应商名称,
-       H.TRAN_DATETIME,
-       SUM(NVL(STI.QTY, 0)) QTY,
-       COUNT(1) TRAN_COUNT,
+       --H.TRAN_DATETIME,
+       SUM(NVL(STI.QTY, 0)) 销售数量,
        SUM(NVL(STI.QTY, 0) * NVL(STI.UNIT_RETAIL, 0) -
-           NVL(DISC.DISC_AMT, 0)) TOTAL_RETAIL
+           NVL(DISC.DISC_AMT, 0)) 销售金额
   FROM SA_TRAN_ITEM STI,
        SA_TRAN_HEAD H,
        SA_STORE_DAY D,
@@ -331,5 +330,5 @@ SELECT STI.ITEM 商品编码,
    AND STI.ITEM IN
        (800388984, 800388986, 800388985, 800185746, 800185745, 800354715)
       --AND D.STORE = 120033
-   AND TO_CHAR(H.TRAN_DATETIME, 'HH24MI') > '2130'
- GROUP BY STI.ITEM, STI.STORE, H.TRAN_DATETIME
+   AND TO_CHAR(H.TRAN_DATETIME, 'HH24MI') >= '2130'
+ GROUP BY STI.ITEM, STI.STORE --, H.TRAN_DATETIME
