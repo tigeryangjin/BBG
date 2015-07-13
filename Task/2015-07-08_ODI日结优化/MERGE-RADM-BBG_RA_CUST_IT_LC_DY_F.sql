@@ -1,0 +1,77 @@
+--2015-7-9 4:03:14
+--3869√Î
+--≤Â»Î ˝:413216
+merge /*+ APPEND */
+into RADM.BBG_RA_CUST_IT_LC_DY_F T
+using (Select /*+ APPEND */
+        BBG_RA_CUST_IT_LC_DY_TMP.PROD_IT_WID              PROD_WID,
+        BBG_RA_CUST_IT_LC_DY_TMP.PROD_SCD1_WID            PROD_SCD1_WID,
+        BBG_RA_CUST_IT_LC_DY_TMP.ORG_WID                  ORG_WID,
+        BBG_RA_CUST_IT_LC_DY_TMP.ORG_LC_WID               ORG_DH_WID,
+        BBG_RA_CUST_IT_LC_DY_TMP.ORG_SCD1_WID             ORG_SCD1_WID,
+        BBG_RA_CUST_IT_LC_DY_TMP.DT_WID                   DT_WID,
+        BBG_RA_CUST_IT_LC_DY_TMP.BBG_ITEM_LOC_WID         BBG_ITEM_LOC_WID,
+        BBG_RA_CUST_IT_LC_DY_TMP.BBG_CUSTOMER_COUNT       BBG_CUSTOMER_COUNT,
+        BBG_RA_CUST_IT_LC_DY_TMP.BBG_SERVICE_SATISFACTION BBG_SERVICE_SATISFACTION,
+        BBG_RA_CUST_IT_LC_DY_TMP.DATASOURCE_NUM_ID        DATASOURCE_NUM_ID,
+        BBG_RA_CUST_IT_LC_DY_TMP.INTEGRATION_ID           INTEGRATION_ID,
+        BBG_RA_CUST_IT_LC_DY_TMP.W_INSERT_DT              W_INSERT_DT,
+        BBG_RA_CUST_IT_LC_DY_TMP.W_UPDATE_DT              W_UPDATE_DT
+       
+         From RABATCHER.BBG_RA_CUST_IT_LC_DY_TMP BBG_RA_CUST_IT_LC_DY_TMP
+        Where (1 = 1)
+       
+       ) S
+on (T.PROD_WID = S.PROD_WID and T.ORG_WID = S.ORG_WID and T.DT_WID = S.DT_WID and T.BBG_ITEM_LOC_WID = S.BBG_ITEM_LOC_WID)
+when matched then
+  update
+     set T.PROD_SCD1_WID            = S.PROD_SCD1_WID,
+         T.ORG_DH_WID               = S.ORG_DH_WID,
+         T.ORG_SCD1_WID             = S.ORG_SCD1_WID,
+         T.BBG_CUSTOMER_COUNT       = S.BBG_CUSTOMER_COUNT,
+         T.BBG_SERVICE_SATISFACTION = S.BBG_SERVICE_SATISFACTION,
+         T.DATASOURCE_NUM_ID        = S.DATASOURCE_NUM_ID,
+         T.INTEGRATION_ID           = S.INTEGRATION_ID,
+         T.W_INSERT_DT              = S.W_INSERT_DT,
+         T.W_UPDATE_DT              = S.W_UPDATE_DT
+  
+
+when not matched then
+  insert
+    (
+     
+     T.ROW_WID,
+     T.PROD_WID,
+     T.PROD_SCD1_WID,
+     T.ORG_WID,
+     T.ORG_DH_WID,
+     T.ORG_SCD1_WID,
+     T.DT_WID,
+     T.BBG_ITEM_LOC_WID,
+     T.BBG_CUSTOMER_COUNT,
+     T.BBG_SERVICE_SATISFACTION,
+     T.DATASOURCE_NUM_ID,
+     T.INTEGRATION_ID,
+     T.W_INSERT_DT,
+     T.W_UPDATE_DT
+     
+     )
+  values
+    (
+     
+     RADM.BBG_RA_CUST_IT_LC_DY_F_SEQ.NEXTVAL,
+     S.PROD_WID,
+     S.PROD_SCD1_WID,
+     S.ORG_WID,
+     S.ORG_DH_WID,
+     S.ORG_SCD1_WID,
+     S.DT_WID,
+     S.BBG_ITEM_LOC_WID,
+     S.BBG_CUSTOMER_COUNT,
+     S.BBG_SERVICE_SATISFACTION,
+     S.DATASOURCE_NUM_ID,
+     S.INTEGRATION_ID,
+     S.W_INSERT_DT,
+     S.W_UPDATE_DT
+     
+     )

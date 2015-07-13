@@ -1,0 +1,19 @@
+/* DETECTION_STRATEGY = NOT_EXISTS */
+insert into RA_RMS.W_RTL_INV_IT_LC_TMP_A PARTITION FOR
+  (6) T
+  (PROD_IT_NUM, ORG_NUM, ORG_TYPE_CDE, DAY_DT, ETL_THREAD_VAL)
+
+  select S.PROD_IT_NUM, S.ORG_NUM, S.ORG_TYPE_CDE, S.DAY_DT, 6
+    from (select RA_INV_IT_LC_V.ITEM PROD_IT_NUM,
+                 TO_CHAR(RA_INV_IT_LC_V.LOCATION) ORG_NUM,
+                 RA_INV_IT_LC_V.LOC_TYPE ORG_TYPE_CDE,
+                 TO_DATE('2015-07-09', 'YYYY-MM-DD') DAY_DT
+            from RA_RMS.RA_RESTART_LOC RESTART_LOC,
+                 RA_RMS.RA_INV_IT_LC_V RA_INV_IT_LC_V
+           where (1 = 1)
+             And (RA_INV_IT_LC_V.LOCATION = RESTART_LOC.DRIVER_VALUE)
+             And (RESTART_LOC.SCENARIO_NAME =
+                 'SDE_BBG_RETAILINVPOSITIONTRANSACTIONFACT')
+             And (RESTART_LOC.THREAD_VAL = 6)
+          
+          ) S
