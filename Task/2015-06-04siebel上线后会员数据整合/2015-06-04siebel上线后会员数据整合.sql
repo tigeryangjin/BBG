@@ -1064,8 +1064,43 @@ ALTER TABLE RADM.W_RTL_SLS_LC_MN_A ADD vip_ret_emp_disc_amt_lcl NUMBER(20,4);
 ALTER TABLE RADM.W_RTL_SLS_LC_MN_A ADD vip_ret_trx_count NUMBER(18,4);
 
 
+--W_LOCALIZED_STRING_G中文说明
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_-----VIP_Net_Sales-----
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_-----VIP_Net_Profit-----
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_-----VIP_Net_Tax-----
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_-----VIP_Gross_Sales-----
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_-----VIP_Gross_Profit-----
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_-----VIP_Gross_Tax-----
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_VIP_Net_Sales_Qty
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_VIP_Net_Sales_Qty_LY
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_VIP_Net_Sales_Amt
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_VIP_Net_Sales_Amt_LY
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_VIP_Net_Sales_Amt_Inc_Tax
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_VIP_Net_Sales_Amt_Inc_Tax_LY
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_VIP_Net_Profit
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_VIP_Net_Profit_LY
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_VIP_Net_Tax
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_VIP_Net_Tax_LY
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_VIP_Gross_Sales_Qty
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_VIP_Gross_Sales_Qty_LY
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_VIP_Gross_Sales_Amt
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_VIP_Gross_Sales_Amt_LY
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_VIP_Gross_Profit
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_VIP_Gross_Profit_LY
+OK:CN_Retail_As-Was_BBG_VIP_Sales_New_VIP_Gross_Tax
+CN_Retail_As-Was_BBG_VIP_Sales_New_VIP_Gross_Tax_LY
+
+;
+SELECT *
+  FROM RADM.W_LOCALIZED_STRING_G T
+ WHERE T.MSG_NUM LIKE '%Retail_As-Was_Sales%Net_Sales_Qty'
+   AND T.LANG_ID = 'zh-cn'
+   FOR UPDATE;
+
 -- ADD COMMENTS TO THE COLUMNS 
 COMMENT ON COLUMN RABATCHER.W_RTL_SLS_IT_LC_DY_TMP.VIP_SLS_QTY
-  IS '会员销售数量';
+  IS '会员销售数量'; 
+
+
 
 
