@@ -30,6 +30,8 @@ SELECT *
                A.*
           FROM (SELECT trunc(ah_timestamp2 + NUMTODSINTERVAL(8, 'hour')) days,
                        ah_name,
+                       (ah_timestamp2 + NUMTODSINTERVAL(8, 'hour')) start_time,
+                       (ah_timestamp4 + NUMTODSINTERVAL(8, 'hour')) end_time,
                        LPAD(trunc((ah_timestamp4 - ah_timestamp2) * 24),
                             2,
                             '0') || ':' ||
@@ -41,8 +43,6 @@ SELECT *
                                   trunc((ah_timestamp4 - ah_timestamp2) * 24 * 60) * 60),
                             2,
                             '0') RUN_TIME,
-                       (ah_timestamp2 + NUMTODSINTERVAL(8, 'hour')) start_time,
-                       (ah_timestamp4 + NUMTODSINTERVAL(8, 'hour')) end_time,
                        case
                          when AH_STATUS = 1900 then
                           'ENDED_OK-ended normally'
@@ -71,4 +71,4 @@ SELECT *
                                    'BBG.CMX.RA.F27_RETAIL_CUST',
                                    'BBG_ETL_MONTH_DATA.KSH',
                                    'BATCH_RESA2DW_BACKUP.KSH')) A)
- ORDER BY 1,5;
+ ORDER BY 1, 4;

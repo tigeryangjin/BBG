@@ -1,3 +1,6 @@
+--****************************************************************************************
+--ODI修改
+--****************************************************************************************
 --1.商品销售表处理
 --1.1.W_RTL_SLS_IT_LC_DY_TMP
 -- ADD/MODIFY COLUMNS 
@@ -1093,13 +1096,1535 @@ CN_Retail_As-Was_BBG_VIP_Sales_New_VIP_Gross_Tax_LY
 ;
 SELECT *
   FROM RADM.W_LOCALIZED_STRING_G T
- WHERE T.MSG_NUM LIKE '%Retail_As-Was_Sales%Gross_Tax_LY'
+ WHERE T.MSG_NUM LIKE '%Retail_As-Was_Sales%Net_Sales_Qty'
    AND T.LANG_ID = 'zh-cn'
    FOR UPDATE;
 
 -- ADD COMMENTS TO THE COLUMNS 
 COMMENT ON COLUMN RABATCHER.W_RTL_SLS_IT_LC_DY_TMP.VIP_SLS_QTY
   IS '会员销售数量'; 
+
+
+--****************************************************************************************
+--历史数据补入
+--****************************************************************************************
+--1.RADM.W_RTL_SLS_TRX_IT_LC_DY_F补入HYK_NO
+--120141009000之后接入了hyk_no
+--temp
+CREATE TABLE RADM.BBG_RA_YJ_TRX_HYK_TMP AS
+SELECT T.TRAN_SEQ_NO, T.HYK_NO
+  FROM RMS.CMX_DING_HY@RA_RMS_DBLINK T
+ WHERE T.MATCH_IND = 'Y';
+--create index
+SELECT T.TRAN_SEQ_NO, COUNT(*)
+  FROM RADM.BBG_RA_YJ_TRX_HYK_TMP T
+ GROUP BY T.TRAN_SEQ_NO
+HAVING COUNT(*) > 1;
+--UPDATE
+UPDATE /*+PARALLEL(A,12)*/ RADM.W_RTL_SLS_TRX_IT_LC_DY_F PARTITION(RTL_SLS_TRX_IT_LC_DY_F_201401) A
+   SET A.HYK_NO =
+       (SELECT /*+PARALLEL(B,12)*/
+         B.HYK_NO
+          FROM RADM.BBG_RA_YJ_TRX_HYK_TMP B
+         WHERE A.SLS_TRX_ID = B.TRAN_SEQ_NO)
+ WHERE EXISTS (SELECT /*+PARALLEL(B,12)*/
+         1
+          FROM RADM.BBG_RA_YJ_TRX_HYK_TMP B
+         WHERE A.SLS_TRX_ID = B.TRAN_SEQ_NO)
+   AND A.HYK_NO IS NULL
+   AND A.DT_WID = 120140101000;
+
+--1.1.RADM.W_RTL_SLS_TRX_IT_LC_DY_F更新会员数据列
+--2014.1.1~2015.6.23
+UPDATE RADM.W_RTL_SLS_TRX_IT_LC_DY_F A
+   SET A.vip_sls_qty = CASE
+                         WHEN A.VIP_sls_qty IS NULL THEN
+                          CASE
+                            WHEN A.HYK_NO IS NOT NULL THEN
+                             A.sls_qty
+                            ELSE
+                             0
+                          END
+                         ELSE
+                          A.VIP_sls_qty
+                       END,
+       A.vip_sls_amt_lcl = CASE
+                             WHEN A.VIP_sls_amt_lcl IS NULL THEN
+                              CASE
+                                WHEN A.HYK_NO IS NOT NULL THEN
+                                 A.sls_amt_lcl
+                                ELSE
+                                 0
+                              END
+                             ELSE
+                              A.VIP_sls_amt_lcl
+                           END,
+       A.vip_sls_profit_amt_lcl = CASE
+                                    WHEN A.VIP_sls_profit_amt_lcl IS NULL THEN
+                                     CASE
+                                       WHEN A.HYK_NO IS NOT NULL THEN
+                                        A.sls_profit_amt_lcl
+                                       ELSE
+                                        0
+                                     END
+                                    ELSE
+                                     A.VIP_sls_profit_amt_lcl
+                                  END,
+       A.vip_sls_manual_mkdn_amt_lcl = CASE
+                                         WHEN A.VIP_sls_manual_mkdn_amt_lcl IS NULL THEN
+                                          CASE
+                                            WHEN A.HYK_NO IS NOT NULL THEN
+                                             A.sls_manual_mkdn_amt_lcl
+                                            ELSE
+                                             0
+                                          END
+                                         ELSE
+                                          A.VIP_sls_manual_mkdn_amt_lcl
+                                       END,
+       A.vip_sls_manual_mkup_amt_lcl = CASE
+                                         WHEN A.VIP_sls_manual_mkup_amt_lcl IS NULL THEN
+                                          CASE
+                                            WHEN A.HYK_NO IS NOT NULL THEN
+                                             A.sls_manual_mkup_amt_lcl
+                                            ELSE
+                                             0
+                                          END
+                                         ELSE
+                                          A.VIP_sls_manual_mkup_amt_lcl
+                                       END,
+       A.vip_sls_tax_amt_lcl = CASE
+                                 WHEN A.VIP_sls_tax_amt_lcl IS NULL THEN
+                                  CASE
+                                    WHEN A.HYK_NO IS NOT NULL THEN
+                                     A.sls_tax_amt_lcl
+                                    ELSE
+                                     0
+                                  END
+                                 ELSE
+                                  A.VIP_sls_tax_amt_lcl
+                               END,
+       A.vip_sls_emp_disc_amt_lcl = CASE
+                                      WHEN A.VIP_sls_emp_disc_amt_lcl IS NULL THEN
+                                       CASE
+                                         WHEN A.HYK_NO IS NOT NULL THEN
+                                          A.sls_emp_disc_amt_lcl
+                                         ELSE
+                                          0
+                                       END
+                                      ELSE
+                                       A.VIP_sls_emp_disc_amt_lcl
+                                    END,
+       A.vip_sls_manual_count = CASE
+                                  WHEN A.VIP_sls_manual_count IS NULL THEN
+                                   CASE
+                                     WHEN A.HYK_NO IS NOT NULL THEN
+                                      A.sls_manual_count
+                                     ELSE
+                                      0
+                                   END
+                                  ELSE
+                                   A.VIP_sls_manual_count
+                                END,
+       A.vip_sls_scan_count = CASE
+                                WHEN A.VIP_sls_scan_count IS NULL THEN
+                                 CASE
+                                   WHEN A.HYK_NO IS NOT NULL THEN
+                                    A.sls_scan_count
+                                   ELSE
+                                    0
+                                 END
+                                ELSE
+                                 A.VIP_sls_scan_count
+                              END,
+       A.vip_ret_qty = CASE
+                         WHEN A.VIP_ret_qty IS NULL THEN
+                          CASE
+                            WHEN A.HYK_NO IS NOT NULL THEN
+                             A.ret_qty
+                            ELSE
+                             0
+                          END
+                         ELSE
+                          A.VIP_ret_qty
+                       END,
+       A.vip_ret_amt_lcl = CASE
+                             WHEN A.VIP_ret_amt_lcl IS NULL THEN
+                              CASE
+                                WHEN A.HYK_NO IS NOT NULL THEN
+                                 A.ret_amt_lcl
+                                ELSE
+                                 0
+                              END
+                             ELSE
+                              A.VIP_ret_amt_lcl
+                           END,
+       A.vip_ret_profit_amt_lcl = CASE
+                                    WHEN A.VIP_ret_profit_amt_lcl IS NULL THEN
+                                     CASE
+                                       WHEN A.HYK_NO IS NOT NULL THEN
+                                        A.ret_profit_amt_lcl
+                                       ELSE
+                                        0
+                                     END
+                                    ELSE
+                                     A.VIP_ret_profit_amt_lcl
+                                  END,
+       A.vip_ret_manual_mkdn_amt_lcl = CASE
+                                         WHEN A.VIP_ret_manual_mkdn_amt_lcl IS NULL THEN
+                                          CASE
+                                            WHEN A.HYK_NO IS NOT NULL THEN
+                                             A.ret_manual_mkdn_amt_lcl
+                                            ELSE
+                                             0
+                                          END
+                                         ELSE
+                                          A.VIP_ret_manual_mkdn_amt_lcl
+                                       END,
+       A.vip_ret_manual_mkup_amt_lcl = CASE
+                                         WHEN A.VIP_ret_manual_mkup_amt_lcl IS NULL THEN
+                                          CASE
+                                            WHEN A.HYK_NO IS NOT NULL THEN
+                                             A.ret_manual_mkup_amt_lcl
+                                            ELSE
+                                             0
+                                          END
+                                         ELSE
+                                          A.VIP_ret_manual_mkup_amt_lcl
+                                       END,
+       A.vip_ret_tax_amt_lcl = CASE
+                                 WHEN A.VIP_ret_tax_amt_lcl IS NULL THEN
+                                  CASE
+                                    WHEN A.HYK_NO IS NOT NULL THEN
+                                     A.ret_tax_amt_lcl
+                                    ELSE
+                                     0
+                                  END
+                                 ELSE
+                                  A.VIP_ret_tax_amt_lcl
+                               END,
+       A.vip_ret_emp_disc_amt_lcl = CASE
+                                      WHEN A.VIP_ret_emp_disc_amt_lcl IS NULL THEN
+                                       CASE
+                                         WHEN A.HYK_NO IS NOT NULL THEN
+                                          A.ret_emp_disc_amt_lcl
+                                         ELSE
+                                          0
+                                       END
+                                      ELSE
+                                       A.VIP_ret_emp_disc_amt_lcl
+                                    END,
+       A.vip_ret_manual_count = CASE
+                                  WHEN A.VIP_ret_manual_count IS NULL THEN
+                                   CASE
+                                     WHEN A.HYK_NO IS NOT NULL THEN
+                                      A.ret_manual_count
+                                     ELSE
+                                      0
+                                   END
+                                  ELSE
+                                   A.VIP_ret_manual_count
+                                END,
+       A.vip_ret_scan_count = CASE
+                                WHEN A.VIP_ret_scan_count IS NULL THEN
+                                 CASE
+                                   WHEN A.HYK_NO IS NOT NULL THEN
+                                    A.ret_scan_count
+                                   ELSE
+                                    0
+                                 END
+                                ELSE
+                                 A.VIP_ret_scan_count
+                              END
+ WHERE A.DT_WID BETWEEN &BDTWID AND &EDTWID;
+
+	 
+--检查更新日期
+SELECT /*+PARALLEL(A,20)*/
+DISTINCT A.DT_WID
+  FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F A
+ WHERE A.VIP_SLS_QTY IS NULL
+   AND A.DT_WID BETWEEN 120140101000 AND 120150623000
+ ORDER BY A.DT_WID;
+
+--2.销售汇总表补入会员销售
+--2.1.W_RTL_SLS_TRX_IT_LC_DY_F完成
+
+
+--2.2.W_RTL_SLS_CL_DY_CUR_A-----------------------------------------------------------------------------
+UPDATE RADM.W_RTL_SLS_CL_DY_CUR_A A
+   SET (A.VIP_SLS_QTY,
+        A.VIP_SLS_AMT_LCL,
+        A.VIP_SLS_PROFIT_AMT_LCL,
+        A.VIP_SLS_TAX_AMT_LCL,
+        A.VIP_SLS_EMP_DISC_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKDN_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKUP_AMT_LCL,
+        A.VIP_RET_QTY,
+        A.VIP_RET_AMT_LCL,
+        A.VIP_RET_PROFIT_AMT_LCL,
+        A.VIP_RET_TAX_AMT_LCL,
+        A.VIP_RET_EMP_DISC_AMT_LCL,
+        A.VIP_RET_MANUAL_MKDN_AMT_LCL,
+        A.VIP_RET_MANUAL_MKUP_AMT_LCL,
+        A.VIP_SLS_AMT,
+        A.VIP_SLS_AMT_GLOBAL1,
+        A.VIP_SLS_AMT_GLOBAL2,
+        A.VIP_SLS_AMT_GLOBAL3,
+        A.VIP_SLS_PROFIT_AMT,
+        A.VIP_SLS_PROFIT_AMT_GLOBAL1,
+        A.VIP_SLS_PROFIT_AMT_GLOBAL2,
+        A.VIP_SLS_PROFIT_AMT_GLOBAL3,
+        A.VIP_SLS_TAX_AMT,
+        A.VIP_SLS_TAX_AMT_GLOBAL1,
+        A.VIP_SLS_TAX_AMT_GLOBAL2,
+        A.VIP_SLS_TAX_AMT_GLOBAL3,
+        A.VIP_SLS_EMP_DISC_AMT,
+        A.VIP_SLS_EMP_DISC_AMT_GLOBAL1,
+        A.VIP_SLS_EMP_DISC_AMT_GLOBAL2,
+        A.VIP_SLS_EMP_DISC_AMT_GLOBAL3,
+        A.VIP_SLS_MANUAL_MKDN_AMT,
+        A.V_SLS_MANUAL_MKDN_AMT_GLOBAL1,
+        A.V_SLS_MANUAL_MKDN_AMT_GLOBAL2,
+        A.V_SLS_MANUAL_MKDN_AMT_GLOBAL3,
+        A.VIP_SLS_MANUAL_MKUP_AMT,
+        A.V_SLS_MANUAL_MKUP_AMT_GLOBAL1,
+        A.V_SLS_MANUAL_MKUP_AMT_GLOBAL2,
+        A.V_SLS_MANUAL_MKUP_AMT_GLOBAL3,
+        A.VIP_RET_AMT,
+        A.VIP_RET_AMT_GLOBAL1,
+        A.VIP_RET_AMT_GLOBAL2,
+        A.VIP_RET_AMT_GLOBAL3,
+        A.VIP_RET_PROFIT_AMT,
+        A.VIP_RET_PROFIT_AMT_GLOBAL1,
+        A.VIP_RET_PROFIT_AMT_GLOBAL2,
+        A.VIP_RET_PROFIT_AMT_GLOBAL3,
+        A.VIP_RET_TAX_AMT,
+        A.VIP_RET_TAX_AMT_GLOBAL1,
+        A.VIP_RET_TAX_AMT_GLOBAL2,
+        A.VIP_RET_TAX_AMT_GLOBAL3,
+        A.VIP_RET_EMP_DISC_AMT,
+        A.VIP_RET_EMP_DISC_AMT_GLOBAL1,
+        A.VIP_RET_EMP_DISC_AMT_GLOBAL2,
+        A.VIP_RET_EMP_DISC_AMT_GLOBAL3,
+        A.VIP_RET_MANUAL_MKDN_AMT,
+        A.V_RET_MANUAL_MKDN_AMT_GLOBAL1,
+        A.V_RET_MANUAL_MKDN_AMT_GLOBAL2,
+        A.V_RET_MANUAL_MKDN_AMT_GLOBAL3,
+        A.VIP_RET_MANUAL_MKUP_AMT,
+        A.V_RET_MANUAL_MKUP_AMT_GLOBAL1,
+        A.V_RET_MANUAL_MKUP_AMT_GLOBAL2,
+        A.V_RET_MANUAL_MKUP_AMT_GLOBAL3,
+        A.VIP_SLS_MANUAL_COUNT,
+        A.VIP_SLS_SCAN_COUNT,
+        A.VIP_RET_MANUAL_COUNT,
+        A.VIP_RET_SCAN_COUNT) =
+       (SELECT SUM(B.VIP_SLS_QTY) VIP_SLS_QTY,
+               SUM(B.VIP_SLS_AMT_LCL) VIP_SLS_AMT_LCL,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL) VIP_SLS_PROFIT_AMT_LCL,
+               SUM(B.VIP_SLS_TAX_AMT_LCL) VIP_SLS_TAX_AMT_LCL,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL) VIP_SLS_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL) VIP_SLS_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL) VIP_SLS_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_RET_QTY) VIP_RET_QTY,
+               SUM(B.VIP_RET_AMT_LCL) VIP_RET_AMT_LCL,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL) VIP_RET_PROFIT_AMT_LCL,
+               SUM(B.VIP_RET_TAX_AMT_LCL) VIP_RET_TAX_AMT_LCL,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL) VIP_RET_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL) VIP_RET_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL) VIP_RET_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_SLS_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_AMT,
+               SUM(B.VIP_SLS_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_TAX_AMT,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_TAX_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_TAX_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_TAX_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_MANUAL_MKDN_AMT,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) V_SLS_MANUAL_MKDN_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) V_SLS_MANUAL_MKDN_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) V_SLS_MANUAL_MKDN_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_MANUAL_MKUP_AMT,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) V_SLS_MANUAL_MKUP_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) V_SLS_MANUAL_MKUP_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) V_SLS_MANUAL_MKUP_AMT_GLOBAL3,
+               SUM(B.VIP_RET_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_AMT,
+               SUM(B.VIP_RET_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_AMT_GLOBAL1,
+               SUM(B.VIP_RET_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_AMT_GLOBAL2,
+               SUM(B.VIP_RET_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_AMT_GLOBAL3,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_PROFIT_AMT,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_PROFIT_AMT_GLOBAL1,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_PROFIT_AMT_GLOBAL2,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_PROFIT_AMT_GLOBAL3,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_TAX_AMT,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_TAX_AMT_GLOBAL1,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_TAX_AMT_GLOBAL2,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_TAX_AMT_GLOBAL3,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT_GLOBAL1,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT_GLOBAL2,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT_GLOBAL3,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_MANUAL_MKDN_AMT,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) V_RET_MANUAL_MKDN_AMT_GLOBAL1,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) V_RET_MANUAL_MKDN_AMT_GLOBAL2,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) V_RET_MANUAL_MKDN_AMT_GLOBAL3,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_MANUAL_MKUP_AMT,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) V_RET_MANUAL_MKUP_AMT_GLOBAL1,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) V_RET_MANUAL_MKUP_AMT_GLOBAL2,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) V_RET_MANUAL_MKUP_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_MANUAL_COUNT) VIP_SLS_MANUAL_COUNT,
+               SUM(B.VIP_SLS_SCAN_COUNT) VIP_SLS_SCAN_COUNT,
+               SUM(B.VIP_RET_MANUAL_COUNT) VIP_RET_MANUAL_COUNT,
+               SUM(B.VIP_RET_SCAN_COUNT) VIP_RET_SCAN_COUNT
+          FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F B,
+               RABATCHER.W_PRODUCT_D_RTL_TMP P
+         WHERE B.PROD_SCD1_WID = P.PROD_SCD1_WID
+           AND P.PROD_CL_WID = A.PROD_DH_WID
+           AND A.RTL_TYPE_WID = B.RTL_TYPE_WID
+           AND A.DT_WID = B.DT_WID
+           AND A.BBG_RETAIL_TYPE_WID = B.BBG_RETAIL_TYPE_WID
+           AND B.DT_WID = &DTWID)
+ WHERE A.DT_WID = &DTWID;
+
+--PROD_DH_WID, RTL_TYPE_WID, DT_WID, BBG_RETAIL_TYPE_WID
+
+SELECT * FROM RADM.W_RTL_SLS_CL_DY_CUR_A;
+SELECT * FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F;
+
+--2.3.W_RTL_SLS_CL_LC_DY_A-----------------------------------------------------------------------------
+UPDATE RADM.W_RTL_SLS_CL_LC_DY_A A
+   SET (A.VIP_SLS_QTY,
+        A.VIP_SLS_AMT_LCL,
+        A.VIP_SLS_PROFIT_AMT_LCL,
+        A.VIP_SLS_TAX_AMT_LCL,
+        A.VIP_SLS_EMP_DISC_AMT_LCL,
+        A.VIP_RET_QTY,
+        A.VIP_RET_AMT_LCL,
+        A.VIP_RET_PROFIT_AMT_LCL,
+        A.VIP_RET_TAX_AMT_LCL,
+        A.VIP_RET_EMP_DISC_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKDN_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKUP_AMT_LCL,
+        A.VIP_RET_MANUAL_MKDN_AMT_LCL,
+        A.VIP_RET_MANUAL_MKUP_AMT_LCL,
+        A.VIP_SLS_MANUAL_COUNT,
+        A.VIP_SLS_SCAN_COUNT,
+        A.VIP_RET_MANUAL_COUNT,
+        A.VIP_RET_SCAN_COUNT) =
+       (SELECT SUM(B.VIP_SLS_QTY) VIP_SLS_QTY,
+               SUM(B.VIP_SLS_AMT_LCL) VIP_SLS_AMT_LCL,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL) VIP_SLS_PROFIT_AMT_LCL,
+               SUM(B.VIP_SLS_TAX_AMT_LCL) VIP_SLS_TAX_AMT_LCL,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL) VIP_SLS_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_RET_QTY) VIP_RET_QTY,
+               SUM(B.VIP_RET_AMT_LCL) VIP_RET_AMT_LCL,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL) VIP_RET_PROFIT_AMT_LCL,
+               SUM(B.VIP_RET_TAX_AMT_LCL) VIP_RET_TAX_AMT_LCL,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL) VIP_RET_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL) VIP_SLS_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL) VIP_SLS_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL) VIP_RET_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL) VIP_RET_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_COUNT) VIP_SLS_MANUAL_COUNT,
+               SUM(B.VIP_SLS_SCAN_COUNT) VIP_SLS_SCAN_COUNT,
+               SUM(B.VIP_RET_MANUAL_COUNT) VIP_RET_MANUAL_COUNT,
+               SUM(B.VIP_RET_SCAN_COUNT) VIP_RET_SCAN_COUNT
+          FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F B,
+               RABATCHER.W_PRODUCT_D_RTL_TMP P
+         WHERE B.PROD_WID = P.PROD_IT_WID
+           AND P.PROD_CL_WID = A.PROD_DH_WID
+					 AND A.ORG_WID=B.ORG_WID
+           AND A.RTL_TYPE_WID = B.RTL_TYPE_WID
+           AND A.DT_WID = B.DT_WID
+           AND A.BBG_RETAIL_TYPE_WID = B.BBG_RETAIL_TYPE_WID
+           AND B.DT_WID = &DTWID)
+ WHERE A.DT_WID = &DTWID;
+
+
+--PROD_DH_WID, ORG_WID, RTL_TYPE_WID, DT_WID, BBG_RETAIL_TYPE_WID
+SELECT * FROM RADM.W_RTL_SLS_CL_LC_DY_A;
+SELECT * FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F;
+
+--2.4.W_RTL_SLS_CL_LC_DY_CUR_A-----------------------------------------------------------------------------
+UPDATE RADM.W_RTL_SLS_CL_LC_DY_CUR_A A
+   SET (A.VIP_SLS_QTY,
+        A.VIP_SLS_AMT_LCL,
+        A.VIP_SLS_PROFIT_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKDN_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKUP_AMT_LCL,
+        A.VIP_SLS_TAX_AMT_LCL,
+        A.VIP_SLS_EMP_DISC_AMT_LCL,
+        A.VIP_SLS_MANUAL_COUNT,
+        A.VIP_SLS_SCAN_COUNT,
+        A.VIP_RET_QTY,
+        A.VIP_RET_AMT_LCL,
+        A.VIP_RET_PROFIT_AMT_LCL,
+        A.VIP_RET_MANUAL_MKDN_AMT_LCL,
+        A.VIP_RET_MANUAL_MKUP_AMT_LCL,
+        A.VIP_RET_TAX_AMT_LCL,
+        A.VIP_RET_EMP_DISC_AMT_LCL,
+        A.VIP_RET_MANUAL_COUNT,
+        A.VIP_RET_SCAN_COUNT) =
+       (SELECT SUM(B.VIP_SLS_QTY) VIP_SLS_QTY,
+               SUM(B.VIP_SLS_AMT_LCL) VIP_SLS_AMT_LCL,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL) VIP_SLS_PROFIT_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL) VIP_SLS_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL) VIP_SLS_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_SLS_TAX_AMT_LCL) VIP_SLS_TAX_AMT_LCL,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL) VIP_SLS_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_COUNT) VIP_SLS_MANUAL_COUNT,
+               SUM(B.VIP_SLS_SCAN_COUNT) VIP_SLS_SCAN_COUNT,
+               SUM(B.VIP_RET_QTY) VIP_RET_QTY,
+               SUM(B.VIP_RET_AMT_LCL) VIP_RET_AMT_LCL,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL) VIP_RET_PROFIT_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL) VIP_RET_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL) VIP_RET_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_RET_TAX_AMT_LCL) VIP_RET_TAX_AMT_LCL,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL) VIP_RET_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_COUNT) VIP_RET_MANUAL_COUNT,
+               SUM(B.VIP_RET_SCAN_COUNT) VIP_RET_SCAN_COUNT
+          FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F B,
+               RABATCHER.W_PRODUCT_D_RTL_TMP P
+         WHERE B.PROD_SCD1_WID = P.PROD_SCD1_WID
+           AND P.PROD_CL_WID = A.PROD_DH_WID
+           AND A.ORG_WID = B.ORG_WID
+           AND A.RTL_TYPE_WID = B.RTL_TYPE_WID
+           AND A.DT_WID = B.DT_WID
+           AND A.BBG_RETAIL_TYPE_WID = B.BBG_RETAIL_TYPE_WID
+           AND B.DT_WID = &DTWID)
+ WHERE A.DT_WID = &DTWID;
+
+--PROD_DH_WID, ORG_WID, RTL_TYPE_WID, DT_WID, BBG_RETAIL_TYPE_WID
+SELECT * FROM RADM.W_RTL_SLS_CL_LC_DY_CUR_A;
+SELECT * FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F;
+
+--2.5.W_RTL_SLS_DP_DY_CUR_A-----------------------------------------------------------------------------
+UPDATE RADM.W_RTL_SLS_DP_DY_CUR_A A
+   SET (A.VIP_SLS_QTY,
+        A.VIP_SLS_AMT_LCL,
+        A.VIP_SLS_PROFIT_AMT_LCL,
+        A.VIP_SLS_TAX_AMT_LCL,
+        A.VIP_SLS_EMP_DISC_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKDN_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKUP_AMT_LCL,
+        A.VIP_RET_QTY,
+        A.VIP_RET_AMT_LCL,
+        A.VIP_RET_PROFIT_AMT_LCL,
+        A.VIP_RET_TAX_AMT_LCL,
+        A.VIP_RET_EMP_DISC_AMT_LCL,
+        A.VIP_RET_MANUAL_MKDN_AMT_LCL,
+        A.VIP_RET_MANUAL_MKUP_AMT_LCL,
+        A.VIP_SLS_AMT,
+        A.VIP_SLS_AMT_GLOBAL1,
+        A.VIP_SLS_AMT_GLOBAL2,
+        A.VIP_SLS_AMT_GLOBAL3,
+        A.VIP_SLS_PROFIT_AMT,
+        A.VIP_SLS_PROFIT_AMT_GLOBAL1,
+        A.VIP_SLS_PROFIT_AMT_GLOBAL2,
+        A.VIP_SLS_PROFIT_AMT_GLOBAL3,
+        A.VIP_SLS_TAX_AMT,
+        A.VIP_SLS_TAX_AMT_GLOBAL1,
+        A.VIP_SLS_TAX_AMT_GLOBAL2,
+        A.VIP_SLS_TAX_AMT_GLOBAL3,
+        A.VIP_SLS_EMP_DISC_AMT,
+        A.VIP_SLS_EMP_DISC_AMT_GLOBAL1,
+        A.VIP_SLS_EMP_DISC_AMT_GLOBAL2,
+        A.VIP_SLS_EMP_DISC_AMT_GLOBAL3,
+        A.VIP_SLS_MANUAL_MKDN_AMT,
+        A.V_SLS_MANUAL_MKDN_AMT_GLOBAL1,
+        A.V_SLS_MANUAL_MKDN_AMT_GLOBAL2,
+        A.V_SLS_MANUAL_MKDN_AMT_GLOBAL3,
+        A.VIP_SLS_MANUAL_MKUP_AMT,
+        A.V_SLS_MANUAL_MKUP_AMT_GLOBAL1,
+        A.V_SLS_MANUAL_MKUP_AMT_GLOBAL2,
+        A.V_SLS_MANUAL_MKUP_AMT_GLOBAL3,
+        A.VIP_RET_AMT,
+        A.VIP_RET_AMT_GLOBAL1,
+        A.VIP_RET_AMT_GLOBAL2,
+        A.VIP_RET_AMT_GLOBAL3,
+        A.VIP_RET_PROFIT_AMT,
+        A.VIP_RET_PROFIT_AMT_GLOBAL1,
+        A.VIP_RET_PROFIT_AMT_GLOBAL2,
+        A.VIP_RET_PROFIT_AMT_GLOBAL3,
+        A.VIP_RET_TAX_AMT,
+        A.VIP_RET_TAX_AMT_GLOBAL1,
+        A.VIP_RET_TAX_AMT_GLOBAL2,
+        A.VIP_RET_TAX_AMT_GLOBAL3,
+        A.VIP_RET_EMP_DISC_AMT,
+        A.VIP_RET_EMP_DISC_AMT_GLOBAL1,
+        A.VIP_RET_EMP_DISC_AMT_GLOBAL2,
+        A.VIP_RET_EMP_DISC_AMT_GLOBAL3,
+        A.VIP_RET_MANUAL_MKDN_AMT,
+        A.V_RET_MANUAL_MKDN_AMT_GLOBAL1,
+        A.V_RET_MANUAL_MKDN_AMT_GLOBAL2,
+        A.V_RET_MANUAL_MKDN_AMT_GLOBAL3,
+        A.VIP_RET_MANUAL_MKUP_AMT,
+        A.V_RET_MANUAL_MKUP_AMT_GLOBAL1,
+        A.V_RET_MANUAL_MKUP_AMT_GLOBAL2,
+        A.V_RET_MANUAL_MKUP_AMT_GLOBAL3,
+        A.VIP_SLS_MANUAL_COUNT,
+        A.VIP_SLS_SCAN_COUNT,
+        A.VIP_RET_MANUAL_COUNT,
+        A.VIP_RET_SCAN_COUNT,) =
+       (SELECT SUM(B.VIP_SLS_QTY) VIP_SLS_QTY,
+               SUM(B.VIP_SLS_AMT_LCL) VIP_SLS_AMT_LCL,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL) VIP_SLS_PROFIT_AMT_LCL,
+               SUM(B.VIP_SLS_TAX_AMT_LCL) VIP_SLS_TAX_AMT_LCL,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL) VIP_SLS_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL) VIP_SLS_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL) VIP_SLS_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_RET_QTY) VIP_RET_QTY,
+               SUM(B.VIP_RET_AMT_LCL) VIP_RET_AMT_LCL,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL) VIP_RET_PROFIT_AMT_LCL,
+               SUM(B.VIP_RET_TAX_AMT_LCL) VIP_RET_TAX_AMT_LCL,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL) VIP_RET_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL) VIP_RET_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL) VIP_RET_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_SLS_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_AMT,
+               SUM(B.VIP_SLS_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_TAX_AMT,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_TAX_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_TAX_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_TAX_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_MANUAL_MKDN_AMT,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) V_SLS_MANUAL_MKDN_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) V_SLS_MANUAL_MKDN_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) V_SLS_MANUAL_MKDN_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_MANUAL_MKUP_AMT,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) V_SLS_MANUAL_MKUP_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) V_SLS_MANUAL_MKUP_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) V_SLS_MANUAL_MKUP_AMT_GLOBAL3,
+               SUM(B.VIP_RET_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_AMT,
+               SUM(B.VIP_RET_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_AMT_GLOBAL1,
+               SUM(B.VIP_RET_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_AMT_GLOBAL2,
+               SUM(B.VIP_RET_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_AMT_GLOBAL3,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_PROFIT_AMT,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_PROFIT_AMT_GLOBAL1,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_PROFIT_AMT_GLOBAL2,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_PROFIT_AMT_GLOBAL3,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_TAX_AMT,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_TAX_AMT_GLOBAL1,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_TAX_AMT_GLOBAL2,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_TAX_AMT_GLOBAL3,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT_GLOBAL1,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT_GLOBAL2,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT_GLOBAL3,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_MANUAL_MKDN_AMT,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) V_RET_MANUAL_MKDN_AMT_GLOBAL1,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) V_RET_MANUAL_MKDN_AMT_GLOBAL2,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) V_RET_MANUAL_MKDN_AMT_GLOBAL3,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_MANUAL_MKUP_AMT,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) V_RET_MANUAL_MKUP_AMT_GLOBAL1,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) V_RET_MANUAL_MKUP_AMT_GLOBAL2,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) V_RET_MANUAL_MKUP_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_MANUAL_COUNT) VIP_SLS_MANUAL_COUNT,
+               SUM(B.VIP_SLS_SCAN_COUNT) VIP_SLS_SCAN_COUNT,
+               SUM(B.VIP_RET_MANUAL_COUNT) VIP_RET_MANUAL_COUNT,
+               SUM(B.VIP_RET_SCAN_COUNT) VIP_RET_SCAN_COUNT
+          FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F B,
+               RABATCHER.W_PRODUCT_D_RTL_TMP P
+         WHERE B.PROD_SCD1_WID = P.PROD_SCD1_WID
+           AND P.PROD_DP_WID = A.PROD_DH_WID
+           AND A.RTL_TYPE_WID = B.RTL_TYPE_WID
+           AND A.DT_WID = B.DT_WID
+           AND A.BBG_RETAIL_TYPE_WID = B.BBG_RETAIL_TYPE_WID
+           AND B.DT_WID = &DTWID)
+ WHERE A.DT_WID = &DTWID;
+
+--PROD_DH_WID, RTL_TYPE_WID, DT_WID, BBG_RETAIL_TYPE_WID
+SELECT * FROM RADM.W_RTL_SLS_DP_DY_CUR_A;
+SELECT * FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F;
+
+--2.6.W_RTL_SLS_DP_LC_DY_A-----------------------------------------------------------------------------
+UPDATE RADM.W_RTL_SLS_DP_LC_DY_A A
+   SET (A.VIP_SLS_QTY,
+        A.VIP_SLS_AMT_LCL,
+        A.VIP_SLS_PROFIT_AMT_LCL,
+        A.VIP_SLS_TAX_AMT_LCL,
+        A.VIP_SLS_EMP_DISC_AMT_LCL,
+        A.VIP_RET_QTY,
+        A.VIP_RET_AMT_LCL,
+        A.VIP_RET_PROFIT_AMT_LCL,
+        A.VIP_RET_TAX_AMT_LCL,
+        A.VIP_RET_EMP_DISC_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKDN_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKUP_AMT_LCL,
+        A.VIP_RET_MANUAL_MKDN_AMT_LCL,
+        A.VIP_RET_MANUAL_MKUP_AMT_LCL,
+        A.VIP_SLS_MANUAL_COUNT,
+        A.VIP_SLS_SCAN_COUNT,
+        A.VIP_RET_MANUAL_COUNT,
+        A.VIP_RET_SCAN_COUNT) =
+       (SELECT SUM(B.VIP_SLS_QTY) VIP_SLS_QTY,
+               SUM(B.VIP_SLS_AMT_LCL) VIP_SLS_AMT_LCL,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL) VIP_SLS_PROFIT_AMT_LCL,
+               SUM(B.VIP_SLS_TAX_AMT_LCL) VIP_SLS_TAX_AMT_LCL,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL) VIP_SLS_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_RET_QTY) VIP_RET_QTY,
+               SUM(B.VIP_RET_AMT_LCL) VIP_RET_AMT_LCL,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL) VIP_RET_PROFIT_AMT_LCL,
+               SUM(B.VIP_RET_TAX_AMT_LCL) VIP_RET_TAX_AMT_LCL,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL) VIP_RET_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL) VIP_SLS_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL) VIP_SLS_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL) VIP_RET_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL) VIP_RET_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_COUNT) VIP_SLS_MANUAL_COUNT,
+               SUM(B.VIP_SLS_SCAN_COUNT) VIP_SLS_SCAN_COUNT,
+               SUM(B.VIP_RET_MANUAL_COUNT) VIP_RET_MANUAL_COUNT,
+               SUM(B.VIP_RET_SCAN_COUNT) VIP_RET_SCAN_COUNT
+          FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F B,
+               RABATCHER.W_PRODUCT_D_RTL_TMP P
+         WHERE B.PROD_WID = P.PROD_IT_WID
+           AND P.PROD_DP_WID = A.PROD_DH_WID
+           AND A.ORG_WID = B.ORG_WID
+           AND A.RTL_TYPE_WID = B.RTL_TYPE_WID
+           AND A.DT_WID = B.DT_WID
+           AND A.BBG_RETAIL_TYPE_WID = B.BBG_RETAIL_TYPE_WID
+           AND B.DT_WID = &DTWID)
+ WHERE A.DT_WID = &DTWID;
+
+--PROD_DH_WID, ORG_WID, RTL_TYPE_WID, DT_WID, BBG_RETAIL_TYPE_WID
+SELECT * FROM RADM.W_RTL_SLS_DP_LC_DY_A;
+SELECT * FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F;
+
+--2.7.W_RTL_SLS_DP_LC_DY_CUR_A-----------------------------------------------------------------------------
+UPDATE RADM.W_RTL_SLS_DP_LC_DY_CUR_A A
+   SET (A.VIP_SLS_QTY,
+        A.VIP_SLS_AMT_LCL,
+        A.VIP_SLS_PROFIT_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKDN_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKUP_AMT_LCL,
+        A.VIP_SLS_TAX_AMT_LCL,
+        A.VIP_SLS_EMP_DISC_AMT_LCL,
+        A.VIP_SLS_MANUAL_COUNT,
+        A.VIP_SLS_SCAN_COUNT,
+        A.VIP_RET_QTY,
+        A.VIP_RET_AMT_LCL,
+        A.VIP_RET_PROFIT_AMT_LCL,
+        A.VIP_RET_MANUAL_MKDN_AMT_LCL,
+        A.VIP_RET_MANUAL_MKUP_AMT_LCL,
+        A.VIP_RET_TAX_AMT_LCL,
+        A.VIP_RET_EMP_DISC_AMT_LCL,
+        A.VIP_RET_MANUAL_COUNT,
+        A.VIP_RET_SCAN_COUNT) =
+       (SELECT SUM(B.VIP_SLS_QTY) VIP_SLS_QTY,
+               SUM(B.VIP_SLS_AMT_LCL) VIP_SLS_AMT_LCL,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL) VIP_SLS_PROFIT_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL) VIP_SLS_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL) VIP_SLS_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_SLS_TAX_AMT_LCL) VIP_SLS_TAX_AMT_LCL,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL) VIP_SLS_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_COUNT) VIP_SLS_MANUAL_COUNT,
+               SUM(B.VIP_SLS_SCAN_COUNT) VIP_SLS_SCAN_COUNT,
+               SUM(B.VIP_RET_QTY) VIP_RET_QTY,
+               SUM(B.VIP_RET_AMT_LCL) VIP_RET_AMT_LCL,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL) VIP_RET_PROFIT_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL) VIP_RET_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL) VIP_RET_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_RET_TAX_AMT_LCL) VIP_RET_TAX_AMT_LCL,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL) VIP_RET_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_COUNT) VIP_RET_MANUAL_COUNT,
+               SUM(B.VIP_RET_SCAN_COUNT) VIP_RET_SCAN_COUNT
+          FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F B,
+               RABATCHER.W_PRODUCT_D_RTL_TMP P
+         WHERE B.PROD_SCD1_WID = P.PROD_SCD1_WID
+           AND P.PROD_DP_WID = A.PROD_DH_WID
+           AND A.ORG_WID = B.ORG_WID
+           AND A.RTL_TYPE_WID = B.RTL_TYPE_WID
+           AND A.DT_WID = B.DT_WID
+           AND A.BBG_RETAIL_TYPE_WID = B.BBG_RETAIL_TYPE_WID
+           AND B.DT_WID = &DTWID)
+ WHERE A.DT_WID = &DTWID;
+ 
+--PROD_DH_WID, ORG_WID, RTL_TYPE_WID, DT_WID, BBG_RETAIL_TYPE_WID
+SELECT * FROM RADM.W_RTL_SLS_DP_LC_DY_CUR_A;
+SELECT * FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F;
+
+--2.8.W_RTL_SLS_IT_DY_A -----------------------------------------------------------------------------
+UPDATE RADM.W_RTL_SLS_IT_DY_A A
+   SET (A.VIP_SLS_QTY,
+        A.VIP_SLS_AMT_LCL,
+        A.VIP_SLS_PROFIT_AMT_LCL,
+        A.VIP_SLS_TAX_AMT_LCL,
+        A.VIP_SLS_EMP_DISC_AMT_LCL,
+        A.VIP_RET_QTY,
+        A.VIP_RET_AMT_LCL,
+        A.VIP_RET_PROFIT_AMT_LCL,
+        A.VIP_RET_TAX_AMT_LCL,
+        A.VIP_RET_EMP_DISC_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKDN_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKUP_AMT_LCL,
+        A.VIP_RET_MANUAL_MKDN_AMT_LCL,
+        A.VIP_RET_MANUAL_MKUP_AMT_LCL,
+        A.VIP_SLS_AMT,
+        A.VIP_SLS_AMT_GLOBAL1,
+        A.VIP_SLS_AMT_GLOBAL2,
+        A.VIP_SLS_AMT_GLOBAL3,
+        A.VIP_SLS_PROFIT_AMT,
+        A.VIP_SLS_PROFIT_AMT_GLOBAL1,
+        A.VIP_SLS_PROFIT_AMT_GLOBAL2,
+        A.VIP_SLS_PROFIT_AMT_GLOBAL3,
+        A.VIP_SLS_MANUAL_MKDN_AMT,
+        A.VIP_SLS_MANUAL_MKUP_AMT,
+        A.VIP_SLS_TAX_AMT,
+        A.VIP_SLS_TAX_AMT_GLOBAL1,
+        A.VIP_SLS_TAX_AMT_GLOBAL2,
+        A.VIP_SLS_TAX_AMT_GLOBAL3,
+        A.VIP_SLS_EMP_DISC_AMT,
+        A.VIP_SLS_EMP_DISC_AMT_GLOBAL1,
+        A.VIP_SLS_EMP_DISC_AMT_GLOBAL2,
+        A.VIP_SLS_EMP_DISC_AMT_GLOBAL3,
+        A.VIP_RET_AMT,
+        A.VIP_RET_AMT_GLOBAL1,
+        A.VIP_RET_AMT_GLOBAL2,
+        A.VIP_RET_AMT_GLOBAL3,
+        A.VIP_RET_PROFIT_AMT,
+        A.VIP_RET_PROFIT_AMT_GLOBAL1,
+        A.VIP_RET_PROFIT_AMT_GLOBAL2,
+        A.VIP_RET_PROFIT_AMT_GLOBAL3,
+        A.VIP_RET_MANUAL_MKDN_AMT,
+        A.VIP_RET_MANUAL_MKUP_AMT,
+        A.VIP_RET_TAX_AMT,
+        A.VIP_RET_TAX_AMT_GLOBAL1,
+        A.VIP_RET_TAX_AMT_GLOBAL2,
+        A.VIP_RET_TAX_AMT_GLOBAL3,
+        A.VIP_RET_EMP_DISC_AMT,
+        A.VIP_RET_EMP_DISC_AMT_GLOBAL1,
+        A.VIP_RET_EMP_DISC_AMT_GLOBAL2,
+        A.VIP_RET_EMP_DISC_AMT_GLOBAL3,
+        A.VIP_SLS_MANUAL_COUNT,
+        A.VIP_SLS_SCAN_COUNT,
+        A.VIP_RET_MANUAL_COUNT,
+        A.VIP_RET_SCAN_COUNT,
+        A.V_SLS_MANUAL_MKDN_AMT_GLOBAL1,
+        A.V_SLS_MANUAL_MKDN_AMT_GLOBAL2,
+        A.V_SLS_MANUAL_MKDN_AMT_GLOBAL3,
+        A.V_SLS_MANUAL_MKUP_AMT_GLOBAL1,
+        A.V_SLS_MANUAL_MKUP_AMT_GLOBAL2,
+        A.V_SLS_MANUAL_MKUP_AMT_GLOBAL3,
+        A.V_RET_MANUAL_MKDN_AMT_GLOBAL1,
+        A.V_RET_MANUAL_MKDN_AMT_GLOBAL2,
+        A.V_RET_MANUAL_MKDN_AMT_GLOBAL3,
+        A.V_RET_MANUAL_MKUP_AMT_GLOBAL1,
+        A.V_RET_MANUAL_MKUP_AMT_GLOBAL2,
+        A.V_RET_MANUAL_MKUP_AMT_GLOBAL3) =
+       (SELECT SUM(B.VIP_SLS_QTY) VIP_SLS_QTY,
+               SUM(B.VIP_SLS_AMT_LCL) VIP_SLS_AMT_LCL,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL) VIP_SLS_PROFIT_AMT_LCL,
+               SUM(B.VIP_SLS_TAX_AMT_LCL) VIP_SLS_TAX_AMT_LCL,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL) VIP_SLS_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_RET_QTY) VIP_RET_QTY,
+               SUM(B.VIP_RET_AMT_LCL) VIP_RET_AMT_LCL,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL) VIP_RET_PROFIT_AMT_LCL,
+               SUM(B.VIP_RET_TAX_AMT_LCL) VIP_RET_TAX_AMT_LCL,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL) VIP_RET_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL) VIP_SLS_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL) VIP_SLS_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL) VIP_RET_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL) VIP_RET_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_SLS_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_AMT,
+               SUM(B.VIP_SLS_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_MANUAL_MKDN_AMT,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_MANUAL_MKUP_AMT,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_TAX_AMT,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_TAX_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_TAX_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_TAX_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT_GLOBAL3,
+               SUM(B.VIP_RET_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_AMT,
+               SUM(B.VIP_RET_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_AMT_GLOBAL1,
+               SUM(B.VIP_RET_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_AMT_GLOBAL2,
+               SUM(B.VIP_RET_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_AMT_GLOBAL3,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_PROFIT_AMT,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_PROFIT_AMT_GLOBAL1,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_PROFIT_AMT_GLOBAL2,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_PROFIT_AMT_GLOBAL3,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_MANUAL_MKDN_AMT,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_MANUAL_MKUP_AMT,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_TAX_AMT,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_TAX_AMT_GLOBAL1,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_TAX_AMT_GLOBAL2,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_TAX_AMT_GLOBAL3,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT_GLOBAL1,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT_GLOBAL2,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_MANUAL_COUNT) VIP_SLS_MANUAL_COUNT,
+               SUM(B.VIP_SLS_SCAN_COUNT) VIP_SLS_SCAN_COUNT,
+               SUM(B.VIP_RET_MANUAL_COUNT) VIP_RET_MANUAL_COUNT,
+               SUM(B.VIP_RET_SCAN_COUNT) VIP_RET_SCAN_COUNT,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) V_SLS_MANUAL_MKDN_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) V_SLS_MANUAL_MKDN_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) V_SLS_MANUAL_MKDN_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) V_SLS_MANUAL_MKUP_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) V_SLS_MANUAL_MKUP_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) V_SLS_MANUAL_MKUP_AMT_GLOBAL3,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) V_RET_MANUAL_MKDN_AMT_GLOBAL1,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) V_RET_MANUAL_MKDN_AMT_GLOBAL2,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) V_RET_MANUAL_MKDN_AMT_GLOBAL3,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) V_RET_MANUAL_MKUP_AMT_GLOBAL1,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) V_RET_MANUAL_MKUP_AMT_GLOBAL2,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) V_RET_MANUAL_MKUP_AMT_GLOBAL3
+          FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F B
+         WHERE B.PROD_WID = A.PROD_WID
+           AND A.RTL_TYPE_WID = B.RTL_TYPE_WID
+           AND A.DT_WID = B.DT_WID
+           AND A.BBG_RETAIL_TYPE_WID = B.BBG_RETAIL_TYPE_WID
+           AND B.DT_WID = &DTWID)
+ WHERE A.DT_WID = &DTWID;
+
+--PROD_WID, RTL_TYPE_WID, DT_WID, VOUCHER_FLG, BBG_RETAIL_TYPE_WID
+SELECT * FROM RADM.W_RTL_SLS_IT_DY_A;
+SELECT * FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F;
+
+--2.9.W_RTL_SLS_IT_DY_SN_A-----------------------------------------------------------------------------
+UPDATE RADM.W_RTL_SLS_IT_DY_SN_A A
+   SET (A.VIP_SLS_QTY,
+        A.VIP_SLS_AMT_LCL,
+        A.VIP_SLS_AMT,
+        A.VIP_SLS_AMT_GLOBAL1,
+        A.VIP_SLS_AMT_GLOBAL2,
+        A.VIP_SLS_AMT_GLOBAL3,
+        A.VIP_SLS_PROFIT_AMT_LCL,
+        A.VIP_SLS_PROFIT_AMT,
+        A.VIP_SLS_PROFIT_AMT_GLOBAL1,
+        A.VIP_SLS_PROFIT_AMT_GLOBAL2,
+        A.VIP_SLS_PROFIT_AMT_GLOBAL3,
+        A.VIP_SLS_TAX_AMT_LCL,
+        A.VIP_SLS_TAX_AMT,
+        A.VIP_SLS_TAX_AMT_GLOBAL1,
+        A.VIP_SLS_TAX_AMT_GLOBAL2,
+        A.VIP_SLS_TAX_AMT_GLOBAL3,
+        A.VIP_SLS_EMP_DISC_AMT_LCL,
+        A.VIP_SLS_EMP_DISC_AMT,
+        A.VIP_SLS_EMP_DISC_AMT_GLOBAL1,
+        A.VIP_SLS_EMP_DISC_AMT_GLOBAL2,
+        A.VIP_SLS_EMP_DISC_AMT_GLOBAL3,
+        A.VIP_RET_QTY,
+        A.VIP_RET_AMT_LCL,
+        A.VIP_RET_AMT,
+        A.VIP_RET_AMT_GLOBAL1,
+        A.VIP_RET_AMT_GLOBAL2,
+        A.VIP_RET_AMT_GLOBAL3,
+        A.VIP_RET_PROFIT_AMT_LCL,
+        A.VIP_RET_PROFIT_AMT,
+        A.VIP_RET_PROFIT_AMT_GLOBAL1,
+        A.VIP_RET_PROFIT_AMT_GLOBAL2,
+        A.VIP_RET_PROFIT_AMT_GLOBAL3,
+        A.VIP_RET_TAX_AMT_LCL,
+        A.VIP_RET_TAX_AMT,
+        A.VIP_RET_TAX_AMT_GLOBAL1,
+        A.VIP_RET_TAX_AMT_GLOBAL2,
+        A.VIP_RET_TAX_AMT_GLOBAL3,
+        A.VIP_RET_EMP_DISC_AMT_LCL,
+        A.VIP_RET_EMP_DISC_AMT,
+        A.VIP_RET_EMP_DISC_AMT_GLOBAL1,
+        A.VIP_RET_EMP_DISC_AMT_GLOBAL2,
+        A.VIP_RET_EMP_DISC_AMT_GLOBAL3) =
+       (SELECT SUM(B.VIP_SLS_QTY) VIP_SLS_QTY,
+               SUM(B.VIP_SLS_AMT_LCL) VIP_SLS_AMT_LCL,
+               SUM(B.VIP_SLS_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_AMT,
+               SUM(B.VIP_SLS_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL) VIP_SLS_PROFIT_AMT_LCL,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_TAX_AMT_LCL) VIP_SLS_TAX_AMT_LCL,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_TAX_AMT,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_TAX_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_TAX_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_TAX_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL) VIP_SLS_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT_GLOBAL3,
+               SUM(B.VIP_RET_QTY) VIP_RET_QTY,
+               SUM(B.VIP_RET_AMT_LCL) VIP_RET_AMT_LCL,
+               SUM(B.VIP_RET_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_AMT,
+               SUM(B.VIP_RET_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_AMT_GLOBAL1,
+               SUM(B.VIP_RET_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_AMT_GLOBAL2,
+               SUM(B.VIP_RET_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_AMT_GLOBAL3,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL) VIP_RET_PROFIT_AMT_LCL,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_PROFIT_AMT,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_PROFIT_AMT_GLOBAL1,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_PROFIT_AMT_GLOBAL2,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_PROFIT_AMT_GLOBAL3,
+               SUM(B.VIP_RET_TAX_AMT_LCL) VIP_RET_TAX_AMT_LCL,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_TAX_AMT,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_TAX_AMT_GLOBAL1,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_TAX_AMT_GLOBAL2,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_TAX_AMT_GLOBAL3,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL) VIP_RET_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT_GLOBAL1,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT_GLOBAL2,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT_GLOBAL3
+          FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F B, RADM.W_RTL_SEASON_IT_D S
+         WHERE B.PROD_WID = S.PROD_WID
+           AND TO_DATE(SUBSTR(B.DT_WID, 2, 8), 'YYYYMMDD') BETWEEN
+               S.EFFECTIVE_FROM_DT AND S.EFFECTIVE_TO_DT
+           AND A.PROD_WID = B.PROD_WID
+           AND A.RTL_TYPE_WID = B.RTL_TYPE_WID
+           AND A.DT_WID = B.DT_WID
+           AND A.SEASON_WID = S.SEASON_WID
+           AND A.BBG_RETAIL_TYPE_WID = B.BBG_RETAIL_TYPE_WID)
+ WHERE A.DT_WID = &DTWID;
+
+--PROD_WID, RTL_TYPE_WID, DT_WID, VOUCHER_FLG, SEASON_WID, BBG_RETAIL_TYPE_WID
+SELECT * FROM RADM.W_RTL_SLS_IT_DY_SN_A;
+SELECT * FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F;
+
+--2.10.W_RTL_SLS_IT_LC_DY_A-----------------------------------------------------------------------------
+UPDATE RADM.W_RTL_SLS_IT_LC_DY_A A
+   SET (A.VIP_SLS_QTY,
+        A.VIP_SLS_AMT_LCL,
+        A.VIP_SLS_PROFIT_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKDN_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKUP_AMT_LCL,
+        A.VIP_SLS_TAX_AMT_LCL,
+        A.VIP_SLS_EMP_DISC_AMT_LCL,
+        A.VIP_SLS_MANUAL_COUNT,
+        A.VIP_SLS_SCAN_COUNT,
+        A.VIP_RET_QTY,
+        A.VIP_RET_AMT_LCL,
+        A.VIP_RET_PROFIT_AMT_LCL,
+        A.VIP_RET_MANUAL_MKDN_AMT_LCL,
+        A.VIP_RET_MANUAL_MKUP_AMT_LCL,
+        A.VIP_RET_TAX_AMT_LCL,
+        A.VIP_RET_EMP_DISC_AMT_LCL,
+        A.VIP_RET_MANUAL_COUNT,
+        A.VIP_RET_SCAN_COUNT) =
+       (SELECT SUM(B.VIP_SLS_QTY) VIP_SLS_QTY,
+               SUM(B.VIP_SLS_AMT_LCL) VIP_SLS_AMT_LCL,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL) VIP_SLS_PROFIT_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL) VIP_SLS_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL) VIP_SLS_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_SLS_TAX_AMT_LCL) VIP_SLS_TAX_AMT_LCL,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL) VIP_SLS_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_COUNT) VIP_SLS_MANUAL_COUNT,
+               SUM(B.VIP_SLS_SCAN_COUNT) VIP_SLS_SCAN_COUNT,
+               SUM(B.VIP_RET_QTY) VIP_RET_QTY,
+               SUM(B.VIP_RET_AMT_LCL) VIP_RET_AMT_LCL,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL) VIP_RET_PROFIT_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL) VIP_RET_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL) VIP_RET_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_RET_TAX_AMT_LCL) VIP_RET_TAX_AMT_LCL,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL) VIP_RET_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_COUNT) VIP_RET_MANUAL_COUNT,
+               SUM(B.VIP_RET_SCAN_COUNT) VIP_RET_SCAN_COUNT
+          FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F B
+         WHERE A.PROD_WID = B.PROD_WID
+           AND A.ORG_WID = B.ORG_WID
+           AND A.RTL_TYPE_WID = B.RTL_TYPE_WID
+           AND A.DT_WID = B.DT_WID
+           AND A.BBG_RETAIL_TYPE_WID = B.BBG_RETAIL_TYPE_WID
+           AND A.BBG_ITEM_LOC_WID = B.BBG_ITEM_LOC_WID)
+ WHERE A.DT_WID = &DTWID;
+
+--PROD_WID, ORG_WID, RTL_TYPE_WID, DT_WID, VOUCHER_FLG, BBG_RETAIL_TYPE_WID, BBG_ITEM_LOC_WID
+SELECT * FROM RADM.W_RTL_SLS_IT_LC_DY_A;
+SELECT * FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F;
+
+--2.11.W_RTL_SLS_IT_LC_DY_SN_A-----------------------------------------------------------------------------
+UPDATE W_RTL_SLS_IT_LC_DY_SN_A A
+   SET (A.VIP_SLS_QTY,
+        A.VIP_SLS_AMT_LCL,
+        A.VIP_SLS_PROFIT_AMT_LCL,
+        A.VIP_SLS_TAX_AMT_LCL,
+        A.VIP_SLS_EMP_DISC_AMT_LCL,
+        A.VIP_RET_QTY,
+        A.VIP_RET_AMT_LCL,
+        A.VIP_RET_PROFIT_AMT_LCL,
+        A.VIP_RET_TAX_AMT_LCL,
+        A.VIP_RET_EMP_DISC_AMT_LCL) =
+       (SELECT SUM(B.VIP_SLS_QTY) VIP_SLS_QTY,
+               SUM(B.VIP_SLS_AMT_LCL) VIP_SLS_AMT_LCL,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL) VIP_SLS_PROFIT_AMT_LCL,
+               SUM(B.VIP_SLS_TAX_AMT_LCL) VIP_SLS_TAX_AMT_LCL,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL) VIP_SLS_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_RET_QTY) VIP_RET_QTY,
+               SUM(B.VIP_RET_AMT_LCL) VIP_RET_AMT_LCL,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL) VIP_RET_PROFIT_AMT_LCL,
+               SUM(B.VIP_RET_TAX_AMT_LCL) VIP_RET_TAX_AMT_LCL,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL) VIP_RET_EMP_DISC_AMT_LCL
+          FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F B, RADM.W_RTL_SEASON_IT_D S
+         WHERE B.PROD_WID = S.PROD_WID
+           AND TO_DATE(SUBSTR(B.DT_WID, 2, 8), 'YYYYMMDD') BETWEEN
+               S.EFFECTIVE_FROM_DT AND S.EFFECTIVE_TO_DT
+           AND A.PROD_WID = B.PROD_WID
+           AND A.ORG_WID = B.ORG_WID
+           AND A.RTL_TYPE_WID = B.RTL_TYPE_WID
+           AND A.DT_WID = B.DT_WID
+           AND A.SEASON_WID = S.SEASON_WID
+           AND A.BBG_RETAIL_TYPE_WID = B.BBG_RETAIL_TYPE_WID)
+ WHERE A.DT_WID = &DTWID;
+
+--PROD_WID, ORG_WID, RTL_TYPE_WID, DT_WID, VOUCHER_FLG, SEASON_WID, BBG_RETAIL_TYPE_WID
+SELECT * FROM RADM.W_RTL_SLS_IT_LC_DY_SN_A;
+SELECT * FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F;
+
+--2.12.W_RTL_SLS_LC_DY_A-----------------------------------------------------------------------------
+UPDATE W_RTL_SLS_LC_DY_A A
+   SET (A.VIP_SLS_QTY,
+        A.VIP_SLS_AMT_LCL,
+        A.VIP_SLS_PROFIT_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKDN_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKUP_AMT_LCL,
+        A.VIP_SLS_TAX_AMT_LCL,
+        A.VIP_SLS_EMP_DISC_AMT_LCL,
+        A.VIP_SLS_TRX_COUNT,
+        A.VIP_RET_QTY,
+        A.VIP_RET_AMT_LCL,
+        A.VIP_RET_PROFIT_AMT_LCL,
+        A.VIP_RET_MANUAL_MKDN_AMT_LCL,
+        A.VIP_RET_MANUAL_MKUP_AMT_LCL,
+        A.VIP_RET_TAX_AMT_LCL,
+        A.VIP_RET_EMP_DISC_AMT_LCL,
+        A.VIP_RET_TRX_COUNT) =
+       (SELECT SUM(B.VIP_SLS_QTY) VIP_SLS_QTY,
+               SUM(B.VIP_SLS_AMT_LCL) VIP_SLS_AMT_LCL,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL) VIP_SLS_PROFIT_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL) VIP_SLS_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL) VIP_SLS_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_SLS_TAX_AMT_LCL) VIP_SLS_TAX_AMT_LCL,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL) VIP_SLS_EMP_DISC_AMT_LCL,
+               0 VIP_SLS_TRX_COUNT,
+               SUM(B.VIP_RET_QTY) VIP_RET_QTY,
+               SUM(B.VIP_RET_AMT_LCL) VIP_RET_AMT_LCL,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL) VIP_RET_PROFIT_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL) VIP_RET_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL) VIP_RET_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_RET_TAX_AMT_LCL) VIP_RET_TAX_AMT_LCL,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL) VIP_RET_EMP_DISC_AMT_LCL,
+               0 VIP_RET_TRX_COUNT
+          FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F B
+         WHERE A.ORG_WID = B.ORG_WID
+           AND A.RTL_TYPE_WID = B.RTL_TYPE_WID
+           AND A.DT_WID = B.DT_WID
+           AND A.BBG_RETAIL_TYPE_WID = B.BBG_RETAIL_TYPE_WID)
+ WHERE A.DT_WID = &DTWID;
+ 
+--ORG_WID, RTL_TYPE_WID, DT_WID, VOUCHER_FLG, BBG_RETAIL_TYPE_WID
+SELECT * FROM RADM.W_RTL_SLS_LC_DY_A;
+SELECT * FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F;
+
+--2.13.W_RTL_SLS_SC_DY_A-----------------------------------------------------------------------------
+UPDATE W_RTL_SLS_SC_DY_A A
+   SET (A.VIP_SLS_QTY,
+        A.VIP_SLS_AMT_LCL,
+        A.VIP_SLS_PROFIT_AMT_LCL,
+        A.VIP_SLS_TAX_AMT_LCL,
+        A.VIP_SLS_EMP_DISC_AMT_LCL,
+        A.VIP_RET_QTY,
+        A.VIP_RET_AMT_LCL,
+        A.VIP_RET_PROFIT_AMT_LCL,
+        A.VIP_RET_TAX_AMT_LCL,
+        A.VIP_RET_EMP_DISC_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKDN_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKUP_AMT_LCL,
+        A.VIP_RET_MANUAL_MKDN_AMT_LCL,
+        A.VIP_RET_MANUAL_MKUP_AMT_LCL,
+        A.VIP_SLS_AMT,
+        A.VIP_SLS_AMT_GLOBAL1,
+        A.VIP_SLS_AMT_GLOBAL2,
+        A.VIP_SLS_AMT_GLOBAL3,
+        A.VIP_SLS_PROFIT_AMT,
+        A.VIP_SLS_PROFIT_AMT_GLOBAL1,
+        A.VIP_SLS_PROFIT_AMT_GLOBAL2,
+        A.VIP_SLS_PROFIT_AMT_GLOBAL3,
+        A.VIP_SLS_MANUAL_MKDN_AMT,
+        A.VIP_SLS_MANUAL_MKUP_AMT,
+        A.VIP_SLS_TAX_AMT,
+        A.VIP_SLS_TAX_AMT_GLOBAL1,
+        A.VIP_SLS_TAX_AMT_GLOBAL2,
+        A.VIP_SLS_TAX_AMT_GLOBAL3,
+        A.VIP_SLS_EMP_DISC_AMT,
+        A.VIP_SLS_EMP_DISC_AMT_GLOBAL1,
+        A.VIP_SLS_EMP_DISC_AMT_GLOBAL2,
+        A.VIP_SLS_EMP_DISC_AMT_GLOBAL3,
+        A.VIP_RET_AMT,
+        A.VIP_RET_AMT_GLOBAL1,
+        A.VIP_RET_AMT_GLOBAL2,
+        A.VIP_RET_AMT_GLOBAL3,
+        A.VIP_RET_PROFIT_AMT,
+        A.VIP_RET_PROFIT_AMT_GLOBAL1,
+        A.VIP_RET_PROFIT_AMT_GLOBAL2,
+        A.VIP_RET_PROFIT_AMT_GLOBAL3,
+        A.VIP_RET_MANUAL_MKDN_AMT,
+        A.VIP_RET_MANUAL_MKUP_AMT,
+        A.VIP_RET_TAX_AMT,
+        A.VIP_RET_TAX_AMT_GLOBAL1,
+        A.VIP_RET_TAX_AMT_GLOBAL2,
+        A.VIP_RET_TAX_AMT_GLOBAL3,
+        A.VIP_RET_EMP_DISC_AMT,
+        A.VIP_RET_EMP_DISC_AMT_GLOBAL1,
+        A.VIP_RET_EMP_DISC_AMT_GLOBAL2,
+        A.VIP_RET_EMP_DISC_AMT_GLOBAL3,
+        A.VIP_SLS_MANUAL_COUNT,
+        A.VIP_SLS_SCAN_COUNT,
+        A.VIP_RET_MANUAL_COUNT,
+        A.VIP_RET_SCAN_COUNT,
+        A.V_SLS_MANUAL_MKDN_AMT_GLOBAL1,
+        A.V_SLS_MANUAL_MKDN_AMT_GLOBAL2,
+        A.V_SLS_MANUAL_MKDN_AMT_GLOBAL3,
+        A.V_SLS_MANUAL_MKUP_AMT_GLOBAL1,
+        A.V_SLS_MANUAL_MKUP_AMT_GLOBAL2,
+        A.V_SLS_MANUAL_MKUP_AMT_GLOBAL3,
+        A.V_RET_MANUAL_MKDN_AMT_GLOBAL1,
+        A.V_RET_MANUAL_MKDN_AMT_GLOBAL2,
+        A.V_RET_MANUAL_MKDN_AMT_GLOBAL3,
+        A.V_RET_MANUAL_MKUP_AMT_GLOBAL1,
+        A.V_RET_MANUAL_MKUP_AMT_GLOBAL2,
+        A.V_RET_MANUAL_MKUP_AMT_GLOBAL3) =
+       (SELECT SUM(B.VIP_SLS_QTY) VIP_SLS_QTY,
+               SUM(B.VIP_SLS_AMT_LCL) VIP_SLS_AMT_LCL,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL) VIP_SLS_PROFIT_AMT_LCL,
+               SUM(B.VIP_SLS_TAX_AMT_LCL) VIP_SLS_TAX_AMT_LCL,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL) VIP_SLS_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_RET_QTY) VIP_RET_QTY,
+               SUM(B.VIP_RET_AMT_LCL) VIP_RET_AMT_LCL,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL) VIP_RET_PROFIT_AMT_LCL,
+               SUM(B.VIP_RET_TAX_AMT_LCL) VIP_RET_TAX_AMT_LCL,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL) VIP_RET_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL) VIP_SLS_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL) VIP_SLS_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL) VIP_RET_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL) VIP_RET_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_SLS_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_AMT,
+               SUM(B.VIP_SLS_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_MANUAL_MKDN_AMT,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_MANUAL_MKUP_AMT,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_TAX_AMT,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_TAX_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_TAX_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_TAX_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT_GLOBAL3,
+               SUM(B.VIP_RET_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_AMT,
+               SUM(B.VIP_RET_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_AMT_GLOBAL1,
+               SUM(B.VIP_RET_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_AMT_GLOBAL2,
+               SUM(B.VIP_RET_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_AMT_GLOBAL3,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_PROFIT_AMT,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_PROFIT_AMT_GLOBAL1,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_PROFIT_AMT_GLOBAL2,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_PROFIT_AMT_GLOBAL3,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_MANUAL_MKDN_AMT,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_MANUAL_MKUP_AMT,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_TAX_AMT,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_TAX_AMT_GLOBAL1,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_TAX_AMT_GLOBAL2,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_TAX_AMT_GLOBAL3,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT_GLOBAL1,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT_GLOBAL2,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_MANUAL_COUNT) VIP_SLS_MANUAL_COUNT,
+               SUM(B.VIP_SLS_SCAN_COUNT) VIP_SLS_SCAN_COUNT,
+               SUM(B.VIP_RET_MANUAL_COUNT) VIP_RET_MANUAL_COUNT,
+               SUM(B.VIP_RET_SCAN_COUNT) VIP_RET_SCAN_COUNT,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) V_SLS_MANUAL_MKDN_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) V_SLS_MANUAL_MKDN_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) V_SLS_MANUAL_MKDN_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) V_SLS_MANUAL_MKUP_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) V_SLS_MANUAL_MKUP_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) V_SLS_MANUAL_MKUP_AMT_GLOBAL3,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) V_RET_MANUAL_MKDN_AMT_GLOBAL1,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) V_RET_MANUAL_MKDN_AMT_GLOBAL2,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) V_RET_MANUAL_MKDN_AMT_GLOBAL3,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) V_RET_MANUAL_MKUP_AMT_GLOBAL1,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) V_RET_MANUAL_MKUP_AMT_GLOBAL2,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) V_RET_MANUAL_MKUP_AMT_GLOBAL3
+          FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F B,
+               RABATCHER.W_PRODUCT_D_RTL_TMP P
+         WHERE B.PROD_WID = P.PROD_IT_WID
+           AND P.PROD_SC_WID = A.PROD_DH_WID
+           AND A.RTL_TYPE_WID = B.RTL_TYPE_WID
+           AND A.DT_WID = B.DT_WID
+           AND A.BBG_RETAIL_TYPE_WID = B.BBG_RETAIL_TYPE_WID)
+ WHERE A.DT_WID = &DTWID;
+ 
+--PROD_DH_WID, RTL_TYPE_WID, DT_WID, BBG_RETAIL_TYPE_WID
+SELECT * FROM RADM.W_RTL_SLS_SC_DY_A;
+SELECT * FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F;
+
+--2.14.W_RTL_SLS_SC_DY_CUR_A-----------------------------------------------------------------------------
+UPDATE W_RTL_SLS_SC_DY_CUR_A A
+   SET (A.VIP_SLS_QTY,
+        A.VIP_SLS_AMT_LCL,
+        A.VIP_SLS_PROFIT_AMT_LCL,
+        A.VIP_SLS_TAX_AMT_LCL,
+        A.VIP_SLS_EMP_DISC_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKDN_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKUP_AMT_LCL,
+        A.VIP_RET_QTY,
+        A.VIP_RET_AMT_LCL,
+        A.VIP_RET_PROFIT_AMT_LCL,
+        A.VIP_RET_TAX_AMT_LCL,
+        A.VIP_RET_EMP_DISC_AMT_LCL,
+        A.VIP_RET_MANUAL_MKDN_AMT_LCL,
+        A.VIP_RET_MANUAL_MKUP_AMT_LCL,
+        A.VIP_SLS_AMT,
+        A.VIP_SLS_AMT_GLOBAL1,
+        A.VIP_SLS_AMT_GLOBAL2,
+        A.VIP_SLS_AMT_GLOBAL3,
+        A.VIP_SLS_PROFIT_AMT,
+        A.VIP_SLS_PROFIT_AMT_GLOBAL1,
+        A.VIP_SLS_PROFIT_AMT_GLOBAL2,
+        A.VIP_SLS_PROFIT_AMT_GLOBAL3,
+        A.VIP_SLS_TAX_AMT,
+        A.VIP_SLS_TAX_AMT_GLOBAL1,
+        A.VIP_SLS_TAX_AMT_GLOBAL2,
+        A.VIP_SLS_TAX_AMT_GLOBAL3,
+        A.VIP_SLS_EMP_DISC_AMT,
+        A.VIP_SLS_EMP_DISC_AMT_GLOBAL1,
+        A.VIP_SLS_EMP_DISC_AMT_GLOBAL2,
+        A.VIP_SLS_EMP_DISC_AMT_GLOBAL3,
+        A.VIP_SLS_MANUAL_MKDN_AMT,
+        A.VIP_SLS_MANUAL_MKUP_AMT,
+        A.VIP_RET_AMT,
+        A.VIP_RET_AMT_GLOBAL1,
+        A.VIP_RET_AMT_GLOBAL2,
+        A.VIP_RET_AMT_GLOBAL3,
+        A.VIP_RET_PROFIT_AMT,
+        A.VIP_RET_PROFIT_AMT_GLOBAL1,
+        A.VIP_RET_PROFIT_AMT_GLOBAL2,
+        A.VIP_RET_PROFIT_AMT_GLOBAL3,
+        A.VIP_RET_TAX_AMT,
+        A.VIP_RET_TAX_AMT_GLOBAL1,
+        A.VIP_RET_TAX_AMT_GLOBAL2,
+        A.VIP_RET_TAX_AMT_GLOBAL3,
+        A.VIP_RET_EMP_DISC_AMT,
+        A.VIP_RET_EMP_DISC_AMT_GLOBAL1,
+        A.VIP_RET_EMP_DISC_AMT_GLOBAL2,
+        A.VIP_RET_EMP_DISC_AMT_GLOBAL3,
+        A.VIP_RET_MANUAL_MKDN_AMT,
+        A.VIP_RET_MANUAL_MKUP_AMT,
+        A.VIP_SLS_MANUAL_COUNT,
+        A.VIP_SLS_SCAN_COUNT,
+        A.VIP_RET_MANUAL_COUNT,
+        A.VIP_RET_SCAN_COUNT,
+        A.V_SLS_MANUAL_MKDN_AMT_GLOBAL1,
+        A.V_SLS_MANUAL_MKDN_AMT_GLOBAL2,
+        A.V_SLS_MANUAL_MKDN_AMT_GLOBAL3,
+        A.V_SLS_MANUAL_MKUP_AMT_GLOBAL1,
+        A.V_SLS_MANUAL_MKUP_AMT_GLOBAL2,
+        A.V_SLS_MANUAL_MKUP_AMT_GLOBAL3,
+        A.V_RET_MANUAL_MKDN_AMT_GLOBAL1,
+        A.V_RET_MANUAL_MKDN_AMT_GLOBAL2,
+        A.V_RET_MANUAL_MKDN_AMT_GLOBAL3,
+        A.V_RET_MANUAL_MKUP_AMT_GLOBAL1,
+        A.V_RET_MANUAL_MKUP_AMT_GLOBAL2,
+        A.V_RET_MANUAL_MKUP_AMT_GLOBAL3) =
+       (SELECT SUM(B.VIP_SLS_QTY) VIP_SLS_QTY,
+               SUM(B.VIP_SLS_AMT_LCL) VIP_SLS_AMT_LCL,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL) VIP_SLS_PROFIT_AMT_LCL,
+               SUM(B.VIP_SLS_TAX_AMT_LCL) VIP_SLS_TAX_AMT_LCL,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL) VIP_SLS_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL) VIP_SLS_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL) VIP_SLS_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_RET_QTY) VIP_RET_QTY,
+               SUM(B.VIP_RET_AMT_LCL) VIP_RET_AMT_LCL,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL) VIP_RET_PROFIT_AMT_LCL,
+               SUM(B.VIP_RET_TAX_AMT_LCL) VIP_RET_TAX_AMT_LCL,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL) VIP_RET_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL) VIP_RET_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL) VIP_RET_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_SLS_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_AMT,
+               SUM(B.VIP_SLS_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_PROFIT_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_TAX_AMT,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_TAX_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_TAX_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_TAX_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_TAX_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_SLS_EMP_DISC_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_MANUAL_MKDN_AMT,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_SLS_MANUAL_MKUP_AMT,
+               SUM(B.VIP_RET_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_AMT,
+               SUM(B.VIP_RET_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_AMT_GLOBAL1,
+               SUM(B.VIP_RET_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_AMT_GLOBAL2,
+               SUM(B.VIP_RET_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_AMT_GLOBAL3,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_PROFIT_AMT,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_PROFIT_AMT_GLOBAL1,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_PROFIT_AMT_GLOBAL2,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_PROFIT_AMT_GLOBAL3,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_TAX_AMT,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_TAX_AMT_GLOBAL1,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_TAX_AMT_GLOBAL2,
+               SUM(B.VIP_RET_TAX_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_TAX_AMT_GLOBAL3,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT_GLOBAL1,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT_GLOBAL2,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) VIP_RET_EMP_DISC_AMT_GLOBAL3,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_MANUAL_MKDN_AMT,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL / B.LOC_EXCHANGE_RATE) VIP_RET_MANUAL_MKUP_AMT,
+               SUM(B.VIP_SLS_MANUAL_COUNT) VIP_SLS_MANUAL_COUNT,
+               SUM(B.VIP_SLS_SCAN_COUNT) VIP_SLS_SCAN_COUNT,
+               SUM(B.VIP_RET_MANUAL_COUNT) VIP_RET_MANUAL_COUNT,
+               SUM(B.VIP_RET_SCAN_COUNT) VIP_RET_SCAN_COUNT,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) V_SLS_MANUAL_MKDN_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) V_SLS_MANUAL_MKDN_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) V_SLS_MANUAL_MKDN_AMT_GLOBAL3,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) V_SLS_MANUAL_MKUP_AMT_GLOBAL1,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) V_SLS_MANUAL_MKUP_AMT_GLOBAL2,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) V_SLS_MANUAL_MKUP_AMT_GLOBAL3,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) V_RET_MANUAL_MKDN_AMT_GLOBAL1,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) V_RET_MANUAL_MKDN_AMT_GLOBAL2,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) V_RET_MANUAL_MKDN_AMT_GLOBAL3,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL / B.GLOBAL1_EXCHANGE_RATE) V_RET_MANUAL_MKUP_AMT_GLOBAL1,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL / B.GLOBAL2_EXCHANGE_RATE) V_RET_MANUAL_MKUP_AMT_GLOBAL2,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL / B.GLOBAL3_EXCHANGE_RATE) V_RET_MANUAL_MKUP_AMT_GLOBAL3
+          FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F B,
+               RABATCHER.W_PRODUCT_D_RTL_TMP P
+         WHERE B.PROD_SCD1_WID = P.PROD_SCD1_WID
+           AND P.PROD_SC_WID = A.PROD_DH_WID
+           AND A.RTL_TYPE_WID = B.RTL_TYPE_WID
+           AND A.DT_WID = B.DT_WID
+           AND A.BBG_RETAIL_TYPE_WID = B.BBG_RETAIL_TYPE_WID)
+ WHERE A.DT_WID = &DTWID;
+ 
+--PROD_DH_WID, RTL_TYPE_WID, DT_WID, BBG_RETAIL_TYPE_WID
+SELECT * FROM RADM.W_RTL_SLS_SC_DY_CUR_A;
+SELECT * FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F;
+
+--2.15.W_RTL_SLS_SC_LC_DY_A-----------------------------------------------------------------------------
+UPDATE W_RTL_SLS_SC_LC_DY_A A
+   SET () =
+       (SELECT 1
+          FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F B,
+               RABATCHER.W_PRODUCT_D_RTL_TMP P
+         WHERE B.PROD_WID = P.PROD_IT_WID
+           AND P.PROD_SC_WID = A.PROD_DH_WID
+           AND A.ORG_WID = B.ORG_WID
+           AND A.RTL_TYPE_WID = B.RTL_TYPE_WID
+           AND A.DT_WID = B.DT_WID
+           AND A.BBG_RETAIL_TYPE_WID = B.BBG_RETAIL_TYPE_WID)
+ WHERE A.DT_WID = &DTWID;
+ 
+--PROD_DH_WID, ORG_WID, RTL_TYPE_WID, DT_WID, BBG_RETAIL_TYPE_WID
+SELECT * FROM RADM.W_RTL_SLS_SC_LC_DY_A;
+SELECT * FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F;
+
+--2.16.W_RTL_SLS_SC_LC_DY_CUR_A-----------------------------------------------------------------------------
+UPDATE W_RTL_SLS_SC_LC_DY_CUR_A A
+   SET (A.VIP_SLS_QTY,
+        A.VIP_SLS_AMT_LCL,
+        A.VIP_SLS_PROFIT_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKDN_AMT_LCL,
+        A.VIP_SLS_MANUAL_MKUP_AMT_LCL,
+        A.VIP_SLS_TAX_AMT_LCL,
+        A.VIP_SLS_EMP_DISC_AMT_LCL,
+        A.VIP_SLS_MANUAL_COUNT,
+        A.VIP_SLS_SCAN_COUNT,
+        A.VIP_RET_QTY,
+        A.VIP_RET_AMT_LCL,
+        A.VIP_RET_PROFIT_AMT_LCL,
+        A.VIP_RET_MANUAL_MKDN_AMT_LCL,
+        A.VIP_RET_MANUAL_MKUP_AMT_LCL,
+        A.VIP_RET_TAX_AMT_LCL,
+        A.VIP_RET_EMP_DISC_AMT_LCL,
+        A.VIP_RET_MANUAL_COUNT,
+        A.VIP_RET_SCAN_COUNT) =
+       (SELECT SUM(B.VIP_SLS_QTY) VIP_SLS_QTY,
+               SUM(B.VIP_SLS_AMT_LCL) VIP_SLS_AMT_LCL,
+               SUM(B.VIP_SLS_PROFIT_AMT_LCL) VIP_SLS_PROFIT_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKDN_AMT_LCL) VIP_SLS_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_MKUP_AMT_LCL) VIP_SLS_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_SLS_TAX_AMT_LCL) VIP_SLS_TAX_AMT_LCL,
+               SUM(B.VIP_SLS_EMP_DISC_AMT_LCL) VIP_SLS_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_SLS_MANUAL_COUNT) VIP_SLS_MANUAL_COUNT,
+               SUM(B.VIP_SLS_SCAN_COUNT) VIP_SLS_SCAN_COUNT,
+               SUM(B.VIP_RET_QTY) VIP_RET_QTY,
+               SUM(B.VIP_RET_AMT_LCL) VIP_RET_AMT_LCL,
+               SUM(B.VIP_RET_PROFIT_AMT_LCL) VIP_RET_PROFIT_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKDN_AMT_LCL) VIP_RET_MANUAL_MKDN_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_MKUP_AMT_LCL) VIP_RET_MANUAL_MKUP_AMT_LCL,
+               SUM(B.VIP_RET_TAX_AMT_LCL) VIP_RET_TAX_AMT_LCL,
+               SUM(B.VIP_RET_EMP_DISC_AMT_LCL) VIP_RET_EMP_DISC_AMT_LCL,
+               SUM(B.VIP_RET_MANUAL_COUNT) VIP_RET_MANUAL_COUNT,
+               SUM(B.VIP_RET_SCAN_COUNT) VIP_RET_SCAN_COUNT
+          FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F B,
+               RABATCHER.W_PRODUCT_D_RTL_TMP P
+         WHERE B.PROD_SCD1_WID = P.PROD_SCD1_WID
+           AND P.PROD_SC_WID = A.PROD_DH_WID
+           AND A.ORG_WID = B.ORG_WID
+           AND A.RTL_TYPE_WID = B.RTL_TYPE_WID
+           AND A.DT_WID = B.DT_WID
+           AND A.BBG_RETAIL_TYPE_WID = B.BBG_RETAIL_TYPE_WID)
+ WHERE A.DT_WID = &DTWID;
+ 
+--PROD_DH_WID, ORG_WID, RTL_TYPE_WID, DT_WID, BBG_RETAIL_TYPE_WID
+SELECT * FROM RADM.W_RTL_SLS_SC_LC_DY_CUR_A;
+SELECT * FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
