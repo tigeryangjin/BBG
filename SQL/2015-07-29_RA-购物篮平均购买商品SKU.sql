@@ -1,0 +1,18 @@
+SELECT TO_DATE(SUBSTR(C.DT_WID, 2, 8), 'YYYYMMDD') DAYS,
+       O.ORG_NUM,
+       ROUND(C.ITEM_COUNT / C.TRX_COUNT, 2) SI_SKU
+  FROM RADM.W_INT_ORG_D O,
+       (SELECT B.ORG_WID,
+               B.DT_WID,
+               COUNT(B.SLS_TRX_ID) TRX_COUNT,
+               SUM(B.ITEM_COUNT) ITEM_COUNT
+          FROM (SELECT A.ORG_WID,
+                       A.DT_WID,
+                       A.SLS_TRX_ID,
+                       COUNT(DISTINCT A.PROD_WID) ITEM_COUNT
+                  FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F A
+                 WHERE A.DT_WID BETWEEN 120150601000 AND 120150630000
+                 GROUP BY A.ORG_WID, A.DT_WID, A.SLS_TRX_ID) B
+         GROUP BY B.ORG_WID, B.DT_WID) C
+ WHERE O.ROW_WID = C.ORG_WID
+ ORDER BY C.DT_WID, O.ORG_NUM;
