@@ -48,10 +48,12 @@ SELECT *
                           'ENDED_OK-ended normally'
                          when AH_STATUS = 1800 then
                           'ENDED_NOT_OK-aborted'
+                         when AH_STATUS = 1850 then
+                          'ENDED_CANCEL-manually canceled'
                        end STATUS
                   FROM ah@rms_uc4
                  WHERE ah_client = 80
-                   AND AH_STATUS IN (1800, 1900)
+                   AND AH_STATUS IN (1800, 1850, 1900)
                    AND TRUNC(ah_timestamp2 + NUMTODSINTERVAL(8, 'hour')) =
                        TRUNC(SYSDATE)
                    AND ah_name IN ('PF.ORACLE_ANALYTICS_TOP_LEVEL',
