@@ -3565,16 +3565,19 @@ UPDATE RADM.W_RTL_SLS_SC_LC_DY_CUR_A A
 SELECT * FROM RADM.W_RTL_SLS_SC_LC_DY_CUR_A;
 SELECT * FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F;
 
-
-
-
-
-
-
-
-
-
-
+--*****************************************************************************************
+--3.月销售汇总表补入会员销售
+--*****************************************************************************************
+--3.1.W_RTL_SLS_SC_LC_MN_A
+--3.2.W_RTL_SLS_SC_LC_MN_CUR_A
+--3.3.BBG_RA_SLS_SC_LC_MN_A
+--3.4.W_RTL_SLS_SC_MN_A
+--3.5.W_RTL_SLS_SC_MN_CUR_A
+--3.6.W_RTL_SLS_CL_LC_MN_A
+--3.7.W_RTL_SLS_CL_LC_MN_CUR_A
+--3.8.W_RTL_SLS_DP_LC_MN_A
+--3.9.W_RTL_SLS_DP_LC_MN_CUR_A
+--3.10.W_RTL_SLS_LC_MN_A
 
 
 
