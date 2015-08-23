@@ -7315,8 +7315,21 @@ WHEN NOT MATCHED THEN
 		 
 		 SELECT * FROM BBG_RA_CUST_LC_DY_HR_A T WHERE T.DT_WID=120141231000;
 		 
+--********************************************************************************************
+--6.新增会员拉客数事实添加中文说明
+--********************************************************************************************
+CN_Retail_As-Was_Fact_Retail_Customer_Count_-----BBG_Customer_Count-----
+CD_Retail_As-Was_Fact_Retail_Customer_Count_-----BBG_Customer_Count-----
+CN_Retail_As-Was_Fact_Retail_Customer_Count_-----BBG_VIP_Customer_Count-----
+CD_Retail_As-Was_Fact_Retail_Customer_Count_-----BBG_VIP_Customer_Count-----
+CN_Retail_As-Was_Fact_Retail_Customer_Count_BBG_VIP_CUSTOMER_COUNT
+CD_Retail_As-Was_Fact_Retail_Customer_Count_BBG_VIP_CUSTOMER_COUNT
+CN_Retail_As-Was_Fact_Retail_Customer_Count_BBG_VIP_Customer_Count_LD
+CD_Retail_As-Was_Fact_Retail_Customer_Count_BBG_VIP_Customer_Count_LD
+CN_Retail_As-Was_Fact_Retail_Customer_Count_BBG_VIP_Customer_Count_MTD
+CD_Retail_As-Was_Fact_Retail_Customer_Count_BBG_VIP_Customer_Count_MTD
+CN_Retail_As-Was_Fact_Retail_Customer_Count_BBG_VIP_Customer_Count_YTD
+CD_Retail_As-Was_Fact_Retail_Customer_Count_BBG_VIP_Customer_Count_YTD
 
-
-
-
-
+;
+SELECT * FROM RADM.W_LOCALIZED_STRING_G T WHERE T.MSG_NUM LIKE '%Retail_Customer_Count%' FOR UPDATE;
