@@ -94,9 +94,11 @@ CREATE TABLE RADM.W_RTL_SLS_TRX_LC_DY_A
   VIP_RET_TAX_AMT_LCL         NUMBER(20,4),
   VIP_RET_EMP_DISC_AMT_LCL    NUMBER(20,4),
   VIP_RET_MANUAL_COUNT        NUMBER(18,4),
-  VIP_RET_SCAN_COUNT          NUMBER(18,4));
+  VIP_RET_SCAN_COUNT          NUMBER(18,4),
+	N69_NET_SALES_AMT           NUMBER(20,4),
+	N69_NET_SALES_AMT_INC_TAX   NUMBER(20,4));
 	
-DROP TABLE RADM.W_RTL_SLS_TRX_LC_DY_A;
+
 	
 --1.1.2.CREATE INDEX
 ALTER TABLE RADM.W_RTL_SLS_TRX_LC_DY_A
@@ -217,9 +219,29 @@ INSERT INTO RADM.W_RTL_SLS_TRX_LC_DY_A
                  SUM(F.vip_ret_tax_amt_lcl) vip_ret_tax_amt_lcl,
                  SUM(F.vip_ret_emp_disc_amt_lcl) vip_ret_emp_disc_amt_lcl,
                  SUM(F.vip_ret_manual_count) vip_ret_manual_count,
-                 SUM(F.vip_ret_scan_count) vip_ret_scan_count
-            FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F F
-           WHERE F.DT_WID = 120150823000
+                 SUM(F.vip_ret_scan_count) vip_ret_scan_count,
+                 SUM(F.N69_NET_SALES_AMT) N69_NET_SALES_AMT,
+                 SUM(F.N69_NET_SALES_AMT_INC_TAX) N69_NET_SALES_AMT_INC_TAX
+            FROM (SELECT A.*,
+                         (SELECT CASE
+                                   WHEN P.PROD_DV_NUM NOT IN (6, 7, 8, 9) THEN
+                                    (A.SLS_AMT_LCL - A.RET_AMT_LCL) -
+                                    (A.SLS_TAX_AMT_LCL - A.RET_TAX_AMT_LCL)
+                                   ELSE
+                                    0
+                                 END
+                            FROM RABATCHER.W_PRODUCT_D_RTL_TMP P
+                           WHERE A.PROD_WID = P.PROD_IT_WID) N69_NET_SALES_AMT,
+                         (SELECT CASE
+                                   WHEN P.PROD_DV_NUM NOT IN (6, 7, 8, 9) THEN
+                                    (A.SLS_AMT_LCL - A.RET_AMT_LCL)
+                                   ELSE
+                                    0
+                                 END
+                            FROM RABATCHER.W_PRODUCT_D_RTL_TMP P
+                           WHERE A.PROD_WID = P.PROD_IT_WID) N69_NET_SALES_AMT_INC_TAX
+                    FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F A
+										WHERE A.DT_WID=120150823000) F
            GROUP BY F.ORG_WID,
                     F.ORG_DH_WID,
                     F.ORG_SCD1_WID,
@@ -230,6 +252,9 @@ INSERT INTO RADM.W_RTL_SLS_TRX_LC_DY_A
                     F.EMPLOYEE_WID,
                     F.HYK_NO) A;
 COMMIT;
+
+--1.1.5
+W_RTL_SLS_TRX_LC_DY_A_AGG;
 
 --1.2.W_RTL_SLS_TRX_DP_LC_DY_A------------------------------------------------------------------------
 --1.2.1.CREATE TABLE
@@ -464,7 +489,7 @@ INSERT INTO RADM.W_RTL_SLS_TRX_DP_LC_DY_A
 										P.PROD_DP_WID) A;
 COMMIT;
 
---1.2.4.存储出过程
+--1.2.5.存储出过程
 W_RTL_SLS_TRX_DP_LC_DY_A_AGG;
 
 --1.3.W_RTL_SLS_TRX_CL_LC_DY_A-------------------------------------------------------------------------
