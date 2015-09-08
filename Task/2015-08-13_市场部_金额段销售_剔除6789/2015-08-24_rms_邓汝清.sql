@@ -163,6 +163,6 @@ select store, count(*), sum(sale)
                               41,
                               42)
          group by resa1.store, resa1.tran_seq_no)
- where sale >= 100
+ where ROUND(sale,4) >= 100
  group by store
  order by 1;

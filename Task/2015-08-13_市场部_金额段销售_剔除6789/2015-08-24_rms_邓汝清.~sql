@@ -9,9 +9,9 @@ select resa1.store,
                sti1.item_seq_no,
                sti1.qty * sti1.unit_retail normal_sale
           from sa_tran_head sth1, sa_store_day ssd1, sa_tran_item sti1
-         where SSD1.BUSINESS_DATE >= date '2014-1-24'
+         where SSD1.BUSINESS_DATE >= date '2015-9-1'
            and SSD1.BUSINESS_DATE <= date
-         '2014-1-26'
+         '2015-9-1'
            and sth1.store_day_seq_no = SSD1.STORE_DAY_SEQ_NO
            and sth1.tran_seq_no = sti1.tran_seq_no
            and sth1.store = sti1.store
@@ -26,9 +26,9 @@ select resa1.store,
                sa_store_day ssd1,
                sa_tran_item sti1,
                sa_tran_disc std1
-         where SSD1.BUSINESS_DATE >= date '2014-1-24'
+         where SSD1.BUSINESS_DATE >= date '2015-9-1'
            and SSD1.BUSINESS_DATE <= date
-         '2014-1-26'
+         '2015-9-1'
            and sth1.store_day_seq_no = SSD1.STORE_DAY_SEQ_NO
            and sth1.tran_seq_no = sti1.tran_seq_no
            and sth1.store = sti1.store
@@ -77,7 +77,7 @@ select resa1.store,
                       41,
                       42)
  group by resa1.store
- order by 1;
+ order by 1; 
 
 --大于等于多少（注意改日期及大于等于条件值）
 select store, count(*), sum(sale)
@@ -163,6 +163,6 @@ select store, count(*), sum(sale)
                               41,
                               42)
          group by resa1.store, resa1.tran_seq_no)
- where sale >= 100
+ where ROUND(sale,2) >= 100
  group by store
  order by 1;
