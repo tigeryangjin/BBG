@@ -1,0 +1,108 @@
+
+
+--CMX_RPT_INV_DAYS_SALES_TMP
+TRUNCATE TABLE CMX.CMX_RA_INV_DAYS_SALE_TMP;
+INSERT INTO CMX_RA_INV_DAYS_SALE_TMP
+  (VDATE, LOC, LOC_TYPE, DEPT, CLASS, SUBCLASS, BUSINESS_TYPE, TOTAL_COST)
+  SELECT MAX(&P_ST_DATE),
+         T.LOC,
+         MAX(T.LOC_TYPE) LOC_TYPE,
+         MAX(IM.DEPT),
+         MAX(IM.CLASS),
+         IM.SUBCLASS,
+         T.BUSINESS_TYPE,
+         SUM(T.TOTAL_COST)
+    FROM (SELECT SALET.TRAN_DATE,
+                 SALET.LOCATION LOC,
+                 'S' LOC_TYPE,
+                 SALET.ITEM,
+                 SUPS.BUSINESS_TYPE BUSINESS_TYPE,
+                 SALET.TOTAL_COST
+            FROM CMX_SUPP_INV_TRAN_DATA_HIST SALET, CMX_SUPPLIER_INFO SUPS
+           WHERE SALET.TRAN_DATE BETWEEN &P_ST_DATE AND &P_END_DATE
+             AND SUPS.SUPPLIER = SALET.PRIMARY_SUPP
+             AND SALET.LOC_TYPE = 'S'
+             AND SALET.TRAN_CODE = 1
+             AND SUPS.BUSINESS_TYPE IN ('JX', 'DX')
+          UNION ALL
+          SELECT SALET.TRAN_DATE,
+                 SALET.LOCATION LOC,
+                 'S' LOC_TYPE,
+                 SALET.ITEM,
+                 SUPS.BUSINESS_TYPE BUSINESS_TYPE,
+                 SALET.TOTAL_COST
+            FROM CMX_SUPP_INV_TRAN_DATA SALET, CMX_SUPPLIER_INFO SUPS
+           WHERE SALET.TRAN_DATE BETWEEN &P_ST_DATE AND &P_END_DATE
+             AND SUPS.SUPPLIER = SALET.PRIMARY_SUPP
+             AND SALET.LOC_TYPE = 'S'
+             AND SALET.TRAN_CODE = 1
+             AND SUPS.BUSINESS_TYPE IN ('JX', 'DX')) T,
+         ITEM_MASTER IM
+   WHERE IM.ITEM = T.ITEM
+   GROUP BY T.LOC, IM.SUBCLASS, T.BUSINESS_TYPE;
+COMMIT;
+
+--CMX_RPT_INV_DAYS_SOH_TMP
+TRUNCATE TABLE CMX.CMX_RA_INV_DAYS_SOH_TMP;
+INSERT INTO CMX_RA_INV_DAYS_SOH_TMP
+  (VDATE, LOC, LOC_TYPE, DEPT, CLASS, SUBCLASS, BUSINESS_TYPE, SOH_AMT)
+  SELECT MAX(&P_ST_DATE) VDATE,
+         T.LOC,
+         MAX(T.LOC_TYPE) LOC_TYPE,
+         MAX(IM.DEPT) DEPT,
+         MAX(IM.CLASS) CLASS,
+         IM.SUBCLASS,
+         SUP.BUSINESS_TYPE,
+         SUM(SOH_AMT) SOH_AMT¡¡FROM (SELECT SOH.SOH_BAK_DATE VDATE,
+                                           SOH.LOC,
+                                           SOH.LOC_TYPE,
+                                           SOH.ITEM,
+                                           SOH.PRIMARY_SUPP,
+                                           SOH.AV_COST *
+                                           (SOH.STOCK_ON_HAND +
+                                           NVL(SOH.IN_TRANSIT_QTY, 0)) SOH_AMT
+                                      FROM ITEM_LOC_SOH_HIST SOH
+                                     WHERE SOH.SOH_BAK_DATE BETWEEN
+                                           &P_ST_DATE AND &P_END_DATE) T,
+         ITEM_MASTER IM,
+         CMX_SUPPLIER_INFO SUP WHERE IM.ITEM = T.ITEM AND SUP.SUPPLIER = T.PRIMARY_SUPP AND SUP.BUSINESS_TYPE IN('JX',
+                                                                                                                 'DX') GROUP BY T.LOC,
+         IM.SUBCLASS,
+         SUP.BUSINESS_TYPE;
+COMMIT;
+
+DELETE FROM CMX_RA_INV_DAYS_SOH_TMP NOLOGGING
+ WHERE LOC IN (118005, /*118010,118011,118012,*/ 118015, 118023);
+COMMIT;
+
+--JIN_BBG_RA_INV_DAYS_FS
+INSERT INTO RADM.JIN_BBG_RA_INV_DAYS_FS@RMS_RA
+  (MONTH,
+   CATALOG,
+   LOC,
+   LOC_TYPE,
+   DIV,
+   DEPT,
+   CLASS,
+   SUBCLASS,
+   BUSINESS_TYPE,
+   SOH_AMT,
+   TOTAL_COST)
+  SELECT TO_CHAR(SOH.VDATE, 'YYYY-MM'),
+         &CATALOG,
+         SOH.LOC,
+         SOH.LOC_TYPE,
+         (SELECT DIV FROM CMX_RPT_DIV_DEPT WHERE DEPT = SOH.DEPT),
+         SOH.DEPT,
+         SOH.CLASS,
+         SOH.SUBCLASS,
+         SOH.BUSINESS_TYPE,
+         SOH.SOH_AMT,
+         NVL(SALET.TOTAL_COST, 0) TOTAL_COST
+    FROM CMX_RA_INV_DAYS_SOH_TMP SOH, CMX_RA_INV_DAYS_SALE_TMP SALET
+   WHERE SOH.VDATE = SALET.VDATE(+)
+     AND SOH.LOC = SALET.LOC(+)
+     AND SOH.SUBCLASS = SALET.SUBCLASS(+)
+     AND SOH.BUSINESS_TYPE = SALET.BUSINESS_TYPE(+)
+     AND SOH.DEPT NOT IN (9101, 9103);
+COMMIT;
