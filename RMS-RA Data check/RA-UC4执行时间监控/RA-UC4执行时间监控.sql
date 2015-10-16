@@ -74,3 +74,40 @@ SELECT *
                                    'BBG_ETL_MONTH_DATA.KSH',
                                    'BATCH_RESA2DW_BACKUP.KSH')) A)
  ORDER BY 1, 4;
+
+SELECT *
+  FROM (SELECT A.*
+          FROM (SELECT trunc(ah_timestamp2 + NUMTODSINTERVAL(8, 'hour')) days,
+                       ah_name,
+                       (ah_timestamp2 + NUMTODSINTERVAL(8, 'hour')) start_time,
+                       (ah_timestamp4 + NUMTODSINTERVAL(8, 'hour')) end_time,
+                       LPAD(trunc((ah_timestamp4 - ah_timestamp2) * 24),
+                            2,
+                            '0') || ':' ||
+                       LPAD((trunc((ah_timestamp4 - ah_timestamp2) * 24 * 60) -
+                            trunc((ah_timestamp4 - ah_timestamp2) * 24) * 60),
+                            2,
+                            '0') || ':' ||
+                       LPAD(TRUNC((ah_timestamp4 - ah_timestamp2) * 24 * 60 * 60 -
+                                  trunc((ah_timestamp4 - ah_timestamp2) * 24 * 60) * 60),
+                            2,
+                            '0') RUN_TIME,
+                       CNT,
+                       case
+                         when AH_STATUS = 1900 then
+                          'ENDED_OK-ended normally'
+                         when AH_STATUS = 1800 then
+                          'ENDED_NOT_OK-aborted'
+                         when AH_STATUS = 1850 then
+                          'ENDED_CANCEL-manually canceled'
+                       end STATUS
+                  FROM ah@rms_uc4,
+                       (SELECT COUNT(*) CNT
+                          FROM cmx_item_supp_country_loc T
+                         WHERE TRUNC(T.LAST_UPDATE_DATE) = TRUNC(SYSDATE - 1))
+                 WHERE ah_client = 80
+                   AND AH_STATUS IN (1800, 1850, 1900)
+                   AND TRUNC(ah_timestamp2 + NUMTODSINTERVAL(8, 'hour')) =
+                       TRUNC(SYSDATE)
+                   AND ah_name IN ('BBG_RA_ITEM_LOC_SUPP_SIL.KSH')) A)
+ ORDER BY 1, 4;

@@ -1,0 +1,36 @@
+--MAR04
+--日期、区域、零售类型（一级）、净销售额、会员净销售额、会员销售占比、毛利率
+SELECT TRUNC(MCAL.MCAL_DAY_DT) DAYS, --日期
+       O.ORG_HIER9_NUM LOC, --地点
+       O.ORG_HIER10_NUM DISTRICT, --城市
+       O.ORG_HIER11_NUM REGION, --区域
+       O.ORG_HIER12_NUM AREA, --省份
+       O.ORG_HIER13_NUM CHAIN, --业态
+       RT.RETAIL_GROUP_ID || '-' || RT.RETAIL_GROUP_DESC RETAIL_GROUP, --零售类型（一级）
+       RT.RETAIL_TYPE_ID || '-' || RT.RETAIL_TYPE_DESC RETAIL_TYPE, --零售类型（二级）
+       T.AMT AMT, --净销售金额
+       DECODE(T.AMT, 0, 0, T.PROFIT / T.AMT) GP, --毛利率
+       T.VIP_AMT, --会员销售
+       DECODE(T.AMT, 0, 0, T.VIP_AMT / T.AMT) PROPORTION --占比
+  FROM RADM.W_MCAL_DAY_DV MCAL,
+       (SELECT S.DT_WID,
+               S.ORG_DH_WID,
+               S.BBG_RETAIL_TYPE_WID,
+               SUM((S.SLS_AMT_LCL - S.SLS_TAX_AMT_LCL) -
+                   (S.RET_AMT_LCL - S.RET_TAX_AMT_LCL)) AMT,
+               SUM((S.VIP_SLS_AMT_LCL - S.VIP_SLS_TAX_AMT_LCL) -
+                   (S.VIP_RET_AMT_LCL - S.VIP_RET_TAX_AMT_LCL)) VIP_AMT,
+               SUM(S.SLS_PROFIT_AMT_LCL - S.RET_PROFIT_AMT_LCL) PROFIT,
+               SUM(C.BBG_CUSTOMER_COUNT) CUST,
+               SUM(C.VIP_BBG_CUSTOMER_COUNT) VIP_CUST
+          FROM RADM.W_RTL_SLS_LC_DY_A S, RADM.BBG_RA_CUST_LC_DY_A C
+         WHERE S.DT_WID = 120150513000
+           AND S.DT_WID = C.DT_WID
+           AND S.ORG_WID = C.ORG_WID
+         GROUP BY S.DT_WID, S.ORG_DH_WID, S.BBG_RETAIL_TYPE_WID) T,
+       RADM.W_INT_ORG_DH O,
+       RADM.BBG_RA_RETAIL_TYPE_D RT
+ WHERE MCAL.ROW_WID = T.DT_WID
+   AND T.ORG_DH_WID = O.ROW_WID
+   AND RT.ROW_WID = T.BBG_RETAIL_TYPE_WID
+ ORDER BY O.ORG_HIER9_NUM, RT.RETAIL_TYPE_ID;
