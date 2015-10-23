@@ -1,0 +1,35 @@
+--BBG_RA_CUST_LC_DY_A.vip_bbg_customer_count在2015.01.02~2015.01.14为0，需要修复
+--1.
+TRUNCATE TABLE RADM.W_RTL_SLS_TRX_IT_LC_DY_F_BAK;
+--2.
+INSERT INTO RADM.W_RTL_SLS_TRX_IT_LC_DY_F_BAK
+  SELECT *
+    FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F
+   WHERE DT_WID BETWEEN 120150102000 AND 120150114000;
+COMMIT;
+--3.
+CREATE TABLE RADM.CUST_TMP7 AS
+SELECT B.ORG_WID,
+       B.DT_WID,
+       COUNT(DISTINCT DECODE(B.HYK_NO, '', '', B.SLS_TRX_ID)) CNT
+  FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F_BAK B
+ GROUP BY B.ORG_WID, B.DT_WID;
+ 
+DROP TABLE RADM.CUST_TMP7;
+--4.
+UPDATE /*+PARALLEL(16)*/ RADM.BBG_RA_CUST_LC_DY_A A
+   SET A.VIP_BBG_CUSTOMER_COUNT = NVL((SELECT /*+PARALLEL(16)*/
+                                       D.CNT
+                                        FROM CUST_TMP7 D
+                                       WHERE D.ORG_WID = A.ORG_WID
+                                         AND D.DT_WID = A.DT_WID),
+                                      0)
+ WHERE EXISTS (SELECT /*+PARALLEL(16)*/
+         1
+          FROM CUST_TMP7 D
+         WHERE D.ORG_WID = A.ORG_WID
+           AND D.DT_WID = A.DT_WID)
+   AND A.VIP_BBG_CUSTOMER_COUNT = 0;
+
+COMMIT;
+

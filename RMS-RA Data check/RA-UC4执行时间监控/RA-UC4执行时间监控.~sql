@@ -75,7 +75,6 @@ SELECT *
                                    'BATCH_RESA2DW_BACKUP.KSH')) A)
  ORDER BY 1, 4;
 
-
 SELECT *
   FROM (SELECT A.*
           FROM (SELECT trunc(ah_timestamp2 + NUMTODSINTERVAL(8, 'hour')) days,
@@ -93,6 +92,7 @@ SELECT *
                                   trunc((ah_timestamp4 - ah_timestamp2) * 24 * 60) * 60),
                             2,
                             '0') RUN_TIME,
+                       CNT,
                        case
                          when AH_STATUS = 1900 then
                           'ENDED_OK-ended normally'
@@ -101,7 +101,10 @@ SELECT *
                          when AH_STATUS = 1850 then
                           'ENDED_CANCEL-manually canceled'
                        end STATUS
-                  FROM ah@rms_uc4
+                  FROM ah@rms_uc4,
+                       (SELECT COUNT(*) CNT
+                          FROM cmx_item_supp_country_loc T
+                         WHERE TRUNC(T.LAST_UPDATE_DATE) = TRUNC(SYSDATE - 1))
                  WHERE ah_client = 80
                    AND AH_STATUS IN (1800, 1850, 1900)
                    AND TRUNC(ah_timestamp2 + NUMTODSINTERVAL(8, 'hour')) =

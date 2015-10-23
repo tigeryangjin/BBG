@@ -40,7 +40,7 @@ USING (SELECT /*+PARALLEL(16)*/
                         GROUP BY SUBSTR(TS.DT_WID, 2, 6), TS.PROD_DH_WID) DPS
                 WHERE MCAL.ROW_WID = CUST.DT_WID
                   AND MCAL.ROW_WID = SLS.DT_WID
-                  AND MCAL.CAL_MONTH_WID = DPS.MN_WID
+                  AND MCAL.CAL_MONTH_WID = DPS.MN_WID 
                   AND MCAL.CAL_MONTH_WID = FC.MN_WID
                   AND PROD.LEVEL_NAME = 'DEPT'
                   AND CUST.ORG_WID = SLS.ORG_WID
