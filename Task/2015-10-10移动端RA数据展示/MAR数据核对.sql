@@ -59,3 +59,14 @@ DISTINCT A.DT_WID
          WHERE A.ORG_WID = B.ORG_WID
            AND A.DT_WID = B.DT_WID)
  ORDER BY A.DT_WID;
+--Éú³ÉÖ´ÐÐÓï¾ä
+SELECT 'CALL JIN_UPD_CUST_PROC(' || C.DT_WID || ');'
+  FROM (SELECT /*+PARALLEL(16)*/
+        DISTINCT A.DT_WID
+          FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F A
+         WHERE NOT EXISTS (SELECT /*+PARALLEL(16)*/
+                 1
+                  FROM RADM.BBG_RA_CUST_LC_DY_A B
+                 WHERE A.ORG_WID = B.ORG_WID
+                   AND A.DT_WID = B.DT_WID)
+         ORDER BY A.DT_WID) C;

@@ -254,7 +254,8 @@ SELECT --TDH.TRAN_DATE 销售日期,
                     800416669,
                     800249105,
                     800249106,
-                    101942566)
+                    101942566,
+                    800002917)
    AND TDH.TRAN_CODE IN (1, 3)
  GROUP BY TDH.ITEM, TDH.SUBCLASS, TDH.LOCATION --, TDH.TRAN_DATE
  ORDER BY /*TDH.TRAN_DATE,*/ TDH.LOCATION, TDH.ITEM;
