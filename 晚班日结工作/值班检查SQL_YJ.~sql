@@ -99,3 +99,7 @@ select count(*) 记录数
  where pub_status = 'N';
 --值班注意点：如果上面的语句查出的记录数字段结果提示大于2万，
 --请检查UC4中的每五分钟跑一次的CHAIN:BBG.IF.MOM.DOC.01.DATA.EVERY.5MIN一直在跑或被BLOCK
+
+--9
+--FTP文件检查
+SELECT * FROM CMX.FTP_FILE_CHECK;
