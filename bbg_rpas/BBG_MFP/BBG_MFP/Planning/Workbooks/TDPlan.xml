@@ -1,0 +1,1021 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="Workbook">
+  <attribute name="name">
+    <value>TDPlan</value>
+  </attribute>
+  <attribute name="Label">
+    <value>Top Down Pre-season Plan</value>
+  </attribute>
+  <attribute name="WorkbookGroup">
+    <value>Planning</value>
+  </attribute>
+  <attribute name="WorkbookLib">
+    <value>Templates</value>
+  </attribute>
+  <attribute name="WorkbookType">
+    <value>DynamicTemplate</value>
+  </attribute>
+  <attribute name="IsWizardOnly">
+    <value>false</value>
+  </attribute>
+  <attribute name="IsImageEnabled">
+    <value>false</value>
+  </attribute>
+  <attribute name="RuleSet">
+    <value>TDP</value>
+  </attribute>
+  <attribute name="LoadRules">
+    <value>TDP_load</value>
+  </attribute>
+  <attribute name="CalcRules">
+    <value>TDP_calc</value>
+  </attribute>
+  <attribute name="RefreshRules">
+    <value>TDP_refresh</value>
+  </attribute>
+  <attribute name="IsUseDefaults">
+    <value>false</value>
+  </attribute>
+  <attribute name="DpmDimensions">
+    <value></value>
+  </attribute>
+  <attribute name="IsCustomWizard">
+    <value>false</value>
+  </attribute>
+  <data_model type="AxisInfo">
+    <attribute name="name">
+      <value>AxisInfo</value>
+    </attribute>
+    <attribute name="CLNDAxis">
+      <value>XAxis</value>
+    </attribute>
+    <attribute name="CLNDOrder">
+      <value>0</value>
+    </attribute>
+    <attribute name="SEASAxis">
+      <value>YAxis</value>
+    </attribute>
+    <attribute name="SEASOrder">
+      <value>0</value>
+    </attribute>
+    <attribute name="PRODAxis">
+      <value>YAxis</value>
+    </attribute>
+    <attribute name="PRODOrder">
+      <value>1</value>
+    </attribute>
+    <attribute name="LOCAxis">
+      <value>ZAxis</value>
+    </attribute>
+    <attribute name="LOCOrder">
+      <value>0</value>
+    </attribute>
+    <attribute name="MEASAxis">
+      <value>ZAxis</value>
+    </attribute>
+    <attribute name="MEASOrder">
+      <value>1</value>
+    </attribute>
+  </data_model>
+  <data_model type="Wizards">
+    <attribute name="name">
+      <value>Wizards</value>
+    </attribute>
+    <data_model type="Wizard">
+      <attribute name="name">
+        <value>CLNDWizard</value>
+      </attribute>
+      <attribute name="CLNDOrder">
+        <value>0</value>
+      </attribute>
+      <attribute name="CLNDDim">
+        <value>mnth</value>
+      </attribute>
+      <attribute name="CLNDLLabel">
+        <value></value>
+      </attribute>
+      <attribute name="CLNDRLabel">
+        <value></value>
+      </attribute>
+      <attribute name="CLNDMaxPos">
+        <value>-1</value>
+      </attribute>
+      <attribute name="CLNDWizardLabel">
+        <value></value>
+      </attribute>
+    </data_model>
+    <data_model type="Wizard">
+      <attribute name="name">
+        <value>PRODWizard</value>
+      </attribute>
+      <attribute name="PRODOrder">
+        <value>1</value>
+      </attribute>
+      <attribute name="PRODDim">
+        <value>pgrp</value>
+      </attribute>
+      <attribute name="PRODLLabel">
+        <value></value>
+      </attribute>
+      <attribute name="PRODRLabel">
+        <value></value>
+      </attribute>
+      <attribute name="PRODMaxPos">
+        <value>-1</value>
+      </attribute>
+      <attribute name="PRODWizardLabel">
+        <value></value>
+      </attribute>
+    </data_model>
+    <data_model type="Wizard">
+      <attribute name="name">
+        <value>LOCWizard</value>
+      </attribute>
+      <attribute name="LOCOrder">
+        <value>2</value>
+      </attribute>
+      <attribute name="LOCDim">
+        <value>area</value>
+      </attribute>
+      <attribute name="LOCLLabel">
+        <value></value>
+      </attribute>
+      <attribute name="LOCRLabel">
+        <value></value>
+      </attribute>
+      <attribute name="LOCMaxPos">
+        <value>-1</value>
+      </attribute>
+      <attribute name="LOCWizardLabel">
+        <value></value>
+      </attribute>
+    </data_model>
+    <data_model type="Wizard">
+      <attribute name="name">
+        <value>SEASWizard</value>
+      </attribute>
+      <attribute name="SEASOrder">
+        <value>3</value>
+      </attribute>
+      <attribute name="SEASDim">
+        <value>sesn</value>
+      </attribute>
+      <attribute name="SEASLLabel">
+        <value></value>
+      </attribute>
+      <attribute name="SEASRLabel">
+        <value></value>
+      </attribute>
+      <attribute name="SEASMaxPos">
+        <value>-1</value>
+      </attribute>
+      <attribute name="SEASWizardLabel">
+        <value></value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="WorkbookTabs">
+    <attribute name="name">
+      <value>WorkbookTabs</value>
+    </attribute>
+    <data_model type="WorkbookTab">
+      <attribute name="name">
+        <value>WorkbookTab0</value>
+      </attribute>
+      <attribute name="Label">
+        <value>Review Sales Plan</value>
+      </attribute>
+      <data_model type="Worksheets">
+        <attribute name="name">
+          <value>Worksheets</value>
+        </attribute>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>Worksheet0</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Review Sales Plan</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>mnth_pgrp_area_sesn</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>BUWpBlank1Tx</value>
+                <value>BUWpBlank2Tx</value>
+                <value>BUWpBlank3Tx</value>
+                <value>BUWpBlank4Tx</value>
+                <value>BUWpBlank5Tx</value>
+                <value>DRLySlsRegAr</value>
+                <value>DRLySlsRegU</value>
+                <value>MOWaGMARegp</value>
+                <value>MOWaGMRegp</value>
+                <value>MOWaMkdPermRp</value>
+                <value>MOWaSlsARegR</value>
+                <value>DRALSlsARegR</value>
+                <value>DRLyGMARegp</value>
+                <value>DRLyGMRegp</value>
+                <value>DRLyMkdPermRp</value>
+                <value>DRLySlsARegR</value>
+                <value>DRLyGMApVRegLyRp</value>
+                <value>DRLyGMpVRegLyRp</value>
+                <value>DRLyMkdPerVlyRp</value>
+                <value>DRLySlsAcVRegLyRp</value>
+                <value>DRLySlsArVRegLyRp</value>
+                <value>DRLySlsVRegLyRp</value>
+                <value>MOOpGMApVRegLyRp</value>
+                <value>MOOpGMpVRegLyRp</value>
+                <value>MOOpMkdPerVlyRp</value>
+                <value>MOOpSlsAcVRegLyRp</value>
+                <value>MOOpSlsArVRegLyRp</value>
+                <value>MOOpSlsAVRegLyRp</value>
+                <value>MOOpSlsVRegLyRp</value>
+                <value>MOWaGMApVRegLyRp</value>
+                <value>MOWaGMpVRegLyRp</value>
+                <value>MOWaMkdPerVlyRp</value>
+                <value>MOWaSlsAcVRegLyRp</value>
+                <value>MOWaSlsArVRegLyRp</value>
+                <value>MOWaSlsAVRegLyRp</value>
+                <value>MOWaSlsVRegLyRp</value>
+                <value>MOWaSlsRegAc</value>
+                <value>MOOpGMARegp</value>
+                <value>MOOpGMRegp</value>
+                <value>MOOpMkdPermRp</value>
+                <value>MOOpSlsARegR</value>
+                <value>MOOpSlsRegAc</value>
+                <value>MOOpSlsRegAr</value>
+                <value>MOOpSlsRegU</value>
+                <value>MOWaSlsRegAr</value>
+                <value>MOWaSlsRegU</value>
+                <value>MOOpAdjSlsAVRegLyRp</value>
+                <value>MOWaAdjSlsAVRegLyRp</value>
+                <value>DRLySlsRegAc</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>BUWpBlank1Tx</value>
+                <value>BUWpBlank2Tx</value>
+                <value>BUWpBlank3Tx</value>
+                <value>BUWpBlank4Tx</value>
+                <value>BUWpBlank5Tx</value>
+                <value>DRLySlsRegAr</value>
+                <value>DRLySlsRegU</value>
+                <value>MOWaGMARegp</value>
+                <value>MOWaGMRegp</value>
+                <value>MOWaMkdPermRp</value>
+                <value>MOWaSlsARegR</value>
+                <value>DRALSlsARegR</value>
+                <value>DRLyGMARegp</value>
+                <value>DRLyGMRegp</value>
+                <value>DRLyMkdPermRp</value>
+                <value>DRLySlsARegR</value>
+                <value>DRLyGMApVRegLyRp</value>
+                <value>DRLyGMpVRegLyRp</value>
+                <value>DRLyMkdPerVlyRp</value>
+                <value>DRLySlsAcVRegLyRp</value>
+                <value>DRLySlsArVRegLyRp</value>
+                <value>DRLySlsVRegLyRp</value>
+                <value>MOOpGMApVRegLyRp</value>
+                <value>MOOpGMpVRegLyRp</value>
+                <value>MOOpMkdPerVlyRp</value>
+                <value>MOOpSlsAcVRegLyRp</value>
+                <value>MOOpSlsArVRegLyRp</value>
+                <value>MOOpSlsAVRegLyRp</value>
+                <value>MOOpSlsVRegLyRp</value>
+                <value>MOWaGMApVRegLyRp</value>
+                <value>MOWaGMpVRegLyRp</value>
+                <value>MOWaMkdPerVlyRp</value>
+                <value>MOWaSlsAcVRegLyRp</value>
+                <value>MOWaSlsArVRegLyRp</value>
+                <value>MOWaSlsAVRegLyRp</value>
+                <value>MOWaSlsVRegLyRp</value>
+                <value>MOWaSlsRegAc</value>
+                <value>MOOpGMARegp</value>
+                <value>MOOpGMRegp</value>
+                <value>MOOpMkdPermRp</value>
+                <value>MOOpSlsARegR</value>
+                <value>MOOpSlsRegAc</value>
+                <value>MOOpSlsRegAr</value>
+                <value>MOOpSlsRegU</value>
+                <value>MOWaSlsRegAr</value>
+                <value>MOWaSlsRegU</value>
+                <value>MOOpAdjSlsAVRegLyRp</value>
+                <value>MOWaAdjSlsAVRegLyRp</value>
+                <value>DRLySlsRegAc</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>DRLySlsARegR</value>
+                <value>DRALSlsARegR</value>
+                <value>DRLyGMRegp</value>
+                <value>DRLyGMARegp</value>
+                <value>DRLyMkdPermRp</value>
+                <value>DRLySlsRegAr</value>
+                <value>DRLySlsRegU</value>
+                <value>DRLySlsRegAc</value>
+                <value>BUWpBlank1Tx</value>
+                <value>MOWaSlsARegR</value>
+                <value>MOWaGMRegp</value>
+                <value>MOWaGMARegp</value>
+                <value>MOWaMkdPermRp</value>
+                <value>MOWaSlsRegAr</value>
+                <value>MOWaSlsRegU</value>
+                <value>MOWaSlsRegAc</value>
+                <value>BUWpBlank2Tx</value>
+                <value>MOOpSlsARegR</value>
+                <value>MOOpGMRegp</value>
+                <value>MOOpGMARegp</value>
+                <value>MOOpMkdPermRp</value>
+                <value>MOOpSlsRegAr</value>
+                <value>MOOpSlsRegU</value>
+                <value>MOOpSlsRegAc</value>
+                <value>BUWpBlank3Tx</value>
+                <value>DRLySlsVRegLyRp</value>
+                <value>DRLyGMpVRegLyRp</value>
+                <value>DRLyGMApVRegLyRp</value>
+                <value>DRLyMkdPerVlyRp</value>
+                <value>DRLySlsArVRegLyRp</value>
+                <value>DRLySlsAcVRegLyRp</value>
+                <value>BUWpBlank4Tx</value>
+                <value>MOWaSlsVRegLyRp</value>
+                <value>MOWaSlsAVRegLyRp</value>
+                <value>MOWaAdjSlsAVRegLyRp</value>
+                <value>MOWaGMpVRegLyRp</value>
+                <value>MOWaGMApVRegLyRp</value>
+                <value>MOWaMkdPerVlyRp</value>
+                <value>MOWaSlsArVRegLyRp</value>
+                <value>MOWaSlsAcVRegLyRp</value>
+                <value>BUWpBlank5Tx</value>
+                <value>MOOpSlsVRegLyRp</value>
+                <value>MOOpSlsAVRegLyRp</value>
+                <value>MOOpAdjSlsAVRegLyRp</value>
+                <value>MOOpGMpVRegLyRp</value>
+                <value>MOOpGMApVRegLyRp</value>
+                <value>MOOpMkdPerVlyRp</value>
+                <value>MOOpSlsArVRegLyRp</value>
+                <value>MOOpSlsAcVRegLyRp</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>DRLySlsARegR</value>
+                <value>DRALSlsARegR</value>
+                <value>DRLyGMRegp</value>
+                <value>DRLyGMARegp</value>
+                <value>DRLyMkdPermRp</value>
+                <value>DRLySlsRegAr</value>
+                <value>DRLySlsRegU</value>
+                <value>DRLySlsRegAc</value>
+                <value>BUWpBlank1Tx</value>
+                <value>MOWaSlsARegR</value>
+                <value>MOWaGMRegp</value>
+                <value>MOWaGMARegp</value>
+                <value>MOWaMkdPermRp</value>
+                <value>MOWaSlsRegAr</value>
+                <value>MOWaSlsRegU</value>
+                <value>MOWaSlsRegAc</value>
+                <value>BUWpBlank2Tx</value>
+                <value>MOOpSlsARegR</value>
+                <value>MOOpGMRegp</value>
+                <value>MOOpGMARegp</value>
+                <value>MOOpMkdPermRp</value>
+                <value>MOOpSlsRegAr</value>
+                <value>MOOpSlsRegU</value>
+                <value>MOOpSlsRegAc</value>
+                <value>BUWpBlank3Tx</value>
+                <value>DRLySlsVRegLyRp</value>
+                <value>DRLyGMpVRegLyRp</value>
+                <value>DRLyGMApVRegLyRp</value>
+                <value>DRLyMkdPerVlyRp</value>
+                <value>DRLySlsArVRegLyRp</value>
+                <value>DRLySlsAcVRegLyRp</value>
+                <value>BUWpBlank4Tx</value>
+                <value>MOWaSlsVRegLyRp</value>
+                <value>MOWaSlsAVRegLyRp</value>
+                <value>MOWaAdjSlsAVRegLyRp</value>
+                <value>MOWaGMpVRegLyRp</value>
+                <value>MOWaGMApVRegLyRp</value>
+                <value>MOWaMkdPerVlyRp</value>
+                <value>MOWaSlsArVRegLyRp</value>
+                <value>MOWaSlsAcVRegLyRp</value>
+                <value>BUWpBlank5Tx</value>
+                <value>MOOpSlsVRegLyRp</value>
+                <value>MOOpSlsAVRegLyRp</value>
+                <value>MOOpAdjSlsAVRegLyRp</value>
+                <value>MOOpGMpVRegLyRp</value>
+                <value>MOOpGMApVRegLyRp</value>
+                <value>MOOpMkdPerVlyRp</value>
+                <value>MOOpSlsArVRegLyRp</value>
+                <value>MOOpSlsAcVRegLyRp</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="CLNDAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="CLNDOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="LOCAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="LOCOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>1</value>
+            </attribute>
+            <attribute name="SEASAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="SEASOrder">
+              <value>2</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+      </data_model>
+    </data_model>
+    <data_model type="WorkbookTab">
+      <attribute name="name">
+        <value>WorkbookTab1</value>
+      </attribute>
+      <attribute name="Label">
+        <value>Review Stock Plan</value>
+      </attribute>
+      <data_model type="Worksheets">
+        <attribute name="name">
+          <value>Worksheets</value>
+        </attribute>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>Worksheet1</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Review Stock Plan</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>mnth_pgrp_area_sesn</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>MOWaBOPRpVLy</value>
+                <value>MOWaEOPRpVLy</value>
+                <value>MOWaPTORpVLy</value>
+                <value>BUWpBlank1Tx</value>
+                <value>BUWpBlank2Tx</value>
+                <value>BUWpBlank3Tx</value>
+                <value>BUWpBlank4Tx</value>
+                <value>BUWpBlank5Tx</value>
+                <value>DRLyBOPR</value>
+                <value>DRLyEOPR</value>
+                <value>DRLyFwdCvrR</value>
+                <value>DRLyMiscOutR</value>
+                <value>DRLyPAvgInvR</value>
+                <value>DRLyPTORr</value>
+                <value>DRLyRecR</value>
+                <value>DRLySellThrRp</value>
+                <value>DRLySlsRegR</value>
+                <value>MOWaEOPAr</value>
+                <value>MOWaSlsRegR</value>
+                <value>DRLyMiscInR</value>
+                <value>MOWaBOPR</value>
+                <value>MOWaEOPR</value>
+                <value>MOWaFwdCvrR</value>
+                <value>MOWaMiscInR</value>
+                <value>MOWaMiscOutR</value>
+                <value>MOWaPAvgInvR</value>
+                <value>MOWaPTORr</value>
+                <value>MOWaRecR</value>
+                <value>MOWaSellThrRp</value>
+                <value>MOWaOTBR</value>
+                <value>DRLyEOPCSeasRp,Absolute % To Parent,SEAS_alls</value>
+                <value>DRLyEOPCProdRp,Absolute % To Parent,PROD_pgrp</value>
+                <value>MOWaEOPCSeasRp,Absolute % To Parent,SEAS_alls</value>
+                <value>MOWaBRVR</value>
+                <value>MOWaEOPCProdRp,Absolute % To Parent,PROD_pgrp</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>MOWaBOPRpVLy</value>
+                <value>MOWaEOPRpVLy</value>
+                <value>MOWaPTORpVLy</value>
+                <value>BUWpBlank1Tx</value>
+                <value>BUWpBlank2Tx</value>
+                <value>BUWpBlank3Tx</value>
+                <value>BUWpBlank4Tx</value>
+                <value>BUWpBlank5Tx</value>
+                <value>DRLyBOPR</value>
+                <value>DRLyEOPR</value>
+                <value>DRLyFwdCvrR</value>
+                <value>DRLyMiscOutR</value>
+                <value>DRLyPAvgInvR</value>
+                <value>DRLyPTORr</value>
+                <value>DRLyRecR</value>
+                <value>DRLySellThrRp</value>
+                <value>DRLySlsRegR</value>
+                <value>MOWaEOPAr</value>
+                <value>MOWaSlsRegR</value>
+                <value>DRLyMiscInR</value>
+                <value>MOWaBOPR</value>
+                <value>MOWaEOPR</value>
+                <value>MOWaFwdCvrR</value>
+                <value>MOWaMiscInR</value>
+                <value>MOWaMiscOutR</value>
+                <value>MOWaPAvgInvR</value>
+                <value>MOWaPTORr</value>
+                <value>MOWaRecR</value>
+                <value>MOWaSellThrRp</value>
+                <value>MOWaOTBR</value>
+                <value>DRLyEOPCSeasRp,Absolute % To Parent,SEAS_alls</value>
+                <value>DRLyEOPCProdRp,Absolute % To Parent,PROD_pgrp</value>
+                <value>MOWaEOPCSeasRp,Absolute % To Parent,SEAS_alls</value>
+                <value>MOWaBRVR</value>
+                <value>MOWaEOPCProdRp,Absolute % To Parent,PROD_pgrp</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>DRLyBOPR</value>
+                <value>DRLyRecR</value>
+                <value>DRLySlsRegR</value>
+                <value>DRLyMiscInR</value>
+                <value>DRLyMiscOutR</value>
+                <value>DRLyEOPR</value>
+                <value>DRLyFwdCvrR</value>
+                <value>DRLyPAvgInvR</value>
+                <value>DRLyPTORr</value>
+                <value>DRLySellThrRp</value>
+                <value>BUWpBlank1Tx</value>
+                <value>MOWaBOPR</value>
+                <value>MOWaRecR</value>
+                <value>MOWaSlsRegR</value>
+                <value>MOWaMiscInR</value>
+                <value>MOWaMiscOutR</value>
+                <value>MOWaEOPR</value>
+                <value>MOWaFwdCvrR</value>
+                <value>MOWaOTBR</value>
+                <value>MOWaBRVR</value>
+                <value>MOWaPAvgInvR</value>
+                <value>MOWaPTORr</value>
+                <value>MOWaSellThrRp</value>
+                <value>MOWaEOPAr</value>
+                <value>BUWpBlank2Tx</value>
+                <value>MOWaBOPRpVLy</value>
+                <value>MOWaEOPRpVLy</value>
+                <value>MOWaPTORpVLy</value>
+                <value>BUWpBlank3Tx</value>
+                <value>DRLyEOPCSeasRp,Absolute % To Parent,SEAS_alls</value>
+                <value>MOWaEOPCSeasRp,Absolute % To Parent,SEAS_alls</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>DRLyBOPR</value>
+                <value>DRLyRecR</value>
+                <value>DRLySlsRegR</value>
+                <value>DRLyMiscInR</value>
+                <value>DRLyMiscOutR</value>
+                <value>DRLyEOPR</value>
+                <value>DRLyFwdCvrR</value>
+                <value>DRLyPAvgInvR</value>
+                <value>DRLyPTORr</value>
+                <value>DRLySellThrRp</value>
+                <value>BUWpBlank1Tx</value>
+                <value>MOWaBOPR</value>
+                <value>MOWaRecR</value>
+                <value>MOWaSlsRegR</value>
+                <value>MOWaMiscInR</value>
+                <value>MOWaMiscOutR</value>
+                <value>MOWaEOPR</value>
+                <value>MOWaFwdCvrR</value>
+                <value>MOWaOTBR</value>
+                <value>MOWaBRVR</value>
+                <value>MOWaPAvgInvR</value>
+                <value>MOWaPTORr</value>
+                <value>MOWaSellThrRp</value>
+                <value>MOWaEOPAr</value>
+                <value>BUWpBlank2Tx</value>
+                <value>MOWaBOPRpVLy</value>
+                <value>MOWaEOPRpVLy</value>
+                <value>MOWaPTORpVLy</value>
+                <value>BUWpBlank3Tx</value>
+                <value>DRLyEOPCSeasRp,Absolute % To Parent,SEAS_alls</value>
+                <value>MOWaEOPCSeasRp,Absolute % To Parent,SEAS_alls</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="CLNDAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="CLNDOrder">
+              <value>1</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="SEASAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="SEASOrder">
+              <value>1</value>
+            </attribute>
+            <attribute name="LOCAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="LOCOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+            <data_model type="STYLEOR">
+              <attribute name="name">
+                <value>DRLyEOPCSeasRp,Absolute % To Parent,SEAS_alls</value>
+              </attribute>
+              <attribute name="Label">
+                <value>label</value>
+              </attribute>
+              <attribute name="Style">
+                <value>Percentage</value>
+              </attribute>
+            </data_model>
+            <data_model type="STYLEOR">
+              <attribute name="name">
+                <value>DRLyEOPCProdRp,Absolute % To Parent,PROD_pgrp</value>
+              </attribute>
+              <attribute name="Label">
+                <value>label</value>
+              </attribute>
+              <attribute name="Style">
+                <value>Percentage</value>
+              </attribute>
+            </data_model>
+            <data_model type="STYLEOR">
+              <attribute name="name">
+                <value>MOWaEOPCSeasRp,Absolute % To Parent,SEAS_alls</value>
+              </attribute>
+              <attribute name="Label">
+                <value>label</value>
+              </attribute>
+              <attribute name="Style">
+                <value>Percentage</value>
+              </attribute>
+            </data_model>
+            <data_model type="STYLEOR">
+              <attribute name="name">
+                <value>MOWaEOPCProdRp,Absolute % To Parent,PROD_pgrp</value>
+              </attribute>
+              <attribute name="Label">
+                <value>label</value>
+              </attribute>
+              <attribute name="Style">
+                <value>Percentage</value>
+              </attribute>
+            </data_model>
+            <data_model type="STYLEOR">
+              <attribute name="name">
+                <value>DRLyEOPR</value>
+              </attribute>
+              <attribute name="Label">
+                <value>label</value>
+              </attribute>
+              <attribute name="Style">
+                <value>UserCustom</value>
+              </attribute>
+            </data_model>
+          </data_model>
+        </data_model>
+      </data_model>
+    </data_model>
+    <data_model type="WorkbookTab">
+      <attribute name="name">
+        <value>WorkbookTab2</value>
+      </attribute>
+      <attribute name="Label">
+        <value>Approve Plan</value>
+      </attribute>
+      <data_model type="Worksheets">
+        <attribute name="name">
+          <value>Worksheets</value>
+        </attribute>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>Worksheet2</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Approve Plan</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>mnth_pgrp_area_sesn</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>TDWpAppTx</value>
+                <value>TDWpAppInfoTx</value>
+                <value>TDWpAppTypeTxP</value>
+                <value>TDOpAppByTxP</value>
+                <value>TDOpAppDtP</value>
+                <value>TDOpAppInfoTxP</value>
+                <value>MOWaSubInfoTxP</value>
+                <value>MOWaSubmitByTxP</value>
+                <value>MOWaSubmitDtP</value>
+                <value>TDWpAppEnbB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>TDWpAppTx</value>
+                <value>TDWpAppInfoTx</value>
+                <value>TDWpAppTypeTxP</value>
+                <value>TDOpAppByTxP</value>
+                <value>TDOpAppDtP</value>
+                <value>TDOpAppInfoTxP</value>
+                <value>MOWaSubInfoTxP</value>
+                <value>MOWaSubmitByTxP</value>
+                <value>MOWaSubmitDtP</value>
+                <value>TDWpAppEnbB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>MOWaSubmitByTxP</value>
+                <value>MOWaSubmitDtP</value>
+                <value>MOWaSubInfoTxP</value>
+                <value>TDWpAppTx</value>
+                <value>TDWpAppInfoTx</value>
+                <value>TDWpAppTypeTxP</value>
+                <value>TDOpAppByTxP</value>
+                <value>TDOpAppDtP</value>
+                <value>TDOpAppInfoTxP</value>
+                <value>TDWpAppEnbB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>MOWaSubmitByTxP</value>
+                <value>MOWaSubmitDtP</value>
+                <value>MOWaSubInfoTxP</value>
+                <value>TDWpAppTx</value>
+                <value>TDWpAppInfoTx</value>
+                <value>TDWpAppTypeTxP</value>
+                <value>TDOpAppByTxP</value>
+                <value>TDOpAppDtP</value>
+                <value>TDOpAppInfoTxP</value>
+                <value>TDWpAppEnbB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="CLNDAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="CLNDOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="LOCAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="LOCOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>1</value>
+            </attribute>
+            <attribute name="SEASAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="SEASOrder">
+              <value>2</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="Menu">
+    <attribute name="name">
+      <value>Menu27</value>
+    </attribute>
+    <attribute name="Label">
+      <value>Menu27</value>
+    </attribute>
+    <data_model type="MenuItems">
+      <attribute name="name">
+        <value>MenuItems</value>
+      </attribute>
+      <data_model type="MenuItem">
+        <attribute name="name">
+          <value>menuItem106</value>
+        </attribute>
+        <attribute name="Label">
+          <value>Approve / Reject</value>
+        </attribute>
+        <attribute name="Function">
+          <value>RuleGroupProcessor</value>
+        </attribute>
+        <attribute name="Arguments">
+          <value>TDP_Approve,TDP_AppClean,TDP_cmt_app</value>
+        </attribute>
+        <attribute name="MenuItemId">
+          <value>106</value>
+        </attribute>
+        <attribute name="Condition">
+          <value></value>
+        </attribute>
+        <attribute name="Message">
+          <value>TDWpMessage3Tx</value>
+        </attribute>
+        <attribute name="CommitAsap">
+          <value>false</value>
+        </attribute>
+        <attribute name="IntradayConcurrent">
+          <value>false</value>
+        </attribute>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="DynHiers">
+    <attribute name="name">
+      <value>DynHiers</value>
+    </attribute>
+  </data_model>
+  <data_model type="EditedMeasures">
+    <attribute name="name">
+      <value>EditedMeasures</value>
+    </attribute>
+  </data_model>
+  <data_model type="ExtendedMeasures">
+    <attribute name="name">
+      <value>ExtendedMeasures</value>
+    </attribute>
+    <data_model type="ExtendedMeasure">
+      <attribute name="name">
+        <value>DRLyEOPCSeasRp,Absolute % To Parent,SEAS_alls</value>
+      </attribute>
+      <attribute name="arguments">
+        <value>SEAS_alls</value>
+      </attribute>
+      <attribute name="label">
+        <value>DR Ly EOP Inv contrib Season R%</value>
+      </attribute>
+      <attribute name="identifier">
+        <value>21</value>
+      </attribute>
+    </data_model>
+    <data_model type="ExtendedMeasure">
+      <attribute name="name">
+        <value>DRLyEOPCProdRp,Absolute % To Parent,PROD_pgrp</value>
+      </attribute>
+      <attribute name="arguments">
+        <value>PROD_pgrp</value>
+      </attribute>
+      <attribute name="label">
+        <value>DR Ly EOP Inv contrib Prod R%</value>
+      </attribute>
+      <attribute name="identifier">
+        <value>23</value>
+      </attribute>
+    </data_model>
+    <data_model type="ExtendedMeasure">
+      <attribute name="name">
+        <value>MOWaEOPCSeasRp,Absolute % To Parent,SEAS_alls</value>
+      </attribute>
+      <attribute name="arguments">
+        <value>SEAS_alls</value>
+      </attribute>
+      <attribute name="label">
+        <value>MO Wa EOP Inv contrib Season R%</value>
+      </attribute>
+      <attribute name="identifier">
+        <value>67</value>
+      </attribute>
+    </data_model>
+    <data_model type="ExtendedMeasure">
+      <attribute name="name">
+        <value>MOWaEOPCProdRp,Absolute % To Parent,PROD_pgrp</value>
+      </attribute>
+      <attribute name="arguments">
+        <value>PROD_pgrp</value>
+      </attribute>
+      <attribute name="label">
+        <value>MO Wa EOP Inv contrib Prod R%</value>
+      </attribute>
+      <attribute name="identifier">
+        <value>91</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

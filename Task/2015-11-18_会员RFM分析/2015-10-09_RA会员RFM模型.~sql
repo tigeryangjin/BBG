@@ -8,6 +8,7 @@ CREATE TABLE BBG_RA_RFM_VIP_F
   HYK_NO             VARCHAR2(30) NOT NULL,
   SLS_TRX_ID         VARCHAR2(30) NOT NULL,
   DT_WID             NUMBER(15) NOT NULL,
+	MIN_WID             NUMBER(10),
   ORG_WID            NUMBER(10) NOT NULL,
   ORG_DH_WID         NUMBER(10) NOT NULL,
   ORG_SCD1_WID       NUMBER(10) NOT NULL,
@@ -69,79 +70,81 @@ CREATE UNIQUE INDEX PK_BBG_RA_RFM_VIP_F ON BBG_RA_RFM_VIP_F (DT_WID, ORG_WID, HY
 
 --1.2.BBG_RA_RFM_VIP_MN_A
 -- CREATE TABLE
-CREATE TABLE BBG_RA_RFM_VIP_MN_A
+-- Create table
+create table BBG_RA_RFM_VIP_MN_A
 (
-  ROW_WID            NUMBER(15) NOT NULL,
-  HYK_NO             VARCHAR2(30) NOT NULL,
-  MN_WID             NUMBER(15) NOT NULL,
-  DATASOURCE_NUM_ID  NUMBER(10) NOT NULL,
-  INTEGRATION_ID     VARCHAR2(80) NOT NULL,
-  W_INSERT_DT        DATE,
-  W_UPDATE_DT        DATE,
-  VIP_RECENCY        DATE,
-  VIP_MONTH_FREQ     NUMBER(10),
-  VIP_YEAR_FREQ      NUMBER(10),
-  VIP_MONTH_SLS_QTY            NUMBER(18,4),
-  VIP_MONTH_SLS_AMT_LCL        NUMBER(18,4),
-  VIP_MONTH_SLS_PROFIT_AMT_LCL NUMBER(18,4),
-  VIP_MONTH_SLS_TAX_AMT_LCL    NUMBER(18,4),
-  VIP_MONTH_RET_QTY            NUMBER(18,4),
-  VIP_MONTH_RET_AMT_LCL        NUMBER(18,4),
-  VIP_MONTH_RET_PROFIT_AMT_LCL NUMBER(18,4),
-  VIP_MONTH_RET_TAX_AMT_LCL    NUMBER(18,4),
-	VIP_YEAR_SLS_QTY            NUMBER(18,4),
-  VIP_YEAR_SLS_AMT_LCL        NUMBER(18,4),
-  VIP_YEAR_SLS_PROFIT_AMT_LCL NUMBER(18,4),
-  VIP_YEAR_SLS_TAX_AMT_LCL    NUMBER(18,4),
-  VIP_YEAR_RET_QTY            NUMBER(18,4),
-  VIP_YEAR_RET_AMT_LCL        NUMBER(18,4),
-  VIP_YEAR_RET_PROFIT_AMT_LCL NUMBER(18,4),
-  VIP_YEAR_RET_TAX_AMT_LCL    NUMBER(18,4),
-  BBG_REFERENCE_DO1  VARCHAR2(250),
-  BBG_REFERENCE_DO2  VARCHAR2(250),
-  BBG_REFERENCE_DO3  VARCHAR2(250),
-  BBG_REFERENCE_DO4  VARCHAR2(250),
-  BBG_REFERENCE_DO5  VARCHAR2(250),
-  BBG_REFERENCE_FO1  NUMBER(20,4),
-  BBG_REFERENCE_FO2  NUMBER(20,4),
-  BBG_REFERENCE_FO3  NUMBER(20,4),
-  BBG_REFERENCE_FO4  NUMBER(20,4),
-  BBG_REFERENCE_FO5  NUMBER(20,4),
-  BBG_REFERENCE_FO6  NUMBER(20,4),
-  BBG_REFERENCE_FO7  NUMBER(20,4),
-  BBG_REFERENCE_FO8  NUMBER(20,4),
-  BBG_REFERENCE_FO9  NUMBER(20,4),
-  BBG_REFERENCE_FO10 NUMBER(20,4)
+  row_wid                      NUMBER(15) not null,
+  hyk_no                       VARCHAR2(30) not null,
+  mn_wid                       NUMBER(15) not null,
+  datasource_num_id            NUMBER(10) not null,
+  integration_id               VARCHAR2(80) not null,
+  w_insert_dt                  DATE,
+  w_update_dt                  DATE,
+  vip_recency_date             DATE,
+  vip_month_freq               NUMBER(10),
+  vip_year_freq                NUMBER(10),
+  vip_month_sls_qty            NUMBER(18,4),
+  vip_month_sls_amt_lcl        NUMBER(18,4),
+  vip_month_sls_profit_amt_lcl NUMBER(18,4),
+  vip_month_sls_tax_amt_lcl    NUMBER(18,4),
+  vip_month_ret_qty            NUMBER(18,4),
+  vip_month_ret_amt_lcl        NUMBER(18,4),
+  vip_month_ret_profit_amt_lcl NUMBER(18,4),
+  vip_month_ret_tax_amt_lcl    NUMBER(18,4),
+  vip_year_sls_qty             NUMBER(18,4),
+  vip_year_sls_amt_lcl         NUMBER(18,4),
+  vip_year_sls_profit_amt_lcl  NUMBER(18,4),
+  vip_year_sls_tax_amt_lcl     NUMBER(18,4),
+  vip_year_ret_qty             NUMBER(18,4),
+  vip_year_ret_amt_lcl         NUMBER(18,4),
+  vip_year_ret_profit_amt_lcl  NUMBER(18,4),
+  vip_year_ret_tax_amt_lcl     NUMBER(18,4),
+  bbg_reference_do1            VARCHAR2(250),
+  bbg_reference_do2            VARCHAR2(250),
+  bbg_reference_do3            VARCHAR2(250),
+  bbg_reference_do4            VARCHAR2(250),
+  bbg_reference_do5            VARCHAR2(250),
+  bbg_reference_fo1            NUMBER(20,4),
+  bbg_reference_fo2            NUMBER(20,4),
+  bbg_reference_fo3            NUMBER(20,4),
+  bbg_reference_fo4            NUMBER(20,4),
+  bbg_reference_fo5            NUMBER(20,4),
+  bbg_reference_fo6            NUMBER(20,4),
+  bbg_reference_fo7            NUMBER(20,4),
+  bbg_reference_fo8            NUMBER(20,4),
+  bbg_reference_fo9            NUMBER(20,4),
+  bbg_reference_fo10           NUMBER(20,4)
 )
-TABLESPACE RETAIL_DATA
-  PCTFREE 10
-  INITRANS 1
-  MAXTRANS 255
-  STORAGE
+tablespace RETAIL_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
   (
-    INITIAL 64K
-    NEXT 8K
-    MINEXTENTS 1
-    MAXEXTENTS UNLIMITED
+    initial 64K
+    next 8K
+    minextents 1
+    maxextents unlimited
   );
--- ADD COMMENTS TO THE COLUMNS 
-COMMENT ON COLUMN BBG_RA_RFM_VIP_MN_A.VIP_RECENCY
-  IS '会员最后消费日期';
-COMMENT ON COLUMN BBG_RA_RFM_VIP_MN_A.VIP_MONTH_FREQ
-  IS '会员月消费频率';
-COMMENT ON COLUMN BBG_RA_RFM_VIP_MN_A.VIP_YEAR_FREQ
-  IS '会员年消费频率';
--- CREATE/RECREATE INDEXES 
-CREATE UNIQUE INDEX PK_BBG_RA_RFM_VIP_MN_A ON BBG_RA_RFM_VIP_MN_A (MN_WID, HYK_NO)
-  TABLESPACE RETAIL_INDEX
-  PCTFREE 10
-  INITRANS 2
-  MAXTRANS 255
-  STORAGE
+-- Add comments to the columns 
+comment on column BBG_RA_RFM_VIP_MN_A.vip_recency_date
+  is '会员最后消费日期';
+comment on column BBG_RA_RFM_VIP_MN_A.vip_month_freq
+  is '会员月消费频率';
+comment on column BBG_RA_RFM_VIP_MN_A.vip_year_freq
+  is '会员年消费频率';
+-- Create/Recreate indexes 
+create unique index PK_BBG_RA_RFM_VIP_MN_A on BBG_RA_RFM_VIP_MN_A (MN_WID, HYK_NO)
+  tablespace RETAIL_INDEX
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
   (
-    INITIAL 64K
-    MINEXTENTS 1
-    MAXEXTENTS UNLIMITED
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
   );
 
 
@@ -161,7 +164,6 @@ CREATE TABLE BBG_RA_RFM_LC_MN_A
   W_UPDATE_DT        DATE,
   VIP_COUNT          NUMBER(10),
   VIP_SLS_TRX_COUNT  NUMBER(10),
-  SLS_TRX_COUNT      NUMBER(10),
   BBG_REFERENCE_DO1  VARCHAR2(250),
   BBG_REFERENCE_DO2  VARCHAR2(250),
   BBG_REFERENCE_DO3  VARCHAR2(250),
@@ -194,8 +196,6 @@ COMMENT ON COLUMN BBG_RA_RFM_LC_MN_A.VIP_COUNT
   IS '会员卡数目';
 COMMENT ON COLUMN BBG_RA_RFM_LC_MN_A.VIP_SLS_TRX_COUNT
   IS '会员交易笔数';
-COMMENT ON COLUMN BBG_RA_RFM_LC_MN_A.SLS_TRX_COUNT
-  IS '交易笔数';
 -- CREATE/RECREATE INDEXES 
 CREATE UNIQUE INDEX PK_BBG_RA_RFM_LC_MN_A ON BBG_RA_RFM_LC_MN_A (MN_WID, ORG_WID)
   TABLESPACE RETAIL_INDEX
@@ -247,6 +247,7 @@ USING (
      T.HYK_NO,
      T.SLS_TRX_ID,
      T.DT_WID,
+     T.MIN_WID,
      T.ORG_WID,
      T.ORG_DH_WID,
      T.ORG_SCD1_WID,
@@ -284,6 +285,7 @@ USING (
      GROUP BY T.HYK_NO,
               T.SLS_TRX_ID,
               T.DT_WID,
+              T.MIN_WID,
               T.ORG_WID,
               T.ORG_DH_WID,
               T.ORG_SCD1_WID),
@@ -300,6 +302,7 @@ USING (
    A.HYK_NO,
    A.SLS_TRX_ID,
    A.DT_WID,
+   A.MIN_WID,
    A.ORG_WID,
    A.ORG_DH_WID,
    A.ORG_SCD1_WID,
@@ -331,7 +334,7 @@ USING (
    A.BBG_REFERENCE_FO10
     FROM A, B, O
    WHERE A.ORG_WID = O.ROW_WID
-     AND B.DRIVER_VALUE = O.ORG_NUM) S ON (T.HYK_NO = S.HYK_NO AND T.SLS_TRX_ID = S.SLS_TRX_ID AND T.DT_WID = S.DT_WID AND T.ORG_WID = S.ORG_WID) WHEN MATCHED THEN
+     AND B.DRIVER_VALUE = O.ORG_NUM) S ON (T.HYK_NO = S.HYK_NO AND T.SLS_TRX_ID = S.SLS_TRX_ID AND T.DT_WID = S.DT_WID AND T.MIN_WID = S.MIN_WID AND T.ORG_WID = S.ORG_WID) WHEN MATCHED THEN
     UPDATE
        SET T.SLS_QTY            = S.SLS_QTY,
            T.SLS_AMT_LCL        = S.SLS_AMT_LCL,
@@ -358,6 +361,7 @@ USING (
        T.HYK_NO,
        T.SLS_TRX_ID,
        T.DT_WID,
+       T.MIN_WID,
        T.ORG_WID,
        T.ORG_DH_WID,
        T.ORG_SCD1_WID,
@@ -394,6 +398,7 @@ USING (
        S.HYK_NO,
        S.SLS_TRX_ID,
        S.DT_WID,
+       S.MIN_WID,
        S.ORG_WID,
        S.ORG_DH_WID,
        S.ORG_SCD1_WID,
@@ -425,7 +430,6 @@ USING (
        S.BBG_REFERENCE_FO8,
        S.BBG_REFERENCE_FO9,
        S.BBG_REFERENCE_FO10);
-
 
 		
 --3.2.BBG_RA_RFM_VIP_MN_A
@@ -691,11 +695,57 @@ WHEN MATCHED THEN
 		VALUES();
 
 
---*******************************************************************************************************
---*******************************************************************************************************
---*******************************************************************************************************
---*******************************************************************************************************
+---临时刷新MIN_WID
+CREATE TABLE RADM.YJ_SLSTRX_MINWID_TMP AS
+  SELECT /*+PARALLEL(32)*/
+  DISTINCT T.SLS_TRX_ID, T.MIN_WID, T.DT_WID
+    FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F T
+   WHERE T.DT_WID >= 120140101000
+     AND T.HYK_NO IS NOT NULL;
 
+SELECT COUNT(1) FROM RADM.YJ_SLSTRX_MINWID_TMP;
+
+UPDATE RADM.BBG_RA_RFM_VIP_F A
+   SET A.MIN_WID =
+       (SELECT B.MIN_WID
+          FROM RADM.YJ_SLSTRX_MINWID_TMP B
+         WHERE A.SLS_TRX_ID = B.SLS_TRX_ID
+           AND A.DT_WID = B.DT_WID
+           AND B.DT_WID = 120140101000)
+ WHERE EXISTS (SELECT 1
+          FROM RADM.YJ_SLSTRX_MINWID_TMP C
+         WHERE A.SLS_TRX_ID = C.SLS_TRX_ID
+           AND A.DT_WID = C.DT_WID
+           AND C.DT_WID = 120140101000)
+   AND A.MIN_WID IS NULL
+   AND A.DT_WID = 120140101000;
+	 
+--4.中文字段说明
+--CN_Retail_As-Was_BBG_VIP_RFM_Analysis
+--CD_Retail_As-Was_BBG_VIP_RFM_Analysis
+--CN_Retail_As-Was_BBG_VIP_RFM_Analysis_HYK_NO
+--CD_Retail_As-Was_BBG_VIP_RFM_Analysis_HYK_NO
+--CN_Retail_As-Was_BBG_VIP_RFM_Analysis_VIP_RECENCY_DATE
+--CD_Retail_As-Was_BBG_VIP_RFM_Analysis_VIP_RECENCY_DATE
+--CN_Retail_As-Was_BBG_VIP_RFM_Analysis_VIP_MONTH_FREQ
+--CD_Retail_As-Was_BBG_VIP_RFM_Analysis_VIP_MONTH_FREQ
+--CN_Retail_As-Was_BBG_VIP_RFM_Analysis_VIP_YEAR_FREQ
+--CD_Retail_As-Was_BBG_VIP_RFM_Analysis_VIP_YEAR_FREQ
+--CN_Retail_As-Was_BBG_VIP_RFM_Analysis_VIP_Month_Sales_Amt
+--CD_Retail_As-Was_BBG_VIP_RFM_Analysis_VIP_Month_Sales_Amt
+--CN_Retail_As-Was_BBG_VIP_RFM_Analysis_VIP_Month_Net_Sales_Amt
+--CD_Retail_As-Was_BBG_VIP_RFM_Analysis_VIP_Month_Net_Sales_Amt
+--CN_Retail_As-Was_BBG_VIP_RFM_Analysis_VIP_Year_Sales_Amt
+--CD_Retail_As-Was_BBG_VIP_RFM_Analysis_VIP_Year_Sales_Amt
+--CN_Retail_As-Was_BBG_VIP_RFM_Analysis_VIP_Year_Net_Sales_Amt
+--CD_Retail_As-Was_BBG_VIP_RFM_Analysis_VIP_Year_Net_Sales_Amt
+SELECT * FROM RADM.W_LOCALIZED_STRING_G T WHERE T.MSG_NUM LIKE '%Retail_As-Was_BBG_VIP_RFM_Analysis' FOR UPDATE;
+
+--*******************************************************************************************************
+--*******************************************************************************************************
+--*******************************************************************************************************
+--*******************************************************************************************************
+--old
 --1.会员卡号、交易小票号、日期维度、ORG_WID、ORG_DH_WID、ORG_SCD1_WID、消费金额
 SELECT /*+PARALLEL(20)*/
  T.HYK_NO,

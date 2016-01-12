@@ -102,7 +102,8 @@ SELECT *
                           'ENDED_CANCEL-manually canceled'
                        end STATUS
                   FROM ah@rms_uc4,
-                       (SELECT COUNT(*) ROWCOUNT
+                       (SELECT /*+PARALLEL(16)*/
+                         COUNT(*) ROWCOUNT
                           FROM cmx_item_supp_country_loc T
                          WHERE TRUNC(T.LAST_UPDATE_DATE) = TRUNC(SYSDATE - 1))
                  WHERE ah_client = 80

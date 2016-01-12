@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="ClassScheme">
+  <attribute name="name">
+    <value>scheme</value>
+  </attribute>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>Role</value>
+    </attribute>
+    <attribute name="label">
+      <value>Role</value>
+    </attribute>
+    <attribute name="type">
+      <value>string</value>
+    </attribute>
+    <attribute name="baseint">
+      <value>#UNSPECIFIED#</value>
+    </attribute>
+    <attribute name="defagg">
+      <value>reclc</value>
+    </attribute>
+    <attribute name="defspread">
+      <value>#UNSPECIFIED#</value>
+    </attribute>
+    <attribute name="db">
+      <value>yj</value>
+    </attribute>
+    <attribute name="viewtype">
+      <value>#UNSPECIFIED#</value>
+    </attribute>
+    <attribute name="insertable">
+      <value>#UNSPECIFIED#</value>
+    </attribute>
+    <attribute name="uitype">
+      <value>#UNSPECIFIED#</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>Td</value>
+      </attribute>
+      <attribute name="label">
+        <value>Top Down</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>year_dept_chain</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>reclc</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>Mo</value>
+      </attribute>
+      <attribute name="label">
+        <value>Middle Out</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>mnth_cls_reg</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>reclc</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>#UNSPECIFIED#</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>#UNSPECIFIED#</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>#UNSPECIFIED#</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>Bu</value>
+      </attribute>
+      <attribute name="label">
+        <value>Bottom Up</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>day_sbc_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>reclc</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>Version</value>
+    </attribute>
+    <attribute name="label">
+      <value>Version</value>
+    </attribute>
+    <attribute name="type">
+      <value>int</value>
+    </attribute>
+    <attribute name="defagg">
+      <value>reclc</value>
+    </attribute>
+    <attribute name="db">
+      <value>yj</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>Wp</value>
+      </attribute>
+      <attribute name="label">
+        <value>Work Plan</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>#UNSPECIFIED#</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>Ly</value>
+      </attribute>
+      <attribute name="label">
+        <value>Last Year</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>Metric</value>
+    </attribute>
+    <attribute name="label">
+      <value>Metric</value>
+    </attribute>
+    <attribute name="type">
+      <value>string</value>
+    </attribute>
+    <attribute name="defagg">
+      <value>reclc</value>
+    </attribute>
+    <attribute name="defspread">
+      <value>#UNSPECIFIED#</value>
+    </attribute>
+    <attribute name="basestate">
+      <value>#UNSPECIFIED#</value>
+    </attribute>
+    <attribute name="aggstate">
+      <value>#UNSPECIFIED#</value>
+    </attribute>
+    <attribute name="db">
+      <value>yj</value>
+    </attribute>
+    <attribute name="viewtype">
+      <value>#UNSPECIFIED#</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>Sls</value>
+      </attribute>
+      <attribute name="label">
+        <value>Sale</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>GM</value>
+      </attribute>
+      <attribute name="label">
+        <value>GM</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>Inv</value>
+      </attribute>
+      <attribute name="label">
+        <value>BOP Inv</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>UOM</value>
+    </attribute>
+    <attribute name="label">
+      <value>Unit of Measurement</value>
+    </attribute>
+    <attribute name="type">
+      <value>real</value>
+    </attribute>
+    <attribute name="defagg">
+      <value>reclc</value>
+    </attribute>
+    <attribute name="db">
+      <value>yj</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>R</value>
+      </attribute>
+      <attribute name="label">
+        <value>Retail Amt</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>U</value>
+      </attribute>
+      <attribute name="label">
+        <value>Unit</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>C</value>
+      </attribute>
+      <attribute name="label">
+        <value>Retail Cost</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

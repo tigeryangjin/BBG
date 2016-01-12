@@ -92,7 +92,7 @@ SELECT *
                                   trunc((ah_timestamp4 - ah_timestamp2) * 24 * 60) * 60),
                             2,
                             '0') RUN_TIME,
-                       CNT,
+                       ROWCOUNT,
                        case
                          when AH_STATUS = 1900 then
                           'ENDED_OK-ended normally'
@@ -102,7 +102,7 @@ SELECT *
                           'ENDED_CANCEL-manually canceled'
                        end STATUS
                   FROM ah@rms_uc4,
-                       (SELECT COUNT(*) CNT
+                       (SELECT COUNT(*) ROWCOUNT
                           FROM cmx_item_supp_country_loc T
                          WHERE TRUNC(T.LAST_UPDATE_DATE) = TRUNC(SYSDATE - 1))
                  WHERE ah_client = 80
