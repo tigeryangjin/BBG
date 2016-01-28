@@ -739,7 +739,7 @@ UPDATE RADM.BBG_RA_RFM_VIP_F A
 --CD_Retail_As-Was_BBG_VIP_RFM_Analysis_VIP_Year_Sales_Amt
 --CN_Retail_As-Was_BBG_VIP_RFM_Analysis_VIP_Year_Net_Sales_Amt
 --CD_Retail_As-Was_BBG_VIP_RFM_Analysis_VIP_Year_Net_Sales_Amt
-SELECT * FROM RADM.W_LOCALIZED_STRING_G T WHERE T.MSG_NUM LIKE '%Retail_As-Was_BBG_VIP_RFM_Analysis' FOR UPDATE;
+SELECT * FROM RADM.W_LOCALIZED_STRING_G T WHERE T.MSG_NUM LIKE '%Retail_As-Was_BBG_VIP_RFM_Analysis%' FOR UPDATE;
 
 --*******************************************************************************************************
 --*******************************************************************************************************
@@ -793,3 +793,52 @@ SELECT /*+PARALLEL(20)*/
  GROUP BY A.HYK_NO;
 
 --3.按门店统计RFM会员数
+
+
+--4.写入RFM指标分级数据。
+/*
+R
+一级:400+
+二级:121-400
+三级:0-120
+
+F
+一级:0-1
+二级:2-3
+三级:4+
+
+M
+一级:0-130
+二级:131-330
+三级:331+
+*/
+ALTER TABLE RADM.BBG_RA_RFM_VIP_MN_A NOLOGGING;
+ALTER SESSION ENABLE PARALLEL DML;
+UPDATE RADM.BBG_RA_RFM_VIP_MN_A T
+   SET T.R_LEVEL = (CASE
+                     WHEN TRUNC(&DATE) - T.VIP_RECENCY_DATE BETWEEN 0 AND 120 THEN
+                      3
+                     WHEN TRUNC(&DATE) - T.VIP_RECENCY_DATE BETWEEN 121 AND 400 THEN
+                      2
+                     WHEN TRUNC(&DATE) - T.VIP_RECENCY_DATE >= 401 THEN
+                      3
+                   END),
+       T.F_LEVEL = (CASE
+                     WHEN T.VIP_MONTH_FREQ BETWEEN 0 AND 1 THEN
+                      1
+                     WHEN T.VIP_MONTH_FREQ BETWEEN 2 AND 3 THEN
+                      2
+                     WHEN T.VIP_MONTH_FREQ >= 4 THEN
+                      3
+                   END),
+       T.M_LEVEL = (CASE
+                     WHEN T.VIP_MONTH_SLS_AMT_LCL BETWEEN 0 AND 130 THEN
+                      1
+                     WHEN T.VIP_MONTH_SLS_AMT_LCL BETWEEN 131 AND 330 THEN
+                      2
+                     WHEN T.VIP_MONTH_SLS_AMT_LCL >= 331 THEN
+                      3
+                   END)
+ WHERE T.MN_WID = SUBSTR(TO_CHAR(&DATE, 'YYYYMMDD'), 1, 6)
+   AND T.HYK_NO = '006062113685';
+ALTER TABLE RADM.BBG_RA_RFM_VIP_MN_A LOGGING;

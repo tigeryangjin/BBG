@@ -15,7 +15,8 @@ SELECT A.DAYS R, COUNT(1) CNT
                                                         WHERE TO_DATE(SUBSTR(DT_WID,
                                                                              2,
                                                                              8),
-                                                                      'YYYYMMDD') <= &DAYS)
+                                                                      'YYYYMMDD') <=
+                                                              &DAYS)
                  SELECT /*+PARALLEL(16)*/
                   A.HYK_NO,
                   TO_CHAR(&DAYS, 'YYYYMM') MN_WID,
@@ -154,7 +155,7 @@ SELECT A.DAYS R, COUNT(1) CNT
                   WHERE A.HYK_NO = B.HYK_NO
                   GROUP BY A.HYK_NO) T
         ) A
- WHERE A.DAYS <= 300
+ --WHERE A.DAYS <= 300
  GROUP BY A.DAYS
  ORDER BY A.DAYS;
 
@@ -167,7 +168,8 @@ SELECT A.FREQ F, COUNT(1) CNT
                                MAX(TO_DATE(SUBSTR(DT_WID, 2, 8), 'YYYYMMDD')) - 30 MONTH_DAYS,
                                MAX(TO_DATE(SUBSTR(DT_WID, 2, 8), 'YYYYMMDD')) - 365 YEAR_DAYS
                                 FROM RADM.BBG_RA_RFM_VIP_F
-                               WHERE TO_DATE(SUBSTR(DT_WID, 2, 8), 'YYYYMMDD') <= &DAYS
+                               WHERE TO_DATE(SUBSTR(DT_WID, 2, 8), 'YYYYMMDD') <=
+                                     &DAYS
                                GROUP BY HYK_NO), A AS (SELECT /*+PARALLEL(16)*/
                                                         *
                                                          FROM RADM.BBG_RA_RFM_VIP_F
@@ -314,8 +316,8 @@ SELECT A.FREQ F, COUNT(1) CNT
                   WHERE A.HYK_NO = B.HYK_NO
                   GROUP BY A.HYK_NO) T
         ) A
- WHERE A.FREQ <= 200
-   AND A.FREQ > 0
+ /*WHERE A.FREQ <= 200
+   AND A.FREQ > 0*/
  GROUP BY A.FREQ
  ORDER BY A.FREQ;
 
@@ -328,7 +330,8 @@ SELECT A.AMT M, COUNT(1) CNT
                                MAX(TO_DATE(SUBSTR(DT_WID, 2, 8), 'YYYYMMDD')) - 30 MONTH_DAYS,
                                MAX(TO_DATE(SUBSTR(DT_WID, 2, 8), 'YYYYMMDD')) - 365 YEAR_DAYS
                                 FROM RADM.BBG_RA_RFM_VIP_F
-                               WHERE TO_DATE(SUBSTR(DT_WID, 2, 8), 'YYYYMMDD') <= &DAYS
+                               WHERE TO_DATE(SUBSTR(DT_WID, 2, 8), 'YYYYMMDD') <=
+                                     &DAYS
                                GROUP BY HYK_NO), A AS (SELECT /*+PARALLEL(16)*/
                                                         *
                                                          FROM RADM.BBG_RA_RFM_VIP_F
@@ -475,6 +478,6 @@ SELECT A.AMT M, COUNT(1) CNT
                   WHERE A.HYK_NO = B.HYK_NO
                   GROUP BY A.HYK_NO) T
         ) A
- WHERE A.AMT > 0
+ --WHERE A.AMT > 0
  GROUP BY A.AMT
  ORDER BY A.AMT;

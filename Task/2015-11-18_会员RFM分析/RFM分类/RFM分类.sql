@@ -155,7 +155,7 @@ SELECT A.DAYS R, COUNT(1) CNT
                   WHERE A.HYK_NO = B.HYK_NO
                   GROUP BY A.HYK_NO) T
         ) A
- WHERE A.DAYS <= 300
+ --WHERE A.DAYS <= 300
  GROUP BY A.DAYS
  ORDER BY A.DAYS;
 
@@ -316,12 +316,12 @@ SELECT A.FREQ F, COUNT(1) CNT
                   WHERE A.HYK_NO = B.HYK_NO
                   GROUP BY A.HYK_NO) T
         ) A
- WHERE A.FREQ <= 200
-   AND A.FREQ > 0
+ /*WHERE A.FREQ <= 200
+   AND A.FREQ > 0*/
  GROUP BY A.FREQ
  ORDER BY A.FREQ;
 
---M
+--M 
 SELECT A.AMT M, COUNT(1) CNT
   FROM (SELECT T.HYK_NO, ROUND(NVL(T.VIP_MONTH_SLS_AMT_LCL, 0), 0) AMT
           FROM (WITH MAXR AS (SELECT /*+PARALLEL(16)*/
@@ -478,6 +478,6 @@ SELECT A.AMT M, COUNT(1) CNT
                   WHERE A.HYK_NO = B.HYK_NO
                   GROUP BY A.HYK_NO) T
         ) A
- WHERE A.AMT > 0
+ --WHERE A.AMT > 0
  GROUP BY A.AMT
  ORDER BY A.AMT;
