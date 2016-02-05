@@ -739,6 +739,12 @@ UPDATE RADM.BBG_RA_RFM_VIP_F A
 --CD_Retail_As-Was_BBG_VIP_RFM_Analysis_VIP_Year_Sales_Amt
 --CN_Retail_As-Was_BBG_VIP_RFM_Analysis_VIP_Year_Net_Sales_Amt
 --CD_Retail_As-Was_BBG_VIP_RFM_Analysis_VIP_Year_Net_Sales_Amt
+--CN_Retail_As-Was_BBG_VIP_RFM_Analysis_R_LEVEL
+--CD_Retail_As-Was_BBG_VIP_RFM_Analysis_R_LEVEL
+--CN_Retail_As-Was_BBG_VIP_RFM_Analysis_F_LEVEL
+--CD_Retail_As-Was_BBG_VIP_RFM_Analysis_F_LEVEL
+--CN_Retail_As-Was_BBG_VIP_RFM_Analysis_M_LEVEL
+--CD_Retail_As-Was_BBG_VIP_RFM_Analysis_M_LEVEL
 SELECT * FROM RADM.W_LOCALIZED_STRING_G T WHERE T.MSG_NUM LIKE '%Retail_As-Was_BBG_VIP_RFM_Analysis%' FOR UPDATE;
 
 --*******************************************************************************************************
