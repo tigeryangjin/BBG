@@ -244,18 +244,7 @@ SELECT --TDH.TRAN_DATE 销售日期,
  SUM(TDH.TOTAL_RETAIL) - SUM(TDH.TOTAL_COST) 毛利额
   FROM RMS.TRAN_DATA_HISTORY TDH
  WHERE TDH.TRAN_DATE BETWEEN &BDATE AND &EDATE
-   AND TDH.ITEM IN (800215920,
-                    800215921,
-                    800212743,
-                    800212742,
-                    800346241,
-                    800346242,
-                    800416670,
-                    800416669,
-                    101183117,
-                    800394726,
-                    101942582,
-                    102704228)
+   AND TDH.ITEM IN (101825837，101942671，800002917)
    AND TDH.TRAN_CODE IN (1, 3)
  GROUP BY TDH.ITEM, TDH.SUBCLASS, TDH.LOCATION --, TDH.TRAN_DATE
  ORDER BY /*TDH.TRAN_DATE,*/ TDH.LOCATION, TDH.ITEM;

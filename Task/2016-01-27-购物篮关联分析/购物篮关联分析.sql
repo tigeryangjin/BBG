@@ -67,3 +67,7 @@ SELECT *
           FROM RADM.W_PRODUCT_D P
          WHERE T.PROD_WID = P.ROW_WID
            AND P.PROD_NUM IN ('800220788', '800399780'));
+--------------------
+--CN_Retail_As-Was_BBG_Sales_Market_Basket_Analysis
+--CD_Retail_As-Was_BBG_Sales_Market_Basket_Analysis
+SELECT * FROM RADM.W_LOCALIZED_STRING_G T WHERE T.MSG_NUM LIKE '%Retail_As-Was_BBG_VIP_RFM_Analysis' FOR UPDATE;

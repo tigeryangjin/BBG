@@ -5,7 +5,7 @@ WITH ALL_TRX AS
          T.ORG_WID,
          T.ORG_DH_WID,
          T.ORG_SCD1_WID,
-         COUNT(T.SLS_TRX_ID) LOC_CNT
+         COUNT(DISTINCT T.SLS_TRX_ID) LOC_CNT
     FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F T
    GROUP BY T.DT_WID, T.ORG_WID, T.ORG_DH_WID, T.ORG_SCD1_WID),
 A_TRX AS
@@ -16,7 +16,7 @@ A_TRX AS
          T.ORG_WID,
          T.ORG_DH_WID,
          T.ORG_SCD1_WID,
-         COUNT(T.SLS_TRX_ID) A_CNT
+         COUNT(DISTINCT T.SLS_TRX_ID) A_CNT
     FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F T
    GROUP BY T.DT_WID,
             T.PROD_WID,
@@ -33,7 +33,7 @@ B_TRX AS
          T.ORG_WID,
          T.ORG_DH_WID,
          T.ORG_SCD1_WID,
-         COUNT(T.SLS_TRX_ID) B_CNT
+         COUNT(DISTINCT T.SLS_TRX_ID) B_CNT
     FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F T
    GROUP BY T.DT_WID,
             T.PROD_WID,
@@ -77,7 +77,7 @@ SELECT MBA.DT_WID,
                        AB.B_PROD_SCD1_WID,
                        COUNT(AB.SLS_TRX_ID) AB_CNT
                   FROM --¹ºÎïÀºAB¹ØÁª
-                       (SELECT A.DT_WID,
+                       (SELECT DISTINCT A.DT_WID,
                                A.ORG_WID,
                                A.ORG_DH_WID,
                                A.ORG_SCD1_WID,
@@ -93,7 +93,7 @@ SELECT MBA.DT_WID,
                            AND A.ORG_WID = B.ORG_WID
                            AND A.ORG_DH_WID = B.ORG_DH_WID
                            AND A.ORG_SCD1_WID = B.ORG_SCD1_WID
-                           AND A.PROD_WID <> B.PROD_WID) AB
+                           AND A.PROD_WID < B.PROD_WID) AB
                  GROUP BY AB.DT_WID,
                           AB.ORG_WID,
                           AB.ORG_DH_WID,
@@ -122,8 +122,8 @@ SELECT MBA.DT_WID,
            AND TT1.ORG_WID = B_TRX.ORG_WID
            AND TT1.ORG_DH_WID = B_TRX.ORG_DH_WID
            AND TT1.ORG_SCD1_WID = B_TRX.ORG_SCD1_WID
-           AND TT1.A_PROD_WID = B_TRX.PROD_WID
-           AND TT1.A_PROD_SCD1_WID = B_TRX.PROD_SCD1_WID) MBA,
+           AND TT1.B_PROD_WID = B_TRX.PROD_WID
+           AND TT1.B_PROD_SCD1_WID = B_TRX.PROD_SCD1_WID) MBA,
        (SELECT P.ROW_WID PROD_WID, P.PROD_NUM, L.PRODUCT_NAME
           FROM RADM.W_PRODUCT_D P, RADM.W_PRODUCT_D_TL L
          WHERE P.INTEGRATION_ID = L.INTEGRATION_ID
