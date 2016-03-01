@@ -70,4 +70,21 @@ SELECT *
 --------------------
 --CN_Retail_As-Was_BBG_Sales_Market_Basket_Analysis
 --CD_Retail_As-Was_BBG_Sales_Market_Basket_Analysis
+--CN_Retail_As-Was_BBG_Sales_Market_Basket_Analysis_A_PROD_NUM
+--CD_Retail_As-Was_BBG_Sales_Market_Basket_Analysis_A_PROD_NUM
+--CN_Retail_As-Was_BBG_Sales_Market_Basket_Analysis_A_PROD_NAME
+--CD_Retail_As-Was_BBG_Sales_Market_Basket_Analysis_A_PROD_NAME
+--CN_Retail_As-Was_BBG_Sales_Market_Basket_Analysis_B_PROD_NUM
+--CD_Retail_As-Was_BBG_Sales_Market_Basket_Analysis_B_PROD_NUM
+--CN_Retail_As-Was_BBG_Sales_Market_Basket_Analysis_B_PROD_NAME
+--CD_Retail_As-Was_BBG_Sales_Market_Basket_Analysis_B_PROD_NAME
+--CN_Retail_As-Was_BBG_Sales_Market_Basket_Analysis_A_CNT
+--CD_Retail_As-Was_BBG_Sales_Market_Basket_Analysis_A_CNT
+--CN_Retail_As-Was_BBG_Sales_Market_Basket_Analysis_B_CNT
+--CD_Retail_As-Was_BBG_Sales_Market_Basket_Analysis_B_CNT
+--CN_Retail_As-Was_BBG_Sales_Market_Basket_Analysis_AB_CNT
+--CD_Retail_As-Was_BBG_Sales_Market_Basket_Analysis_AB_CNT
+--CN_Retail_As-Was_BBG_Sales_Market_Basket_Analysis_LOC_CNT
+--CD_Retail_As-Was_BBG_Sales_Market_Basket_Analysis_LOC_CNT
+
 SELECT * FROM RADM.W_LOCALIZED_STRING_G T WHERE T.MSG_NUM LIKE '%Retail_As-Was_BBG_VIP_RFM_Analysis' FOR UPDATE;
