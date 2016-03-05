@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="Workbook">
+  <attribute name="name">
+    <value>WeekMapping</value>
+  </attribute>
+  <attribute name="Label">
+    <value>Mapping Setup</value>
+  </attribute>
+  <attribute name="WorkbookGroup">
+    <value>PlnAdmin</value>
+  </attribute>
+  <attribute name="WorkbookGroupLabel">
+    <value>Planning Admin</value>
+  </attribute>
+  <attribute name="WorkbookLib">
+    <value>Templates</value>
+  </attribute>
+  <attribute name="WorkbookType">
+    <value>DynamicTemplate</value>
+  </attribute>
+  <attribute name="IsWizardOnly">
+    <value>false</value>
+  </attribute>
+  <attribute name="IsImageEnabled">
+    <value>false</value>
+  </attribute>
+  <attribute name="RuleSet">
+    <value>Map</value>
+  </attribute>
+  <attribute name="LoadRules">
+    <value>Map_load</value>
+  </attribute>
+  <attribute name="CommitRules">
+    <value>Map_commit</value>
+  </attribute>
+  <attribute name="RefreshRules">
+    <value>Map_refresh</value>
+  </attribute>
+  <attribute name="IsUseDefaults">
+    <value>false</value>
+  </attribute>
+  <attribute name="DpmDimensions">
+    <value></value>
+  </attribute>
+  <attribute name="IsCustomWizard">
+    <value>false</value>
+  </attribute>
+  <data_model type="AxisInfo">
+    <attribute name="name">
+      <value>AxisInfo</value>
+    </attribute>
+    <attribute name="CLNDAxis">
+      <value>XAxis</value>
+    </attribute>
+    <attribute name="CLNDOrder">
+      <value>0</value>
+    </attribute>
+    <attribute name="MEASAxis">
+      <value>YAxis</value>
+    </attribute>
+    <attribute name="MEASOrder">
+      <value>0</value>
+    </attribute>
+  </data_model>
+  <data_model type="Wizards">
+    <attribute name="name">
+      <value>Wizards</value>
+    </attribute>
+  </data_model>
+  <data_model type="WorkbookTabs">
+    <attribute name="name">
+      <value>WorkbookTabs</value>
+    </attribute>
+    <data_model type="WorkbookTab">
+      <attribute name="name">
+        <value>Mapping</value>
+      </attribute>
+      <attribute name="Label">
+        <value>Mapping</value>
+      </attribute>
+      <data_model type="Worksheets">
+        <attribute name="name">
+          <value>Worksheets</value>
+        </attribute>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>Mapping1</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Mapping</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>week</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>true</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>BUALLagTx</value>
+                <value>BULyLagTx</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>BUALLagTx</value>
+                <value>BULyLagTx</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>BULyLagTx</value>
+                <value>BUALLagTx</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>BULyLagTx</value>
+                <value>BUALLagTx</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="CLNDAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="CLNDOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="HierMods">
+    <attribute name="name">
+      <value>HierMods</value>
+    </attribute>
+  </data_model>
+  <data_model type="DynHiers">
+    <attribute name="name">
+      <value>DynHiers</value>
+    </attribute>
+  </data_model>
+  <data_model type="EditedMeasures">
+    <attribute name="name">
+      <value>EditedMeasures</value>
+    </attribute>
+  </data_model>
+  <data_model type="PercentToParents">
+    <attribute name="name">
+      <value>PercentToParents</value>
+    </attribute>
+  </data_model>
+</data_set>

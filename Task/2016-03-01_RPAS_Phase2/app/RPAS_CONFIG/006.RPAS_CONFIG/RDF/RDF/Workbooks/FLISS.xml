@@ -1,0 +1,1490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="Workbook">
+  <attribute name="name">
+    <value>FLISS</value>
+  </attribute>
+  <attribute name="Label">
+    <value>Forecast Like-Item, Sister-Store</value>
+  </attribute>
+  <attribute name="WorkbookGroup">
+    <value>Forecast</value>
+  </attribute>
+  <attribute name="WorkbookLib">
+    <value>RdfTemplates</value>
+  </attribute>
+  <attribute name="WorkbookType">
+    <value>RdfDynamicTemplate</value>
+  </attribute>
+  <attribute name="IsWizardOnly">
+    <value>false</value>
+  </attribute>
+  <attribute name="IsImageEnabled">
+    <value>false</value>
+  </attribute>
+  <attribute name="RuleSet">
+    <value>FLISS</value>
+  </attribute>
+  <attribute name="LoadRules">
+    <value>FLISS_load</value>
+  </attribute>
+  <attribute name="CommitRules">
+    <value>FLISS_commit</value>
+  </attribute>
+  <attribute name="CalcRules">
+    <value>FLISS_calc</value>
+  </attribute>
+  <attribute name="RefreshRules">
+    <value>FLISS_refresh</value>
+  </attribute>
+  <attribute name="IsUseDefaults">
+    <value>true</value>
+  </attribute>
+  <attribute name="DpmDimensions">
+    <value></value>
+  </attribute>
+  <attribute name="IsCustomWizard">
+    <value>true</value>
+  </attribute>
+  <attribute name="properties">
+    <value>propertymap</value>
+    <value>maxmeas</value>
+    <value>creator</value>
+    <value>maxdb</value>
+  </attribute>
+  <attribute name="propertymap">
+    <value>"CanOpenInGlobal", "false"</value>
+  </attribute>
+  <attribute name="maxmeas">
+    <value>100</value>
+  </attribute>
+  <attribute name="creator">
+    <value>RDF</value>
+  </attribute>
+  <attribute name="maxdb">
+    <value>100</value>
+  </attribute>
+  <data_model type="AxisInfo">
+    <attribute name="name">
+      <value>AxisInfo</value>
+    </attribute>
+    <attribute name="MEASAxis">
+      <value>YAxis</value>
+    </attribute>
+    <attribute name="MEASOrder">
+      <value>0</value>
+    </attribute>
+  </data_model>
+  <data_model type="Wizards">
+    <attribute name="name">
+      <value>Wizards</value>
+    </attribute>
+    <data_model type="CustomWizard">
+      <attribute name="name">
+        <value> fliss </value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="WorkbookTabs">
+    <attribute name="name">
+      <value>WorkbookTabs</value>
+    </attribute>
+    <data_model type="WorkbookTab">
+      <attribute name="name">
+        <value>FlissTab0</value>
+      </attribute>
+      <attribute name="Label">
+        <value>Like-Item, Sister-Store</value>
+      </attribute>
+      <data_model type="Worksheets">
+        <attribute name="name">
+          <value>Worksheets</value>
+        </attribute>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>shfliss3F01</value>
+          </attribute>
+          <attribute name="Label">
+            <value>1 - itm/str/week-Final Advanced Parameter Worksheet</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>item_str</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_yaxis</value>
+            <value>subst_intersection</value>
+            <value>tag</value>
+            <value>subst_xaxis</value>
+            <value>subst_zaxis</value>
+          </attribute>
+          <attribute name="tag">
+            <value>FLVL01</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>adjpct01XB</value>
+                <value>fmafstdt01XB</value>
+                <value>fmafenddt01XB</value>
+                <value>fmahstdt01XB</value>
+                <value>substmth01XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>adjpct01XB</value>
+                <value>fmafstdt01XB</value>
+                <value>fmafenddt01XB</value>
+                <value>fmahstdt01XB</value>
+                <value>substmth01XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>adjpct01XB</value>
+                <value>fmafstdt01XB</value>
+                <value>fmafenddt01XB</value>
+                <value>fmahstdt01XB</value>
+                <value>substmth01XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>adjpct01XB</value>
+                <value>fmafstdt01XB</value>
+                <value>fmafenddt01XB</value>
+                <value>fmahstdt01XB</value>
+                <value>substmth01XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="LOCAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="LOCOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>shfliss3F06</value>
+          </attribute>
+          <attribute name="Label">
+            <value>6 - itm/str/day-Final Advanced Parameter Worksheet</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>item_str</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_yaxis</value>
+            <value>subst_intersection</value>
+            <value>tag</value>
+            <value>subst_xaxis</value>
+            <value>subst_zaxis</value>
+          </attribute>
+          <attribute name="tag">
+            <value>FLVL06</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>adjpct06XB</value>
+                <value>fmafstdt06XB</value>
+                <value>fmafenddt06XB</value>
+                <value>fmahstdt06XB</value>
+                <value>substmth06XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>adjpct06XB</value>
+                <value>fmafstdt06XB</value>
+                <value>fmafenddt06XB</value>
+                <value>fmahstdt06XB</value>
+                <value>substmth06XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>adjpct06XB</value>
+                <value>fmafstdt06XB</value>
+                <value>fmafenddt06XB</value>
+                <value>fmahstdt06XB</value>
+                <value>substmth06XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>adjpct06XB</value>
+                <value>fmafstdt06XB</value>
+                <value>fmafenddt06XB</value>
+                <value>fmahstdt06XB</value>
+                <value>substmth06XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="LOCAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="LOCOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>shfliss3F10</value>
+          </attribute>
+          <attribute name="Label">
+            <value>10 - itm/area/day-Final Advanced Parameter Worksheet</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>item_area</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_yaxis</value>
+            <value>subst_intersection</value>
+            <value>tag</value>
+            <value>subst_xaxis</value>
+            <value>subst_zaxis</value>
+          </attribute>
+          <attribute name="tag">
+            <value>FLVL10</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>adjpct10XB</value>
+                <value>fmafstdt10XB</value>
+                <value>fmafenddt10XB</value>
+                <value>fmahstdt10XB</value>
+                <value>substmth10XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>adjpct10XB</value>
+                <value>fmafstdt10XB</value>
+                <value>fmafenddt10XB</value>
+                <value>fmahstdt10XB</value>
+                <value>substmth10XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>adjpct10XB</value>
+                <value>fmafstdt10XB</value>
+                <value>fmafenddt10XB</value>
+                <value>fmahstdt10XB</value>
+                <value>substmth10XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>adjpct10XB</value>
+                <value>fmafstdt10XB</value>
+                <value>fmafenddt10XB</value>
+                <value>fmahstdt10XB</value>
+                <value>substmth10XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="LOCAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="LOCOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>shfliss3F14</value>
+          </attribute>
+          <attribute name="Label">
+            <value>14 - itm/str/week-Final - SLC baseline Advanced Parameter Worksheet</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>item_str</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_yaxis</value>
+            <value>subst_intersection</value>
+            <value>tag</value>
+            <value>subst_xaxis</value>
+            <value>subst_zaxis</value>
+          </attribute>
+          <attribute name="tag">
+            <value>FLVL14</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>adjpct14XB</value>
+                <value>fmafstdt14XB</value>
+                <value>fmafenddt14XB</value>
+                <value>fmahstdt14XB</value>
+                <value>substmth14XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>adjpct14XB</value>
+                <value>fmafstdt14XB</value>
+                <value>fmafenddt14XB</value>
+                <value>fmahstdt14XB</value>
+                <value>substmth14XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>adjpct14XB</value>
+                <value>fmafstdt14XB</value>
+                <value>fmafenddt14XB</value>
+                <value>fmahstdt14XB</value>
+                <value>substmth14XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>adjpct14XB</value>
+                <value>fmafstdt14XB</value>
+                <value>fmafenddt14XB</value>
+                <value>fmahstdt14XB</value>
+                <value>substmth14XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="LOCAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="LOCOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>shfliss3F15</value>
+          </attribute>
+          <attribute name="Label">
+            <value>15 - itm/str/week-Final - Causal SLC Advanced Parameter Worksheet</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>item_str</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_yaxis</value>
+            <value>subst_intersection</value>
+            <value>tag</value>
+            <value>subst_xaxis</value>
+            <value>subst_zaxis</value>
+          </attribute>
+          <attribute name="tag">
+            <value>FLVL15</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>adjpct15XB</value>
+                <value>fmafstdt15XB</value>
+                <value>fmafenddt15XB</value>
+                <value>fmahstdt15XB</value>
+                <value>substmth15XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>adjpct15XB</value>
+                <value>fmafstdt15XB</value>
+                <value>fmafenddt15XB</value>
+                <value>fmahstdt15XB</value>
+                <value>substmth15XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>adjpct15XB</value>
+                <value>fmafstdt15XB</value>
+                <value>fmafenddt15XB</value>
+                <value>fmahstdt15XB</value>
+                <value>substmth15XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>adjpct15XB</value>
+                <value>fmafstdt15XB</value>
+                <value>fmafenddt15XB</value>
+                <value>fmahstdt15XB</value>
+                <value>substmth15XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="LOCAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="LOCOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>shfliss4F01</value>
+          </attribute>
+          <attribute name="Label">
+            <value>1 - itm/str/week-Final Like-Item Worksheet</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>item</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_yaxis</value>
+            <value>subst_intersection</value>
+            <value>tag</value>
+            <value>subst_xaxis</value>
+          </attribute>
+          <attribute name="tag">
+            <value>FLVL01</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>likesku01XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>likesku01XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>likesku01XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>likesku01XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>shfliss4F06</value>
+          </attribute>
+          <attribute name="Label">
+            <value>6 - itm/str/day-Final Like-Item Worksheet</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>item</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_yaxis</value>
+            <value>subst_intersection</value>
+            <value>tag</value>
+            <value>subst_xaxis</value>
+          </attribute>
+          <attribute name="tag">
+            <value>FLVL06</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>likesku06XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>likesku06XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>likesku06XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>likesku06XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>shfliss4F10</value>
+          </attribute>
+          <attribute name="Label">
+            <value>10 - itm/area/day-Final Like-Item Worksheet</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>item</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_yaxis</value>
+            <value>subst_intersection</value>
+            <value>tag</value>
+            <value>subst_xaxis</value>
+          </attribute>
+          <attribute name="tag">
+            <value>FLVL10</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>likesku10XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>likesku10XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>likesku10XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>likesku10XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>shfliss4F14</value>
+          </attribute>
+          <attribute name="Label">
+            <value>14 - itm/str/week-Final - SLC baseline Like-Item Worksheet</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>item</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_yaxis</value>
+            <value>subst_intersection</value>
+            <value>tag</value>
+            <value>subst_xaxis</value>
+          </attribute>
+          <attribute name="tag">
+            <value>FLVL14</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>likesku14XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>likesku14XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>likesku14XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>likesku14XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>shfliss4F15</value>
+          </attribute>
+          <attribute name="Label">
+            <value>15 - itm/str/week-Final - Causal SLC Like-Item Worksheet</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>item</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_yaxis</value>
+            <value>subst_intersection</value>
+            <value>tag</value>
+            <value>subst_xaxis</value>
+          </attribute>
+          <attribute name="tag">
+            <value>FLVL15</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>likesku15XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>likesku15XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>likesku15XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>likesku15XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>shfliss5F01</value>
+          </attribute>
+          <attribute name="Label">
+            <value>1 - itm/str/week-Final Sister-Store Worksheet</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>str</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_yaxis</value>
+            <value>subst_intersection</value>
+            <value>tag</value>
+            <value>subst_xaxis</value>
+          </attribute>
+          <attribute name="tag">
+            <value>FLVL01</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>sisstr01XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>sisstr01XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>sisstr01XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>sisstr01XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="LOCAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="LOCOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>shfliss5F06</value>
+          </attribute>
+          <attribute name="Label">
+            <value>6 - itm/str/day-Final Sister-Store Worksheet</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>str</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_yaxis</value>
+            <value>subst_intersection</value>
+            <value>tag</value>
+            <value>subst_xaxis</value>
+          </attribute>
+          <attribute name="tag">
+            <value>FLVL06</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>sisstr06XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>sisstr06XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>sisstr06XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>sisstr06XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="LOCAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="LOCOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>shfliss5F10</value>
+          </attribute>
+          <attribute name="Label">
+            <value>10 - itm/area/day-Final Sister-Store Worksheet</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>area</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_yaxis</value>
+            <value>subst_intersection</value>
+            <value>tag</value>
+            <value>subst_xaxis</value>
+          </attribute>
+          <attribute name="tag">
+            <value>FLVL10</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>sisstr10XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>sisstr10XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>sisstr10XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>sisstr10XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="LOCAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="LOCOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>shfliss5F14</value>
+          </attribute>
+          <attribute name="Label">
+            <value>14 - itm/str/week-Final - SLC baseline Sister-Store Worksheet</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>str</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_yaxis</value>
+            <value>subst_intersection</value>
+            <value>tag</value>
+            <value>subst_xaxis</value>
+          </attribute>
+          <attribute name="tag">
+            <value>FLVL14</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>sisstr14XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>sisstr14XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>sisstr14XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>sisstr14XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="LOCAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="LOCOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>shfliss5F15</value>
+          </attribute>
+          <attribute name="Label">
+            <value>15 - itm/str/week-Final - Causal SLC Sister-Store Worksheet</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>str</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_yaxis</value>
+            <value>subst_intersection</value>
+            <value>tag</value>
+            <value>subst_xaxis</value>
+          </attribute>
+          <attribute name="tag">
+            <value>FLVL15</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>sisstr15XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>sisstr15XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>sisstr15XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>sisstr15XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="LOCAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="LOCOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="DynHiers">
+    <attribute name="name">
+      <value>DynHiers</value>
+    </attribute>
+  </data_model>
+  <data_model type="EditedMeasures">
+    <attribute name="name">
+      <value>EditedMeasures</value>
+    </attribute>
+  </data_model>
+</data_set>

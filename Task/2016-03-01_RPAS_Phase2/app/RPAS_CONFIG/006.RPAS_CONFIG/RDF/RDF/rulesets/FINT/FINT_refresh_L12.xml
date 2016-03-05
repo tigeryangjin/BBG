@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="com.retek.ride.rule.newmodel.RuleGroup">
+  <attribute name="name">
+    <value>FINT_refresh_L12</value>
+  </attribute>
+  <attribute name="description">
+    <value>a rule group</value>
+  </attribute>
+  <attribute name="creator">
+    <value>RDF</value>
+  </attribute>
+  <attribute name="role">
+    <value>user</value>
+  </attribute>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>RDF_1463</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>RDF</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>pposaleXLXB = pposale.master</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>RDF_1464</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>RDF</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>reqmth10XB = if (flookup(defreqmthXLXB.level([PROD].top), [data].[flvl].[flvl10]) == 5 || flookup(defreqmthXLXB.level([PROD].top), [data].[flvl].[flvl10]) == 13 || flookup(defreqmthXLXB.level([PROD].top), [data].[flvl].[flvl10]) == 14 || flookup(defreqmthXLXB.level([PROD].top), [data].[flvl].[flvl10]) == 15 || flookup(defreqmthXLXB.level([PROD].top), [data].[flvl].[flvl10]) == 16, 7, flookup(defreqmthXLXB.level([PROD].top), [data].[flvl].[flvl10]))</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>RDF_1465</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>RDF</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>fstdt10XB = fstdt10XB.master</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>RDF_1466</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>RDF</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>fenddt10XB = fenddt10XB.master</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>RDF_1467</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>RDF</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>hstdt10XB = hstdt10XB.master</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>RDF_1468</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>RDF</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>reqmth12XB = if (flookup(defreqmthXLXB.level([PROD].top), [data].[flvl].[flvl12]) == 5 || flookup(defreqmthXLXB.level([PROD].top), [data].[flvl].[flvl12]) == 13 || flookup(defreqmthXLXB.level([PROD].top), [data].[flvl].[flvl12]) == 14 || flookup(defreqmthXLXB.level([PROD].top), [data].[flvl].[flvl12]) == 15 || flookup(defreqmthXLXB.level([PROD].top), [data].[flvl].[flvl12]) == 16, 7, flookup(defreqmthXLXB.level([PROD].top), [data].[flvl].[flvl12]))</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>RDF_1469</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>RDF</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>fswinlngth12XB = fswinlngth12XB.master</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

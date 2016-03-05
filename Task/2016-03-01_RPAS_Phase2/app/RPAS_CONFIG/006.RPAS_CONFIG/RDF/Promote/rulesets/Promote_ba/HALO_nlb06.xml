@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="com.retek.ride.rule.newmodel.RuleGroup">
+  <attribute name="name">
+    <value>HALO_nlb06</value>
+  </attribute>
+  <attribute name="description">
+    <value></value>
+  </attribute>
+  <attribute name="creator">
+    <value>Promote</value>
+  </attribute>
+  <attribute name="role">
+    <value>user</value>
+  </attribute>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>HALO_nlb0601</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>CROSS_LIFT:pmhalolift06XB &lt;- promocrosslift(EFF_MASK:haloTSmsk06XB,EFF_MATRIX:apphaloeff,FB_RATIO:frcstvsbasehalor06XB,FCST_START_INDEX:haloStIdx06XB,FCST_END_INDEX:haloEdIdx06XB)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

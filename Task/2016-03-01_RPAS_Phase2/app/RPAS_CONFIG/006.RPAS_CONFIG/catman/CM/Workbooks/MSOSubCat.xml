@@ -1,0 +1,1289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="Workbook">
+  <attribute name="name">
+    <value>MSOSubCat</value>
+  </attribute>
+  <attribute name="Label">
+    <value>Macro Space Optimization @ Sub-Category</value>
+  </attribute>
+  <attribute name="WorkbookGroup">
+    <value>Planning</value>
+  </attribute>
+  <attribute name="WorkbookGroupLabel">
+    <value>Planning</value>
+  </attribute>
+  <attribute name="WorkbookLib">
+    <value>Templates</value>
+  </attribute>
+  <attribute name="WorkbookType">
+    <value>DynamicTemplate</value>
+  </attribute>
+  <attribute name="IsWizardOnly">
+    <value>false</value>
+  </attribute>
+  <attribute name="IsImageEnabled">
+    <value>false</value>
+  </attribute>
+  <attribute name="RuleSet">
+    <value>MSO_SubCat</value>
+  </attribute>
+  <attribute name="LoadRules">
+    <value>MSO_SubCat_load</value>
+  </attribute>
+  <attribute name="CommitRules">
+    <value>MSO_SubCat_commit</value>
+  </attribute>
+  <attribute name="CalcRules">
+    <value>MSO_SubCat_calc</value>
+  </attribute>
+  <attribute name="RefreshRules">
+    <value>MSO_SubCat_refresh</value>
+  </attribute>
+  <attribute name="IsUseDefaults">
+    <value>true</value>
+  </attribute>
+  <attribute name="DpmDimensions">
+    <value></value>
+  </attribute>
+  <attribute name="IsCustomWizard">
+    <value>false</value>
+  </attribute>
+  <data_model type="AxisInfo">
+    <attribute name="name">
+      <value>AxisInfo</value>
+    </attribute>
+    <data_model type="Axis">
+      <attribute name="name">
+        <value>XAxis</value>
+      </attribute>
+      <attribute name="Hiers">
+        <value>MEAS</value>
+      </attribute>
+    </data_model>
+    <data_model type="Axis">
+      <attribute name="name">
+        <value>YAxis</value>
+      </attribute>
+    </data_model>
+    <data_model type="Axis">
+      <attribute name="name">
+        <value>ZAxis</value>
+      </attribute>
+    </data_model>
+    <data_model type="Axis">
+      <attribute name="name">
+        <value>Unassigned</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="Wizards">
+    <attribute name="name">
+      <value>Wizards</value>
+    </attribute>
+    <data_model type="Wizard">
+      <attribute name="name">
+        <value>CLNDWizard</value>
+      </attribute>
+      <attribute name="CLNDOrder">
+        <value>0</value>
+      </attribute>
+      <attribute name="CLNDDim">
+        <value>qrtr</value>
+      </attribute>
+      <attribute name="CLNDLLabel">
+        <value></value>
+      </attribute>
+      <attribute name="CLNDRLabel">
+        <value></value>
+      </attribute>
+      <attribute name="CLNDMaxPos">
+        <value>-1</value>
+      </attribute>
+      <attribute name="CLNDWizardLabel">
+        <value>Select Calendar</value>
+      </attribute>
+    </data_model>
+    <data_model type="Wizard">
+      <attribute name="name">
+        <value>LOCWizard</value>
+      </attribute>
+      <attribute name="LOCOrder">
+        <value>1</value>
+      </attribute>
+      <attribute name="LOCDim">
+        <value>tdar</value>
+      </attribute>
+      <attribute name="LOCLLabel">
+        <value></value>
+      </attribute>
+      <attribute name="LOCRLabel">
+        <value></value>
+      </attribute>
+      <attribute name="LOCMaxPos">
+        <value>-1</value>
+      </attribute>
+      <attribute name="LOCWizardLabel">
+        <value>Select Location</value>
+      </attribute>
+    </data_model>
+    <data_model type="Wizard">
+      <attribute name="name">
+        <value>POGHWizard</value>
+      </attribute>
+      <attribute name="POGHOrder">
+        <value>2</value>
+      </attribute>
+      <attribute name="POGHDim">
+        <value>pdep</value>
+      </attribute>
+      <attribute name="POGHLLabel">
+        <value></value>
+      </attribute>
+      <attribute name="POGHRLabel">
+        <value></value>
+      </attribute>
+      <attribute name="POGHMaxPos">
+        <value>-1</value>
+      </attribute>
+      <attribute name="POGHWizardLabel">
+        <value>Select Product</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="WorkbookTabs">
+    <attribute name="name">
+      <value>WorkbookTabs</value>
+    </attribute>
+    <data_model type="WorkbookTab">
+      <attribute name="name">
+        <value>MSOS_RCS_TB1</value>
+      </attribute>
+      <attribute name="label">
+        <value>Review Category Scorecard</value>
+      </attribute>
+      <data_model type="Worksheets">
+        <attribute name="name">
+          <value>Worksheets</value>
+        </attribute>
+        <data_model type="java.lang.Object">
+          <attribute name="name">
+            <value>MSOS_RevCatScr</value>
+          </attribute>
+          <attribute name="label">
+            <value>Review Category Scorecard @ Sub-Category</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>qrtr_str_psub</value>
+          </attribute>
+          <attribute name="windowType">
+            <value>0</value>
+          </attribute>
+          <data_model type="GridWindow">
+            <attribute name="name">
+              <value>Window</value>
+            </attribute>
+            <attribute name="IsUseDefaultAxis">
+              <value>false</value>
+            </attribute>
+            <data_model type="AxisInfo">
+              <attribute name="name">
+                <value>AxisInfo</value>
+              </attribute>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>XAxis</value>
+                </attribute>
+                <attribute name="Hiers">
+                  <value>POGH</value>
+                </attribute>
+              </data_model>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>YAxis</value>
+                </attribute>
+                <attribute name="Hiers">
+                  <value>MEAS</value>
+                </attribute>
+              </data_model>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>ZAxis</value>
+                </attribute>
+                <attribute name="Hiers">
+                  <value>LOC</value>
+                  <value>CLND</value>
+                </attribute>
+              </data_model>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>Unassigned</value>
+                </attribute>
+              </data_model>
+            </data_model>
+            <data_model type="ViewableProfile">
+              <attribute name="name">
+                <value>ViewableProfile</value>
+              </attribute>
+              <attribute name="label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>MSOPGPR</value>
+                <value>MSOPPromoSlsAr</value>
+                <value>MSOPPromoSlsR</value>
+                <value>MSOPPromoSlsU</value>
+                <value>MSOPPvtLblGPR</value>
+                <value>MSOPPvtLblSlsAr</value>
+                <value>MSOPPvtLblSlsC</value>
+                <value>MSOPPvtLblSlsR</value>
+                <value>MSOPPvtLblSlsU</value>
+                <value>MSOPSlsAr</value>
+                <value>MSOPSlsC</value>
+                <value>MSOPSlsR</value>
+                <value>MSOPSlsU</value>
+                <value>MSWPGPR</value>
+                <value>MSWPSlsAr</value>
+                <value>MSWPSlsC</value>
+                <value>MSWPSlsR</value>
+                <value>MSWPSlsU</value>
+                <value>MSWPtransprdtopogB</value>
+                <value>MSLYGPR</value>
+                <value>MSLYSlsAr</value>
+                <value>MSLYSlsC</value>
+                <value>MSLYSlsR</value>
+                <value>MSLYSlsU</value>
+                <value>MSMfGPR</value>
+                <value>MSMfSlsAr</value>
+                <value>MSMfSlsC</value>
+                <value>MSMfSlsR</value>
+                <value>MSMfSlsU</value>
+                <value>DRDVSpacer1Tx</value>
+                <value>DRDVSpacer2Tx</value>
+                <value>DRDVSpacer3Tx</value>
+                <value>DRDVSpacer4Tx</value>
+                <value>DRDVSpacer5Tx</value>
+                <value>MSOPAssgnRolATx</value>
+                <value>MSOPAssgnRolBTx</value>
+                <value>MSOPAvgInvR</value>
+                <value>MSOPTurnRr</value>
+                <value>MSOPStratAssgnTx</value>
+                <value>MSOPTacticAssgnTx</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profiles">
+              <attribute name="name">
+                <value>Profiles</value>
+              </attribute>
+              <data_model type="SelectableProfile">
+                <attribute name="name">
+                  <value>Default</value>
+                </attribute>
+                <attribute name="label">
+                  <value>Default</value>
+                </attribute>
+                <attribute name="Measures">
+                  <value>MSWPtransprdtopogB</value>
+                  <value>MSOPAssgnRolATx</value>
+                  <value>MSOPStratAssgnTx</value>
+                  <value>MSOPAssgnRolBTx</value>
+                  <value>MSOPTacticAssgnTx</value>
+                  <value>MSWPSlsR</value>
+                  <value>MSMfSlsR</value>
+                  <value>MSWPSlsU</value>
+                  <value>MSOPSlsR</value>
+                  <value>MSLYSlsR</value>
+                  <value>DRDVSpacer1Tx</value>
+                  <value>MSMfSlsU</value>
+                  <value>MSOPSlsU</value>
+                  <value>MSLYSlsU</value>
+                  <value>DRDVSpacer2Tx</value>
+                  <value>MSWPSlsAr</value>
+                  <value>MSMfSlsAr</value>
+                  <value>MSOPSlsAr</value>
+                  <value>MSLYSlsAr</value>
+                  <value>DRDVSpacer3Tx</value>
+                  <value>MSWPGPR</value>
+                  <value>MSMfGPR</value>
+                  <value>MSOPGPR</value>
+                  <value>MSLYGPR</value>
+                  <value>DRDVSpacer4Tx</value>
+                  <value>MSOPPromoSlsR</value>
+                  <value>MSOPPromoSlsU</value>
+                  <value>MSOPPromoSlsAr</value>
+                  <value>MSOPPvtLblSlsR</value>
+                  <value>MSOPPvtLblSlsU</value>
+                  <value>MSOPPvtLblSlsAr</value>
+                  <value>MSOPPvtLblGPR</value>
+                </attribute>
+              </data_model>
+            </data_model>
+            <data_model type="PositionQueries">
+              <attribute name="name">
+                <value>PositionQueries</value>
+              </attribute>
+            </data_model>
+            <data_model type="StyleORs">
+              <attribute name="name">
+                <value>StyleORs</value>
+              </attribute>
+            </data_model>
+            <data_model type="DimDisplayAttrs">
+              <attribute name="name">
+                <value>DimDisplayAttrs</value>
+              </attribute>
+            </data_model>
+          </data_model>
+        </data_model>
+      </data_model>
+    </data_model>
+    <data_model type="WorkbookTab">
+      <attribute name="name">
+        <value>MSOS_SetOptP_WT</value>
+      </attribute>
+      <attribute name="label">
+        <value>Setup and Review Optimization</value>
+      </attribute>
+      <data_model type="Worksheets">
+        <attribute name="name">
+          <value>Worksheets</value>
+        </attribute>
+        <data_model type="java.lang.Object">
+          <attribute name="name">
+            <value>MSOS_SetOptP_WS</value>
+          </attribute>
+          <attribute name="label">
+            <value>1. Setup and Review Optimization @ Sub-Category</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>qrtr_str_psub</value>
+          </attribute>
+          <attribute name="windowType">
+            <value>0</value>
+          </attribute>
+          <data_model type="GridWindow">
+            <attribute name="name">
+              <value>Window</value>
+            </attribute>
+            <attribute name="IsUseDefaultAxis">
+              <value>false</value>
+            </attribute>
+            <data_model type="AxisInfo">
+              <attribute name="name">
+                <value>AxisInfo</value>
+              </attribute>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>XAxis</value>
+                </attribute>
+                <attribute name="Hiers">
+                  <value>POGH</value>
+                </attribute>
+              </data_model>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>YAxis</value>
+                </attribute>
+                <attribute name="Hiers">
+                  <value>MEAS</value>
+                </attribute>
+              </data_model>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>ZAxis</value>
+                </attribute>
+                <attribute name="Hiers">
+                  <value>LOC</value>
+                  <value>CLND</value>
+                </attribute>
+              </data_model>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>Unassigned</value>
+                </attribute>
+              </data_model>
+            </data_model>
+            <data_model type="ViewableProfile">
+              <attribute name="name">
+                <value>ViewableProfile</value>
+              </attribute>
+              <attribute name="label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>DRDVSpacer4Tx</value>
+                <value>DRDVSpacer2Tx</value>
+                <value>MSWPconstrainttypV</value>
+                <value>MSWPcurrspacelowlimV</value>
+                <value>MSWPcurrspaceuplimV</value>
+                <value>MSWPincludepogB</value>
+                <value>MSHdoptimizeB</value>
+                <value>MSWPlockspaceTx</value>
+                <value>MSWPlockspaceB</value>
+                <value>MSWPlowerlimitp</value>
+                <value>MSWPmandatoryB</value>
+                <value>MSWPmaxspaceV</value>
+                <value>MSWPminspaceV</value>
+                <value>MSWPmandatoryTx</value>
+                <value>MSWPoptimizeB</value>
+                <value>MSWPspacechangeV</value>
+                <value>MSWPoptmethodV</value>
+                <value>MSWPsspaceincV</value>
+                <value>DRDVSpacer1Tx</value>
+                <value>MSWPupperlimitp</value>
+                <value>MSWPweightV</value>
+                <value>MSWPsavailspaceLu</value>
+                <value>MSWPGPR</value>
+                <value>MSWPscurrspaceLu</value>
+                <value>MSWPmaxprofitV</value>
+                <value>MSWPopttgtconstrselTx</value>
+                <value>MSWPoptprofitdGPR</value>
+                <value>MSWPaislenoTx</value>
+                <value>MSWPaisleposseqTx</value>
+                <value>MSWPaislesideTx</value>
+                <value>MSWPoptspaceV</value>
+                <value>MSWPavailspaceTx</value>
+                <value>MSWPcurrspacelowlimTx</value>
+                <value>MSWPoptprofitR</value>
+                <value>MSWPcurrspaceuplimTx</value>
+                <value>MSWPlowerlimitTx</value>
+                <value>MSWPmaxspaceTx</value>
+                <value>MSWPminspaceTx</value>
+                <value>MSWPspaceincTx</value>
+                <value>MSWPspaceresultTx</value>
+                <value>MSWPsubresultTx</value>
+                <value>MSWPupperlimitTx</value>
+                <value>MSWPlockspaceLu</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profiles">
+              <attribute name="name">
+                <value>Profiles</value>
+              </attribute>
+              <data_model type="SelectableProfile">
+                <attribute name="name">
+                  <value>Default</value>
+                </attribute>
+                <attribute name="label">
+                  <value>Default</value>
+                </attribute>
+                <attribute name="Measures">
+                  <value>MSWPconstrainttypV</value>
+                  <value>MSWPopttgtconstrselTx</value>
+                  <value>MSWPsavailspaceLu</value>
+                  <value>MSWPsspaceincV</value>
+                  <value>MSWPscurrspaceLu</value>
+                  <value>MSWPaislenoTx</value>
+                  <value>MSWPaisleposseqTx</value>
+                  <value>MSWPaislesideTx</value>
+                  <value>MSWPincludepogB</value>
+                  <value>MSWPlockspaceB</value>
+                  <value>MSWPmandatoryB</value>
+                  <value>MSWPmandatoryTx</value>
+                  <value>MSWPlockspaceTx</value>
+                  <value>MSWPminspaceV</value>
+                  <value>MSWPmaxspaceV</value>
+                  <value>MSWPlowerlimitp</value>
+                  <value>MSWPupperlimitp</value>
+                  <value>MSWPcurrspacelowlimV</value>
+                  <value>MSWPcurrspaceuplimV</value>
+                  <value>DRDVSpacer2Tx</value>
+                  <value>MSWPspaceresultTx</value>
+                  <value>MSWPsubresultTx</value>
+                  <value>DRDVSpacer1Tx</value>
+                  <value>MSWPoptspaceV</value>
+                  <value>MSWPspacechangeV</value>
+                  <value>MSWPoptprofitR</value>
+                  <value>MSWPoptprofitdGPR</value>
+                </attribute>
+              </data_model>
+            </data_model>
+            <data_model type="PositionQueries">
+              <attribute name="name">
+                <value>PositionQueries</value>
+              </attribute>
+            </data_model>
+            <data_model type="StyleORs">
+              <attribute name="name">
+                <value>StyleORs</value>
+              </attribute>
+            </data_model>
+            <data_model type="DimDisplayAttrs">
+              <attribute name="name">
+                <value>DimDisplayAttrs</value>
+              </attribute>
+            </data_model>
+          </data_model>
+        </data_model>
+        <data_model type="java.lang.Object">
+          <attribute name="name">
+            <value>MSOS_SPH_WS</value>
+          </attribute>
+          <attribute name="label">
+            <value>2. Review Space and Profit Histograms @ Sub-Category</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>qrtr_str_lnum</value>
+          </attribute>
+          <attribute name="windowType">
+            <value>0</value>
+          </attribute>
+          <data_model type="GridWindow">
+            <attribute name="name">
+              <value>Window</value>
+            </attribute>
+            <attribute name="IsUseDefaultAxis">
+              <value>false</value>
+            </attribute>
+            <data_model type="AxisInfo">
+              <attribute name="name">
+                <value>AxisInfo</value>
+              </attribute>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>XAxis</value>
+                </attribute>
+                <attribute name="Hiers">
+                  <value>MEAS</value>
+                </attribute>
+              </data_model>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>YAxis</value>
+                </attribute>
+                <attribute name="Hiers">
+                  <value>LNMH</value>
+                </attribute>
+              </data_model>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>ZAxis</value>
+                </attribute>
+                <attribute name="Hiers">
+                  <value>LOC</value>
+                  <value>CLND</value>
+                </attribute>
+              </data_model>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>Unassigned</value>
+                </attribute>
+              </data_model>
+            </data_model>
+            <data_model type="ViewableProfile">
+              <attribute name="name">
+                <value>ViewableProfile</value>
+              </attribute>
+              <attribute name="label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>MSWPhistgrmprofitR</value>
+                <value>MSWPhistgrmspaceV</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profiles">
+              <attribute name="name">
+                <value>Profiles</value>
+              </attribute>
+              <data_model type="SelectableProfile">
+                <attribute name="name">
+                  <value>Default</value>
+                </attribute>
+                <attribute name="label">
+                  <value>Default</value>
+                </attribute>
+                <attribute name="Measures">
+                  <value>MSWPhistgrmprofitR</value>
+                  <value>MSWPhistgrmspaceV</value>
+                </attribute>
+              </data_model>
+            </data_model>
+            <data_model type="PositionQueries">
+              <attribute name="name">
+                <value>PositionQueries</value>
+              </attribute>
+            </data_model>
+            <data_model type="StyleORs">
+              <attribute name="name">
+                <value>StyleORs</value>
+              </attribute>
+            </data_model>
+            <data_model type="DimDisplayAttrs">
+              <attribute name="name">
+                <value>DimDisplayAttrs</value>
+              </attribute>
+            </data_model>
+          </data_model>
+        </data_model>
+      </data_model>
+    </data_model>
+    <data_model type="WorkbookTab">
+      <attribute name="name">
+        <value>MSOS_AOR_WT</value>
+      </attribute>
+      <attribute name="label">
+        <value>Approve Optimization Results</value>
+      </attribute>
+      <data_model type="Worksheets">
+        <attribute name="name">
+          <value>Worksheets</value>
+        </attribute>
+        <data_model type="java.lang.Object">
+          <attribute name="name">
+            <value>MSOS_AOR_WS</value>
+          </attribute>
+          <attribute name="label">
+            <value>Approve Optimized Results @ Sub-Category</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>qrtr_str_psub</value>
+          </attribute>
+          <attribute name="windowType">
+            <value>0</value>
+          </attribute>
+          <data_model type="GridWindow">
+            <attribute name="name">
+              <value>Window</value>
+            </attribute>
+            <attribute name="IsUseDefaultAxis">
+              <value>false</value>
+            </attribute>
+            <data_model type="AxisInfo">
+              <attribute name="name">
+                <value>AxisInfo</value>
+              </attribute>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>XAxis</value>
+                </attribute>
+                <attribute name="Hiers">
+                  <value>CLND</value>
+                </attribute>
+              </data_model>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>YAxis</value>
+                </attribute>
+                <attribute name="Hiers">
+                  <value>MEAS</value>
+                </attribute>
+              </data_model>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>ZAxis</value>
+                </attribute>
+                <attribute name="Hiers">
+                  <value>LOC</value>
+                  <value>POGH</value>
+                </attribute>
+              </data_model>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>Unassigned</value>
+                </attribute>
+              </data_model>
+            </data_model>
+            <data_model type="ViewableProfile">
+              <attribute name="name">
+                <value>ViewableProfile</value>
+              </attribute>
+              <attribute name="label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>MSWPApprB</value>
+                <value>MSWPApprBy</value>
+                <value>MSWPApprDt</value>
+                <value>DRDVSpacer1Tx</value>
+                <value>MSWPoptspaceV</value>
+                <value>MSWPoptprofitR</value>
+                <value>DRDVSpacer2Tx</value>
+                <value>MSCPoptspaceV</value>
+                <value>MSCPoptprofitR</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profiles">
+              <attribute name="name">
+                <value>Profiles</value>
+              </attribute>
+              <data_model type="SelectableProfile">
+                <attribute name="name">
+                  <value>Default</value>
+                </attribute>
+                <attribute name="label">
+                  <value>Default</value>
+                </attribute>
+                <attribute name="Measures">
+                  <value>MSWPApprB</value>
+                  <value>MSWPApprBy</value>
+                  <value>MSWPApprDt</value>
+                  <value>DRDVSpacer1Tx</value>
+                  <value>MSWPoptspaceV</value>
+                  <value>MSWPoptprofitR</value>
+                  <value>DRDVSpacer2Tx</value>
+                  <value>MSCPoptspaceV</value>
+                  <value>MSCPoptprofitR</value>
+                </attribute>
+              </data_model>
+            </data_model>
+            <data_model type="PositionQueries">
+              <attribute name="name">
+                <value>PositionQueries</value>
+              </attribute>
+            </data_model>
+            <data_model type="StyleORs">
+              <attribute name="name">
+                <value>StyleORs</value>
+              </attribute>
+            </data_model>
+            <data_model type="DimDisplayAttrs">
+              <attribute name="name">
+                <value>DimDisplayAttrs</value>
+              </attribute>
+            </data_model>
+          </data_model>
+        </data_model>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="Menu">
+    <attribute name="name">
+      <value>Menu44</value>
+    </attribute>
+    <attribute name="Label">
+      <value>Planning</value>
+    </attribute>
+    <data_model type="MenuItems">
+      <attribute name="name">
+        <value>MenuItems</value>
+      </attribute>
+      <data_model type="MenuItem">
+        <attribute name="name">
+          <value>menuItem1500</value>
+        </attribute>
+        <attribute name="Label">
+          <value>Transform PROD to POG Hierarchy</value>
+        </attribute>
+        <attribute name="Function">
+          <value>RuleGroupProcessor</value>
+        </attribute>
+        <attribute name="Arguments">
+          <value>MSO_SubCat_Tran1,MSO_SubCat_Tran2,MSO_SubCat_commit,MSO_SubCat_Tran3,MSO_SubCat_Tran4,MSO_SubCat_Tran5</value>
+        </attribute>
+        <attribute name="MenuItemId">
+          <value>1500</value>
+        </attribute>
+        <attribute name="Condition">
+          <value>MSHdtransprdtopogB</value>
+        </attribute>
+        <attribute name="Message">
+          <value>MSHdtransprdtopogTx</value>
+        </attribute>
+        <attribute name="CommitAsap">
+          <value>false</value>
+        </attribute>
+        <attribute name="IntradayConcurrent">
+          <value>false</value>
+        </attribute>
+      </data_model>
+      <data_model type="MenuItem">
+        <attribute name="name">
+          <value>menuItem1509</value>
+        </attribute>
+        <attribute name="Label">
+          <value>Approve Sub-Category</value>
+        </attribute>
+        <attribute name="Function">
+          <value>RuleGroupProcessor</value>
+        </attribute>
+        <attribute name="Arguments">
+          <value>MSO_SubCat_Appr1,MSO_SubCat_Appr2,MSO_SubCat_Appr3,MSO_SubCat_Appr4</value>
+        </attribute>
+        <attribute name="MenuItemId">
+          <value>1509</value>
+        </attribute>
+        <attribute name="Condition">
+          <value>MSHdApprB</value>
+        </attribute>
+        <attribute name="Message">
+          <value>MSWPApprTx</value>
+        </attribute>
+        <attribute name="CommitAsap">
+          <value>true</value>
+        </attribute>
+        <attribute name="IntradayConcurrent">
+          <value>false</value>
+        </attribute>
+      </data_model>
+      <data_model type="MenuItem">
+        <attribute name="name">
+          <value>menuItem1510</value>
+        </attribute>
+        <attribute name="Label">
+          <value>Optimize Sub-Category</value>
+        </attribute>
+        <attribute name="Function">
+          <value>RuleGroupProcessor</value>
+        </attribute>
+        <attribute name="Arguments">
+          <value>MSO_SubCat_Opt,MSO_SubCat_Opt2</value>
+        </attribute>
+        <attribute name="MenuItemId">
+          <value>1510</value>
+        </attribute>
+        <attribute name="Condition">
+          <value>MSHdoptimizeB</value>
+        </attribute>
+        <attribute name="Message">
+          <value>MSHdoptimizeTx</value>
+        </attribute>
+        <attribute name="CommitAsap">
+          <value>true</value>
+        </attribute>
+        <attribute name="IntradayConcurrent">
+          <value>false</value>
+        </attribute>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="DynHiers">
+    <attribute name="name">
+      <value>DynHiers</value>
+    </attribute>
+    <data_model type="DynHier">
+      <attribute name="name">
+        <value>strc</value>
+      </attribute>
+      <attribute name="label">
+        <value>d117</value>
+      </attribute>
+      <attribute name="measure">
+        <value>DRTYStrClusTx</value>
+      </attribute>
+      <attribute name="labelmeasure">
+        <value>DRTYStrClusLbl</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="modifieddim">
+        <value>strc</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="WorkbookAlerts">
+    <attribute name="name">
+      <value>WorkbookAlerts</value>
+    </attribute>
+    <data_model type="java.lang.Object">
+      <attribute name="name">
+        <value>MSMinSpaceAlert</value>
+      </attribute>
+      <attribute name="label">
+        <value>MS Min Space Alert</value>
+      </attribute>
+      <attribute name="targetMeasure">
+        <value>MSWPminspaceV</value>
+      </attribute>
+      <attribute name="alertIntx">
+        <value>#MS#</value>
+      </attribute>
+      <attribute name="alertMeasure">
+        <value>MSWPminspaceTx</value>
+      </attribute>
+      <attribute name="priority">
+        <value>1</value>
+      </attribute>
+      <attribute name="alertId">
+        <value>RealTimeAlert129</value>
+      </attribute>
+      <data_model type="java.lang.Object">
+        <attribute name="name">
+          <value>MSMinSpaceAlertCond</value>
+        </attribute>
+        <attribute name="label">
+          <value>MS Min Space Alert Condition</value>
+        </attribute>
+        <attribute name="style">
+          <value>Alert</value>
+        </attribute>
+        <attribute name="message">
+          <value>MS WP Min. Space must be greater than zero but less than MS WP Max. Space</value>
+        </attribute>
+        <attribute name="conditionId">
+          <value>AlertCondition161</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="java.lang.Object">
+      <attribute name="name">
+        <value>MSMaxSpaceAlert</value>
+      </attribute>
+      <attribute name="label">
+        <value>MS Max Space Alert</value>
+      </attribute>
+      <attribute name="targetMeasure">
+        <value>MSWPmaxspaceV</value>
+      </attribute>
+      <attribute name="alertIntx">
+        <value>#MS#</value>
+      </attribute>
+      <attribute name="alertMeasure">
+        <value>MSWPmaxspaceTx</value>
+      </attribute>
+      <attribute name="priority">
+        <value>1</value>
+      </attribute>
+      <attribute name="alertId">
+        <value>RealTimeAlert130</value>
+      </attribute>
+      <data_model type="java.lang.Object">
+        <attribute name="name">
+          <value>MSMaxSpaceAlertCond</value>
+        </attribute>
+        <attribute name="label">
+          <value>MS Max Space Alert Condition</value>
+        </attribute>
+        <attribute name="style">
+          <value>Alert</value>
+        </attribute>
+        <attribute name="message">
+          <value>MS WP Max Space must be greater than zero but less than MS WP Ttl Available Space</value>
+        </attribute>
+        <attribute name="conditionId">
+          <value>AlertCondition162</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="java.lang.Object">
+      <attribute name="name">
+        <value>MSSpaceIncAlert</value>
+      </attribute>
+      <attribute name="label">
+        <value>MS Space Increment Alert</value>
+      </attribute>
+      <attribute name="targetMeasure">
+        <value>MSWPsspaceincV</value>
+      </attribute>
+      <attribute name="alertIntx">
+        <value>#MS#</value>
+      </attribute>
+      <attribute name="alertMeasure">
+        <value>MSWPspaceincTx</value>
+      </attribute>
+      <attribute name="priority">
+        <value>1</value>
+      </attribute>
+      <attribute name="alertId">
+        <value>RealTimeAlert131</value>
+      </attribute>
+      <data_model type="java.lang.Object">
+        <attribute name="name">
+          <value>MSSpaceIncAlertCond</value>
+        </attribute>
+        <attribute name="label">
+          <value>MS Space Increment Alert Condition</value>
+        </attribute>
+        <attribute name="style">
+          <value>Alert</value>
+        </attribute>
+        <attribute name="message">
+          <value>MS WP Space Increment must be equal to or greater than zero but less than MS WP Ttl Available Space</value>
+        </attribute>
+        <attribute name="conditionId">
+          <value>AlertCondition163</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="java.lang.Object">
+      <attribute name="name">
+        <value>MSLowerLimitAlert</value>
+      </attribute>
+      <attribute name="label">
+        <value>MS Lower Guard Rail % Alert</value>
+      </attribute>
+      <attribute name="targetMeasure">
+        <value>MSWPlowerlimitp</value>
+      </attribute>
+      <attribute name="alertIntx">
+        <value>#MS#</value>
+      </attribute>
+      <attribute name="alertMeasure">
+        <value>MSWPlowerlimitTx</value>
+      </attribute>
+      <attribute name="priority">
+        <value>1</value>
+      </attribute>
+      <attribute name="alertId">
+        <value>RealTimeAlert137</value>
+      </attribute>
+      <data_model type="java.lang.Object">
+        <attribute name="name">
+          <value>MSLowerLimitAlertCond</value>
+        </attribute>
+        <attribute name="label">
+          <value>MS WP Lower Guard Rail % Alert Condition</value>
+        </attribute>
+        <attribute name="style">
+          <value>Alert</value>
+        </attribute>
+        <attribute name="message">
+          <value>MS WP Lower Guard Rail % must be equal to or greater than zero.</value>
+        </attribute>
+        <attribute name="conditionId">
+          <value>AlertCondition164</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="java.lang.Object">
+      <attribute name="name">
+        <value>MSUpperLimitAlert</value>
+      </attribute>
+      <attribute name="label">
+        <value>MS Upper Guard Rail % Alert</value>
+      </attribute>
+      <attribute name="targetMeasure">
+        <value>MSWPupperlimitp</value>
+      </attribute>
+      <attribute name="alertIntx">
+        <value>#MS#</value>
+      </attribute>
+      <attribute name="alertMeasure">
+        <value>MSWPupperlimitTx</value>
+      </attribute>
+      <attribute name="priority">
+        <value>1</value>
+      </attribute>
+      <attribute name="alertId">
+        <value>RealTimeAlert138</value>
+      </attribute>
+      <data_model type="java.lang.Object">
+        <attribute name="name">
+          <value>MSUpperLimitAlertCond</value>
+        </attribute>
+        <attribute name="label">
+          <value>MS WP Upper Guard Rail % Alert Condition</value>
+        </attribute>
+        <attribute name="style">
+          <value>Alert</value>
+        </attribute>
+        <attribute name="message">
+          <value>MS WP Upper Guard Rail % must be equal or greater than zero.</value>
+        </attribute>
+        <attribute name="conditionId">
+          <value>AlertCondition165</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="java.lang.Object">
+      <attribute name="name">
+        <value>MSCurrSpaceLowLimAlert</value>
+      </attribute>
+      <attribute name="label">
+        <value>MS Lower Guard Rail Space Alert</value>
+      </attribute>
+      <attribute name="targetMeasure">
+        <value>MSWPcurrspacelowlimV</value>
+      </attribute>
+      <attribute name="alertIntx">
+        <value>#MS#</value>
+      </attribute>
+      <attribute name="alertMeasure">
+        <value>MSWPcurrspacelowlimTx</value>
+      </attribute>
+      <attribute name="priority">
+        <value>1</value>
+      </attribute>
+      <attribute name="alertId">
+        <value>RealTimeAlert139</value>
+      </attribute>
+      <data_model type="java.lang.Object">
+        <attribute name="name">
+          <value>MSCurrSpaceLowLimAlertCond</value>
+        </attribute>
+        <attribute name="label">
+          <value>MS WP Lower Guard Rail Space Alert Condition</value>
+        </attribute>
+        <attribute name="style">
+          <value>Alert</value>
+        </attribute>
+        <attribute name="message">
+          <value>MS WP Lower Guard Rail Space must be equal to or greater than zero.</value>
+        </attribute>
+        <attribute name="conditionId">
+          <value>AlertCondition166</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="java.lang.Object">
+      <attribute name="name">
+        <value>MSCurrSpaceUpLimAlert</value>
+      </attribute>
+      <attribute name="label">
+        <value>MS Upper Guard Rail Space Alert</value>
+      </attribute>
+      <attribute name="targetMeasure">
+        <value>MSWPcurrspaceuplimV</value>
+      </attribute>
+      <attribute name="alertIntx">
+        <value>#MS#</value>
+      </attribute>
+      <attribute name="alertMeasure">
+        <value>MSWPcurrspaceuplimTx</value>
+      </attribute>
+      <attribute name="priority">
+        <value>1</value>
+      </attribute>
+      <attribute name="alertId">
+        <value>RealTimeAlert140</value>
+      </attribute>
+      <data_model type="java.lang.Object">
+        <attribute name="name">
+          <value>MSCurrSpaceUpLimAlertCond</value>
+        </attribute>
+        <attribute name="label">
+          <value>MS WP Upper Guard Rail Space Alert Condition</value>
+        </attribute>
+        <attribute name="style">
+          <value>Alert</value>
+        </attribute>
+        <attribute name="message">
+          <value>MS WP Upper Guard Rail Space must be equal to or greater than zero.</value>
+        </attribute>
+        <attribute name="conditionId">
+          <value>AlertCondition167</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="java.lang.Object">
+      <attribute name="name">
+        <value>MSttlavailaspaceAlert</value>
+      </attribute>
+      <attribute name="label">
+        <value>MS Total Available Space Alert</value>
+      </attribute>
+      <attribute name="targetMeasure">
+        <value>MSWPsavailspaceLu</value>
+      </attribute>
+      <attribute name="alertIntx">
+        <value>qrtr_str_pdep</value>
+      </attribute>
+      <attribute name="alertMeasure">
+        <value>MSWPavailspaceTx</value>
+      </attribute>
+      <attribute name="priority">
+        <value>1</value>
+      </attribute>
+      <attribute name="alertId">
+        <value>RealTimeAlert142</value>
+      </attribute>
+      <data_model type="java.lang.Object">
+        <attribute name="name">
+          <value>MSttlavailaspaceAlertCond</value>
+        </attribute>
+        <attribute name="label">
+          <value>MS Total Available Space Alert Condition</value>
+        </attribute>
+        <attribute name="style">
+          <value>Alert</value>
+        </attribute>
+        <attribute name="message">
+          <value>MS WP Total Available Space Linear Units must be greater than or equal to zero and greater than the sum of Locked Spaces.</value>
+        </attribute>
+        <attribute name="conditionId">
+          <value>AlertCondition168</value>
+        </attribute>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="EditedMeasures">
+    <attribute name="name">
+      <value>EditedMeasures</value>
+    </attribute>
+    <data_model type="EditedMeasure">
+      <attribute name="name">
+        <value>MSMfGPR</value>
+      </attribute>
+      <attribute name="Label">
+        <value>MFP Gross Profit R</value>
+      </attribute>
+      <attribute name="BaseMeasureSignature">
+        <value>MS Mf GP R</value>
+      </attribute>
+      <attribute name="LoadRangeMeasSignature">
+        <value></value>
+      </attribute>
+      <attribute name="picklist">
+        <value>false</value>
+      </attribute>
+    </data_model>
+    <data_model type="EditedMeasure">
+      <attribute name="name">
+        <value>MSMfSlsAr</value>
+      </attribute>
+      <attribute name="Label">
+        <value>MFP Sales AUR</value>
+      </attribute>
+      <attribute name="BaseMeasureSignature">
+        <value>MS Mf Sls Ar</value>
+      </attribute>
+      <attribute name="LoadRangeMeasSignature">
+        <value></value>
+      </attribute>
+      <attribute name="picklist">
+        <value>false</value>
+      </attribute>
+    </data_model>
+    <data_model type="EditedMeasure">
+      <attribute name="name">
+        <value>MSMfSlsC</value>
+      </attribute>
+      <attribute name="Label">
+        <value>MFP Sales C</value>
+      </attribute>
+      <attribute name="BaseMeasureSignature">
+        <value>MS Mf Sls C</value>
+      </attribute>
+      <attribute name="LoadRangeMeasSignature">
+        <value></value>
+      </attribute>
+      <attribute name="picklist">
+        <value>false</value>
+      </attribute>
+    </data_model>
+    <data_model type="EditedMeasure">
+      <attribute name="name">
+        <value>MSMfSlsR</value>
+      </attribute>
+      <attribute name="Label">
+        <value>MFP Sales R</value>
+      </attribute>
+      <attribute name="BaseMeasureSignature">
+        <value>MS Mf Sls R</value>
+      </attribute>
+      <attribute name="LoadRangeMeasSignature">
+        <value></value>
+      </attribute>
+      <attribute name="picklist">
+        <value>false</value>
+      </attribute>
+    </data_model>
+    <data_model type="EditedMeasure">
+      <attribute name="name">
+        <value>MSMfSlsU</value>
+      </attribute>
+      <attribute name="Label">
+        <value>MFP Sales U</value>
+      </attribute>
+      <attribute name="BaseMeasureSignature">
+        <value>MS Mf Sls U</value>
+      </attribute>
+      <attribute name="LoadRangeMeasSignature">
+        <value></value>
+      </attribute>
+      <attribute name="picklist">
+        <value>false</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

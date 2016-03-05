@@ -1,0 +1,4363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="WizardSet">
+  <attribute name="name">
+    <value>wizardset10</value>
+  </attribute>
+  <data_model type="Wizard">
+    <attribute name="name">
+      <value> pgad </value>
+    </attribute>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgadwz1</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>PGADWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Curve Level Selection</value>
+      </attribute>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>pgadwz1wg1</value>
+        </attribute>
+        <attribute name="locx">
+          <value>9</value>
+        </attribute>
+        <attribute name="locy">
+          <value>15</value>
+        </attribute>
+        <attribute name="width">
+          <value>30</value>
+        </attribute>
+        <attribute name="height">
+          <value>38</value>
+        </attribute>
+        <attribute name="action">
+          <value>StoreLevelsOfFinalAsProperty SourceLevelsList clvl _F Source", "StoreLevelsOfFinalAsProperty FinalLevel clvl _F Final</value>
+        </attribute>
+        <attribute name="type">
+          <value>ListBox</value>
+        </attribute>
+        <attribute name="func">
+          <value>dynamic</value>
+        </attribute>
+      </data_model>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>pgadwz1wg2</value>
+        </attribute>
+        <attribute name="locx">
+          <value>4</value>
+        </attribute>
+        <attribute name="locy">
+          <value>10</value>
+        </attribute>
+        <attribute name="width">
+          <value>42</value>
+        </attribute>
+        <attribute name="height">
+          <value>50</value>
+        </attribute>
+        <attribute name="type">
+          <value>Group</value>
+        </attribute>
+        <attribute name="text">
+          <value>Please select the curve level.</value>
+        </attribute>
+        <attribute name="func">
+          <value>static</value>
+        </attribute>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="Wizard">
+    <attribute name="name">
+      <value> pgap </value>
+    </attribute>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz1</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>CURVEFINALLEVELWIZARD</value>
+      </attribute>
+      <attribute name="label">
+        <value>Final Curve Level Selection</value>
+      </attribute>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>pgapwz1wg1</value>
+        </attribute>
+        <attribute name="locx">
+          <value>4</value>
+        </attribute>
+        <attribute name="locy">
+          <value>5</value>
+        </attribute>
+        <attribute name="width">
+          <value>42</value>
+        </attribute>
+        <attribute name="height">
+          <value>54</value>
+        </attribute>
+        <attribute name="type">
+          <value>Group</value>
+        </attribute>
+        <attribute name="text">
+          <value>Please select the final Curve level.</value>
+        </attribute>
+        <attribute name="func">
+          <value>static</value>
+        </attribute>
+      </data_model>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>pgapwz1wg2</value>
+        </attribute>
+        <attribute name="locx">
+          <value>9</value>
+        </attribute>
+        <attribute name="locy">
+          <value>15</value>
+        </attribute>
+        <attribute name="width">
+          <value>30</value>
+        </attribute>
+        <attribute name="height">
+          <value>38</value>
+        </attribute>
+        <attribute name="type">
+          <value>ListBox</value>
+        </attribute>
+        <attribute name="func">
+          <value>dynamic</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz201F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 01</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>item</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz203F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 03</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>scls</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz205F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 05</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>itg1</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz207F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 07</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>itgp</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz209F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 09</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>item</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz211F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 11</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>item</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz213F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 13</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>clss</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz215F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 15</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>pgrp</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz217F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 17</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>pgrp</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz219F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 19</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>splr</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz221F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 21</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>dept</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz223F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 23</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>clss</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz226F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 26</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>clss</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz228F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 28</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>scls</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz230F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 30</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>itgp</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz235F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 35</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>scls</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz239F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 39</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>clss</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz242F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 42</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>dept</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz244F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 44</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>item</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz246F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 46</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>scls</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz248F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 48</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>clss</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz301F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 01</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>chn</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz303F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 03</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz305F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 05</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz307F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 07</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz309F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 09</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>dstr</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz311F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 11</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz315F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 15</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>area</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz319F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 19</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>chn</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz321F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 21</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>dstr</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz323F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 23</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>dstr</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz326F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 26</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz328F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 28</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>dstr</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz330F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 30</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz335F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 35</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz339F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 39</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz342F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 42</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz344F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 44</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>area</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz346F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 46</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>area</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz348F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 48</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>area</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz401F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 01</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>week</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select time periods.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz403F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 03</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>week</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select time periods.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz405F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 05</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>week</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select time periods.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz407F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 07</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>week</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select time periods.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz409F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 09</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>week</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select time periods.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz417F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 17</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>mnth</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select time periods.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz419F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 19</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>week</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select time periods.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz423F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 23</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>week</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select time periods.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz426F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgapwz1 Level 26</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>qrtr</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select time periods.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgapwz5</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RdfExtraMeasuresWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Additional Measure Selection</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select additional measures to include in the workbook.</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="Wizard">
+    <attribute name="name">
+      <value> pgma </value>
+    </attribute>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz1</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>CURVEFINALLEVELWIZARD</value>
+      </attribute>
+      <attribute name="label">
+        <value>Final Curve Level Selection</value>
+      </attribute>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>pgmawz1wg1</value>
+        </attribute>
+        <attribute name="locx">
+          <value>4</value>
+        </attribute>
+        <attribute name="locy">
+          <value>5</value>
+        </attribute>
+        <attribute name="width">
+          <value>42</value>
+        </attribute>
+        <attribute name="height">
+          <value>54</value>
+        </attribute>
+        <attribute name="type">
+          <value>Group</value>
+        </attribute>
+        <attribute name="text">
+          <value>Please select the final Curve level.</value>
+        </attribute>
+        <attribute name="func">
+          <value>static</value>
+        </attribute>
+      </data_model>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>pgmawz1wg2</value>
+        </attribute>
+        <attribute name="locx">
+          <value>9</value>
+        </attribute>
+        <attribute name="locy">
+          <value>15</value>
+        </attribute>
+        <attribute name="width">
+          <value>30</value>
+        </attribute>
+        <attribute name="height">
+          <value>38</value>
+        </attribute>
+        <attribute name="type">
+          <value>ListBox</value>
+        </attribute>
+        <attribute name="func">
+          <value>dynamic</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz201F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 01</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>item</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz203F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 03</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>item</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz205F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 05</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>item</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz207F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 07</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>item</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz209F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 09</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>item</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz211F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 11</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>item</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz213F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 13</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>scls</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz215F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 15</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>pgrp</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz217F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 17</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>pgrp</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz219F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 19</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>item</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz221F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 21</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>scls</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz223F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 23</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>clss</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz226F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 26</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>clss</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz228F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 28</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>scls</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz230F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 30</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>gpd1</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz235F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 35</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>scd1</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz239F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 39</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>cld1</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz242F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 42</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>dpd1</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz244F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 44</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>item</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz246F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 46</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>item</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz248F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 48</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>item</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz301F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 01</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz303F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 03</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz305F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 05</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz307F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 07</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz309F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 09</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz311F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 11</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz315F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 15</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz319F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 19</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz321F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 21</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>dstr</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz323F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 23</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>dstr</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz326F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 26</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz328F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 28</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>dstr</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz330F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 30</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz335F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 35</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz339F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 39</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz342F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 42</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>str</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz344F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 44</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>area</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz346F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 46</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>area</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz348F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 48</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>area</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz401F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 01</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>week</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select dates.</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz403F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 03</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>week</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select dates.</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz405F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 05</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>week</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select dates.</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz407F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 07</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>week</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select dates.</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz409F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 09</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>week</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select dates.</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz411F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 11</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>dow</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select dates.</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz417F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 17</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>day</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select dates.</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz419F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 19</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>week</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select dates.</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz421F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 21</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>week</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select dates.</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz423F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 23</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>day</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select dates.</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz426F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 26</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>week</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select dates.</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz428F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 28</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>dow</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select dates.</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz444F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 44</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>dow</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select dates.</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz446F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 46</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>dow</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select dates.</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz448F</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RDFTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="Dependency">
+        <value>pgmawz1 Level 48</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>dow</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select dates.</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgmawz5</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RdfExtraMeasuresWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Additional  Measure Selection</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select additional measures to include in the workbook.</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="Wizard">
+    <attribute name="name">
+      <value> pgrb </value>
+    </attribute>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgrbwz1</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>CurveFinalLevelWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Final Curve Level Selection</value>
+      </attribute>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>pgrbwz1wg1</value>
+        </attribute>
+        <attribute name="locx">
+          <value>4</value>
+        </attribute>
+        <attribute name="locy">
+          <value>5</value>
+        </attribute>
+        <attribute name="width">
+          <value>42</value>
+        </attribute>
+        <attribute name="height">
+          <value>54</value>
+        </attribute>
+        <attribute name="type">
+          <value>Group</value>
+        </attribute>
+        <attribute name="text">
+          <value>Please select the final curve levels.</value>
+        </attribute>
+        <attribute name="func">
+          <value>static</value>
+        </attribute>
+      </data_model>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>pgrbwz1wg2</value>
+        </attribute>
+        <attribute name="locx">
+          <value>9</value>
+        </attribute>
+        <attribute name="locy">
+          <value>15</value>
+        </attribute>
+        <attribute name="width">
+          <value>30</value>
+        </attribute>
+        <attribute name="height">
+          <value>38</value>
+        </attribute>
+        <attribute name="type">
+          <value>ListBox</value>
+        </attribute>
+        <attribute name="func">
+          <value>dynamic</value>
+        </attribute>
+        <attribute name="style">
+          <value>multiple</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>pgrbwz2</value>
+      </attribute>
+      <attribute name="creator">
+        <value>Curve</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="Type">
+        <value>RunCurveBatchWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Batch Profile Generation</value>
+      </attribute>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>pgrbwz2wg1</value>
+        </attribute>
+        <attribute name="locx">
+          <value>4</value>
+        </attribute>
+        <attribute name="locy">
+          <value>5</value>
+        </attribute>
+        <attribute name="width">
+          <value>42</value>
+        </attribute>
+        <attribute name="height">
+          <value>54</value>
+        </attribute>
+        <attribute name="type">
+          <value>Group</value>
+        </attribute>
+        <attribute name="text">
+          <value>Batch profile generation complete.</value>
+        </attribute>
+        <attribute name="func">
+          <value>static</value>
+        </attribute>
+      </data_model>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>pgrbwz2wg2</value>
+        </attribute>
+        <attribute name="type">
+          <value>Dynamic</value>
+        </attribute>
+        <attribute name="func">
+          <value>dynamic</value>
+        </attribute>
+      </data_model>
+    </data_model>
+  </data_model>
+</data_set>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="com.retek.ride.rule.newmodel.RuleGroup">
+  <attribute name="name">
+    <value>Batch_Attr_0_loc</value>
+  </attribute>
+  <attribute name="description">
+    <value>a rule group</value>
+  </attribute>
+  <attribute name="role">
+    <value>user</value>
+  </attribute>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>adwpattrvaltx_batch</value>
+    </attribute>
+    <attribute name="description">
+      <value>Populates a writeable copy of the loaded sku-attribute map file.</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ADWPAttrValTx = if(ACDVDPMPosB, ignore, DRTYAttrValTx)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

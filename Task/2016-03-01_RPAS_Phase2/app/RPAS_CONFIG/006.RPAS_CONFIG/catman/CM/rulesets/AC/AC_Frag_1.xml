@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="com.retek.ride.rule.newmodel.RuleGroup">
+  <attribute name="name">
+    <value>AC_Frag_1</value>
+  </attribute>
+  <attribute name="description">
+    <value>a rule group</value>
+  </attribute>
+  <attribute name="role">
+    <value>user</value>
+  </attribute>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>mktfrag_1</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACWPMCItmCntCatCt, ACWPMFItmCntCatCt, ACWPMFpSlsCatV, ACWPMCpSlsCatV, ACWPMCumSlsCatV, ACWPMRankCatV &lt;- CMFragmentAnalysisExpr(ACWPMktMetricV, ACWPFragMapCatB, ACWPFragBrkptp, ACWPContrBrkptp)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>mktfrag_2</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACWPMCItmCntSCCt, ACWPMFItmCntSCCt, ACWPMFpSlsSCV, ACWPMCpSlsSCV, ACWPMCumSlsSCV, ACWPMRankSCV &lt;- CMFragmentAnalysisExpr(ACWPMktMetricV, ACWPFragMapScB, ACWPFragBrkptSCp, ACWPContrBrkptSCp)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>retfrag_1</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACWPRCItmCntCatCt, ACWPRFItmCntCatCt, ACWPRFpSlsCatV, ACWPRCpSlsCatV, ACWPRCumSlsCatV, ACWPRRankCatV &lt;- CMFragmentAnalysisExpr(ACWPRetMetricV, ACWPRFMapCatB, ACWPFragBrkptp, ACWPContrBrkptp)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>retfrag_2</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACWPRCItmCntSCCt, ACWPRFItmCntSCCt, ACWPRFpSlsSCV, ACWPRCpSlsSCV, ACWPRCumSlsSCV, ACWPRRankSCV &lt;- CMFragmentAnalysisExpr(ACWPRetMetricV, ACWPRFMapScB, ACWPFragBrkptSCp, ACWPContrBrkptSCp)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

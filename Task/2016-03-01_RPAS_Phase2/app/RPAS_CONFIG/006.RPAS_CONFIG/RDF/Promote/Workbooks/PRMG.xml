@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="Workbook">
+  <attribute name="name">
+    <value>PRMG</value>
+  </attribute>
+  <attribute name="Label">
+    <value>Promotion Management</value>
+  </attribute>
+  <attribute name="WorkbookGroup">
+    <value>Promote</value>
+  </attribute>
+  <attribute name="WorkbookLib">
+    <value>Templates</value>
+  </attribute>
+  <attribute name="WorkbookType">
+    <value>DynamicTemplate</value>
+  </attribute>
+  <attribute name="IsWizardOnly">
+    <value>false</value>
+  </attribute>
+  <attribute name="IsImageEnabled">
+    <value>false</value>
+  </attribute>
+  <attribute name="RuleSet">
+    <value>PRMG</value>
+  </attribute>
+  <attribute name="LoadRules">
+    <value>PRMG_load</value>
+  </attribute>
+  <attribute name="CommitRules">
+    <value>PRMG_commit</value>
+  </attribute>
+  <attribute name="CalcRules">
+    <value>PRMG_calc</value>
+  </attribute>
+  <attribute name="RefreshRules">
+    <value>PRMG_refresh</value>
+  </attribute>
+  <attribute name="IsUseDefaults">
+    <value>true</value>
+  </attribute>
+  <attribute name="DpmDimensions">
+    <value></value>
+  </attribute>
+  <attribute name="IsCustomWizard">
+    <value>false</value>
+  </attribute>
+  <attribute name="properties">
+    <value>CREATOR</value>
+  </attribute>
+  <attribute name="CREATOR">
+    <value>Promote</value>
+  </attribute>
+  <data_model type="AxisInfo">
+    <attribute name="name">
+      <value>AxisInfo</value>
+    </attribute>
+    <attribute name="CSLHAxis">
+      <value>XAxis</value>
+    </attribute>
+    <attribute name="CSLHOrder">
+      <value>0</value>
+    </attribute>
+    <attribute name="PRMHAxis">
+      <value>YAxis</value>
+    </attribute>
+    <attribute name="PRMHOrder">
+      <value>0</value>
+    </attribute>
+    <attribute name="MEASAxis">
+      <value>ZAxis</value>
+    </attribute>
+    <attribute name="MEASOrder">
+      <value>0</value>
+    </attribute>
+  </data_model>
+  <data_model type="Wizards">
+    <attribute name="name">
+      <value>Wizards</value>
+    </attribute>
+    <data_model type="Wizard">
+      <attribute name="name">
+        <value>CSLHWizard</value>
+      </attribute>
+      <attribute name="CSLHOrder">
+        <value>0</value>
+      </attribute>
+      <attribute name="CSLHDim">
+        <value>PRML</value>
+      </attribute>
+      <attribute name="CSLHLLabel">
+        <value>Select Causal Levels</value>
+      </attribute>
+      <attribute name="CSLHRLabel">
+        <value>Selected Causal Levels</value>
+      </attribute>
+      <attribute name="CSLHMaxPos">
+        <value>-1</value>
+      </attribute>
+      <attribute name="CSLHWizardLabel">
+        <value>Causal Level Selection</value>
+      </attribute>
+    </data_model>
+    <data_model type="Wizard">
+      <attribute name="name">
+        <value>PRMHWizard</value>
+      </attribute>
+      <attribute name="PRMHOrder">
+        <value>1</value>
+      </attribute>
+      <attribute name="PRMHDim">
+        <value>PRMO</value>
+      </attribute>
+      <attribute name="PRMHLLabel">
+        <value>Select Promotions</value>
+      </attribute>
+      <attribute name="PRMHRLabel">
+        <value>Selected Promotions</value>
+      </attribute>
+      <attribute name="PRMHMaxPos">
+        <value>-1</value>
+      </attribute>
+      <attribute name="PRMHWizardLabel">
+        <value>Promotion Selection</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="WorkbookTabs">
+    <attribute name="name">
+      <value>WorkbookTabs</value>
+    </attribute>
+    <data_model type="WorkbookTab">
+      <attribute name="name">
+        <value>PromotionEnable</value>
+      </attribute>
+      <attribute name="Label">
+        <value>Promotion Enable</value>
+      </attribute>
+      <data_model type="Worksheets">
+        <attribute name="name">
+          <value>Worksheets</value>
+        </attribute>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>PromoEnableSht</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Promotion Enable Worksheet</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>PRMO_PRML</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>promoenable</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>promoenable</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>promoenable</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>promoenable</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="CSLHAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="CSLHOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRMHAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="PRMHOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+      </data_model>
+    </data_model>
+    <data_model type="WorkbookTab">
+      <attribute name="name">
+        <value>AcceptNegLift</value>
+      </attribute>
+      <attribute name="Label">
+        <value>Accept Negative Lift</value>
+      </attribute>
+      <data_model type="Worksheets">
+        <attribute name="name">
+          <value>Worksheets</value>
+        </attribute>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>AcceptNegLiftW</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Accept Negative Lifts</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>PRMO</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>promoallowneg</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>promoallowneg</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>promoallowneg</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>promoallowneg</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="PRMHAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="PRMHOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+      </data_model>
+    </data_model>
+    <data_model type="WorkbookTab">
+      <attribute name="name">
+        <value>PromoVarModType</value>
+      </attribute>
+      <attribute name="Label">
+        <value>Promo Variable Model Type</value>
+      </attribute>
+      <data_model type="Worksheets">
+        <attribute name="name">
+          <value>Worksheets</value>
+        </attribute>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>wsPromVarModTyp</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Promo Variable Model Type</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>PRMO</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>promomodeltype</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>promomodeltype</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>promomodeltype</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>promomodeltype</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="PRMHAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="PRMHOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="DynHiers">
+    <attribute name="name">
+      <value>DynHiers</value>
+    </attribute>
+  </data_model>
+  <data_model type="EditedMeasures">
+    <attribute name="name">
+      <value>EditedMeasures</value>
+    </attribute>
+  </data_model>
+</data_set>

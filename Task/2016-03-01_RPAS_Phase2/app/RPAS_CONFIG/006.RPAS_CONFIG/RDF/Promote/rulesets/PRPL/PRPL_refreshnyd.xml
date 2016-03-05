@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="com.retek.ride.rule.newmodel.RuleGroup">
+  <attribute name="name">
+    <value>PRPL_refreshnyd</value>
+  </attribute>
+  <attribute name="description">
+    <value></value>
+  </attribute>
+  <attribute name="creator">
+    <value>Promote</value>
+  </attribute>
+  <attribute name="role">
+    <value>user</value>
+  </attribute>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PRPL_refreshnyd01</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>pvarXLnyd=pvarXLnyd.master</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

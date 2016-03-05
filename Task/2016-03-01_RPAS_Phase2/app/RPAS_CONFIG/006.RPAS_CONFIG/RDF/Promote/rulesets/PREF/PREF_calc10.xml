@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="com.retek.ride.rule.newmodel.RuleGroup">
+  <attribute name="name">
+    <value>PREF_calc10</value>
+  </attribute>
+  <attribute name="description">
+    <value></value>
+  </attribute>
+  <attribute name="creator">
+    <value>Promote</value>
+  </attribute>
+  <attribute name="role">
+    <value>user</value>
+  </attribute>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc1005</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>FORECAST:psf10xp,SELF_LIFT_UNIT:prmslfun10xp&lt;-PromoSelfEffExpr(BASELINE:pfb10xp,MODELTYPE:cslmthused10xb,PROMOMODELTYPE:promomodeltype,PROMOENABLE:true,FCST_START_INDEX:startindex,FCST_END_INDEX:endindex,PROMOCAL0:paggXLxmas,PROMOTYPE0:ptyp10xmas,PROMOEFF0:peff10xmas,PROMOEFFOVR0:povr10xmas,PROMOCAL1:paggXLxmss,PROMOTYPE1:ptyp10xmss,PROMOEFF1:peff10xmss,PROMOEFFOVR1:povr10xmss,PROMOCAL2:paggXLnyd,PROMOTYPE2:ptyp10nyd,PROMOEFF2:peff10nyd,PROMOEFFOVR2:povr10nyd,PROMOCAL3:paggXLeas,PROMOTYPE3:ptyp10eas,PROMOEFF3:peff10eas,PROMOEFFOVR3:povr10eas,PROMOCAL4:paggXLbts,PROMOTYPE4:ptyp10bts,PROMOEFF4:peff10bts,PROMOEFFOVR4:povr10bts,PROMOCAL5:paggXLcirc,PROMOTYPE5:ptyp10circ,PROMOEFF5:peff10circ,PROMOEFFOVR5:povr10circ,PROMOCAL6:paggXLisd,PROMOTYPE6:ptyp10isd,PROMOEFF6:peff10isd,PROMOEFFOVR6:povr10isd,PROMOCAL7:paggXLdml,PROMOTYPE7:ptyp10dml,PROMOEFF7:peff10dml,PROMOEFFOVR7:povr10dml,PROMOCAL8:paggXLsgn,PROMOTYPE8:ptyp10sgn,PROMOEFF8:peff10sgn,PROMOEFFOVR8:povr10sgn,PROMOCAL9:paggXLpprc,PROMOTYPE9:ptyp10pprc,PROMOEFF9:peff10pprc,PROMOEFFOVR9:povr10pprc)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc1007</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>calprmlift10xp=psf10xp-pfb10xp</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc1009</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>prmliftovr10xp=aprmliftovr10xb*calprmlift10xp/calprmlift10xp.level([PROD].[item]+[LOC].[area]+[CLND].[day]).total</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc1010</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>totprmlift10xp=if(apprmovr10xb,prmliftovr10xp,calprmlift10xp)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc1011</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>pff10xp=pfb10xp+totprmlift10xp</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

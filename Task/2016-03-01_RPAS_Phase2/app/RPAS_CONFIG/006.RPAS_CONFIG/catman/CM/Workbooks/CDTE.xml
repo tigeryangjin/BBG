@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="Workbook">
+  <attribute name="name">
+    <value>CDTE</value>
+  </attribute>
+  <attribute name="Label">
+    <value>CDT Editor</value>
+  </attribute>
+  <attribute name="WorkbookGroup">
+    <value>CDTEditor</value>
+  </attribute>
+  <attribute name="WorkbookGroupLabel">
+    <value>CDT Editor</value>
+  </attribute>
+  <attribute name="WorkbookLib">
+    <value>Templates</value>
+  </attribute>
+  <attribute name="WorkbookType">
+    <value>DynamicTemplate</value>
+  </attribute>
+  <attribute name="IsWizardOnly">
+    <value>false</value>
+  </attribute>
+  <attribute name="IsImageEnabled">
+    <value>false</value>
+  </attribute>
+  <attribute name="RuleSet">
+    <value>CDTE</value>
+  </attribute>
+  <attribute name="LoadRules">
+    <value>CDTE_load</value>
+  </attribute>
+  <attribute name="CommitRules">
+    <value>CDTE_commit</value>
+  </attribute>
+  <attribute name="CalcRules">
+    <value>CDTE_calc</value>
+  </attribute>
+  <attribute name="RefreshRules">
+    <value>CDTE_refresh</value>
+  </attribute>
+  <attribute name="IsUseDefaults">
+    <value>true</value>
+  </attribute>
+  <attribute name="DpmDimensions">
+    <value>csvd</value>
+  </attribute>
+  <attribute name="IsCustomWizard">
+    <value>false</value>
+  </attribute>
+  <data_model type="AxisInfo">
+    <attribute name="name">
+      <value>AxisInfo</value>
+    </attribute>
+    <data_model type="Axis">
+      <attribute name="name">
+        <value>XAxis</value>
+      </attribute>
+      <attribute name="Hiers">
+        <value>MEAS</value>
+      </attribute>
+    </data_model>
+    <data_model type="Axis">
+      <attribute name="name">
+        <value>YAxis</value>
+      </attribute>
+    </data_model>
+    <data_model type="Axis">
+      <attribute name="name">
+        <value>ZAxis</value>
+      </attribute>
+    </data_model>
+    <data_model type="Axis">
+      <attribute name="name">
+        <value>Unassigned</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="Wizards">
+    <attribute name="name">
+      <value>Wizards</value>
+    </attribute>
+    <data_model type="Wizard">
+      <attribute name="name">
+        <value>PRODWizard</value>
+      </attribute>
+      <attribute name="PRODOrder">
+        <value>0</value>
+      </attribute>
+      <attribute name="PRODDim">
+        <value>clss</value>
+      </attribute>
+      <attribute name="PRODLLabel">
+        <value>Select Category</value>
+      </attribute>
+      <attribute name="PRODRLabel">
+        <value>Selected Category</value>
+      </attribute>
+      <attribute name="PRODMaxPos">
+        <value>-1</value>
+      </attribute>
+      <attribute name="PRODWizardLabel">
+        <value>Product</value>
+      </attribute>
+    </data_model>
+    <data_model type="Wizard">
+      <attribute name="name">
+        <value>LOCWizard</value>
+      </attribute>
+      <attribute name="LOCOrder">
+        <value>1</value>
+      </attribute>
+      <attribute name="LOCDim">
+        <value>tdar</value>
+      </attribute>
+      <attribute name="LOCLLabel">
+        <value>Select Trading Area</value>
+      </attribute>
+      <attribute name="LOCRLabel">
+        <value>Selected Trading Area</value>
+      </attribute>
+      <attribute name="LOCMaxPos">
+        <value>-1</value>
+      </attribute>
+      <attribute name="LOCWizardLabel">
+        <value>Location</value>
+      </attribute>
+    </data_model>
+    <data_model type="Wizard">
+      <attribute name="name">
+        <value>CSHWizard</value>
+      </attribute>
+      <attribute name="CSHOrder">
+        <value>2</value>
+      </attribute>
+      <attribute name="CSHDim">
+        <value>csd</value>
+      </attribute>
+      <attribute name="CSHLLabel">
+        <value>Select Consumer Segment</value>
+      </attribute>
+      <attribute name="CSHRLabel">
+        <value>Selected Consumer Segment</value>
+      </attribute>
+      <attribute name="CSHMaxPos">
+        <value>-1</value>
+      </attribute>
+      <attribute name="CSHWizardLabel">
+        <value>Consumer Segment</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="WorkbookTabs">
+    <attribute name="name">
+      <value>WorkbookTabs</value>
+    </attribute>
+    <data_model type="WorkbookTab">
+      <attribute name="name">
+        <value>CDTE_ADT</value>
+      </attribute>
+      <attribute name="label">
+        <value>CDT Meta Data</value>
+      </attribute>
+      <data_model type="Worksheets">
+        <attribute name="name">
+          <value>Worksheets</value>
+        </attribute>
+        <data_model type="java.lang.Object">
+          <attribute name="name">
+            <value>CDTE_ADT_VAS</value>
+          </attribute>
+          <attribute name="label">
+            <value>1. Valid Attribute Name and Values</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>sku_ATV</value>
+          </attribute>
+          <attribute name="windowType">
+            <value>0</value>
+          </attribute>
+          <data_model type="GridWindow">
+            <attribute name="name">
+              <value>Window</value>
+            </attribute>
+            <attribute name="IsUseDefaultAxis">
+              <value>false</value>
+            </attribute>
+            <data_model type="AxisInfo">
+              <attribute name="name">
+                <value>AxisInfo</value>
+              </attribute>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>XAxis</value>
+                </attribute>
+                <attribute name="Hiers">
+                  <value>MEAS</value>
+                </attribute>
+              </data_model>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>YAxis</value>
+                </attribute>
+                <attribute name="Hiers">
+                  <value>ATTR</value>
+                </attribute>
+              </data_model>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>ZAxis</value>
+                </attribute>
+                <attribute name="Hiers">
+                  <value>PROD</value>
+                </attribute>
+              </data_model>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>Unassigned</value>
+                </attribute>
+              </data_model>
+            </data_model>
+            <data_model type="ViewableProfile">
+              <attribute name="name">
+                <value>ViewableProfile</value>
+              </attribute>
+              <attribute name="label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>CEWPAttrValTx</value>
+                <value>ADDVAttrValTx</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profiles">
+              <attribute name="name">
+                <value>Profiles</value>
+              </attribute>
+              <data_model type="SelectableProfile">
+                <attribute name="name">
+                  <value>Default</value>
+                </attribute>
+                <attribute name="label">
+                  <value>Default</value>
+                </attribute>
+                <attribute name="Measures">
+                  <value>CEWPAttrValTx</value>
+                </attribute>
+              </data_model>
+            </data_model>
+            <data_model type="PositionQueries">
+              <attribute name="name">
+                <value>PositionQueries</value>
+              </attribute>
+            </data_model>
+            <data_model type="StyleORs">
+              <attribute name="name">
+                <value>StyleORs</value>
+              </attribute>
+            </data_model>
+            <data_model type="DimDisplayAttrs">
+              <attribute name="name">
+                <value>DimDisplayAttrs</value>
+              </attribute>
+            </data_model>
+          </data_model>
+        </data_model>
+        <data_model type="java.lang.Object">
+          <attribute name="name">
+            <value>CDTE_ADT_CDTI</value>
+          </attribute>
+          <attribute name="label">
+            <value>2. CDT Information</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>clss_tdar_csvd</value>
+          </attribute>
+          <attribute name="windowType">
+            <value>0</value>
+          </attribute>
+          <data_model type="GridWindow">
+            <attribute name="name">
+              <value>Window</value>
+            </attribute>
+            <attribute name="IsUseDefaultAxis">
+              <value>false</value>
+            </attribute>
+            <data_model type="AxisInfo">
+              <attribute name="name">
+                <value>AxisInfo</value>
+              </attribute>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>XAxis</value>
+                </attribute>
+                <attribute name="Hiers">
+                  <value>MEAS</value>
+                </attribute>
+              </data_model>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>YAxis</value>
+                </attribute>
+                <attribute name="Hiers">
+                  <value>CSH</value>
+                </attribute>
+              </data_model>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>ZAxis</value>
+                </attribute>
+                <attribute name="Hiers">
+                  <value>PROD</value>
+                  <value>LOC</value>
+                </attribute>
+              </data_model>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>Unassigned</value>
+                </attribute>
+              </data_model>
+            </data_model>
+            <data_model type="ViewableProfile">
+              <attribute name="name">
+                <value>ViewableProfile</value>
+              </attribute>
+              <attribute name="label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>CEWPCDTLblTx</value>
+                <value>CEWPCDTSlotV</value>
+                <value>CEWPCDTXmlTx</value>
+                <value>CEWPCDTSlotB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profiles">
+              <attribute name="name">
+                <value>Profiles</value>
+              </attribute>
+              <data_model type="SelectableProfile">
+                <attribute name="name">
+                  <value>Default</value>
+                </attribute>
+                <attribute name="label">
+                  <value>Default</value>
+                </attribute>
+                <attribute name="Measures">
+                  <value>CEWPCDTLblTx</value>
+                  <value>CEWPCDTSlotV</value>
+                  <value>CEWPCDTXmlTx</value>
+                  <value>CEWPCDTSlotB</value>
+                </attribute>
+              </data_model>
+            </data_model>
+            <data_model type="PositionQueries">
+              <attribute name="name">
+                <value>PositionQueries</value>
+              </attribute>
+            </data_model>
+            <data_model type="StyleORs">
+              <attribute name="name">
+                <value>StyleORs</value>
+              </attribute>
+            </data_model>
+            <data_model type="DimDisplayAttrs">
+              <attribute name="name">
+                <value>DimDisplayAttrs</value>
+              </attribute>
+            </data_model>
+          </data_model>
+        </data_model>
+        <data_model type="java.lang.Object">
+          <attribute name="name">
+            <value>CDTE_ADT_CDTA</value>
+          </attribute>
+          <attribute name="label">
+            <value>3. CDT Approval</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>clss_tdar_csvd</value>
+          </attribute>
+          <attribute name="windowType">
+            <value>0</value>
+          </attribute>
+          <data_model type="GridWindow">
+            <attribute name="name">
+              <value>Window</value>
+            </attribute>
+            <attribute name="IsUseDefaultAxis">
+              <value>false</value>
+            </attribute>
+            <data_model type="AxisInfo">
+              <attribute name="name">
+                <value>AxisInfo</value>
+              </attribute>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>XAxis</value>
+                </attribute>
+                <attribute name="Hiers">
+                  <value>MEAS</value>
+                </attribute>
+              </data_model>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>YAxis</value>
+                </attribute>
+                <attribute name="Hiers">
+                  <value>CSH</value>
+                </attribute>
+              </data_model>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>ZAxis</value>
+                </attribute>
+                <attribute name="Hiers">
+                  <value>PROD</value>
+                  <value>LOC</value>
+                </attribute>
+              </data_model>
+              <data_model type="Axis">
+                <attribute name="name">
+                  <value>Unassigned</value>
+                </attribute>
+              </data_model>
+            </data_model>
+            <data_model type="ViewableProfile">
+              <attribute name="name">
+                <value>ViewableProfile</value>
+              </attribute>
+              <attribute name="label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>CEWPCDTverB</value>
+                <value>CEWPApprBy</value>
+                <value>CEWPApprDt</value>
+                <value>CEWPApprTx</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profiles">
+              <attribute name="name">
+                <value>Profiles</value>
+              </attribute>
+              <data_model type="SelectableProfile">
+                <attribute name="name">
+                  <value>Default</value>
+                </attribute>
+                <attribute name="label">
+                  <value>Default</value>
+                </attribute>
+                <attribute name="Measures">
+                  <value>CEWPCDTverB</value>
+                  <value>CEWPApprDt</value>
+                  <value>CEWPApprBy</value>
+                  <value>CEWPApprTx</value>
+                </attribute>
+              </data_model>
+            </data_model>
+            <data_model type="PositionQueries">
+              <attribute name="name">
+                <value>PositionQueries</value>
+              </attribute>
+            </data_model>
+            <data_model type="StyleORs">
+              <attribute name="name">
+                <value>StyleORs</value>
+              </attribute>
+            </data_model>
+            <data_model type="DimDisplayAttrs">
+              <attribute name="name">
+                <value>DimDisplayAttrs</value>
+              </attribute>
+            </data_model>
+          </data_model>
+        </data_model>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="Menu">
+    <attribute name="name">
+      <value>Menu28</value>
+    </attribute>
+    <attribute name="Label">
+      <value>Accept XML</value>
+    </attribute>
+    <data_model type="MenuItems">
+      <attribute name="name">
+        <value>MenuItems</value>
+      </attribute>
+      <data_model type="MenuItem">
+        <attribute name="name">
+          <value>menuItem1474</value>
+        </attribute>
+        <attribute name="Label">
+          <value>Accept XML</value>
+        </attribute>
+        <attribute name="Function">
+          <value>RuleGroupProcessor</value>
+        </attribute>
+        <attribute name="Arguments">
+          <value>CDTE_cln,*acceptEditedCdts.ksh</value>
+        </attribute>
+        <attribute name="MenuItemId">
+          <value>1474</value>
+        </attribute>
+        <attribute name="Condition">
+          <value></value>
+        </attribute>
+        <attribute name="Message">
+          <value></value>
+        </attribute>
+        <attribute name="CommitAsap">
+          <value>false</value>
+        </attribute>
+        <attribute name="IntradayConcurrent">
+          <value>false</value>
+        </attribute>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="DynHiers">
+    <attribute name="name">
+      <value>DynHiers</value>
+    </attribute>
+  </data_model>
+  <data_model type="EditedMeasures">
+    <attribute name="name">
+      <value>EditedMeasures</value>
+    </attribute>
+  </data_model>
+</data_set>

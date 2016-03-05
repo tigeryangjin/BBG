@@ -1,0 +1,4572 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="HierSet">
+  <attribute name="name">
+    <value>Hierarchies</value>
+  </attribute>
+  <data_model type="HierClass">
+    <attribute name="name">
+      <value>CLND</value>
+    </attribute>
+    <attribute name="rpas_name.access">
+      <value>final</value>
+    </attribute>
+    <attribute name="label">
+      <value>Calendar</value>
+    </attribute>
+    <attribute name="securitydim">
+      <value></value>
+    </attribute>
+    <attribute name="rpas_name">
+      <value>CLND</value>
+    </attribute>
+    <attribute name="isDeletable">
+      <value>false</value>
+    </attribute>
+    <attribute name="order.access">
+      <value>final</value>
+    </attribute>
+    <attribute name="order">
+      <value>999</value>
+    </attribute>
+    <attribute name="purgeage">
+      <value>10000</value>
+    </attribute>
+    <attribute name="securitydim.access">
+      <value>final</value>
+    </attribute>
+    <data_model type="DimClass">
+      <attribute name="name">
+        <value>day</value>
+      </attribute>
+      <attribute name="db">
+        <value>hmaint</value>
+      </attribute>
+      <attribute name="image_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="labelstart.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="start">
+        <value>1</value>
+      </attribute>
+      <attribute name="prefix">
+        <value>3</value>
+      </attribute>
+      <attribute name="buffer_pct_low.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="buffer_pct_high">
+        <value>0</value>
+      </attribute>
+      <attribute name="column">
+        <value>0</value>
+      </attribute>
+      <attribute name="labelstart">
+        <value>10</value>
+      </attribute>
+      <attribute name="aggs">
+        <value></value>
+      </attribute>
+      <attribute name="threshold">
+        <value>1638</value>
+      </attribute>
+      <attribute name="width">
+        <value>9</value>
+      </attribute>
+      <attribute name="buffer_pct_low">
+        <value>0</value>
+      </attribute>
+      <attribute name="column.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="translate">
+        <value>false</value>
+      </attribute>
+      <attribute name="label">
+        <value>Day</value>
+      </attribute>
+      <attribute name="start.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="labelwidth">
+        <value>120</value>
+      </attribute>
+      <attribute name="cardinality">
+        <value>14</value>
+      </attribute>
+      <attribute name="positionformat">
+        <value>day%Y%m%d</value>
+      </attribute>
+      <attribute name="rpas_name">
+        <value>day</value>
+      </attribute>
+      <attribute name="dpm_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="buffer_pct_high.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="userdim">
+        <value>false</value>
+      </attribute>
+      <data_model type="DimClass">
+        <attribute name="name">
+          <value>week</value>
+        </attribute>
+        <attribute name="db">
+          <value>hmaint</value>
+        </attribute>
+        <attribute name="image_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="prefix">
+          <value>4</value>
+        </attribute>
+        <attribute name="labelstart.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="buffer_pct_low.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="buffer_pct_high">
+          <value>0</value>
+        </attribute>
+        <attribute name="column">
+          <value>1</value>
+        </attribute>
+        <attribute name="cardinality">
+          <value>10</value>
+        </attribute>
+        <attribute name="buffer_pct_low">
+          <value>0</value>
+        </attribute>
+        <attribute name="column.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="translate">
+          <value>false</value>
+        </attribute>
+        <attribute name="start.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="start">
+          <value>130</value>
+        </attribute>
+        <attribute name="label">
+          <value>Week</value>
+        </attribute>
+        <attribute name="labelwidth">
+          <value>120</value>
+        </attribute>
+        <attribute name="labelstart">
+          <value>150</value>
+        </attribute>
+        <attribute name="aggs">
+          <value>day</value>
+        </attribute>
+        <attribute name="threshold">
+          <value>102</value>
+        </attribute>
+        <attribute name="width">
+          <value>20</value>
+        </attribute>
+        <attribute name="dpm_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="rpas_name">
+          <value>week</value>
+        </attribute>
+        <attribute name="buffer_pct_high.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="userdim">
+          <value>false</value>
+        </attribute>
+        <data_model type="DimClass">
+          <attribute name="name">
+            <value>mnth</value>
+          </attribute>
+          <attribute name="db">
+            <value>hmaint</value>
+          </attribute>
+          <attribute name="rpas_name">
+            <value>mnth</value>
+          </attribute>
+          <attribute name="image_enabled">
+            <value>false</value>
+          </attribute>
+          <attribute name="prefix">
+            <value>4</value>
+          </attribute>
+          <attribute name="labelstart.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="buffer_pct_low.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="buffer_pct_high">
+            <value>0</value>
+          </attribute>
+          <attribute name="column">
+            <value>2</value>
+          </attribute>
+          <attribute name="cardinality">
+            <value>10</value>
+          </attribute>
+          <attribute name="labelstart">
+            <value>290</value>
+          </attribute>
+          <attribute name="buffer_pct_low">
+            <value>0</value>
+          </attribute>
+          <attribute name="column.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="start">
+            <value>270</value>
+          </attribute>
+          <attribute name="translate">
+            <value>false</value>
+          </attribute>
+          <attribute name="start.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="label">
+            <value>Month</value>
+          </attribute>
+          <attribute name="aggs">
+            <value>week</value>
+          </attribute>
+          <attribute name="labelwidth">
+            <value>120</value>
+          </attribute>
+          <attribute name="threshold">
+            <value>102</value>
+          </attribute>
+          <attribute name="width">
+            <value>20</value>
+          </attribute>
+          <attribute name="dpm_enabled">
+            <value>false</value>
+          </attribute>
+          <attribute name="buffer_pct_high.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="userdim">
+            <value>false</value>
+          </attribute>
+          <data_model type="DimClass">
+            <attribute name="name">
+              <value>qrtr</value>
+            </attribute>
+            <attribute name="db">
+              <value>hmaint</value>
+            </attribute>
+            <attribute name="image_enabled">
+              <value>false</value>
+            </attribute>
+            <attribute name="prefix">
+              <value>4</value>
+            </attribute>
+            <attribute name="threshold">
+              <value>25</value>
+            </attribute>
+            <attribute name="labelstart.access">
+              <value>protected</value>
+            </attribute>
+            <attribute name="cardinality">
+              <value>8</value>
+            </attribute>
+            <attribute name="buffer_pct_low.access">
+              <value>protected</value>
+            </attribute>
+            <attribute name="buffer_pct_high">
+              <value>0</value>
+            </attribute>
+            <attribute name="column">
+              <value>3</value>
+            </attribute>
+            <attribute name="rpas_name">
+              <value>qrtr</value>
+            </attribute>
+            <attribute name="label">
+              <value>Quarter</value>
+            </attribute>
+            <attribute name="aggs">
+              <value>mnth</value>
+            </attribute>
+            <attribute name="buffer_pct_low">
+              <value>0</value>
+            </attribute>
+            <attribute name="column.access">
+              <value>protected</value>
+            </attribute>
+            <attribute name="translate">
+              <value>false</value>
+            </attribute>
+            <attribute name="start.access">
+              <value>protected</value>
+            </attribute>
+            <attribute name="labelwidth">
+              <value>120</value>
+            </attribute>
+            <attribute name="labelstart">
+              <value>430</value>
+            </attribute>
+            <attribute name="start">
+              <value>410</value>
+            </attribute>
+            <attribute name="width">
+              <value>20</value>
+            </attribute>
+            <attribute name="dpm_enabled">
+              <value>false</value>
+            </attribute>
+            <attribute name="buffer_pct_high.access">
+              <value>protected</value>
+            </attribute>
+            <attribute name="userdim">
+              <value>false</value>
+            </attribute>
+            <data_model type="DimClass">
+              <attribute name="name">
+                <value>ssn</value>
+              </attribute>
+              <attribute name="db">
+                <value>hmaint</value>
+              </attribute>
+              <attribute name="image_enabled">
+                <value>false</value>
+              </attribute>
+              <attribute name="prefix">
+                <value>4</value>
+              </attribute>
+              <attribute name="threshold">
+                <value>25</value>
+              </attribute>
+              <attribute name="labelstart.access">
+                <value>protected</value>
+              </attribute>
+              <attribute name="cardinality">
+                <value>8</value>
+              </attribute>
+              <attribute name="buffer_pct_low.access">
+                <value>protected</value>
+              </attribute>
+              <attribute name="buffer_pct_high">
+                <value>0</value>
+              </attribute>
+              <attribute name="rpas_name">
+                <value>ssn</value>
+              </attribute>
+              <attribute name="column">
+                <value>4</value>
+              </attribute>
+              <attribute name="label">
+                <value>Half</value>
+              </attribute>
+              <attribute name="buffer_pct_low">
+                <value>0</value>
+              </attribute>
+              <attribute name="column.access">
+                <value>protected</value>
+              </attribute>
+              <attribute name="aggs">
+                <value>qrtr</value>
+              </attribute>
+              <attribute name="translate">
+                <value>false</value>
+              </attribute>
+              <attribute name="start.access">
+                <value>protected</value>
+              </attribute>
+              <attribute name="labelwidth">
+                <value>120</value>
+              </attribute>
+              <attribute name="start">
+                <value>550</value>
+              </attribute>
+              <attribute name="width">
+                <value>20</value>
+              </attribute>
+              <attribute name="labelstart">
+                <value>570</value>
+              </attribute>
+              <attribute name="dpm_enabled">
+                <value>false</value>
+              </attribute>
+              <attribute name="buffer_pct_high.access">
+                <value>protected</value>
+              </attribute>
+              <attribute name="userdim">
+                <value>false</value>
+              </attribute>
+              <data_model type="DimClass">
+                <attribute name="name">
+                  <value>year</value>
+                </attribute>
+                <attribute name="db">
+                  <value>hmaint</value>
+                </attribute>
+                <attribute name="image_enabled">
+                  <value>false</value>
+                </attribute>
+                <attribute name="prefix">
+                  <value>4</value>
+                </attribute>
+                <attribute name="threshold">
+                  <value>25</value>
+                </attribute>
+                <attribute name="labelstart.access">
+                  <value>protected</value>
+                </attribute>
+                <attribute name="cardinality">
+                  <value>8</value>
+                </attribute>
+                <attribute name="labelstart">
+                  <value>710</value>
+                </attribute>
+                <attribute name="buffer_pct_low.access">
+                  <value>protected</value>
+                </attribute>
+                <attribute name="buffer_pct_high">
+                  <value>0</value>
+                </attribute>
+                <attribute name="start">
+                  <value>690</value>
+                </attribute>
+                <attribute name="column">
+                  <value>5</value>
+                </attribute>
+                <attribute name="rpas_name">
+                  <value>year</value>
+                </attribute>
+                <attribute name="aggs">
+                  <value>ssn</value>
+                </attribute>
+                <attribute name="buffer_pct_low">
+                  <value>0</value>
+                </attribute>
+                <attribute name="column.access">
+                  <value>protected</value>
+                </attribute>
+                <attribute name="translate">
+                  <value>false</value>
+                </attribute>
+                <attribute name="start.access">
+                  <value>protected</value>
+                </attribute>
+                <attribute name="labelwidth">
+                  <value>120</value>
+                </attribute>
+                <attribute name="width">
+                  <value>20</value>
+                </attribute>
+                <attribute name="label">
+                  <value>Year</value>
+                </attribute>
+                <attribute name="dpm_enabled">
+                  <value>false</value>
+                </attribute>
+                <attribute name="buffer_pct_high.access">
+                  <value>protected</value>
+                </attribute>
+                <attribute name="userdim">
+                  <value>false</value>
+                </attribute>
+              </data_model>
+            </data_model>
+          </data_model>
+        </data_model>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="HierClass">
+    <attribute name="name">
+      <value>PROD</value>
+    </attribute>
+    <attribute name="rpas_name.access">
+      <value>final</value>
+    </attribute>
+    <attribute name="isDeletable">
+      <value>false</value>
+    </attribute>
+    <attribute name="order">
+      <value>1001</value>
+    </attribute>
+    <attribute name="order.access">
+      <value>protected</value>
+    </attribute>
+    <attribute name="securitydim">
+      <value>clss</value>
+    </attribute>
+    <attribute name="purgeage">
+      <value>10000</value>
+    </attribute>
+    <attribute name="rpas_name">
+      <value>PROD</value>
+    </attribute>
+    <attribute name="label">
+      <value>Product</value>
+    </attribute>
+    <data_model type="DimClass">
+      <attribute name="name">
+        <value>sku</value>
+      </attribute>
+      <attribute name="db">
+        <value>hmaint</value>
+      </attribute>
+      <attribute name="labelstart.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="start.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="start">
+        <value>1</value>
+      </attribute>
+      <attribute name="column">
+        <value>0</value>
+      </attribute>
+      <attribute name="dpm_enabled">
+        <value>true</value>
+      </attribute>
+      <attribute name="label">
+        <value>SKU</value>
+      </attribute>
+      <attribute name="labelstart">
+        <value>21</value>
+      </attribute>
+      <attribute name="rpas_name">
+        <value>sku</value>
+      </attribute>
+      <attribute name="image_enabled">
+        <value>true</value>
+      </attribute>
+      <attribute name="labelwidth">
+        <value>250</value>
+      </attribute>
+      <attribute name="threshold">
+        <value>13107</value>
+      </attribute>
+      <attribute name="translate">
+        <value>true</value>
+      </attribute>
+      <attribute name="aggs">
+        <value></value>
+      </attribute>
+      <attribute name="cardinality">
+        <value>17</value>
+      </attribute>
+      <attribute name="width">
+        <value>20</value>
+      </attribute>
+      <attribute name="column.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="userdim">
+        <value>false</value>
+      </attribute>
+      <data_model type="DimClass">
+        <attribute name="name">
+          <value>stco</value>
+        </attribute>
+        <attribute name="image_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="db">
+          <value>hmaint</value>
+        </attribute>
+        <attribute name="labelstart.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="start.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="column">
+          <value>3</value>
+        </attribute>
+        <attribute name="cardinality">
+          <value>14</value>
+        </attribute>
+        <attribute name="labelwidth">
+          <value>250</value>
+        </attribute>
+        <attribute name="labelstart">
+          <value>291</value>
+        </attribute>
+        <attribute name="translate">
+          <value>true</value>
+        </attribute>
+        <attribute name="label">
+          <value>Style/Color</value>
+        </attribute>
+        <attribute name="width">
+          <value>20</value>
+        </attribute>
+        <attribute name="start">
+          <value>271</value>
+        </attribute>
+        <attribute name="aggs">
+          <value>sku</value>
+        </attribute>
+        <attribute name="rpas_name">
+          <value>stco</value>
+        </attribute>
+        <attribute name="threshold">
+          <value>1638</value>
+        </attribute>
+        <attribute name="dpm_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="column.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="userdim">
+          <value>false</value>
+        </attribute>
+        <data_model type="DimClass">
+          <attribute name="name">
+            <value>styl</value>
+          </attribute>
+          <attribute name="image_enabled">
+            <value>false</value>
+          </attribute>
+          <attribute name="labelstart">
+            <value>561</value>
+          </attribute>
+          <attribute name="db">
+            <value>hmaint</value>
+          </attribute>
+          <attribute name="label">
+            <value>Style</value>
+          </attribute>
+          <attribute name="labelstart.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="rpas_name">
+            <value>styl</value>
+          </attribute>
+          <attribute name="start.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="start">
+            <value>541</value>
+          </attribute>
+          <attribute name="column">
+            <value>4</value>
+          </attribute>
+          <attribute name="aggs">
+            <value>stco</value>
+          </attribute>
+          <attribute name="cardinality">
+            <value>14</value>
+          </attribute>
+          <attribute name="labelwidth">
+            <value>250</value>
+          </attribute>
+          <attribute name="translate">
+            <value>true</value>
+          </attribute>
+          <attribute name="width">
+            <value>20</value>
+          </attribute>
+          <attribute name="threshold">
+            <value>1638</value>
+          </attribute>
+          <attribute name="dpm_enabled">
+            <value>false</value>
+          </attribute>
+          <attribute name="column.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="userdim">
+            <value>false</value>
+          </attribute>
+          <data_model type="DimClass">
+            <attribute name="name">
+              <value>scls</value>
+            </attribute>
+            <attribute name="prefix">
+              <value>4</value>
+            </attribute>
+            <attribute name="image_enabled">
+              <value>false</value>
+            </attribute>
+            <attribute name="db">
+              <value>hmaint</value>
+            </attribute>
+            <attribute name="labelstart.access">
+              <value>protected</value>
+            </attribute>
+            <attribute name="start.access">
+              <value>protected</value>
+            </attribute>
+            <attribute name="buffer_pct_high">
+              <value>0</value>
+            </attribute>
+            <attribute name="label">
+              <value>Sub-Category</value>
+            </attribute>
+            <attribute name="rpas_name">
+              <value>scls</value>
+            </attribute>
+            <attribute name="column">
+              <value>5</value>
+            </attribute>
+            <attribute name="cardinality">
+              <value>14</value>
+            </attribute>
+            <attribute name="labelwidth">
+              <value>250</value>
+            </attribute>
+            <attribute name="aggs">
+              <value>styl</value>
+            </attribute>
+            <attribute name="translate">
+              <value>true</value>
+            </attribute>
+            <attribute name="start">
+              <value>811</value>
+            </attribute>
+            <attribute name="width">
+              <value>20</value>
+            </attribute>
+            <attribute name="threshold">
+              <value>1638</value>
+            </attribute>
+            <attribute name="dpm_enabled">
+              <value>false</value>
+            </attribute>
+            <attribute name="buffer_pct_low">
+              <value>0</value>
+            </attribute>
+            <attribute name="column.access">
+              <value>protected</value>
+            </attribute>
+            <attribute name="userdim">
+              <value>false</value>
+            </attribute>
+            <attribute name="labelstart">
+              <value>831</value>
+            </attribute>
+            <data_model type="DimClass">
+              <attribute name="name">
+                <value>clss</value>
+              </attribute>
+              <attribute name="prefix">
+                <value>4</value>
+              </attribute>
+              <attribute name="image_enabled">
+                <value>false</value>
+              </attribute>
+              <attribute name="db">
+                <value>hmaint</value>
+              </attribute>
+              <attribute name="labelstart.access">
+                <value>protected</value>
+              </attribute>
+              <attribute name="start.access">
+                <value>protected</value>
+              </attribute>
+              <attribute name="buffer_pct_high">
+                <value>0</value>
+              </attribute>
+              <attribute name="rpas_name">
+                <value>clss</value>
+              </attribute>
+              <attribute name="column">
+                <value>6</value>
+              </attribute>
+              <attribute name="cardinality">
+                <value>14</value>
+              </attribute>
+              <attribute name="labelwidth">
+                <value>250</value>
+              </attribute>
+              <attribute name="labelstart">
+                <value>1101</value>
+              </attribute>
+              <attribute name="translate">
+                <value>true</value>
+              </attribute>
+              <attribute name="width">
+                <value>20</value>
+              </attribute>
+              <attribute name="label">
+                <value>Category</value>
+              </attribute>
+              <attribute name="threshold">
+                <value>1638</value>
+              </attribute>
+              <attribute name="dpm_enabled">
+                <value>false</value>
+              </attribute>
+              <attribute name="buffer_pct_low">
+                <value>0</value>
+              </attribute>
+              <attribute name="aggs">
+                <value>scls</value>
+              </attribute>
+              <attribute name="column.access">
+                <value>protected</value>
+              </attribute>
+              <attribute name="start">
+                <value>1081</value>
+              </attribute>
+              <attribute name="userdim">
+                <value>false</value>
+              </attribute>
+              <data_model type="DimClass">
+                <attribute name="name">
+                  <value>dept</value>
+                </attribute>
+                <attribute name="image_enabled">
+                  <value>false</value>
+                </attribute>
+                <attribute name="db">
+                  <value>hmaint</value>
+                </attribute>
+                <attribute name="labelstart.access">
+                  <value>protected</value>
+                </attribute>
+                <attribute name="start.access">
+                  <value>protected</value>
+                </attribute>
+                <attribute name="column">
+                  <value>7</value>
+                </attribute>
+                <attribute name="cardinality">
+                  <value>10</value>
+                </attribute>
+                <attribute name="labelwidth">
+                  <value>250</value>
+                </attribute>
+                <attribute name="threshold">
+                  <value>102</value>
+                </attribute>
+                <attribute name="translate">
+                  <value>true</value>
+                </attribute>
+                <attribute name="start">
+                  <value>1351</value>
+                </attribute>
+                <attribute name="label">
+                  <value>Department</value>
+                </attribute>
+                <attribute name="width">
+                  <value>20</value>
+                </attribute>
+                <attribute name="rpas_name">
+                  <value>dept</value>
+                </attribute>
+                <attribute name="labelstart">
+                  <value>1371</value>
+                </attribute>
+                <attribute name="dpm_enabled">
+                  <value>false</value>
+                </attribute>
+                <attribute name="column.access">
+                  <value>protected</value>
+                </attribute>
+                <attribute name="userdim">
+                  <value>false</value>
+                </attribute>
+                <attribute name="aggs">
+                  <value>clss</value>
+                </attribute>
+                <data_model type="DimClass">
+                  <attribute name="name">
+                    <value>pgrp</value>
+                  </attribute>
+                  <attribute name="image_enabled">
+                    <value>false</value>
+                  </attribute>
+                  <attribute name="db">
+                    <value>hmaint</value>
+                  </attribute>
+                  <attribute name="column">
+                    <value>8</value>
+                  </attribute>
+                  <attribute name="labelstart">
+                    <value>1641</value>
+                  </attribute>
+                  <attribute name="labelstart.access">
+                    <value>protected</value>
+                  </attribute>
+                  <attribute name="label">
+                    <value>Group</value>
+                  </attribute>
+                  <attribute name="start.access">
+                    <value>protected</value>
+                  </attribute>
+                  <attribute name="start">
+                    <value>1621</value>
+                  </attribute>
+                  <attribute name="cardinality">
+                    <value>10</value>
+                  </attribute>
+                  <attribute name="aggs">
+                    <value>dept</value>
+                  </attribute>
+                  <attribute name="labelwidth">
+                    <value>250</value>
+                  </attribute>
+                  <attribute name="rpas_name">
+                    <value>pgrp</value>
+                  </attribute>
+                  <attribute name="threshold">
+                    <value>102</value>
+                  </attribute>
+                  <attribute name="translate">
+                    <value>true</value>
+                  </attribute>
+                  <attribute name="width">
+                    <value>20</value>
+                  </attribute>
+                  <attribute name="dpm_enabled">
+                    <value>false</value>
+                  </attribute>
+                  <attribute name="column.access">
+                    <value>protected</value>
+                  </attribute>
+                  <attribute name="userdim">
+                    <value>false</value>
+                  </attribute>
+                  <data_model type="DimClass">
+                    <attribute name="name">
+                      <value>dvsn</value>
+                    </attribute>
+                    <attribute name="image_enabled">
+                      <value>false</value>
+                    </attribute>
+                    <attribute name="db">
+                      <value>hmaint</value>
+                    </attribute>
+                    <attribute name="column">
+                      <value>9</value>
+                    </attribute>
+                    <attribute name="labelstart.access">
+                      <value>protected</value>
+                    </attribute>
+                    <attribute name="threshold">
+                      <value>25</value>
+                    </attribute>
+                    <attribute name="aggs">
+                      <value>pgrp</value>
+                    </attribute>
+                    <attribute name="start.access">
+                      <value>protected</value>
+                    </attribute>
+                    <attribute name="cardinality">
+                      <value>8</value>
+                    </attribute>
+                    <attribute name="start">
+                      <value>1891</value>
+                    </attribute>
+                    <attribute name="rpas_name">
+                      <value>dvsn</value>
+                    </attribute>
+                    <attribute name="labelwidth">
+                      <value>250</value>
+                    </attribute>
+                    <attribute name="labelstart">
+                      <value>1911</value>
+                    </attribute>
+                    <attribute name="translate">
+                      <value>true</value>
+                    </attribute>
+                    <attribute name="width">
+                      <value>20</value>
+                    </attribute>
+                    <attribute name="dpm_enabled">
+                      <value>false</value>
+                    </attribute>
+                    <attribute name="label">
+                      <value>Division</value>
+                    </attribute>
+                    <attribute name="column.access">
+                      <value>protected</value>
+                    </attribute>
+                    <attribute name="userdim">
+                      <value>false</value>
+                    </attribute>
+                    <data_model type="DimClass">
+                      <attribute name="name">
+                        <value>cmpy</value>
+                      </attribute>
+                      <attribute name="image_enabled">
+                        <value>false</value>
+                      </attribute>
+                      <attribute name="db">
+                        <value>hmaint</value>
+                      </attribute>
+                      <attribute name="rpas_name">
+                        <value>cmpy</value>
+                      </attribute>
+                      <attribute name="labelstart">
+                        <value>2181</value>
+                      </attribute>
+                      <attribute name="labelstart.access">
+                        <value>protected</value>
+                      </attribute>
+                      <attribute name="threshold">
+                        <value>25</value>
+                      </attribute>
+                      <attribute name="start.access">
+                        <value>protected</value>
+                      </attribute>
+                      <attribute name="cardinality">
+                        <value>8</value>
+                      </attribute>
+                      <attribute name="column">
+                        <value>10</value>
+                      </attribute>
+                      <attribute name="start">
+                        <value>2161</value>
+                      </attribute>
+                      <attribute name="labelwidth">
+                        <value>250</value>
+                      </attribute>
+                      <attribute name="translate">
+                        <value>true</value>
+                      </attribute>
+                      <attribute name="label">
+                        <value>Company</value>
+                      </attribute>
+                      <attribute name="width">
+                        <value>20</value>
+                      </attribute>
+                      <attribute name="aggs">
+                        <value>dvsn</value>
+                      </attribute>
+                      <attribute name="dpm_enabled">
+                        <value>false</value>
+                      </attribute>
+                      <attribute name="column.access">
+                        <value>protected</value>
+                      </attribute>
+                      <attribute name="userdim">
+                        <value>false</value>
+                      </attribute>
+                    </data_model>
+                  </data_model>
+                </data_model>
+              </data_model>
+            </data_model>
+          </data_model>
+        </data_model>
+      </data_model>
+      <data_model type="DimClass">
+        <attribute name="name">
+          <value>sbrd</value>
+        </attribute>
+        <attribute name="image_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="db">
+          <value>hmaint</value>
+        </attribute>
+        <attribute name="labelstart">
+          <value>2451</value>
+        </attribute>
+        <attribute name="labelstart.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="start.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="rpas_name">
+          <value>sbrd</value>
+        </attribute>
+        <attribute name="cardinality">
+          <value>14</value>
+        </attribute>
+        <attribute name="label">
+          <value>Sub-Brand</value>
+        </attribute>
+        <attribute name="labelwidth">
+          <value>250</value>
+        </attribute>
+        <attribute name="start">
+          <value>2431</value>
+        </attribute>
+        <attribute name="translate">
+          <value>true</value>
+        </attribute>
+        <attribute name="column">
+          <value>11</value>
+        </attribute>
+        <attribute name="width">
+          <value>20</value>
+        </attribute>
+        <attribute name="aggs">
+          <value>sku</value>
+        </attribute>
+        <attribute name="threshold">
+          <value>1638</value>
+        </attribute>
+        <attribute name="dpm_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="column.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="userdim">
+          <value>false</value>
+        </attribute>
+        <data_model type="DimClass">
+          <attribute name="name">
+            <value>brd</value>
+          </attribute>
+          <attribute name="image_enabled">
+            <value>false</value>
+          </attribute>
+          <attribute name="db">
+            <value>hmaint</value>
+          </attribute>
+          <attribute name="labelstart.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="start.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="label">
+            <value>Brand</value>
+          </attribute>
+          <attribute name="cardinality">
+            <value>14</value>
+          </attribute>
+          <attribute name="labelwidth">
+            <value>250</value>
+          </attribute>
+          <attribute name="start">
+            <value>2701</value>
+          </attribute>
+          <attribute name="translate">
+            <value>true</value>
+          </attribute>
+          <attribute name="width">
+            <value>20</value>
+          </attribute>
+          <attribute name="column">
+            <value>12</value>
+          </attribute>
+          <attribute name="threshold">
+            <value>1638</value>
+          </attribute>
+          <attribute name="dpm_enabled">
+            <value>false</value>
+          </attribute>
+          <attribute name="aggs">
+            <value>sbrd</value>
+          </attribute>
+          <attribute name="rpas_name">
+            <value>brd</value>
+          </attribute>
+          <attribute name="column.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="labelstart">
+            <value>2721</value>
+          </attribute>
+          <attribute name="userdim">
+            <value>false</value>
+          </attribute>
+        </data_model>
+      </data_model>
+      <data_model type="DimClass">
+        <attribute name="name">
+          <value>vndr</value>
+        </attribute>
+        <attribute name="image_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="db">
+          <value>hmaint</value>
+        </attribute>
+        <attribute name="start">
+          <value>2971</value>
+        </attribute>
+        <attribute name="labelstart.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="start.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="rpas_name">
+          <value>vndr</value>
+        </attribute>
+        <attribute name="labelwidth">
+          <value>250</value>
+        </attribute>
+        <attribute name="threshold">
+          <value>13107</value>
+        </attribute>
+        <attribute name="translate">
+          <value>true</value>
+        </attribute>
+        <attribute name="column">
+          <value>13</value>
+        </attribute>
+        <attribute name="cardinality">
+          <value>17</value>
+        </attribute>
+        <attribute name="width">
+          <value>20</value>
+        </attribute>
+        <attribute name="labelstart">
+          <value>2991</value>
+        </attribute>
+        <attribute name="aggs">
+          <value>sku</value>
+        </attribute>
+        <attribute name="dpm_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="column.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="userdim">
+          <value>false</value>
+        </attribute>
+        <attribute name="label">
+          <value>Vendor</value>
+        </attribute>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="HierClass">
+    <attribute name="name">
+      <value>LOC</value>
+    </attribute>
+    <attribute name="rpas_name.access">
+      <value>final</value>
+    </attribute>
+    <attribute name="securitydim">
+      <value></value>
+    </attribute>
+    <attribute name="label">
+      <value>Location</value>
+    </attribute>
+    <attribute name="isDeletable">
+      <value>false</value>
+    </attribute>
+    <attribute name="order">
+      <value>1002</value>
+    </attribute>
+    <attribute name="order.access">
+      <value>protected</value>
+    </attribute>
+    <attribute name="purgeage">
+      <value>10000</value>
+    </attribute>
+    <attribute name="rpas_name">
+      <value>LOC</value>
+    </attribute>
+    <data_model type="DimClass">
+      <attribute name="name">
+        <value>str</value>
+      </attribute>
+      <attribute name="prefix">
+        <value>4</value>
+      </attribute>
+      <attribute name="image_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="db">
+        <value>hmaint</value>
+      </attribute>
+      <attribute name="labelwidth">
+        <value>150</value>
+      </attribute>
+      <attribute name="labelstart.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="start.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="buffer_pct_high">
+        <value>0</value>
+      </attribute>
+      <attribute name="start">
+        <value>1</value>
+      </attribute>
+      <attribute name="column">
+        <value>0</value>
+      </attribute>
+      <attribute name="labelstart">
+        <value>21</value>
+      </attribute>
+      <attribute name="cardinality">
+        <value>10</value>
+      </attribute>
+      <attribute name="label">
+        <value>Store</value>
+      </attribute>
+      <attribute name="threshold">
+        <value>102</value>
+      </attribute>
+      <attribute name="translate">
+        <value>true</value>
+      </attribute>
+      <attribute name="aggs">
+        <value></value>
+      </attribute>
+      <attribute name="rpas_name">
+        <value>str</value>
+      </attribute>
+      <attribute name="width">
+        <value>20</value>
+      </attribute>
+      <attribute name="dpm_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="buffer_pct_low">
+        <value>0</value>
+      </attribute>
+      <attribute name="column.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="userdim">
+        <value>false</value>
+      </attribute>
+      <data_model type="DimClass">
+        <attribute name="name">
+          <value>dstr</value>
+        </attribute>
+        <attribute name="prefix">
+          <value>4</value>
+        </attribute>
+        <attribute name="image_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="aggs">
+          <value>str</value>
+        </attribute>
+        <attribute name="db">
+          <value>hmaint</value>
+        </attribute>
+        <attribute name="labelstart.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="start">
+          <value>171</value>
+        </attribute>
+        <attribute name="start.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="rpas_name">
+          <value>dstr</value>
+        </attribute>
+        <attribute name="buffer_pct_high">
+          <value>0</value>
+        </attribute>
+        <attribute name="column">
+          <value>1</value>
+        </attribute>
+        <attribute name="labelwidth">
+          <value>120</value>
+        </attribute>
+        <attribute name="cardinality">
+          <value>10</value>
+        </attribute>
+        <attribute name="labelstart">
+          <value>191</value>
+        </attribute>
+        <attribute name="threshold">
+          <value>102</value>
+        </attribute>
+        <attribute name="translate">
+          <value>true</value>
+        </attribute>
+        <attribute name="width">
+          <value>20</value>
+        </attribute>
+        <attribute name="dpm_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="buffer_pct_low">
+          <value>0</value>
+        </attribute>
+        <attribute name="column.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="userdim">
+          <value>false</value>
+        </attribute>
+        <attribute name="label">
+          <value>District</value>
+        </attribute>
+        <data_model type="DimClass">
+          <attribute name="name">
+            <value>rgn</value>
+          </attribute>
+          <attribute name="prefix">
+            <value>4</value>
+          </attribute>
+          <attribute name="image_enabled">
+            <value>false</value>
+          </attribute>
+          <attribute name="db">
+            <value>hmaint</value>
+          </attribute>
+          <attribute name="labelstart.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="start.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="buffer_pct_high">
+            <value>0</value>
+          </attribute>
+          <attribute name="column">
+            <value>2</value>
+          </attribute>
+          <attribute name="labelwidth">
+            <value>120</value>
+          </attribute>
+          <attribute name="cardinality">
+            <value>10</value>
+          </attribute>
+          <attribute name="aggs">
+            <value>dstr</value>
+          </attribute>
+          <attribute name="threshold">
+            <value>102</value>
+          </attribute>
+          <attribute name="translate">
+            <value>true</value>
+          </attribute>
+          <attribute name="width">
+            <value>20</value>
+          </attribute>
+          <attribute name="labelstart">
+            <value>331</value>
+          </attribute>
+          <attribute name="start">
+            <value>311</value>
+          </attribute>
+          <attribute name="label">
+            <value>Region</value>
+          </attribute>
+          <attribute name="dpm_enabled">
+            <value>false</value>
+          </attribute>
+          <attribute name="buffer_pct_low">
+            <value>0</value>
+          </attribute>
+          <attribute name="rpas_name">
+            <value>rgn</value>
+          </attribute>
+          <attribute name="column.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="userdim">
+            <value>false</value>
+          </attribute>
+          <data_model type="DimClass">
+            <attribute name="name">
+              <value>area</value>
+            </attribute>
+            <attribute name="prefix">
+              <value>4</value>
+            </attribute>
+            <attribute name="image_enabled">
+              <value>false</value>
+            </attribute>
+            <attribute name="db">
+              <value>hmaint</value>
+            </attribute>
+            <attribute name="labelstart.access">
+              <value>protected</value>
+            </attribute>
+            <attribute name="threshold">
+              <value>25</value>
+            </attribute>
+            <attribute name="start.access">
+              <value>protected</value>
+            </attribute>
+            <attribute name="cardinality">
+              <value>8</value>
+            </attribute>
+            <attribute name="buffer_pct_high">
+              <value>0</value>
+            </attribute>
+            <attribute name="start">
+              <value>451</value>
+            </attribute>
+            <attribute name="column">
+              <value>3</value>
+            </attribute>
+            <attribute name="labelstart">
+              <value>471</value>
+            </attribute>
+            <attribute name="labelwidth">
+              <value>120</value>
+            </attribute>
+            <attribute name="aggs">
+              <value>rgn</value>
+            </attribute>
+            <attribute name="label">
+              <value>Area</value>
+            </attribute>
+            <attribute name="rpas_name">
+              <value>area</value>
+            </attribute>
+            <attribute name="translate">
+              <value>true</value>
+            </attribute>
+            <attribute name="width">
+              <value>20</value>
+            </attribute>
+            <attribute name="dpm_enabled">
+              <value>false</value>
+            </attribute>
+            <attribute name="buffer_pct_low">
+              <value>0</value>
+            </attribute>
+            <attribute name="column.access">
+              <value>protected</value>
+            </attribute>
+            <attribute name="userdim">
+              <value>false</value>
+            </attribute>
+            <data_model type="DimClass">
+              <attribute name="name">
+                <value>chnl</value>
+              </attribute>
+              <attribute name="prefix">
+                <value>4</value>
+              </attribute>
+              <attribute name="image_enabled">
+                <value>false</value>
+              </attribute>
+              <attribute name="db">
+                <value>hmaint</value>
+              </attribute>
+              <attribute name="labelstart.access">
+                <value>protected</value>
+              </attribute>
+              <attribute name="threshold">
+                <value>25</value>
+              </attribute>
+              <attribute name="start.access">
+                <value>protected</value>
+              </attribute>
+              <attribute name="cardinality">
+                <value>8</value>
+              </attribute>
+              <attribute name="rpas_name">
+                <value>chnl</value>
+              </attribute>
+              <attribute name="buffer_pct_high">
+                <value>0</value>
+              </attribute>
+              <attribute name="aggs">
+                <value>area</value>
+              </attribute>
+              <attribute name="start">
+                <value>591</value>
+              </attribute>
+              <attribute name="label">
+                <value>Channel</value>
+              </attribute>
+              <attribute name="labelstart">
+                <value>611</value>
+              </attribute>
+              <attribute name="labelwidth">
+                <value>120</value>
+              </attribute>
+              <attribute name="column">
+                <value>4</value>
+              </attribute>
+              <attribute name="translate">
+                <value>true</value>
+              </attribute>
+              <attribute name="width">
+                <value>20</value>
+              </attribute>
+              <attribute name="dpm_enabled">
+                <value>false</value>
+              </attribute>
+              <attribute name="buffer_pct_low">
+                <value>0</value>
+              </attribute>
+              <attribute name="column.access">
+                <value>protected</value>
+              </attribute>
+              <attribute name="userdim">
+                <value>false</value>
+              </attribute>
+              <data_model type="DimClass">
+                <attribute name="name">
+                  <value>chn</value>
+                </attribute>
+                <attribute name="prefix">
+                  <value>4</value>
+                </attribute>
+                <attribute name="image_enabled">
+                  <value>false</value>
+                </attribute>
+                <attribute name="db">
+                  <value>hmaint</value>
+                </attribute>
+                <attribute name="label">
+                  <value>Chain</value>
+                </attribute>
+                <attribute name="labelstart.access">
+                  <value>protected</value>
+                </attribute>
+                <attribute name="threshold">
+                  <value>25</value>
+                </attribute>
+                <attribute name="start.access">
+                  <value>protected</value>
+                </attribute>
+                <attribute name="cardinality">
+                  <value>8</value>
+                </attribute>
+                <attribute name="buffer_pct_high">
+                  <value>0</value>
+                </attribute>
+                <attribute name="start">
+                  <value>731</value>
+                </attribute>
+                <attribute name="labelwidth">
+                  <value>120</value>
+                </attribute>
+                <attribute name="column">
+                  <value>5</value>
+                </attribute>
+                <attribute name="aggs">
+                  <value>chnl</value>
+                </attribute>
+                <attribute name="translate">
+                  <value>true</value>
+                </attribute>
+                <attribute name="width">
+                  <value>20</value>
+                </attribute>
+                <attribute name="rpas_name">
+                  <value>chn</value>
+                </attribute>
+                <attribute name="labelstart">
+                  <value>751</value>
+                </attribute>
+                <attribute name="dpm_enabled">
+                  <value>false</value>
+                </attribute>
+                <attribute name="buffer_pct_low">
+                  <value>0</value>
+                </attribute>
+                <attribute name="column.access">
+                  <value>protected</value>
+                </attribute>
+                <attribute name="userdim">
+                  <value>false</value>
+                </attribute>
+                <data_model type="DimClass">
+                  <attribute name="name">
+                    <value>cmpn</value>
+                  </attribute>
+                  <attribute name="db">
+                    <value>hmaint</value>
+                  </attribute>
+                  <attribute name="image_enabled">
+                    <value>false</value>
+                  </attribute>
+                  <attribute name="prefix">
+                    <value>4</value>
+                  </attribute>
+                  <attribute name="threshold">
+                    <value>25</value>
+                  </attribute>
+                  <attribute name="labelstart.access">
+                    <value>protected</value>
+                  </attribute>
+                  <attribute name="labelstart">
+                    <value>891</value>
+                  </attribute>
+                  <attribute name="cardinality">
+                    <value>8</value>
+                  </attribute>
+                  <attribute name="prefix.access">
+                    <value>write</value>
+                  </attribute>
+                  <attribute name="buffer_pct_high">
+                    <value>0</value>
+                  </attribute>
+                  <attribute name="start">
+                    <value>871</value>
+                  </attribute>
+                  <attribute name="column">
+                    <value>6</value>
+                  </attribute>
+                  <attribute name="translate">
+                    <value>true</value>
+                  </attribute>
+                  <attribute name="rpas_name">
+                    <value>cmpn</value>
+                  </attribute>
+                  <attribute name="buffer_pct_low">
+                    <value>0</value>
+                  </attribute>
+                  <attribute name="column.access">
+                    <value>protected</value>
+                  </attribute>
+                  <attribute name="start.access">
+                    <value>protected</value>
+                  </attribute>
+                  <attribute name="labelwidth">
+                    <value>120</value>
+                  </attribute>
+                  <attribute name="width.access">
+                    <value>write</value>
+                  </attribute>
+                  <attribute name="aggs">
+                    <value>chn</value>
+                  </attribute>
+                  <attribute name="width">
+                    <value>20</value>
+                  </attribute>
+                  <attribute name="label">
+                    <value>Company</value>
+                  </attribute>
+                  <attribute name="dpm_enabled">
+                    <value>false</value>
+                  </attribute>
+                  <attribute name="userdim">
+                    <value>false</value>
+                  </attribute>
+                  <attribute name="labelwidth.access">
+                    <value>write</value>
+                  </attribute>
+                </data_model>
+              </data_model>
+            </data_model>
+          </data_model>
+        </data_model>
+      </data_model>
+      <data_model type="DimClass">
+        <attribute name="name">
+          <value>strc</value>
+        </attribute>
+        <attribute name="db">
+          <value>hmaint</value>
+        </attribute>
+        <attribute name="image_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="prefix">
+          <value>4</value>
+        </attribute>
+        <attribute name="labelstart.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="prefix.access">
+          <value>write</value>
+        </attribute>
+        <attribute name="buffer_pct_high">
+          <value>0</value>
+        </attribute>
+        <attribute name="column">
+          <value>7</value>
+        </attribute>
+        <attribute name="cardinality">
+          <value>10</value>
+        </attribute>
+        <attribute name="translate">
+          <value>true</value>
+        </attribute>
+        <attribute name="rpas_name">
+          <value>strc</value>
+        </attribute>
+        <attribute name="buffer_pct_low">
+          <value>0</value>
+        </attribute>
+        <attribute name="column.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="aggs">
+          <value>str</value>
+        </attribute>
+        <attribute name="start.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="start">
+          <value>1011</value>
+        </attribute>
+        <attribute name="label">
+          <value>Store Cluster</value>
+        </attribute>
+        <attribute name="labelwidth">
+          <value>120</value>
+        </attribute>
+        <attribute name="width.access">
+          <value>write</value>
+        </attribute>
+        <attribute name="labelstart">
+          <value>1031</value>
+        </attribute>
+        <attribute name="threshold">
+          <value>102</value>
+        </attribute>
+        <attribute name="width">
+          <value>20</value>
+        </attribute>
+        <attribute name="dpm_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="userdim">
+          <value>false</value>
+        </attribute>
+        <attribute name="labelwidth.access">
+          <value>write</value>
+        </attribute>
+        <data_model type="DimClass">
+          <attribute name="name">
+            <value>tdar</value>
+          </attribute>
+          <attribute name="prefix">
+            <value>4</value>
+          </attribute>
+          <attribute name="image_enabled">
+            <value>false</value>
+          </attribute>
+          <attribute name="aggs">
+            <value>strc</value>
+          </attribute>
+          <attribute name="db">
+            <value>hmaint</value>
+          </attribute>
+          <attribute name="column">
+            <value>8</value>
+          </attribute>
+          <attribute name="labelstart.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="rpas_name">
+            <value>tdar</value>
+          </attribute>
+          <attribute name="labelstart">
+            <value>1171</value>
+          </attribute>
+          <attribute name="start.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="buffer_pct_high">
+            <value>0</value>
+          </attribute>
+          <attribute name="label">
+            <value>Trading Area</value>
+          </attribute>
+          <attribute name="labelwidth">
+            <value>60</value>
+          </attribute>
+          <attribute name="cardinality">
+            <value>10</value>
+          </attribute>
+          <attribute name="start">
+            <value>1151</value>
+          </attribute>
+          <attribute name="threshold">
+            <value>102</value>
+          </attribute>
+          <attribute name="translate">
+            <value>true</value>
+          </attribute>
+          <attribute name="width">
+            <value>20</value>
+          </attribute>
+          <attribute name="dpm_enabled">
+            <value>false</value>
+          </attribute>
+          <attribute name="buffer_pct_low">
+            <value>0</value>
+          </attribute>
+          <attribute name="column.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="userdim">
+            <value>false</value>
+          </attribute>
+          <data_model type="DimClass">
+            <attribute name="name">
+              <value>tdrg</value>
+            </attribute>
+            <attribute name="image_enabled">
+              <value>false</value>
+            </attribute>
+            <attribute name="db">
+              <value>hmaint</value>
+            </attribute>
+            <attribute name="column">
+              <value>9</value>
+            </attribute>
+            <attribute name="labelstart.access">
+              <value>protected</value>
+            </attribute>
+            <attribute name="threshold">
+              <value>25</value>
+            </attribute>
+            <attribute name="start.access">
+              <value>protected</value>
+            </attribute>
+            <attribute name="cardinality">
+              <value>8</value>
+            </attribute>
+            <attribute name="label">
+              <value>Trading Area Group</value>
+            </attribute>
+            <attribute name="labelwidth">
+              <value>60</value>
+            </attribute>
+            <attribute name="labelstart">
+              <value>1251</value>
+            </attribute>
+            <attribute name="aggs">
+              <value>tdar</value>
+            </attribute>
+            <attribute name="translate">
+              <value>true</value>
+            </attribute>
+            <attribute name="width">
+              <value>20</value>
+            </attribute>
+            <attribute name="rpas_name">
+              <value>tdrg</value>
+            </attribute>
+            <attribute name="dpm_enabled">
+              <value>false</value>
+            </attribute>
+            <attribute name="start">
+              <value>1231</value>
+            </attribute>
+            <attribute name="column.access">
+              <value>protected</value>
+            </attribute>
+            <attribute name="userdim">
+              <value>false</value>
+            </attribute>
+          </data_model>
+        </data_model>
+      </data_model>
+      <data_model type="DimClass">
+        <attribute name="name">
+          <value>strg</value>
+        </attribute>
+        <attribute name="image_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="aggs">
+          <value>str</value>
+        </attribute>
+        <attribute name="db">
+          <value>hmaint</value>
+        </attribute>
+        <attribute name="labelwidth">
+          <value>0</value>
+        </attribute>
+        <attribute name="labelstart.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="width.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="threshold">
+          <value>25</value>
+        </attribute>
+        <attribute name="start.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="cardinality">
+          <value>8</value>
+        </attribute>
+        <attribute name="column">
+          <value>10</value>
+        </attribute>
+        <attribute name="userdim">
+          <value>true</value>
+        </attribute>
+        <attribute name="labelstart">
+          <value>1311</value>
+        </attribute>
+        <attribute name="rpas_name">
+          <value>strg</value>
+        </attribute>
+        <attribute name="translate">
+          <value>true</value>
+        </attribute>
+        <attribute name="labelwidth.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="width">
+          <value>0</value>
+        </attribute>
+        <attribute name="start">
+          <value>1311</value>
+        </attribute>
+        <attribute name="dpm_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="column.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="label">
+          <value>Store Group</value>
+        </attribute>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="HierClass">
+    <attribute name="name">
+      <value>ADMU</value>
+    </attribute>
+    <attribute name="securitydim">
+      <value></value>
+    </attribute>
+    <attribute name="isDeletable">
+      <value>false</value>
+    </attribute>
+    <attribute name="rpas_name">
+      <value>ADMU</value>
+    </attribute>
+    <attribute name="purgeage">
+      <value>10000</value>
+    </attribute>
+    <attribute name="name.access">
+      <value>final</value>
+    </attribute>
+    <attribute name="securitydim.access">
+      <value>final</value>
+    </attribute>
+    <attribute name="rpas_name.access">
+      <value>final</value>
+    </attribute>
+    <attribute name="order">
+      <value>1003</value>
+    </attribute>
+    <attribute name="purgeage.access">
+      <value>final</value>
+    </attribute>
+    <attribute name="order.access">
+      <value>final</value>
+    </attribute>
+    <attribute name="label.access">
+      <value>final</value>
+    </attribute>
+    <attribute name="label">
+      <value>Admu</value>
+    </attribute>
+    <data_model type="DimClass">
+      <attribute name="name">
+        <value>user</value>
+      </attribute>
+      <attribute name="image_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="prefix">
+        <value>4</value>
+      </attribute>
+      <attribute name="threshold">
+        <value>25</value>
+      </attribute>
+      <attribute name="isDeletable">
+        <value>false</value>
+      </attribute>
+      <attribute name="labelstart">
+        <value>9</value>
+      </attribute>
+      <attribute name="cardinality">
+        <value>8</value>
+      </attribute>
+      <attribute name="labelwidth.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="start">
+        <value>1</value>
+      </attribute>
+      <attribute name="buffer_pct_high">
+        <value>0</value>
+      </attribute>
+      <attribute name="threshold.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="cardinality.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="column">
+        <value>0</value>
+      </attribute>
+      <attribute name="name.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="buffer_pct_high.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="rpas_name.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="aggs.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="db.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="start.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="aggs">
+        <value></value>
+      </attribute>
+      <attribute name="width.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="db">
+        <value>admin</value>
+      </attribute>
+      <attribute name="label">
+        <value>user</value>
+      </attribute>
+      <attribute name="width">
+        <value>8</value>
+      </attribute>
+      <attribute name="buffer_pct_low">
+        <value>0</value>
+      </attribute>
+      <attribute name="label.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="dpm_enabled.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="userdim.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="labelwidth">
+        <value>0</value>
+      </attribute>
+      <attribute name="translate">
+        <value>false</value>
+      </attribute>
+      <attribute name="column.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="image_enabled.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="buffer_pct_low.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="labelstart.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="translate.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="dpm_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="prefix.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="userdim">
+        <value>false</value>
+      </attribute>
+      <attribute name="rpas_name">
+        <value>user</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="HierClass">
+    <attribute name="name">
+      <value>FAAH</value>
+    </attribute>
+    <attribute name="label">
+      <value>Focus Area Attributes</value>
+    </attribute>
+    <attribute name="securitydim">
+      <value></value>
+    </attribute>
+    <attribute name="rpas_name">
+      <value>FAAH</value>
+    </attribute>
+    <attribute name="order">
+      <value>1004</value>
+    </attribute>
+    <attribute name="order.access">
+      <value>protected</value>
+    </attribute>
+    <attribute name="purgeage">
+      <value>10000</value>
+    </attribute>
+    <data_model type="DimClass">
+      <attribute name="name">
+        <value>far</value>
+      </attribute>
+      <attribute name="image_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="db">
+        <value>hmaint</value>
+      </attribute>
+      <attribute name="label">
+        <value>Focus Area</value>
+      </attribute>
+      <attribute name="translate">
+        <value>false</value>
+      </attribute>
+      <attribute name="labelstart.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="threshold">
+        <value>25</value>
+      </attribute>
+      <attribute name="start.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="cardinality">
+        <value>8</value>
+      </attribute>
+      <attribute name="start">
+        <value>1</value>
+      </attribute>
+      <attribute name="rpas_name">
+        <value>far</value>
+      </attribute>
+      <attribute name="column">
+        <value>0</value>
+      </attribute>
+      <attribute name="labelstart">
+        <value>21</value>
+      </attribute>
+      <attribute name="labelwidth">
+        <value>60</value>
+      </attribute>
+      <attribute name="aggs">
+        <value></value>
+      </attribute>
+      <attribute name="width">
+        <value>20</value>
+      </attribute>
+      <attribute name="dpm_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="column.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="userdim">
+        <value>false</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="HierClass">
+    <attribute name="name">
+      <value>CPRF</value>
+    </attribute>
+    <attribute name="order">
+      <value>1005</value>
+    </attribute>
+    <attribute name="securitydim">
+      <value></value>
+    </attribute>
+    <attribute name="rpas_name">
+      <value>CPRF</value>
+    </attribute>
+    <attribute name="order.access">
+      <value>protected</value>
+    </attribute>
+    <attribute name="label">
+      <value>Consumer Profile</value>
+    </attribute>
+    <attribute name="purgeage">
+      <value>10000</value>
+    </attribute>
+    <data_model type="DimClass">
+      <attribute name="name">
+        <value>cprd</value>
+      </attribute>
+      <attribute name="prefix">
+        <value>4</value>
+      </attribute>
+      <attribute name="image_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="db">
+        <value>hmaint</value>
+      </attribute>
+      <attribute name="translate">
+        <value>false</value>
+      </attribute>
+      <attribute name="labelstart.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="threshold">
+        <value>25</value>
+      </attribute>
+      <attribute name="start.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="cardinality">
+        <value>8</value>
+      </attribute>
+      <attribute name="buffer_pct_high">
+        <value>0</value>
+      </attribute>
+      <attribute name="start">
+        <value>1</value>
+      </attribute>
+      <attribute name="label">
+        <value>Consumer Profile</value>
+      </attribute>
+      <attribute name="column">
+        <value>0</value>
+      </attribute>
+      <attribute name="rpas_name">
+        <value>cprd</value>
+      </attribute>
+      <attribute name="labelstart">
+        <value>21</value>
+      </attribute>
+      <attribute name="labelwidth">
+        <value>250</value>
+      </attribute>
+      <attribute name="aggs">
+        <value></value>
+      </attribute>
+      <attribute name="width">
+        <value>20</value>
+      </attribute>
+      <attribute name="dpm_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="buffer_pct_low">
+        <value>0</value>
+      </attribute>
+      <attribute name="column.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="userdim">
+        <value>false</value>
+      </attribute>
+      <data_model type="DimClass">
+        <attribute name="name">
+          <value>cprt</value>
+        </attribute>
+        <attribute name="image_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="db">
+          <value>hmaint</value>
+        </attribute>
+        <attribute name="translate">
+          <value>false</value>
+        </attribute>
+        <attribute name="labelstart.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="threshold">
+          <value>25</value>
+        </attribute>
+        <attribute name="start.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="cardinality">
+          <value>8</value>
+        </attribute>
+        <attribute name="label">
+          <value>Consumer Profile Type</value>
+        </attribute>
+        <attribute name="column">
+          <value>1</value>
+        </attribute>
+        <attribute name="labelwidth">
+          <value>250</value>
+        </attribute>
+        <attribute name="labelstart">
+          <value>291</value>
+        </attribute>
+        <attribute name="width">
+          <value>20</value>
+        </attribute>
+        <attribute name="start">
+          <value>271</value>
+        </attribute>
+        <attribute name="aggs">
+          <value>cprd</value>
+        </attribute>
+        <attribute name="dpm_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="column.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="userdim">
+          <value>false</value>
+        </attribute>
+        <attribute name="rpas_name">
+          <value>cprt</value>
+        </attribute>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="HierClass">
+    <attribute name="name">
+      <value>LNGS</value>
+    </attribute>
+    <attribute name="securitydim">
+      <value></value>
+    </attribute>
+    <attribute name="isDeletable">
+      <value>false</value>
+    </attribute>
+    <attribute name="label">
+      <value>Lngs</value>
+    </attribute>
+    <attribute name="purgeage">
+      <value>10000</value>
+    </attribute>
+    <attribute name="name.access">
+      <value>final</value>
+    </attribute>
+    <attribute name="securitydim.access">
+      <value>final</value>
+    </attribute>
+    <attribute name="rpas_name.access">
+      <value>final</value>
+    </attribute>
+    <attribute name="order">
+      <value>1006</value>
+    </attribute>
+    <attribute name="purgeage.access">
+      <value>final</value>
+    </attribute>
+    <attribute name="order.access">
+      <value>final</value>
+    </attribute>
+    <attribute name="label.access">
+      <value>final</value>
+    </attribute>
+    <attribute name="rpas_name">
+      <value>LNGS</value>
+    </attribute>
+    <data_model type="DimClass">
+      <attribute name="name">
+        <value>lang</value>
+      </attribute>
+      <attribute name="labelwidth">
+        <value>20</value>
+      </attribute>
+      <attribute name="image_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="threshold">
+        <value>25</value>
+      </attribute>
+      <attribute name="isDeletable">
+        <value>false</value>
+      </attribute>
+      <attribute name="cardinality">
+        <value>8</value>
+      </attribute>
+      <attribute name="labelwidth.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="start">
+        <value>1</value>
+      </attribute>
+      <attribute name="threshold.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="cardinality.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="column">
+        <value>0</value>
+      </attribute>
+      <attribute name="name.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="labelstart">
+        <value>0</value>
+      </attribute>
+      <attribute name="rpas_name">
+        <value>lang</value>
+      </attribute>
+      <attribute name="aggs.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="rpas_name.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="db.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="start.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="aggs">
+        <value></value>
+      </attribute>
+      <attribute name="width.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="db">
+        <value>language</value>
+      </attribute>
+      <attribute name="label.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="dpm_enabled.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="userdim.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="translate">
+        <value>false</value>
+      </attribute>
+      <attribute name="label">
+        <value>lang</value>
+      </attribute>
+      <attribute name="column.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="image_enabled.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="labelstart.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="width">
+        <value>20</value>
+      </attribute>
+      <attribute name="translate.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="dpm_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="userdim">
+        <value>false</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="HierClass">
+    <attribute name="name">
+      <value>RSGH</value>
+    </attribute>
+    <attribute name="order">
+      <value>1007</value>
+    </attribute>
+    <attribute name="securitydim">
+      <value></value>
+    </attribute>
+    <attribute name="order.access">
+      <value>protected</value>
+    </attribute>
+    <attribute name="purgeage">
+      <value>10000</value>
+    </attribute>
+    <attribute name="label">
+      <value>Retail Segment</value>
+    </attribute>
+    <attribute name="rpas_name">
+      <value>RSGH</value>
+    </attribute>
+    <data_model type="DimClass">
+      <attribute name="name">
+        <value>rsgd</value>
+      </attribute>
+      <attribute name="image_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="label">
+        <value>Retailer Type</value>
+      </attribute>
+      <attribute name="db">
+        <value>hmaint</value>
+      </attribute>
+      <attribute name="labelstart.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="threshold">
+        <value>25</value>
+      </attribute>
+      <attribute name="rpas_name">
+        <value>rsgd</value>
+      </attribute>
+      <attribute name="start.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="cardinality">
+        <value>8</value>
+      </attribute>
+      <attribute name="start">
+        <value>1</value>
+      </attribute>
+      <attribute name="column">
+        <value>0</value>
+      </attribute>
+      <attribute name="labelstart">
+        <value>21</value>
+      </attribute>
+      <attribute name="labelwidth">
+        <value>60</value>
+      </attribute>
+      <attribute name="translate">
+        <value>true</value>
+      </attribute>
+      <attribute name="aggs">
+        <value></value>
+      </attribute>
+      <attribute name="width">
+        <value>20</value>
+      </attribute>
+      <attribute name="dpm_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="column.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="userdim">
+        <value>false</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="HierClass">
+    <attribute name="name">
+      <value>RETH</value>
+    </attribute>
+    <attribute name="order">
+      <value>1008</value>
+    </attribute>
+    <attribute name="securitydim">
+      <value></value>
+    </attribute>
+    <attribute name="label">
+      <value>Retailer</value>
+    </attribute>
+    <attribute name="order.access">
+      <value>protected</value>
+    </attribute>
+    <attribute name="rpas_name">
+      <value>RETH</value>
+    </attribute>
+    <attribute name="purgeage">
+      <value>10000</value>
+    </attribute>
+    <data_model type="DimClass">
+      <attribute name="name">
+        <value>retd</value>
+      </attribute>
+      <attribute name="image_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="db">
+        <value>hmaint</value>
+      </attribute>
+      <attribute name="labelstart.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="threshold">
+        <value>25</value>
+      </attribute>
+      <attribute name="label">
+        <value>Retailer</value>
+      </attribute>
+      <attribute name="start.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="cardinality">
+        <value>8</value>
+      </attribute>
+      <attribute name="start">
+        <value>1</value>
+      </attribute>
+      <attribute name="column">
+        <value>0</value>
+      </attribute>
+      <attribute name="labelstart">
+        <value>21</value>
+      </attribute>
+      <attribute name="rpas_name">
+        <value>retd</value>
+      </attribute>
+      <attribute name="labelwidth">
+        <value>60</value>
+      </attribute>
+      <attribute name="translate">
+        <value>true</value>
+      </attribute>
+      <attribute name="aggs">
+        <value></value>
+      </attribute>
+      <attribute name="width">
+        <value>20</value>
+      </attribute>
+      <attribute name="dpm_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="column.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="userdim">
+        <value>false</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="HierClass">
+    <attribute name="name">
+      <value>CSH</value>
+    </attribute>
+    <attribute name="securitydim">
+      <value></value>
+    </attribute>
+    <attribute name="label">
+      <value>Consumer Segment</value>
+    </attribute>
+    <attribute name="order.access">
+      <value>protected</value>
+    </attribute>
+    <attribute name="purgeage">
+      <value>10000</value>
+    </attribute>
+    <attribute name="rpas_name">
+      <value>CSH</value>
+    </attribute>
+    <attribute name="order">
+      <value>1009</value>
+    </attribute>
+    <data_model type="DimClass">
+      <attribute name="name">
+        <value>csvd</value>
+      </attribute>
+      <attribute name="image_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="db">
+        <value>hmaint</value>
+      </attribute>
+      <attribute name="translate">
+        <value>false</value>
+      </attribute>
+      <attribute name="labelstart.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="threshold">
+        <value>25</value>
+      </attribute>
+      <attribute name="start.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="cardinality">
+        <value>8</value>
+      </attribute>
+      <attribute name="start">
+        <value>1</value>
+      </attribute>
+      <attribute name="column">
+        <value>0</value>
+      </attribute>
+      <attribute name="dpm_enabled">
+        <value>true</value>
+      </attribute>
+      <attribute name="labelstart">
+        <value>21</value>
+      </attribute>
+      <attribute name="labelwidth">
+        <value>60</value>
+      </attribute>
+      <attribute name="rpas_name">
+        <value>csvd</value>
+      </attribute>
+      <attribute name="aggs">
+        <value></value>
+      </attribute>
+      <attribute name="label">
+        <value>Version</value>
+      </attribute>
+      <attribute name="width">
+        <value>20</value>
+      </attribute>
+      <attribute name="column.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="userdim">
+        <value>false</value>
+      </attribute>
+      <data_model type="DimClass">
+        <attribute name="name">
+          <value>csd</value>
+        </attribute>
+        <attribute name="image_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="db">
+          <value>hmaint</value>
+        </attribute>
+        <attribute name="labelstart">
+          <value>101</value>
+        </attribute>
+        <attribute name="translate">
+          <value>false</value>
+        </attribute>
+        <attribute name="labelstart.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="threshold">
+          <value>25</value>
+        </attribute>
+        <attribute name="start.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="cardinality">
+          <value>8</value>
+        </attribute>
+        <attribute name="aggs">
+          <value>csvd</value>
+        </attribute>
+        <attribute name="column">
+          <value>1</value>
+        </attribute>
+        <attribute name="labelwidth">
+          <value>60</value>
+        </attribute>
+        <attribute name="start">
+          <value>81</value>
+        </attribute>
+        <attribute name="rpas_name">
+          <value>csd</value>
+        </attribute>
+        <attribute name="width">
+          <value>20</value>
+        </attribute>
+        <attribute name="label">
+          <value>Consumer Segment</value>
+        </attribute>
+        <attribute name="dpm_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="column.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="userdim">
+          <value>false</value>
+        </attribute>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="HierClass">
+    <attribute name="name">
+      <value>LNMH</value>
+    </attribute>
+    <attribute name="securitydim">
+      <value></value>
+    </attribute>
+    <attribute name="order.access">
+      <value>protected</value>
+    </attribute>
+    <attribute name="order">
+      <value>1011</value>
+    </attribute>
+    <attribute name="label">
+      <value>Linear Number</value>
+    </attribute>
+    <attribute name="purgeage">
+      <value>10000</value>
+    </attribute>
+    <attribute name="rpas_name">
+      <value>LNMH</value>
+    </attribute>
+    <data_model type="DimClass">
+      <attribute name="name">
+        <value>lnum</value>
+      </attribute>
+      <attribute name="image_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="db">
+        <value>hmaint</value>
+      </attribute>
+      <attribute name="translate">
+        <value>false</value>
+      </attribute>
+      <attribute name="labelstart.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="threshold">
+        <value>25</value>
+      </attribute>
+      <attribute name="start.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="cardinality">
+        <value>8</value>
+      </attribute>
+      <attribute name="start">
+        <value>1</value>
+      </attribute>
+      <attribute name="label">
+        <value>Linear Number</value>
+      </attribute>
+      <attribute name="column">
+        <value>0</value>
+      </attribute>
+      <attribute name="labelstart">
+        <value>21</value>
+      </attribute>
+      <attribute name="labelwidth">
+        <value>60</value>
+      </attribute>
+      <attribute name="aggs">
+        <value></value>
+      </attribute>
+      <attribute name="width">
+        <value>20</value>
+      </attribute>
+      <attribute name="dpm_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="rpas_name">
+        <value>lnum</value>
+      </attribute>
+      <attribute name="column.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="userdim">
+        <value>false</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="HierClass">
+    <attribute name="name">
+      <value>TCTH</value>
+    </attribute>
+    <attribute name="securitydim">
+      <value></value>
+    </attribute>
+    <attribute name="order.access">
+      <value>protected</value>
+    </attribute>
+    <attribute name="order">
+      <value>1012</value>
+    </attribute>
+    <attribute name="label">
+      <value>Tactic</value>
+    </attribute>
+    <attribute name="purgeage">
+      <value>10000</value>
+    </attribute>
+    <attribute name="rpas_name">
+      <value>TCTH</value>
+    </attribute>
+    <data_model type="DimClass">
+      <attribute name="name">
+        <value>tctd</value>
+      </attribute>
+      <attribute name="image_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="db">
+        <value>hmaint</value>
+      </attribute>
+      <attribute name="translate">
+        <value>false</value>
+      </attribute>
+      <attribute name="labelstart.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="threshold">
+        <value>25</value>
+      </attribute>
+      <attribute name="start.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="cardinality">
+        <value>8</value>
+      </attribute>
+      <attribute name="rpas_name">
+        <value>tctd</value>
+      </attribute>
+      <attribute name="start">
+        <value>1</value>
+      </attribute>
+      <attribute name="column">
+        <value>0</value>
+      </attribute>
+      <attribute name="labelstart">
+        <value>21</value>
+      </attribute>
+      <attribute name="labelwidth">
+        <value>60</value>
+      </attribute>
+      <attribute name="aggs">
+        <value></value>
+      </attribute>
+      <attribute name="width">
+        <value>20</value>
+      </attribute>
+      <attribute name="label">
+        <value>Tactic</value>
+      </attribute>
+      <attribute name="dpm_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="column.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="userdim">
+        <value>false</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="HierClass">
+    <attribute name="name">
+      <value>PCTH</value>
+    </attribute>
+    <attribute name="securitydim">
+      <value></value>
+    </attribute>
+    <attribute name="label">
+      <value>BreakPoints</value>
+    </attribute>
+    <attribute name="order.access">
+      <value>protected</value>
+    </attribute>
+    <attribute name="order">
+      <value>1013</value>
+    </attribute>
+    <attribute name="purgeage">
+      <value>10000</value>
+    </attribute>
+    <attribute name="rpas_name">
+      <value>PCTH</value>
+    </attribute>
+    <data_model type="DimClass">
+      <attribute name="name">
+        <value>PCTD</value>
+      </attribute>
+      <attribute name="image_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="db">
+        <value>hmaint</value>
+      </attribute>
+      <attribute name="translate">
+        <value>false</value>
+      </attribute>
+      <attribute name="labelstart.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="threshold">
+        <value>25</value>
+      </attribute>
+      <attribute name="label">
+        <value>Breakpoint</value>
+      </attribute>
+      <attribute name="start.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="cardinality">
+        <value>8</value>
+      </attribute>
+      <attribute name="start">
+        <value>1</value>
+      </attribute>
+      <attribute name="column">
+        <value>0</value>
+      </attribute>
+      <attribute name="labelstart">
+        <value>21</value>
+      </attribute>
+      <attribute name="labelwidth">
+        <value>60</value>
+      </attribute>
+      <attribute name="aggs">
+        <value></value>
+      </attribute>
+      <attribute name="width">
+        <value>20</value>
+      </attribute>
+      <attribute name="rpas_name">
+        <value>pctd</value>
+      </attribute>
+      <attribute name="dpm_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="column.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="userdim">
+        <value>false</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="HierClass">
+    <attribute name="name">
+      <value>ATTR</value>
+    </attribute>
+    <attribute name="label">
+      <value>Product Attributes</value>
+    </attribute>
+    <attribute name="securitydim">
+      <value></value>
+    </attribute>
+    <attribute name="order">
+      <value>1014</value>
+    </attribute>
+    <attribute name="purgeage">
+      <value>10000</value>
+    </attribute>
+    <attribute name="rpas_name">
+      <value>ATTR</value>
+    </attribute>
+    <data_model type="DimClass">
+      <attribute name="name">
+        <value>ATV</value>
+      </attribute>
+      <attribute name="prefix">
+        <value>4</value>
+      </attribute>
+      <attribute name="image_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="db">
+        <value>hmaint</value>
+      </attribute>
+      <attribute name="translate">
+        <value>false</value>
+      </attribute>
+      <attribute name="labelstart.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="start.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="label">
+        <value>Attribute Value</value>
+      </attribute>
+      <attribute name="buffer_pct_high">
+        <value>0</value>
+      </attribute>
+      <attribute name="start">
+        <value>1</value>
+      </attribute>
+      <attribute name="rpas_name">
+        <value>atv</value>
+      </attribute>
+      <attribute name="column">
+        <value>0</value>
+      </attribute>
+      <attribute name="dpm_enabled">
+        <value>true</value>
+      </attribute>
+      <attribute name="labelstart">
+        <value>21</value>
+      </attribute>
+      <attribute name="labelwidth">
+        <value>60</value>
+      </attribute>
+      <attribute name="cardinality">
+        <value>10</value>
+      </attribute>
+      <attribute name="threshold">
+        <value>102</value>
+      </attribute>
+      <attribute name="aggs">
+        <value></value>
+      </attribute>
+      <attribute name="width">
+        <value>20</value>
+      </attribute>
+      <attribute name="buffer_pct_low">
+        <value>0</value>
+      </attribute>
+      <attribute name="column.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="userdim">
+        <value>false</value>
+      </attribute>
+      <data_model type="DimClass">
+        <attribute name="name">
+          <value>ATN</value>
+        </attribute>
+        <attribute name="prefix">
+          <value>4</value>
+        </attribute>
+        <attribute name="image_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="db">
+          <value>hmaint</value>
+        </attribute>
+        <attribute name="labelstart">
+          <value>101</value>
+        </attribute>
+        <attribute name="translate">
+          <value>false</value>
+        </attribute>
+        <attribute name="labelstart.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="start.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="buffer_pct_high">
+          <value>0</value>
+        </attribute>
+        <attribute name="column">
+          <value>1</value>
+        </attribute>
+        <attribute name="dpm_enabled">
+          <value>true</value>
+        </attribute>
+        <attribute name="labelwidth">
+          <value>60</value>
+        </attribute>
+        <attribute name="aggs">
+          <value>ATV</value>
+        </attribute>
+        <attribute name="start">
+          <value>81</value>
+        </attribute>
+        <attribute name="cardinality">
+          <value>10</value>
+        </attribute>
+        <attribute name="threshold">
+          <value>102</value>
+        </attribute>
+        <attribute name="rpas_name">
+          <value>atn</value>
+        </attribute>
+        <attribute name="width">
+          <value>20</value>
+        </attribute>
+        <attribute name="buffer_pct_low">
+          <value>0</value>
+        </attribute>
+        <attribute name="column.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="label">
+          <value>Attribute Name</value>
+        </attribute>
+        <attribute name="userdim">
+          <value>false</value>
+        </attribute>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="HierClass">
+    <attribute name="name">
+      <value>SGYH</value>
+    </attribute>
+    <attribute name="securitydim">
+      <value></value>
+    </attribute>
+    <attribute name="order">
+      <value>1015</value>
+    </attribute>
+    <attribute name="rpas_name">
+      <value>SGYH</value>
+    </attribute>
+    <attribute name="purgeage">
+      <value>10000</value>
+    </attribute>
+    <attribute name="label">
+      <value>Strategy</value>
+    </attribute>
+    <data_model type="DimClass">
+      <attribute name="name">
+        <value>sgyd</value>
+      </attribute>
+      <attribute name="image_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="db">
+        <value>hmaint</value>
+      </attribute>
+      <attribute name="translate">
+        <value>false</value>
+      </attribute>
+      <attribute name="labelstart.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="threshold">
+        <value>25</value>
+      </attribute>
+      <attribute name="rpas_name">
+        <value>sgyd</value>
+      </attribute>
+      <attribute name="start.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="cardinality">
+        <value>8</value>
+      </attribute>
+      <attribute name="start">
+        <value>1</value>
+      </attribute>
+      <attribute name="column">
+        <value>0</value>
+      </attribute>
+      <attribute name="labelstart">
+        <value>21</value>
+      </attribute>
+      <attribute name="label">
+        <value>Strategy</value>
+      </attribute>
+      <attribute name="labelwidth">
+        <value>60</value>
+      </attribute>
+      <attribute name="aggs">
+        <value></value>
+      </attribute>
+      <attribute name="width">
+        <value>20</value>
+      </attribute>
+      <attribute name="dpm_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="column.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="userdim">
+        <value>false</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="HierClass">
+    <attribute name="name">
+      <value>PROR</value>
+    </attribute>
+    <attribute name="isDeletable">
+      <value>false</value>
+    </attribute>
+    <attribute name="label">
+      <value>RHS Product</value>
+    </attribute>
+    <attribute name="securitydim">
+      <value>clsr</value>
+    </attribute>
+    <attribute name="purgeage">
+      <value>10000</value>
+    </attribute>
+    <attribute name="order">
+      <value>1016</value>
+    </attribute>
+    <attribute name="rpas_name">
+      <value>PROR</value>
+    </attribute>
+    <data_model type="DimClass">
+      <attribute name="name">
+        <value>skur</value>
+      </attribute>
+      <attribute name="db">
+        <value>hmaint</value>
+      </attribute>
+      <attribute name="labelstart.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="start.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="start">
+        <value>1</value>
+      </attribute>
+      <attribute name="column">
+        <value>0</value>
+      </attribute>
+      <attribute name="dpm_enabled">
+        <value>true</value>
+      </attribute>
+      <attribute name="label">
+        <value>SKU</value>
+      </attribute>
+      <attribute name="labelstart">
+        <value>21</value>
+      </attribute>
+      <attribute name="image_enabled">
+        <value>true</value>
+      </attribute>
+      <attribute name="labelwidth">
+        <value>250</value>
+      </attribute>
+      <attribute name="threshold">
+        <value>13107</value>
+      </attribute>
+      <attribute name="translate">
+        <value>true</value>
+      </attribute>
+      <attribute name="aggs">
+        <value></value>
+      </attribute>
+      <attribute name="cardinality">
+        <value>17</value>
+      </attribute>
+      <attribute name="width">
+        <value>20</value>
+      </attribute>
+      <attribute name="rpas_name">
+        <value>skur</value>
+      </attribute>
+      <attribute name="column.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="userdim">
+        <value>false</value>
+      </attribute>
+      <data_model type="DimClass">
+        <attribute name="name">
+          <value>stcr</value>
+        </attribute>
+        <attribute name="image_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="db">
+          <value>hmaint</value>
+        </attribute>
+        <attribute name="labelstart.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="rpas_name">
+          <value>stcr</value>
+        </attribute>
+        <attribute name="start.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="column">
+          <value>3</value>
+        </attribute>
+        <attribute name="aggs">
+          <value>skur</value>
+        </attribute>
+        <attribute name="cardinality">
+          <value>14</value>
+        </attribute>
+        <attribute name="labelwidth">
+          <value>250</value>
+        </attribute>
+        <attribute name="labelstart">
+          <value>291</value>
+        </attribute>
+        <attribute name="translate">
+          <value>true</value>
+        </attribute>
+        <attribute name="label">
+          <value>Style/Color</value>
+        </attribute>
+        <attribute name="width">
+          <value>20</value>
+        </attribute>
+        <attribute name="start">
+          <value>271</value>
+        </attribute>
+        <attribute name="threshold">
+          <value>1638</value>
+        </attribute>
+        <attribute name="dpm_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="column.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="userdim">
+          <value>false</value>
+        </attribute>
+        <data_model type="DimClass">
+          <attribute name="name">
+            <value>styr</value>
+          </attribute>
+          <attribute name="image_enabled">
+            <value>false</value>
+          </attribute>
+          <attribute name="labelstart">
+            <value>561</value>
+          </attribute>
+          <attribute name="db">
+            <value>hmaint</value>
+          </attribute>
+          <attribute name="label">
+            <value>Style</value>
+          </attribute>
+          <attribute name="labelstart.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="start.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="start">
+            <value>541</value>
+          </attribute>
+          <attribute name="rpas_name">
+            <value>styr</value>
+          </attribute>
+          <attribute name="column">
+            <value>4</value>
+          </attribute>
+          <attribute name="cardinality">
+            <value>14</value>
+          </attribute>
+          <attribute name="labelwidth">
+            <value>250</value>
+          </attribute>
+          <attribute name="aggs">
+            <value>stcr</value>
+          </attribute>
+          <attribute name="translate">
+            <value>true</value>
+          </attribute>
+          <attribute name="width">
+            <value>20</value>
+          </attribute>
+          <attribute name="threshold">
+            <value>1638</value>
+          </attribute>
+          <attribute name="dpm_enabled">
+            <value>false</value>
+          </attribute>
+          <attribute name="column.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="userdim">
+            <value>false</value>
+          </attribute>
+          <data_model type="DimClass">
+            <attribute name="name">
+              <value>sclr</value>
+            </attribute>
+            <attribute name="prefix">
+              <value>4</value>
+            </attribute>
+            <attribute name="image_enabled">
+              <value>false</value>
+            </attribute>
+            <attribute name="db">
+              <value>hmaint</value>
+            </attribute>
+            <attribute name="labelstart.access">
+              <value>protected</value>
+            </attribute>
+            <attribute name="start.access">
+              <value>protected</value>
+            </attribute>
+            <attribute name="buffer_pct_high">
+              <value>0</value>
+            </attribute>
+            <attribute name="label">
+              <value>Sub-Category</value>
+            </attribute>
+            <attribute name="rpas_name">
+              <value>sclr</value>
+            </attribute>
+            <attribute name="column">
+              <value>5</value>
+            </attribute>
+            <attribute name="cardinality">
+              <value>14</value>
+            </attribute>
+            <attribute name="labelwidth">
+              <value>250</value>
+            </attribute>
+            <attribute name="translate">
+              <value>true</value>
+            </attribute>
+            <attribute name="start">
+              <value>811</value>
+            </attribute>
+            <attribute name="width">
+              <value>20</value>
+            </attribute>
+            <attribute name="threshold">
+              <value>1638</value>
+            </attribute>
+            <attribute name="dpm_enabled">
+              <value>false</value>
+            </attribute>
+            <attribute name="aggs">
+              <value>styr</value>
+            </attribute>
+            <attribute name="buffer_pct_low">
+              <value>0</value>
+            </attribute>
+            <attribute name="column.access">
+              <value>protected</value>
+            </attribute>
+            <attribute name="userdim">
+              <value>false</value>
+            </attribute>
+            <attribute name="labelstart">
+              <value>831</value>
+            </attribute>
+            <data_model type="DimClass">
+              <attribute name="name">
+                <value>clsr</value>
+              </attribute>
+              <attribute name="prefix">
+                <value>4</value>
+              </attribute>
+              <attribute name="image_enabled">
+                <value>false</value>
+              </attribute>
+              <attribute name="db">
+                <value>hmaint</value>
+              </attribute>
+              <attribute name="labelstart.access">
+                <value>protected</value>
+              </attribute>
+              <attribute name="start.access">
+                <value>protected</value>
+              </attribute>
+              <attribute name="buffer_pct_high">
+                <value>0</value>
+              </attribute>
+              <attribute name="rpas_name">
+                <value>clsr</value>
+              </attribute>
+              <attribute name="column">
+                <value>6</value>
+              </attribute>
+              <attribute name="cardinality">
+                <value>14</value>
+              </attribute>
+              <attribute name="labelwidth">
+                <value>250</value>
+              </attribute>
+              <attribute name="labelstart">
+                <value>1101</value>
+              </attribute>
+              <attribute name="translate">
+                <value>true</value>
+              </attribute>
+              <attribute name="width">
+                <value>20</value>
+              </attribute>
+              <attribute name="label">
+                <value>Category</value>
+              </attribute>
+              <attribute name="threshold">
+                <value>1638</value>
+              </attribute>
+              <attribute name="dpm_enabled">
+                <value>false</value>
+              </attribute>
+              <attribute name="aggs">
+                <value>sclr</value>
+              </attribute>
+              <attribute name="buffer_pct_low">
+                <value>0</value>
+              </attribute>
+              <attribute name="column.access">
+                <value>protected</value>
+              </attribute>
+              <attribute name="start">
+                <value>1081</value>
+              </attribute>
+              <attribute name="userdim">
+                <value>false</value>
+              </attribute>
+              <data_model type="DimClass">
+                <attribute name="name">
+                  <value>depr</value>
+                </attribute>
+                <attribute name="image_enabled">
+                  <value>false</value>
+                </attribute>
+                <attribute name="db">
+                  <value>hmaint</value>
+                </attribute>
+                <attribute name="labelstart.access">
+                  <value>protected</value>
+                </attribute>
+                <attribute name="start.access">
+                  <value>protected</value>
+                </attribute>
+                <attribute name="column">
+                  <value>7</value>
+                </attribute>
+                <attribute name="cardinality">
+                  <value>10</value>
+                </attribute>
+                <attribute name="labelwidth">
+                  <value>250</value>
+                </attribute>
+                <attribute name="threshold">
+                  <value>102</value>
+                </attribute>
+                <attribute name="translate">
+                  <value>true</value>
+                </attribute>
+                <attribute name="start">
+                  <value>1351</value>
+                </attribute>
+                <attribute name="label">
+                  <value>Department</value>
+                </attribute>
+                <attribute name="width">
+                  <value>20</value>
+                </attribute>
+                <attribute name="labelstart">
+                  <value>1371</value>
+                </attribute>
+                <attribute name="dpm_enabled">
+                  <value>false</value>
+                </attribute>
+                <attribute name="column.access">
+                  <value>protected</value>
+                </attribute>
+                <attribute name="aggs">
+                  <value>clsr</value>
+                </attribute>
+                <attribute name="userdim">
+                  <value>false</value>
+                </attribute>
+                <attribute name="rpas_name">
+                  <value>depr</value>
+                </attribute>
+                <data_model type="DimClass">
+                  <attribute name="name">
+                    <value>pgrr</value>
+                  </attribute>
+                  <attribute name="image_enabled">
+                    <value>false</value>
+                  </attribute>
+                  <attribute name="db">
+                    <value>hmaint</value>
+                  </attribute>
+                  <attribute name="column">
+                    <value>8</value>
+                  </attribute>
+                  <attribute name="labelstart">
+                    <value>1641</value>
+                  </attribute>
+                  <attribute name="labelstart.access">
+                    <value>protected</value>
+                  </attribute>
+                  <attribute name="label">
+                    <value>Group</value>
+                  </attribute>
+                  <attribute name="start.access">
+                    <value>protected</value>
+                  </attribute>
+                  <attribute name="start">
+                    <value>1621</value>
+                  </attribute>
+                  <attribute name="aggs">
+                    <value>depr</value>
+                  </attribute>
+                  <attribute name="cardinality">
+                    <value>10</value>
+                  </attribute>
+                  <attribute name="rpas_name">
+                    <value>pgrr</value>
+                  </attribute>
+                  <attribute name="labelwidth">
+                    <value>250</value>
+                  </attribute>
+                  <attribute name="threshold">
+                    <value>102</value>
+                  </attribute>
+                  <attribute name="translate">
+                    <value>true</value>
+                  </attribute>
+                  <attribute name="width">
+                    <value>20</value>
+                  </attribute>
+                  <attribute name="dpm_enabled">
+                    <value>false</value>
+                  </attribute>
+                  <attribute name="column.access">
+                    <value>protected</value>
+                  </attribute>
+                  <attribute name="userdim">
+                    <value>false</value>
+                  </attribute>
+                  <data_model type="DimClass">
+                    <attribute name="name">
+                      <value>dvsr</value>
+                    </attribute>
+                    <attribute name="image_enabled">
+                      <value>false</value>
+                    </attribute>
+                    <attribute name="db">
+                      <value>hmaint</value>
+                    </attribute>
+                    <attribute name="column">
+                      <value>9</value>
+                    </attribute>
+                    <attribute name="labelstart.access">
+                      <value>protected</value>
+                    </attribute>
+                    <attribute name="threshold">
+                      <value>25</value>
+                    </attribute>
+                    <attribute name="start.access">
+                      <value>protected</value>
+                    </attribute>
+                    <attribute name="cardinality">
+                      <value>8</value>
+                    </attribute>
+                    <attribute name="start">
+                      <value>1891</value>
+                    </attribute>
+                    <attribute name="aggs">
+                      <value>pgrr</value>
+                    </attribute>
+                    <attribute name="labelwidth">
+                      <value>250</value>
+                    </attribute>
+                    <attribute name="labelstart">
+                      <value>1911</value>
+                    </attribute>
+                    <attribute name="rpas_name">
+                      <value>dvsr</value>
+                    </attribute>
+                    <attribute name="translate">
+                      <value>true</value>
+                    </attribute>
+                    <attribute name="width">
+                      <value>20</value>
+                    </attribute>
+                    <attribute name="dpm_enabled">
+                      <value>false</value>
+                    </attribute>
+                    <attribute name="label">
+                      <value>Division</value>
+                    </attribute>
+                    <attribute name="column.access">
+                      <value>protected</value>
+                    </attribute>
+                    <attribute name="userdim">
+                      <value>false</value>
+                    </attribute>
+                    <data_model type="DimClass">
+                      <attribute name="name">
+                        <value>cmpr</value>
+                      </attribute>
+                      <attribute name="image_enabled">
+                        <value>false</value>
+                      </attribute>
+                      <attribute name="db">
+                        <value>hmaint</value>
+                      </attribute>
+                      <attribute name="labelstart">
+                        <value>2181</value>
+                      </attribute>
+                      <attribute name="labelstart.access">
+                        <value>protected</value>
+                      </attribute>
+                      <attribute name="threshold">
+                        <value>25</value>
+                      </attribute>
+                      <attribute name="aggs">
+                        <value>dvsr</value>
+                      </attribute>
+                      <attribute name="start.access">
+                        <value>protected</value>
+                      </attribute>
+                      <attribute name="cardinality">
+                        <value>8</value>
+                      </attribute>
+                      <attribute name="column">
+                        <value>10</value>
+                      </attribute>
+                      <attribute name="start">
+                        <value>2161</value>
+                      </attribute>
+                      <attribute name="labelwidth">
+                        <value>250</value>
+                      </attribute>
+                      <attribute name="translate">
+                        <value>true</value>
+                      </attribute>
+                      <attribute name="label">
+                        <value>Company</value>
+                      </attribute>
+                      <attribute name="width">
+                        <value>20</value>
+                      </attribute>
+                      <attribute name="dpm_enabled">
+                        <value>false</value>
+                      </attribute>
+                      <attribute name="rpas_name">
+                        <value>cmpr</value>
+                      </attribute>
+                      <attribute name="column.access">
+                        <value>protected</value>
+                      </attribute>
+                      <attribute name="userdim">
+                        <value>false</value>
+                      </attribute>
+                    </data_model>
+                  </data_model>
+                </data_model>
+              </data_model>
+            </data_model>
+          </data_model>
+        </data_model>
+      </data_model>
+      <data_model type="DimClass">
+        <attribute name="name">
+          <value>sbrr</value>
+        </attribute>
+        <attribute name="image_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="db">
+          <value>hmaint</value>
+        </attribute>
+        <attribute name="labelstart">
+          <value>2451</value>
+        </attribute>
+        <attribute name="labelstart.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="rpas_name">
+          <value>sbrr</value>
+        </attribute>
+        <attribute name="start.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="aggs">
+          <value>skur</value>
+        </attribute>
+        <attribute name="cardinality">
+          <value>14</value>
+        </attribute>
+        <attribute name="label">
+          <value>Sub-Brand</value>
+        </attribute>
+        <attribute name="labelwidth">
+          <value>250</value>
+        </attribute>
+        <attribute name="start">
+          <value>2431</value>
+        </attribute>
+        <attribute name="translate">
+          <value>true</value>
+        </attribute>
+        <attribute name="column">
+          <value>11</value>
+        </attribute>
+        <attribute name="width">
+          <value>20</value>
+        </attribute>
+        <attribute name="threshold">
+          <value>1638</value>
+        </attribute>
+        <attribute name="dpm_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="column.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="userdim">
+          <value>false</value>
+        </attribute>
+        <data_model type="DimClass">
+          <attribute name="name">
+            <value>brdr</value>
+          </attribute>
+          <attribute name="image_enabled">
+            <value>false</value>
+          </attribute>
+          <attribute name="db">
+            <value>hmaint</value>
+          </attribute>
+          <attribute name="labelstart.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="start.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="label">
+            <value>Brand</value>
+          </attribute>
+          <attribute name="cardinality">
+            <value>14</value>
+          </attribute>
+          <attribute name="labelwidth">
+            <value>250</value>
+          </attribute>
+          <attribute name="start">
+            <value>2701</value>
+          </attribute>
+          <attribute name="aggs">
+            <value>sbrr</value>
+          </attribute>
+          <attribute name="translate">
+            <value>true</value>
+          </attribute>
+          <attribute name="rpas_name">
+            <value>brdr</value>
+          </attribute>
+          <attribute name="width">
+            <value>20</value>
+          </attribute>
+          <attribute name="column">
+            <value>12</value>
+          </attribute>
+          <attribute name="threshold">
+            <value>1638</value>
+          </attribute>
+          <attribute name="dpm_enabled">
+            <value>false</value>
+          </attribute>
+          <attribute name="column.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="labelstart">
+            <value>2721</value>
+          </attribute>
+          <attribute name="userdim">
+            <value>false</value>
+          </attribute>
+        </data_model>
+      </data_model>
+      <data_model type="DimClass">
+        <attribute name="name">
+          <value>vnrr</value>
+        </attribute>
+        <attribute name="image_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="db">
+          <value>hmaint</value>
+        </attribute>
+        <attribute name="start">
+          <value>2971</value>
+        </attribute>
+        <attribute name="labelstart.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="start.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="aggs">
+          <value>skur</value>
+        </attribute>
+        <attribute name="rpas_name">
+          <value>vnrr</value>
+        </attribute>
+        <attribute name="labelwidth">
+          <value>250</value>
+        </attribute>
+        <attribute name="threshold">
+          <value>13107</value>
+        </attribute>
+        <attribute name="translate">
+          <value>true</value>
+        </attribute>
+        <attribute name="column">
+          <value>13</value>
+        </attribute>
+        <attribute name="cardinality">
+          <value>17</value>
+        </attribute>
+        <attribute name="width">
+          <value>20</value>
+        </attribute>
+        <attribute name="labelstart">
+          <value>2991</value>
+        </attribute>
+        <attribute name="dpm_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="column.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="userdim">
+          <value>false</value>
+        </attribute>
+        <attribute name="label">
+          <value>Vendor</value>
+        </attribute>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="HierClass">
+    <attribute name="name">
+      <value>CURV</value>
+    </attribute>
+    <attribute name="securitydim">
+      <value></value>
+    </attribute>
+    <attribute name="label">
+      <value>Curve Points</value>
+    </attribute>
+    <attribute name="purgeage">
+      <value>10000</value>
+    </attribute>
+    <attribute name="order">
+      <value>1017</value>
+    </attribute>
+    <attribute name="rpas_name">
+      <value>CURV</value>
+    </attribute>
+    <data_model type="DimClass">
+      <attribute name="name">
+        <value>cnum</value>
+      </attribute>
+      <attribute name="image_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="db">
+        <value>hmaint</value>
+      </attribute>
+      <attribute name="translate">
+        <value>false</value>
+      </attribute>
+      <attribute name="labelstart.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="start.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="start">
+        <value>1</value>
+      </attribute>
+      <attribute name="column">
+        <value>0</value>
+      </attribute>
+      <attribute name="labelstart">
+        <value>21</value>
+      </attribute>
+      <attribute name="labelwidth">
+        <value>60</value>
+      </attribute>
+      <attribute name="width.access">
+        <value>write</value>
+      </attribute>
+      <attribute name="cardinality">
+        <value>14</value>
+      </attribute>
+      <attribute name="label">
+        <value>Curve Point</value>
+      </attribute>
+      <attribute name="aggs">
+        <value></value>
+      </attribute>
+      <attribute name="width">
+        <value>20</value>
+      </attribute>
+      <attribute name="threshold">
+        <value>1638</value>
+      </attribute>
+      <attribute name="dpm_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="column.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="rpas_name">
+        <value>cnum</value>
+      </attribute>
+      <attribute name="userdim">
+        <value>false</value>
+      </attribute>
+      <attribute name="labelwidth.access">
+        <value>write</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="HierClass">
+    <attribute name="name">
+      <value>POGH</value>
+    </attribute>
+    <attribute name="rpas_name">
+      <value>POGH</value>
+    </attribute>
+    <attribute name="securitydim">
+      <value>pcat</value>
+    </attribute>
+    <attribute name="purgeage">
+      <value>10000</value>
+    </attribute>
+    <attribute name="label">
+      <value>Planogram</value>
+    </attribute>
+    <attribute name="order">
+      <value>1018</value>
+    </attribute>
+    <data_model type="DimClass">
+      <attribute name="name">
+        <value>psub</value>
+      </attribute>
+      <attribute name="image_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="db">
+        <value>hmaint</value>
+      </attribute>
+      <attribute name="labelstart.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="start.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="start">
+        <value>1</value>
+      </attribute>
+      <attribute name="label">
+        <value>POG Sub-Category</value>
+      </attribute>
+      <attribute name="column">
+        <value>0</value>
+      </attribute>
+      <attribute name="labelstart">
+        <value>21</value>
+      </attribute>
+      <attribute name="cardinality">
+        <value>14</value>
+      </attribute>
+      <attribute name="labelwidth">
+        <value>250</value>
+      </attribute>
+      <attribute name="translate">
+        <value>true</value>
+      </attribute>
+      <attribute name="aggs">
+        <value></value>
+      </attribute>
+      <attribute name="width">
+        <value>20</value>
+      </attribute>
+      <attribute name="threshold">
+        <value>1638</value>
+      </attribute>
+      <attribute name="rpas_name">
+        <value>psub</value>
+      </attribute>
+      <attribute name="dpm_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="column.access">
+        <value>protected</value>
+      </attribute>
+      <attribute name="userdim">
+        <value>false</value>
+      </attribute>
+      <data_model type="DimClass">
+        <attribute name="name">
+          <value>pcat</value>
+        </attribute>
+        <attribute name="image_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="db">
+          <value>hmaint</value>
+        </attribute>
+        <attribute name="labelstart.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="start.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="column">
+          <value>1</value>
+        </attribute>
+        <attribute name="aggs">
+          <value>psub</value>
+        </attribute>
+        <attribute name="cardinality">
+          <value>14</value>
+        </attribute>
+        <attribute name="label">
+          <value>POG Category</value>
+        </attribute>
+        <attribute name="labelwidth">
+          <value>250</value>
+        </attribute>
+        <attribute name="labelstart">
+          <value>291</value>
+        </attribute>
+        <attribute name="translate">
+          <value>true</value>
+        </attribute>
+        <attribute name="width">
+          <value>20</value>
+        </attribute>
+        <attribute name="rpas_name">
+          <value>pcat</value>
+        </attribute>
+        <attribute name="start">
+          <value>271</value>
+        </attribute>
+        <attribute name="threshold">
+          <value>1638</value>
+        </attribute>
+        <attribute name="dpm_enabled">
+          <value>false</value>
+        </attribute>
+        <attribute name="column.access">
+          <value>protected</value>
+        </attribute>
+        <attribute name="userdim">
+          <value>false</value>
+        </attribute>
+        <data_model type="DimClass">
+          <attribute name="name">
+            <value>pdep</value>
+          </attribute>
+          <attribute name="image_enabled">
+            <value>false</value>
+          </attribute>
+          <attribute name="labelstart">
+            <value>561</value>
+          </attribute>
+          <attribute name="db">
+            <value>hmaint</value>
+          </attribute>
+          <attribute name="aggs">
+            <value>pcat</value>
+          </attribute>
+          <attribute name="labelstart.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="start.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="start">
+            <value>541</value>
+          </attribute>
+          <attribute name="rpas_name">
+            <value>pdep</value>
+          </attribute>
+          <attribute name="column">
+            <value>2</value>
+          </attribute>
+          <attribute name="cardinality">
+            <value>10</value>
+          </attribute>
+          <attribute name="labelwidth">
+            <value>250</value>
+          </attribute>
+          <attribute name="threshold">
+            <value>102</value>
+          </attribute>
+          <attribute name="translate">
+            <value>true</value>
+          </attribute>
+          <attribute name="width">
+            <value>20</value>
+          </attribute>
+          <attribute name="dpm_enabled">
+            <value>false</value>
+          </attribute>
+          <attribute name="column.access">
+            <value>protected</value>
+          </attribute>
+          <attribute name="userdim">
+            <value>false</value>
+          </attribute>
+          <attribute name="label">
+            <value>POG Department</value>
+          </attribute>
+        </data_model>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="HierClass">
+    <attribute name="name">
+      <value>MEAS</value>
+    </attribute>
+    <attribute name="rpas_name">
+      <value>MEAS</value>
+    </attribute>
+    <attribute name="securitydim">
+      <value></value>
+    </attribute>
+    <attribute name="order">
+      <value>0</value>
+    </attribute>
+    <attribute name="purgeage">
+      <value>10000</value>
+    </attribute>
+    <attribute name="label">
+      <value>Meas</value>
+    </attribute>
+    <data_model type="DimClass">
+      <attribute name="name">
+        <value>INFO</value>
+      </attribute>
+      <attribute name="db">
+        <value>hmaint</value>
+      </attribute>
+      <attribute name="image_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="prefix">
+        <value>4</value>
+      </attribute>
+      <attribute name="threshold">
+        <value>25</value>
+      </attribute>
+      <attribute name="cardinality">
+        <value>8</value>
+      </attribute>
+      <attribute name="labelwidth.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="start">
+        <value>1</value>
+      </attribute>
+      <attribute name="buffer_pct_high">
+        <value>0</value>
+      </attribute>
+      <attribute name="column">
+        <value>0</value>
+      </attribute>
+      <attribute name="buffer_pct_high.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="rpas_name">
+        <value>info</value>
+      </attribute>
+      <attribute name="labelstart">
+        <value>0</value>
+      </attribute>
+      <attribute name="rpas_name.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="aggs.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="db.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="start.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="aggs">
+        <value></value>
+      </attribute>
+      <attribute name="width">
+        <value>0</value>
+      </attribute>
+      <attribute name="width.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="buffer_pct_low">
+        <value>0</value>
+      </attribute>
+      <attribute name="label.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="userdim.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="labelwidth">
+        <value>0</value>
+      </attribute>
+      <attribute name="translate">
+        <value>false</value>
+      </attribute>
+      <attribute name="column.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="buffer_pct_low.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="labelstart.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="label">
+        <value>INFO</value>
+      </attribute>
+      <attribute name="translate.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="dpm_enabled">
+        <value>false</value>
+      </attribute>
+      <attribute name="prefix.access">
+        <value>final</value>
+      </attribute>
+      <attribute name="userdim">
+        <value>false</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="LabeledIntxMap">
+    <attribute name="name">
+      <value>LabeledIntxMap</value>
+    </attribute>
+    <data_model type="LabeledIntx">
+      <attribute name="name">
+        <value>AC</value>
+      </attribute>
+      <attribute name="LabeledIntxDefinition">
+        <value>week_sku_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="LabeledIntx">
+      <attribute name="name">
+        <value>actuals</value>
+      </attribute>
+      <attribute name="LabeledIntxDefinition">
+        <value>week_sku_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="LabeledIntx">
+      <attribute name="name">
+        <value>AI_clss</value>
+      </attribute>
+      <attribute name="LabeledIntxDefinition">
+        <value>clss_strc</value>
+      </attribute>
+    </data_model>
+    <data_model type="LabeledIntx">
+      <attribute name="name">
+        <value>AI_sku</value>
+      </attribute>
+      <attribute name="LabeledIntxDefinition">
+        <value>sku_strc</value>
+      </attribute>
+    </data_model>
+    <data_model type="LabeledIntx">
+      <attribute name="name">
+        <value>CM_qrtr</value>
+      </attribute>
+      <attribute name="LabeledIntxDefinition">
+        <value>qrtr_scls_tdar</value>
+      </attribute>
+    </data_model>
+    <data_model type="LabeledIntx">
+      <attribute name="name">
+        <value>CM_week</value>
+      </attribute>
+      <attribute name="LabeledIntxDefinition">
+        <value>week_scls_tdar</value>
+      </attribute>
+    </data_model>
+    <data_model type="LabeledIntx">
+      <attribute name="name">
+        <value>DT</value>
+      </attribute>
+      <attribute name="LabeledIntxDefinition">
+        <value>sku_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="LabeledIntx">
+      <attribute name="name">
+        <value>MD</value>
+      </attribute>
+      <attribute name="LabeledIntxDefinition">
+        <value>qrtr_str_pdep</value>
+      </attribute>
+    </data_model>
+    <data_model type="LabeledIntx">
+      <attribute name="name">
+        <value>MS</value>
+      </attribute>
+      <attribute name="LabeledIntxDefinition">
+        <value>qrtr_str_psub</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

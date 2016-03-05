@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="com.retek.ride.rule.newmodel.RuleGroup">
+  <attribute name="name">
+    <value>CM_Admin_Clone1</value>
+  </attribute>
+  <attribute name="description">
+    <value>a rule group</value>
+  </attribute>
+  <attribute name="role">
+    <value>user</value>
+  </attribute>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>msh1clnpoglenlu_clone</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>MSH1clnpoglenLu &lt;- likeitemstorelookup( ADWPclnlikescatB, MSWPpoglengthLu, ADWPClnSrc1Tx, "psub", ADWPStrSrc1Tx, "str")</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>msh1clnpogprofitr_clone</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>MSH1clnpogprofitR &lt;- likeitemstorelookup(ADWPclnlikescatB, MSWPpogprofitR, ADWPClnSrc1Tx, "psub", ADWPStrSrc1Tx, "str")</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>msh2clnpogprofitr_clone</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>MSH2clnpogprofitR &lt;- likeitemstorelookup(ADWPclnlikescatB, MSWPpogprofitR, ADWPClnSrc2Tx, "psub", ADWPStrSrc2Tx, "str")</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>msh3clnpogprofitr_clone</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>MSH3clnpogprofitR &lt;- likeitemstorelookup(ADWPclnlikescatB, MSWPpogprofitR, ADWPClnSrc3Tx, "psub", ADWPStrSrc3Tx, "str")</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

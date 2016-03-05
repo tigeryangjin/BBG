@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="com.retek.ride.rule.newmodel.RuleGroup">
+  <attribute name="name">
+    <value>PREF_calc01cr</value>
+  </attribute>
+  <attribute name="description">
+    <value></value>
+  </attribute>
+  <attribute name="creator">
+    <value>Promote</value>
+  </attribute>
+  <attribute name="role">
+    <value>user</value>
+  </attribute>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr03</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>PROMO_INDICATOR:promoind01xp&lt;-PromoMergeExpr(MASK:pfb01xp.level([CLND].top).total,FCST_START_INDEX:startindex,FCST_END_INDEX:endindex,PROMOCAL0:paggXLxmas.level([CLND].[week]).total,PROMOCAL1:paggXLxmss,PROMOCAL2:paggXLnyd.level([CLND].[week]).total,PROMOCAL3:paggXLeas.level([CLND].[week]).total,PROMOCAL4:paggXLbts,PROMOCAL5:paggXLcirc,PROMOCAL6:paggXLisd,PROMOCAL7:paggXLdml.level([CLND].[week]).total,PROMOCAL8:paggXLsgn.level([CLND].[week]).total,PROMOCAL9:paggXLpprc)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr05</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>FORECAST:psf01xp,SELF_LIFT_UNIT:prmslfun01xp&lt;-PromoSelfEffExpr(BASELINE:pfb01xp,MODELTYPE:cslmthused01xb,PROMOMODELTYPE:promomodeltype,PROMOENABLE:true,FCST_START_INDEX:startindex,FCST_END_INDEX:endindex,PROMOCAL0:paggXLxmas.level([CLND].[week]).average,PROMOTYPE0:ptyp01xmas,PROMOEFF0:peff01xmas,PROMOEFFOVR0:povr01xmas,PROMOCAL1:paggXLxmss,PROMOTYPE1:ptyp01xmss,PROMOEFF1:peff01xmss,PROMOEFFOVR1:povr01xmss,PROMOCAL2:paggXLnyd.level([CLND].[week]).average,PROMOTYPE2:ptyp01nyd,PROMOEFF2:peff01nyd,PROMOEFFOVR2:povr01nyd,PROMOCAL3:paggXLeas.level([CLND].[week]).average,PROMOTYPE3:ptyp01eas,PROMOEFF3:peff01eas,PROMOEFFOVR3:povr01eas,PROMOCAL4:paggXLbts,PROMOTYPE4:ptyp01bts,PROMOEFF4:peff01bts,PROMOEFFOVR4:povr01bts,PROMOCAL5:paggXLcirc,PROMOTYPE5:ptyp01circ,PROMOEFF5:peff01circ,PROMOEFFOVR5:povr01circ,PROMOCAL6:paggXLisd,PROMOTYPE6:ptyp01isd,PROMOEFF6:peff01isd,PROMOEFFOVR6:povr01isd,PROMOCAL7:paggXLdml.level([CLND].[week]).average,PROMOTYPE7:ptyp01dml,PROMOEFF7:peff01dml,PROMOEFFOVR7:povr01dml,PROMOCAL8:paggXLsgn.level([CLND].[week]).average,PROMOTYPE8:ptyp01sgn,PROMOEFF8:peff01sgn,PROMOEFFOVR8:povr01sgn,PROMOCAL9:paggXLpprc,PROMOTYPE9:ptyp01pprc,PROMOEFF9:peff01pprc,PROMOEFFOVR9:povr01pprc)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr06</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>FORECAST:pcsf01xp,HALO_LIFT_UNIT:prmhaloun01xp,CANN_LIFT_UNIT:prmcanun01xp&lt;-PromoCrossEffAppExpr(BASELINE:pfb01xp,SELF_LIFT_FORECAST:psf01xp,FCST_METHOD:reqmth01xb,PROMO_HALO_LIFT:pmhaloliftwi01xb,PROMO_CAN_LIFT:pmcanliftwi01xb,APP_HALO_LIFT:fapprmhalo01xb,APP_CANN_LIFT:fapprmcan01xb,FCST_START_INDEX:startindex,FCST_END_INDEX:endindex)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr07</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>FORECAST:pcsrf01xp,PRICE_PEAK:calprclift01xp,SELF_LIFT_UNIT:prcslfun01xp,HALO_LIFT_UNIT:prchaloun01xp,CANN_LIFT_UNIT:prccanun01xp&lt;-PriceEffAppExpr(PRICE_BASELINE:pcsf01xp,SELF_LIFT:prslflift01xb,HALO_LIFT:prhalolift01xb,CANN_LIFT:prcanlift01xb,LIFT_UNIT_OVERRIDE:prclifovr01xb,FCST_METHOD:reqmth01xb,APP_PRICE_LIFT:arltreq01xb,APP_OVER_PROMO:roprreq01xb,PROMO_INDICATOR:promoind01xp,APP_SELF_LIFT:appslfreq01xb,APP_HALO_LIFT:apphaloreq01xb,APP_CANN_LIFT:appcanreq01xb,FCST_START_INDEX:startindex,FCST_END_INDEX:endindex)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr08</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>calprmlift01xp=pcsrf01xp-pfb01xp</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr09</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>prmliftovr01xp=aprmliftovr01xb*calprmlift01xp/calprmlift01xp.level([PROD].[item]+[LOC].[str]+[CLND].[week]).total</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr10</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>totprmlift01xp=if(apprmovr01xb,prmliftovr01xp,prmslfun01xp+prmhaloun01xp+prmcanun01xp)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr11</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>totprclift01xp=if(apprmovr01xb,0,calprclift01xp)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr12</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>pff01xp=pfb01xp+totprmlift01xp+totprclift01xp</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr13</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>reqmthxp=flookup(defreqmthxlxb,[data].[flvl].[flvl01])</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr14</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>reqmth01xb=if (fmareqmth01xb!=reqmthxp, fmareqmth01xb, reqmthxp)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr15</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>arltxp=flookup(arltxlxb,[data].[flvl].[flvl01] )</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr16</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>arltreq01xb=if(arltov01xb!=3,arltov01xb,arltxp)</value>
+      </attribute>
+    </data_model>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E1</value>
+      </attribute>
+      <attribute name="formula">
+        <value>arltov01xb=if(arltreq01xb!=arltxp,arltreq01xb,0)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr17</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>roprxp=flookup(roprxlxb,[data].[flvl].[flvl01] )</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr18</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>roprreq01xb=if(roprov01xb != 0,if(roprov01xb==1,true,false),roprxp)</value>
+      </attribute>
+    </data_model>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E1</value>
+      </attribute>
+      <attribute name="formula">
+        <value>roprov01xb=if(roprreq01xb!=roprxp,if(roprreq01xb,1,2),0)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr19</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>appslfxp=flookup(appslfxlxb,[data].[flvl].[flvl01] )</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr20</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>appslfreq01xb=if(appslfov01xb!=0,if(appslfov01xb==1,true,false),appslfxp)</value>
+      </attribute>
+    </data_model>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E1</value>
+      </attribute>
+      <attribute name="formula">
+        <value>appslfov01xb=if(appslfreq01xb!=appslfxp,if(appslfreq01xb,1,2),0)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr21</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>apphaloxp=flookup(apphaloxlxb,[data].[flvl].[flvl01] )</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr22</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>apphaloreq01xb=if(apphaloov01xb!=0,if(apphaloov01xb==1,true,false),apphaloxp)</value>
+      </attribute>
+    </data_model>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E1</value>
+      </attribute>
+      <attribute name="formula">
+        <value>apphaloov01xb=if(apphaloreq01xb!=apphaloxp,if(apphaloreq01xb,1,2),0)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr23</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>appcanxp=flookup(appcanxlxb,[data].[flvl].[flvl01] )</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr24</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>appcanreq01xb=if(appcanov01xb!=0,if(appcanov01xb==1,true,false),appcanxp)</value>
+      </attribute>
+    </data_model>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E1</value>
+      </attribute>
+      <attribute name="formula">
+        <value>appcanov01xb=if(appcanreq01xb!=appcanxp,if(appcanreq01xb,1,2),0)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr27</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>apprmhaloxp=flookup(apprmhaloxlxb,[data].[flvl].[flvl01] )</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr28</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>fapprmhalo01xb=if(apprmhaloov01xb!=0,if(apprmhaloov01xb==1,true,false),apprmhaloxp)</value>
+      </attribute>
+    </data_model>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E1</value>
+      </attribute>
+      <attribute name="formula">
+        <value>apprmhaloov01xb=if(fapprmhalo01xb!=apprmhaloxp,if(fapprmhalo01xb,1,2),0)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr29</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>apprmcanxp=flookup(apprmcanxlxb,[data].[flvl].[flvl01] )</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr30</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>fapprmcan01xb=if(apprmcanov01xb!=0,if(apprmcanov01xb==1,true,false),apprmcanxp)</value>
+      </attribute>
+    </data_model>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E1</value>
+      </attribute>
+      <attribute name="formula">
+        <value>apprmcanov01xb=if(fapprmcan01xb!=apprmcanxp,if(fapprmcan01xb,1,2),0)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr31</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>slffrcsthalowi01xb=slffrcsthalocache01xb+psf01xp.total</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr32</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>slffrcstcanwi01xb=slffrcstcancache01xb+psf01xp.total</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr33</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>frcstvsbasehalowi01xb=slffrcsthalowi01xb/baselinehalo01xb</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr34</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>frcstvsbasecanwi01xb=slffrcstcanwi01xb/baselinecan01xb</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr35</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>CROSS_LIFT:pmhalolifttm01xb&lt;-PromoCrossLift(EFF_MASK:apphaloeff.level([PROR].top).total,EFF_MATRIX:apphaloeff,FB_RATIO:frcstvsbasehalowi01xb,FCST_START_INDEX:startindex,FCST_END_INDEX:endindex)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr36</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>CROSS_LIFT:pmcanlifttm01xb&lt;-PromoCrossLift(EFF_MASK:appcanneff.level([PROR].top).total,EFF_MATRIX:appcanneff,FB_RATIO:frcstvsbasecanwi01xb,FCST_START_INDEX:startindex,FCST_END_INDEX:endindex)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr37</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>pmhaloliftwi01xb=pmhaloliftcache01xb*pmhalolifttm01xb</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>PREF_calc01cr38</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>pmcanliftwi01xb=pmcanliftcache01xb*pmcanlifttm01xb</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

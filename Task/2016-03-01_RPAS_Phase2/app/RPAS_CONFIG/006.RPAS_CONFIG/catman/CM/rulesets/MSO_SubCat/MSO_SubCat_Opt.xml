@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="com.retek.ride.rule.newmodel.RuleGroup">
+  <attribute name="name">
+    <value>MSO_SubCat_Opt</value>
+  </attribute>
+  <attribute name="description">
+    <value>a rule group</value>
+  </attribute>
+  <attribute name="role">
+    <value>user</value>
+  </attribute>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>md_space_profit_opt_1</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>OPTPROFITLB:MSHdoptprofitR, OPTSPACELB:MSHdoptspaceV, HISTPROFITLB:MSWPhistgrmprofitR, HISTSPACELB:MSWPhistgrmspaceV, OPTRESULTLB:MSWPspaceresultTx, OPTSUBRESULTLB:MSWPsubresultTx  &lt;- MSOSpace(INCLUDELB:MSWPoptimizeB, MANDATORYLB:MSHdmandatoryB, MINSPACELB:MSH1minspaceV, MAXSPACELB:MSH1maxspaceV, PROFITLISTLB:MSWPpogprofitR, SPACELISTLB:MSWPpoglengthLu, MAXCAPACITYLB:MSHdsavailspaceLu, WEIGHTLB:MSWPweightV, OPTMETHODLB:MSWPoptmethodV, CONSTRAINTMODELB:MSWPconstrainttypV,MAXPROFITLB:MSWPmaxprofitV)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

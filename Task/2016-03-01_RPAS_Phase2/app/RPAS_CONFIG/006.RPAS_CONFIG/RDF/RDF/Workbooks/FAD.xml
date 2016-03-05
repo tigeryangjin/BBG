@@ -1,0 +1,1038 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="Workbook">
+  <attribute name="name">
+    <value>FAD</value>
+  </attribute>
+  <attribute name="Label">
+    <value>Forecast Administration</value>
+  </attribute>
+  <attribute name="WorkbookGroup">
+    <value>Forecast</value>
+  </attribute>
+  <attribute name="WorkbookLib">
+    <value>RdfTemplates</value>
+  </attribute>
+  <attribute name="WorkbookType">
+    <value>RdfDynamicTemplate</value>
+  </attribute>
+  <attribute name="IsWizardOnly">
+    <value>false</value>
+  </attribute>
+  <attribute name="IsImageEnabled">
+    <value>false</value>
+  </attribute>
+  <attribute name="RuleSet">
+    <value>FAD</value>
+  </attribute>
+  <attribute name="LoadRules">
+    <value>FAD_load</value>
+  </attribute>
+  <attribute name="CommitRules">
+    <value>FAD_commit</value>
+  </attribute>
+  <attribute name="CalcRules">
+    <value>FAD_calc</value>
+  </attribute>
+  <attribute name="RefreshRules">
+    <value>FAD_refresh</value>
+  </attribute>
+  <attribute name="IsUseDefaults">
+    <value>true</value>
+  </attribute>
+  <attribute name="DpmDimensions">
+    <value></value>
+  </attribute>
+  <attribute name="IsCustomWizard">
+    <value>true</value>
+  </attribute>
+  <attribute name="properties">
+    <value>propertymap</value>
+    <value>maxmeas</value>
+    <value>action</value>
+    <value>creator</value>
+    <value>maxdb</value>
+  </attribute>
+  <attribute name="propertymap">
+    <value>"TRUE", "TRUE"</value>
+  </attribute>
+  <attribute name="maxmeas">
+    <value>100</value>
+  </attribute>
+  <attribute name="action">
+    <value>"SetPicklist TRUE defsrcXLXB PROPERTY SourceLevelsList", "ShowPositionsForWindow WINFAD5 FLVL PromoLevels", "ShowPositionsForWindow WINFAD1 FLVL FinalLevel", "ShowPositionsForWindow WINFAD3 FLVL FinalLevel", "AddMeasuresToPicklist defappmthxlxb alc FORECAST_APPROVAL", "ShowPositionsForWindow WINFAD6 FLVL FinalPriceLevel", "ShowPositionsForWindow WINFAD7 FLVL FinalPromoAffLevel"</value>
+  </attribute>
+  <attribute name="creator">
+    <value>RDF</value>
+  </attribute>
+  <attribute name="maxdb">
+    <value>100</value>
+  </attribute>
+  <data_model type="AxisInfo">
+    <attribute name="name">
+      <value>AxisInfo</value>
+    </attribute>
+    <attribute name="MEASAxis">
+      <value>YAxis</value>
+    </attribute>
+    <attribute name="MEASOrder">
+      <value>0</value>
+    </attribute>
+  </data_model>
+  <data_model type="Wizards">
+    <attribute name="name">
+      <value>Wizards</value>
+    </attribute>
+    <data_model type="CustomWizard">
+      <attribute name="name">
+        <value> fad </value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="WorkbookTabs">
+    <attribute name="name">
+      <value>WorkbookTabs</value>
+    </attribute>
+    <data_model type="WorkbookTab">
+      <attribute name="name">
+        <value>TABFAD1</value>
+      </attribute>
+      <attribute name="Label">
+        <value>Basic Settings</value>
+      </attribute>
+      <data_model type="Worksheets">
+        <attribute name="name">
+          <value>Worksheets</value>
+        </attribute>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>WINFAD1</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Final Level Parameters</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>flvl_pgrp</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_yaxis</value>
+            <value>subst_xaxis</value>
+            <value>subst_intxpartdim</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>lnXLXB</value>
+                <value>defappmthXLXB</value>
+                <value>defsrcXLXB</value>
+                <value>dfXLXB</value>
+                <value>fcycleXLXB</value>
+                <value>nxtrunXLXB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>lnXLXB</value>
+                <value>defappmthXLXB</value>
+                <value>defsrcXLXB</value>
+                <value>dfXLXB</value>
+                <value>fcycleXLXB</value>
+                <value>nxtrunXLXB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>lnXLXB</value>
+                <value>defappmthXLXB</value>
+                <value>defsrcXLXB</value>
+                <value>dfXLXB</value>
+                <value>fcycleXLXB</value>
+                <value>nxtrunXLXB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>lnXLXB</value>
+                <value>defappmthXLXB</value>
+                <value>defsrcXLXB</value>
+                <value>dfXLXB</value>
+                <value>fcycleXLXB</value>
+                <value>nxtrunXLXB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="DATAAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="DATAOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>WINFAD2</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Final and Source Level Parameters</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>flvl_pgrp</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_yaxis</value>
+            <value>subst_xaxis</value>
+            <value>subst_intxpartdim</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>datasrcpXLXB</value>
+                <value>defhstdtXLXB</value>
+                <value>defreqmthXLXB</value>
+                <value>fplanXLXB</value>
+                <value>seasprofXLXB</value>
+                <value>sprdprofXLXB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>datasrcpXLXB</value>
+                <value>defhstdtXLXB</value>
+                <value>defreqmthXLXB</value>
+                <value>fplanXLXB</value>
+                <value>seasprofXLXB</value>
+                <value>sprdprofXLXB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>datasrcpXLXB</value>
+                <value>defhstdtXLXB</value>
+                <value>defreqmthXLXB</value>
+                <value>fplanXLXB</value>
+                <value>seasprofXLXB</value>
+                <value>sprdprofXLXB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>datasrcpXLXB</value>
+                <value>defhstdtXLXB</value>
+                <value>defreqmthXLXB</value>
+                <value>fplanXLXB</value>
+                <value>seasprofXLXB</value>
+                <value>sprdprofXLXB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="DATAAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="DATAOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+      </data_model>
+    </data_model>
+    <data_model type="WorkbookTab">
+      <attribute name="name">
+        <value>TABFAD2</value>
+      </attribute>
+      <attribute name="Label">
+        <value>Advanced Settings</value>
+      </attribute>
+      <data_model type="Worksheets">
+        <attribute name="name">
+          <value>Worksheets</value>
+        </attribute>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>WINFAD3</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Final Level Parameters</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>flvl_pgrp</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_yaxis</value>
+            <value>subst_xaxis</value>
+            <value>subst_intxpartdim</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>gbXLXB</value>
+                <value>gcXLXB</value>
+                <value>giXLXB</value>
+                <value>gmXLXB</value>
+                <value>gpXLXB</value>
+                <value>lstwkfnumXLXB</value>
+                <value>lstwkfXLXB</value>
+                <value>maxnumfXLXB</value>
+                <value>tsdurXLXB</value>
+                <value>enddtactXLXB</value>
+                <value>siXLXB</value>
+                <value>defklstchXLXB</value>
+                <value>intcaplwXLXB</value>
+                <value>intcapupXLXB</value>
+                <value>fcoXLXB</value>
+                <value>intcoXLXB</value>
+                <value>rltcoXLXB</value>
+                <value>prltcoXLXB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>gbXLXB</value>
+                <value>gcXLXB</value>
+                <value>giXLXB</value>
+                <value>gmXLXB</value>
+                <value>gpXLXB</value>
+                <value>lstwkfnumXLXB</value>
+                <value>lstwkfXLXB</value>
+                <value>maxnumfXLXB</value>
+                <value>tsdurXLXB</value>
+                <value>enddtactXLXB</value>
+                <value>siXLXB</value>
+                <value>defklstchXLXB</value>
+                <value>intcaplwXLXB</value>
+                <value>intcapupXLXB</value>
+                <value>fcoXLXB</value>
+                <value>intcoXLXB</value>
+                <value>rltcoXLXB</value>
+                <value>prltcoXLXB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>gbXLXB</value>
+                <value>gcXLXB</value>
+                <value>giXLXB</value>
+                <value>gmXLXB</value>
+                <value>gpXLXB</value>
+                <value>lstwkfnumXLXB</value>
+                <value>lstwkfXLXB</value>
+                <value>maxnumfXLXB</value>
+                <value>tsdurXLXB</value>
+                <value>enddtactXLXB</value>
+                <value>siXLXB</value>
+                <value>defklstchXLXB</value>
+                <value>intcaplwXLXB</value>
+                <value>intcapupXLXB</value>
+                <value>fcoXLXB</value>
+                <value>intcoXLXB</value>
+                <value>rltcoXLXB</value>
+                <value>prltcoXLXB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>gbXLXB</value>
+                <value>gcXLXB</value>
+                <value>giXLXB</value>
+                <value>gmXLXB</value>
+                <value>gpXLXB</value>
+                <value>lstwkfnumXLXB</value>
+                <value>lstwkfXLXB</value>
+                <value>maxnumfXLXB</value>
+                <value>tsdurXLXB</value>
+                <value>enddtactXLXB</value>
+                <value>siXLXB</value>
+                <value>defklstchXLXB</value>
+                <value>intcaplwXLXB</value>
+                <value>intcapupXLXB</value>
+                <value>fcoXLXB</value>
+                <value>intcoXLXB</value>
+                <value>rltcoXLXB</value>
+                <value>prltcoXLXB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="DATAAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="DATAOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>WINFAD4</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Final and Source Level Parameters</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>flvl_pgrp</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_yaxis</value>
+            <value>subst_xaxis</value>
+            <value>subst_intxpartdim</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>alphbayesXLXB</value>
+                <value>baycapratioXLXB</value>
+                <value>dddurXLXB</value>
+                <value>maxalphpfXLXB</value>
+                <value>maxalphshXLXB</value>
+                <value>maxalphwnXLXB</value>
+                <value>mincrstnXLXB</value>
+                <value>minholtXLXB</value>
+                <value>minwntrsXLXB</value>
+                <value>trnddampXLXB</value>
+                <value>fallbackmthXLXB</value>
+                <value>seassmindxXLXB</value>
+                <value>winmodeXLXB</value>
+                <value>winlngthXLXB</value>
+                <value>maxgammawnXLXB</value>
+                <value>maxgammahXLXB</value>
+                <value>ddemandXLXB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>alphbayesXLXB</value>
+                <value>baycapratioXLXB</value>
+                <value>dddurXLXB</value>
+                <value>maxalphpfXLXB</value>
+                <value>maxalphshXLXB</value>
+                <value>maxalphwnXLXB</value>
+                <value>mincrstnXLXB</value>
+                <value>minholtXLXB</value>
+                <value>minwntrsXLXB</value>
+                <value>trnddampXLXB</value>
+                <value>fallbackmthXLXB</value>
+                <value>seassmindxXLXB</value>
+                <value>winmodeXLXB</value>
+                <value>winlngthXLXB</value>
+                <value>maxgammawnXLXB</value>
+                <value>maxgammahXLXB</value>
+                <value>ddemandXLXB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>alphbayesXLXB</value>
+                <value>baycapratioXLXB</value>
+                <value>dddurXLXB</value>
+                <value>maxalphpfXLXB</value>
+                <value>maxalphshXLXB</value>
+                <value>maxalphwnXLXB</value>
+                <value>mincrstnXLXB</value>
+                <value>minholtXLXB</value>
+                <value>minwntrsXLXB</value>
+                <value>trnddampXLXB</value>
+                <value>fallbackmthXLXB</value>
+                <value>seassmindxXLXB</value>
+                <value>winmodeXLXB</value>
+                <value>winlngthXLXB</value>
+                <value>maxgammawnXLXB</value>
+                <value>maxgammahXLXB</value>
+                <value>ddemandXLXB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>alphbayesXLXB</value>
+                <value>baycapratioXLXB</value>
+                <value>dddurXLXB</value>
+                <value>maxalphpfXLXB</value>
+                <value>maxalphshXLXB</value>
+                <value>maxalphwnXLXB</value>
+                <value>mincrstnXLXB</value>
+                <value>minholtXLXB</value>
+                <value>minwntrsXLXB</value>
+                <value>trnddampXLXB</value>
+                <value>fallbackmthXLXB</value>
+                <value>seassmindxXLXB</value>
+                <value>winmodeXLXB</value>
+                <value>winlngthXLXB</value>
+                <value>maxgammawnXLXB</value>
+                <value>maxgammahXLXB</value>
+                <value>ddemandXLXB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="DATAAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="DATAOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>WINFAD5</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Causal Parameters</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>flvl_pgrp</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_yaxis</value>
+            <value>subst_xaxis</value>
+            <value>subst_intxpartdim</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>aggXLXB</value>
+                <value>calcdtsrcXLXB</value>
+                <value>calcintXLXB</value>
+                <value>cslcintpXLXB</value>
+                <value>cslhintXLXB</value>
+                <value>promodsblXLXB</value>
+                <value>spreadXLXB</value>
+                <value>usecapXLXB</value>
+                <value>capXLXB</value>
+                <value>capratioXLXB</value>
+                <value>mincaphisXLXB</value>
+                <value>betascaleXLXB</value>
+                <value>shtseascutXLXB</value>
+                <value>seasregovrXLXB</value>
+                <value>seasblcrtXLXB</value>
+                <value>cminwntrsXLXB</value>
+                <value>causalextbXLXB</value>
+                <value>decausmodeXLXB</value>
+                <value>smoothmthXLXB</value>
+                <value>cslcrosXLXB</value>
+                <value>causeffonlyXLXB</value>
+                <value>prmliftovrXLXB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>aggXLXB</value>
+                <value>calcdtsrcXLXB</value>
+                <value>calcintXLXB</value>
+                <value>cslcintpXLXB</value>
+                <value>cslhintXLXB</value>
+                <value>promodsblXLXB</value>
+                <value>spreadXLXB</value>
+                <value>usecapXLXB</value>
+                <value>capXLXB</value>
+                <value>capratioXLXB</value>
+                <value>mincaphisXLXB</value>
+                <value>betascaleXLXB</value>
+                <value>shtseascutXLXB</value>
+                <value>seasregovrXLXB</value>
+                <value>seasblcrtXLXB</value>
+                <value>cminwntrsXLXB</value>
+                <value>causalextbXLXB</value>
+                <value>decausmodeXLXB</value>
+                <value>smoothmthXLXB</value>
+                <value>cslcrosXLXB</value>
+                <value>causeffonlyXLXB</value>
+                <value>prmliftovrXLXB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>aggXLXB</value>
+                <value>calcdtsrcXLXB</value>
+                <value>calcintXLXB</value>
+                <value>cslcintpXLXB</value>
+                <value>cslhintXLXB</value>
+                <value>promodsblXLXB</value>
+                <value>spreadXLXB</value>
+                <value>usecapXLXB</value>
+                <value>capXLXB</value>
+                <value>capratioXLXB</value>
+                <value>mincaphisXLXB</value>
+                <value>betascaleXLXB</value>
+                <value>shtseascutXLXB</value>
+                <value>seasregovrXLXB</value>
+                <value>seasblcrtXLXB</value>
+                <value>cminwntrsXLXB</value>
+                <value>causalextbXLXB</value>
+                <value>decausmodeXLXB</value>
+                <value>smoothmthXLXB</value>
+                <value>cslcrosXLXB</value>
+                <value>causeffonlyXLXB</value>
+                <value>prmliftovrXLXB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>aggXLXB</value>
+                <value>calcdtsrcXLXB</value>
+                <value>calcintXLXB</value>
+                <value>cslcintpXLXB</value>
+                <value>cslhintXLXB</value>
+                <value>promodsblXLXB</value>
+                <value>spreadXLXB</value>
+                <value>usecapXLXB</value>
+                <value>capXLXB</value>
+                <value>capratioXLXB</value>
+                <value>mincaphisXLXB</value>
+                <value>betascaleXLXB</value>
+                <value>shtseascutXLXB</value>
+                <value>seasregovrXLXB</value>
+                <value>seasblcrtXLXB</value>
+                <value>cminwntrsXLXB</value>
+                <value>causalextbXLXB</value>
+                <value>decausmodeXLXB</value>
+                <value>smoothmthXLXB</value>
+                <value>cslcrosXLXB</value>
+                <value>causeffonlyXLXB</value>
+                <value>prmliftovrXLXB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="DATAAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="DATAOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>WINFAD6</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Regular Price Parameters</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>flvl_pgrp</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_yaxis</value>
+            <value>condition_price</value>
+            <value>subst_xaxis</value>
+            <value>subst_intxpartdim</value>
+          </attribute>
+          <attribute name="condition_price">
+            <value>true</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>arltXLXB</value>
+                <value>roprXLXB</value>
+                <value>regdecfctXLXB</value>
+                <value>appslfXLXB</value>
+                <value>apphaloXLXB</value>
+                <value>appcanXLXB</value>
+                <value>regprdXLXB</value>
+                <value>prcelasXLXB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>arltXLXB</value>
+                <value>roprXLXB</value>
+                <value>regdecfctXLXB</value>
+                <value>appslfXLXB</value>
+                <value>apphaloXLXB</value>
+                <value>appcanXLXB</value>
+                <value>regprdXLXB</value>
+                <value>prcelasXLXB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>arltXLXB</value>
+                <value>roprXLXB</value>
+                <value>regdecfctXLXB</value>
+                <value>appslfXLXB</value>
+                <value>apphaloXLXB</value>
+                <value>appcanXLXB</value>
+                <value>regprdXLXB</value>
+                <value>prcelasXLXB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>arltXLXB</value>
+                <value>roprXLXB</value>
+                <value>regdecfctXLXB</value>
+                <value>appslfXLXB</value>
+                <value>apphaloXLXB</value>
+                <value>appcanXLXB</value>
+                <value>regprdXLXB</value>
+                <value>prcelasXLXB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="DATAAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="DATAOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>WINFAD7</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Promo Affinity Parameters</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>flvl_pgrp</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_yaxis</value>
+            <value>subst_measure</value>
+            <value>condition_promo</value>
+            <value>subst_xaxis</value>
+            <value>subst_intxpartdim</value>
+          </attribute>
+          <attribute name="condition_promo">
+            <value>true</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>promocanXLXB</value>
+                <value>promohaloXLXB</value>
+                <value>apprmhaloXLXB</value>
+                <value>apprmcanXLXB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>promocanXLXB</value>
+                <value>promohaloXLXB</value>
+                <value>apprmhaloXLXB</value>
+                <value>apprmcanXLXB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>promocanXLXB</value>
+                <value>promohaloXLXB</value>
+                <value>apprmhaloXLXB</value>
+                <value>apprmcanXLXB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>promocanXLXB</value>
+                <value>promohaloXLXB</value>
+                <value>apprmhaloXLXB</value>
+                <value>apprmcanXLXB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="DATAAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="DATAOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="DynHiers">
+    <attribute name="name">
+      <value>DynHiers</value>
+    </attribute>
+  </data_model>
+  <data_model type="EditedMeasures">
+    <attribute name="name">
+      <value>EditedMeasures</value>
+    </attribute>
+  </data_model>
+</data_set>

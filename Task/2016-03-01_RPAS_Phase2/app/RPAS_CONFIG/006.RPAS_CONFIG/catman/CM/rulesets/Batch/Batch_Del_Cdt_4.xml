@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="com.retek.ride.rule.newmodel.RuleGroup">
+  <attribute name="name">
+    <value>Batch_Del_Cdt_4</value>
+  </attribute>
+  <attribute name="description">
+    <value>Rules to delete a CDT from a domain</value>
+  </attribute>
+  <attribute name="role">
+    <value>user</value>
+  </attribute>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>adwpcdtdelb_cl</value>
+    </attribute>
+    <attribute name="description">
+      <value>Clear CDT Delete Mask</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ADWPCDTDelB = FALSE</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

@@ -1,0 +1,1455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="Workbook">
+  <attribute name="name">
+    <value>Cloning</value>
+  </attribute>
+  <attribute name="Label">
+    <value>Product/Location Cloning Administration</value>
+  </attribute>
+  <attribute name="WorkbookGroup">
+    <value>Forecast</value>
+  </attribute>
+  <attribute name="WorkbookLib">
+    <value>Templates</value>
+  </attribute>
+  <attribute name="WorkbookType">
+    <value>DynamicTemplate</value>
+  </attribute>
+  <attribute name="IsWizardOnly">
+    <value>false</value>
+  </attribute>
+  <attribute name="IsImageEnabled">
+    <value>false</value>
+  </attribute>
+  <attribute name="RuleSet">
+    <value>Cloning</value>
+  </attribute>
+  <attribute name="LoadRules">
+    <value>Cloning_load</value>
+  </attribute>
+  <attribute name="CommitRules">
+    <value>Cloning_commit</value>
+  </attribute>
+  <attribute name="CalcRules">
+    <value>Cloning_calc</value>
+  </attribute>
+  <attribute name="RefreshRules">
+    <value>Cloning_refresh</value>
+  </attribute>
+  <attribute name="IsUseDefaults">
+    <value>true</value>
+  </attribute>
+  <attribute name="DpmDimensions">
+    <value></value>
+  </attribute>
+  <attribute name="IsCustomWizard">
+    <value>false</value>
+  </attribute>
+  <data_model type="AxisInfo">
+    <attribute name="name">
+      <value>AxisInfo</value>
+    </attribute>
+    <attribute name="PRODAxis">
+      <value>XAxis</value>
+    </attribute>
+    <attribute name="PRODOrder">
+      <value>0</value>
+    </attribute>
+    <attribute name="LOCAxis">
+      <value>YAxis</value>
+    </attribute>
+    <attribute name="LOCOrder">
+      <value>0</value>
+    </attribute>
+    <attribute name="MEASAxis">
+      <value>ZAxis</value>
+    </attribute>
+    <attribute name="MEASOrder">
+      <value>0</value>
+    </attribute>
+  </data_model>
+  <data_model type="Wizards">
+    <attribute name="name">
+      <value>Wizards</value>
+    </attribute>
+    <data_model type="Wizard">
+      <attribute name="name">
+        <value>PRODWizard</value>
+      </attribute>
+      <attribute name="PRODOrder">
+        <value>0</value>
+      </attribute>
+      <attribute name="PRODDim">
+        <value>item</value>
+      </attribute>
+      <attribute name="PRODLLabel">
+        <value>Selectable Products</value>
+      </attribute>
+      <attribute name="PRODRLabel">
+        <value>Selected Products</value>
+      </attribute>
+      <attribute name="PRODMaxPos">
+        <value>-1</value>
+      </attribute>
+      <attribute name="PRODWizardLabel">
+        <value></value>
+      </attribute>
+    </data_model>
+    <data_model type="Wizard">
+      <attribute name="name">
+        <value>LOCWizard</value>
+      </attribute>
+      <attribute name="LOCOrder">
+        <value>1</value>
+      </attribute>
+      <attribute name="LOCDim">
+        <value>str</value>
+      </attribute>
+      <attribute name="LOCLLabel">
+        <value>Selectable Locations</value>
+      </attribute>
+      <attribute name="LOCRLabel">
+        <value>Selected Locations</value>
+      </attribute>
+      <attribute name="LOCMaxPos">
+        <value>-1</value>
+      </attribute>
+      <attribute name="LOCWizardLabel">
+        <value></value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="WorkbookTabs">
+    <attribute name="name">
+      <value>WorkbookTabs</value>
+    </attribute>
+    <data_model type="WorkbookTab">
+      <attribute name="name">
+        <value>clnadjparm</value>
+      </attribute>
+      <attribute name="Label">
+        <value>Cloned History Adjustment</value>
+      </attribute>
+      <data_model type="Worksheets">
+        <attribute name="name">
+          <value>Worksheets</value>
+        </attribute>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>clnhistadjparm</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Adjustment Parameters</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>pgrp</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>clnalphaXLXB</value>
+                <value>clnslsprdXLXB</value>
+                <value>clnclcprdXLXB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>clnalphaXLXB</value>
+                <value>clnslsprdXLXB</value>
+                <value>clnclcprdXLXB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>clnalphaXLXB</value>
+                <value>clnslsprdXLXB</value>
+                <value>clnclcprdXLXB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>clnalphaXLXB</value>
+                <value>clnslsprdXLXB</value>
+                <value>clnclcprdXLXB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>0</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+      </data_model>
+    </data_model>
+    <data_model type="WorkbookTab">
+      <attribute name="name">
+        <value>prodclntab</value>
+      </attribute>
+      <attribute name="Label">
+        <value>Product Cloning</value>
+      </attribute>
+      <data_model type="Worksheets">
+        <attribute name="name">
+          <value>Worksheets</value>
+        </attribute>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>prodcln01</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Product Cloning 01</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>item_rgn</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>true</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>prodcln101XB</value>
+                <value>prodcln201XB</value>
+                <value>prodcln301XB</value>
+                <value>prodcnt101XB</value>
+                <value>prodcnt201XB</value>
+                <value>prodcnt301XB</value>
+                <value>prodadjpct01XB</value>
+                <value>clnmask01XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>prodcln101XB</value>
+                <value>prodcln201XB</value>
+                <value>prodcln301XB</value>
+                <value>prodcnt101XB</value>
+                <value>prodcnt201XB</value>
+                <value>prodcnt301XB</value>
+                <value>prodadjpct01XB</value>
+                <value>clnmask01XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>prodcln101XB</value>
+                <value>prodcln201XB</value>
+                <value>prodcln301XB</value>
+                <value>prodcnt101XB</value>
+                <value>prodcnt201XB</value>
+                <value>prodcnt301XB</value>
+                <value>prodadjpct01XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>prodcln101XB</value>
+                <value>prodcln201XB</value>
+                <value>prodcln301XB</value>
+                <value>prodcnt101XB</value>
+                <value>prodcnt201XB</value>
+                <value>prodcnt301XB</value>
+                <value>prodadjpct01XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>prodcln06</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Product Cloning 06</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>item_rgn</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>true</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>prodcln106XB</value>
+                <value>prodcln206XB</value>
+                <value>prodcln306XB</value>
+                <value>prodcnt106XB</value>
+                <value>prodcnt206XB</value>
+                <value>prodcnt306XB</value>
+                <value>prodadjpct06XB</value>
+                <value>clnmask06XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>prodcln106XB</value>
+                <value>prodcln206XB</value>
+                <value>prodcln306XB</value>
+                <value>prodcnt106XB</value>
+                <value>prodcnt206XB</value>
+                <value>prodcnt306XB</value>
+                <value>prodadjpct06XB</value>
+                <value>clnmask06XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>prodcln106XB</value>
+                <value>prodcln206XB</value>
+                <value>prodcln306XB</value>
+                <value>prodcnt106XB</value>
+                <value>prodcnt206XB</value>
+                <value>prodcnt306XB</value>
+                <value>prodadjpct06XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>prodcln106XB</value>
+                <value>prodcln206XB</value>
+                <value>prodcln306XB</value>
+                <value>prodcnt106XB</value>
+                <value>prodcnt206XB</value>
+                <value>prodcnt306XB</value>
+                <value>prodadjpct06XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>prodcln10</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Product Cloning 10</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>item_rgn</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>true</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>prodcln110XB</value>
+                <value>prodcln210XB</value>
+                <value>prodcln310XB</value>
+                <value>prodcnt110XB</value>
+                <value>prodcnt210XB</value>
+                <value>prodcnt310XB</value>
+                <value>prodadjpct10XB</value>
+                <value>clnmask10XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>prodcln110XB</value>
+                <value>prodcln210XB</value>
+                <value>prodcln310XB</value>
+                <value>prodcnt110XB</value>
+                <value>prodcnt210XB</value>
+                <value>prodcnt310XB</value>
+                <value>prodadjpct10XB</value>
+                <value>clnmask10XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>prodcln110XB</value>
+                <value>prodcln210XB</value>
+                <value>prodcln310XB</value>
+                <value>prodcnt110XB</value>
+                <value>prodcnt210XB</value>
+                <value>prodcnt310XB</value>
+                <value>prodadjpct10XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>prodcln110XB</value>
+                <value>prodcln210XB</value>
+                <value>prodcln310XB</value>
+                <value>prodcnt110XB</value>
+                <value>prodcnt210XB</value>
+                <value>prodcnt310XB</value>
+                <value>prodadjpct10XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>prodcln14</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Product Cloning 14</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>item_rgn</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>true</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>prodcln114XB</value>
+                <value>prodcln214XB</value>
+                <value>prodcln314XB</value>
+                <value>prodcnt114XB</value>
+                <value>prodcnt214XB</value>
+                <value>prodcnt314XB</value>
+                <value>prodadjpct14XB</value>
+                <value>clnmask14XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>prodcln114XB</value>
+                <value>prodcln214XB</value>
+                <value>prodcln314XB</value>
+                <value>prodcnt114XB</value>
+                <value>prodcnt214XB</value>
+                <value>prodcnt314XB</value>
+                <value>prodadjpct14XB</value>
+                <value>clnmask14XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>prodcln114XB</value>
+                <value>prodcln214XB</value>
+                <value>prodcln314XB</value>
+                <value>prodcnt114XB</value>
+                <value>prodcnt214XB</value>
+                <value>prodcnt314XB</value>
+                <value>prodadjpct14XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>prodcln114XB</value>
+                <value>prodcln214XB</value>
+                <value>prodcln314XB</value>
+                <value>prodcnt114XB</value>
+                <value>prodcnt214XB</value>
+                <value>prodcnt314XB</value>
+                <value>prodadjpct14XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>prodcln15</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Product Cloning 15</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>item_rgn</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>true</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>prodcln115XB</value>
+                <value>prodcln215XB</value>
+                <value>prodcln315XB</value>
+                <value>prodcnt115XB</value>
+                <value>prodcnt215XB</value>
+                <value>prodcnt315XB</value>
+                <value>prodadjpct15XB</value>
+                <value>clnmask15XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>prodcln115XB</value>
+                <value>prodcln215XB</value>
+                <value>prodcln315XB</value>
+                <value>prodcnt115XB</value>
+                <value>prodcnt215XB</value>
+                <value>prodcnt315XB</value>
+                <value>prodadjpct15XB</value>
+                <value>clnmask15XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>prodcln115XB</value>
+                <value>prodcln215XB</value>
+                <value>prodcln315XB</value>
+                <value>prodcnt115XB</value>
+                <value>prodcnt215XB</value>
+                <value>prodcnt315XB</value>
+                <value>prodadjpct15XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>prodcln115XB</value>
+                <value>prodcln215XB</value>
+                <value>prodcln315XB</value>
+                <value>prodcnt115XB</value>
+                <value>prodcnt215XB</value>
+                <value>prodcnt315XB</value>
+                <value>prodadjpct15XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+      </data_model>
+    </data_model>
+    <data_model type="WorkbookTab">
+      <attribute name="name">
+        <value>locclntab</value>
+      </attribute>
+      <attribute name="Label">
+        <value>Location Cloning</value>
+      </attribute>
+      <data_model type="Worksheets">
+        <attribute name="name">
+          <value>Worksheets</value>
+        </attribute>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>loccln01</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Location Cloning 01</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>dept_str</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>true</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>loccln101XB</value>
+                <value>loccln201XB</value>
+                <value>loccln301XB</value>
+                <value>loccnt101XB</value>
+                <value>loccnt201XB</value>
+                <value>loccnt301XB</value>
+                <value>locadjpct01XB</value>
+                <value>clnmask01XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>loccln101XB</value>
+                <value>loccln201XB</value>
+                <value>loccln301XB</value>
+                <value>loccnt101XB</value>
+                <value>loccnt201XB</value>
+                <value>loccnt301XB</value>
+                <value>locadjpct01XB</value>
+                <value>clnmask01XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>loccln101XB</value>
+                <value>loccln201XB</value>
+                <value>loccln301XB</value>
+                <value>loccnt101XB</value>
+                <value>loccnt201XB</value>
+                <value>loccnt301XB</value>
+                <value>locadjpct01XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>loccln101XB</value>
+                <value>loccln201XB</value>
+                <value>loccln301XB</value>
+                <value>loccnt101XB</value>
+                <value>loccnt201XB</value>
+                <value>loccnt301XB</value>
+                <value>locadjpct01XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>loccln06</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Location Cloning 06</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>dept_str</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>true</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>loccln106XB</value>
+                <value>loccln206XB</value>
+                <value>loccln306XB</value>
+                <value>loccnt106XB</value>
+                <value>loccnt206XB</value>
+                <value>loccnt306XB</value>
+                <value>locadjpct06XB</value>
+                <value>clnmask06XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>loccln106XB</value>
+                <value>loccln206XB</value>
+                <value>loccln306XB</value>
+                <value>loccnt106XB</value>
+                <value>loccnt206XB</value>
+                <value>loccnt306XB</value>
+                <value>locadjpct06XB</value>
+                <value>clnmask06XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>loccln106XB</value>
+                <value>loccln206XB</value>
+                <value>loccln306XB</value>
+                <value>loccnt106XB</value>
+                <value>loccnt206XB</value>
+                <value>loccnt306XB</value>
+                <value>locadjpct06XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>loccln106XB</value>
+                <value>loccln206XB</value>
+                <value>loccln306XB</value>
+                <value>loccnt106XB</value>
+                <value>loccnt206XB</value>
+                <value>loccnt306XB</value>
+                <value>locadjpct06XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>loccln10</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Location Cloning 10</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>dept_area</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>true</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>loccln110XB</value>
+                <value>loccln210XB</value>
+                <value>loccln310XB</value>
+                <value>loccnt110XB</value>
+                <value>loccnt210XB</value>
+                <value>loccnt310XB</value>
+                <value>locadjpct10XB</value>
+                <value>clnmask10XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>loccln110XB</value>
+                <value>loccln210XB</value>
+                <value>loccln310XB</value>
+                <value>loccnt110XB</value>
+                <value>loccnt210XB</value>
+                <value>loccnt310XB</value>
+                <value>locadjpct10XB</value>
+                <value>clnmask10XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>loccln110XB</value>
+                <value>loccln210XB</value>
+                <value>loccln310XB</value>
+                <value>loccnt110XB</value>
+                <value>loccnt210XB</value>
+                <value>loccnt310XB</value>
+                <value>locadjpct10XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>loccln110XB</value>
+                <value>loccln210XB</value>
+                <value>loccln310XB</value>
+                <value>loccnt110XB</value>
+                <value>loccnt210XB</value>
+                <value>loccnt310XB</value>
+                <value>locadjpct10XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>loccln14</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Location Cloning 14</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>dept_str</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>true</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>loccln114XB</value>
+                <value>loccln214XB</value>
+                <value>loccln314XB</value>
+                <value>loccnt114XB</value>
+                <value>loccnt214XB</value>
+                <value>loccnt314XB</value>
+                <value>locadjpct14XB</value>
+                <value>clnmask14XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>loccln114XB</value>
+                <value>loccln214XB</value>
+                <value>loccln314XB</value>
+                <value>loccnt114XB</value>
+                <value>loccnt214XB</value>
+                <value>loccnt314XB</value>
+                <value>locadjpct14XB</value>
+                <value>clnmask14XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>loccln114XB</value>
+                <value>loccln214XB</value>
+                <value>loccln314XB</value>
+                <value>loccnt114XB</value>
+                <value>loccnt214XB</value>
+                <value>loccnt314XB</value>
+                <value>locadjpct14XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>loccln114XB</value>
+                <value>loccln214XB</value>
+                <value>loccln314XB</value>
+                <value>loccnt114XB</value>
+                <value>loccnt214XB</value>
+                <value>loccnt314XB</value>
+                <value>locadjpct14XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>loccln15</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Location Cloning 15</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>dept_str</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>true</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>loccln115XB</value>
+                <value>loccln215XB</value>
+                <value>loccln315XB</value>
+                <value>loccnt115XB</value>
+                <value>loccnt215XB</value>
+                <value>loccnt315XB</value>
+                <value>locadjpct15XB</value>
+                <value>clnmask15XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>loccln115XB</value>
+                <value>loccln215XB</value>
+                <value>loccln315XB</value>
+                <value>loccnt115XB</value>
+                <value>loccnt215XB</value>
+                <value>loccnt315XB</value>
+                <value>locadjpct15XB</value>
+                <value>clnmask15XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>loccln115XB</value>
+                <value>loccln215XB</value>
+                <value>loccln315XB</value>
+                <value>loccnt115XB</value>
+                <value>loccnt215XB</value>
+                <value>loccnt315XB</value>
+                <value>locadjpct15XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>loccln115XB</value>
+                <value>loccln215XB</value>
+                <value>loccln315XB</value>
+                <value>loccnt115XB</value>
+                <value>loccnt215XB</value>
+                <value>loccnt315XB</value>
+                <value>locadjpct15XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+      </data_model>
+    </data_model>
+    <data_model type="WorkbookTab">
+      <attribute name="name">
+        <value>clonemask</value>
+      </attribute>
+      <attribute name="Label">
+        <value>Clone Mask</value>
+      </attribute>
+      <data_model type="Worksheets">
+        <attribute name="name">
+          <value>Worksheets</value>
+        </attribute>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>clonemas01</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Clone Mask01</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>item_str</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>true</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>clnmask01XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>clnmask01XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>clnmask01XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>clnmask01XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>clonemas06</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Clone Mask06</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>item_str</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>true</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>clnmask06XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>clnmask06XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>clnmask06XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>clnmask06XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>clonemas10</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Clone Mask10</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>item_str</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>true</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>clnmask10XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>clnmask10XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>clnmask10XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>clnmask10XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>clonemas14</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Clone Mask14</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>item_str</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>true</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>clnmask14XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>clnmask14XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>clnmask14XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>clnmask14XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>clonemas15</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Clone Mask15</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>item_str</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>true</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>clnmask15XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>clnmask15XB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>clnmask15XB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>clnmask15XB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="DynHiers">
+    <attribute name="name">
+      <value>DynHiers</value>
+    </attribute>
+  </data_model>
+  <data_model type="EditedMeasures">
+    <attribute name="name">
+      <value>EditedMeasures</value>
+    </attribute>
+  </data_model>
+</data_set>

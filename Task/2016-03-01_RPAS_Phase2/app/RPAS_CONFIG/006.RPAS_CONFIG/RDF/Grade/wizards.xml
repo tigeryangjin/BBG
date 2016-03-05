@@ -1,0 +1,1421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="WizardSet">
+  <attribute name="name">
+    <value>wizardset92</value>
+  </attribute>
+  <data_model type="Wizard">
+    <attribute name="name">
+      <value>cldel</value>
+    </attribute>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>cldelwz1</value>
+      </attribute>
+      <attribute name="Type">
+        <value>BirthSelWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Cluster Run Selection</value>
+      </attribute>
+      <attribute name="InputDimVar">
+        <value>GBRT</value>
+      </attribute>
+      <attribute name="InputMeasNameTplVar">
+        <value>BirthIndMeasVar</value>
+      </attribute>
+      <attribute name="OutputVar">
+        <value>SelBirthVar</value>
+      </attribute>
+      <attribute name="InputMeasTokenVar">
+        <value>BirthTokenVar</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>cldelwz1wg1</value>
+        </attribute>
+        <attribute name="locx">
+          <value>4</value>
+        </attribute>
+        <attribute name="locy">
+          <value>5</value>
+        </attribute>
+        <attribute name="width">
+          <value>42</value>
+        </attribute>
+        <attribute name="height">
+          <value>54</value>
+        </attribute>
+        <attribute name="type">
+          <value>Group</value>
+        </attribute>
+        <attribute name="text">
+          <value>Select Cluster Run to Delete</value>
+        </attribute>
+        <attribute name="func">
+          <value>static</value>
+        </attribute>
+      </data_model>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>cldelwz1wg2</value>
+        </attribute>
+        <attribute name="locx">
+          <value>9</value>
+        </attribute>
+        <attribute name="locy">
+          <value>15</value>
+        </attribute>
+        <attribute name="width">
+          <value>30</value>
+        </attribute>
+        <attribute name="height">
+          <value>38</value>
+        </attribute>
+        <attribute name="type">
+          <value>ListBox</value>
+        </attribute>
+        <attribute name="func">
+          <value>dynamic</value>
+        </attribute>
+        <attribute name="style">
+          <value>multiple</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>cldelwz2</value>
+      </attribute>
+      <attribute name="Type">
+        <value>DelClusterWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Delete Status</value>
+      </attribute>
+      <attribute name="GID">
+        <value>SelBirthVar</value>
+      </attribute>
+      <attribute name="FailMsg">
+        <value>Delete Cluster Run Failed</value>
+      </attribute>
+      <attribute name="SucceedMsg">
+        <value>Delete Cluster Run Succeeded</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>cldelwz2wg1</value>
+        </attribute>
+        <attribute name="locx">
+          <value>4</value>
+        </attribute>
+        <attribute name="locy">
+          <value>5</value>
+        </attribute>
+        <attribute name="width">
+          <value>0</value>
+        </attribute>
+        <attribute name="height">
+          <value>54</value>
+        </attribute>
+        <attribute name="type">
+          <value>Group</value>
+        </attribute>
+        <attribute name="text">
+          <value>Delete Cluster</value>
+        </attribute>
+        <attribute name="func">
+          <value>dynamic</value>
+        </attribute>
+        <attribute name="widht">
+          <value>42</value>
+        </attribute>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="Wizard">
+    <attribute name="name">
+      <value> clrev </value>
+    </attribute>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>clrevwz1</value>
+      </attribute>
+      <attribute name="Type">
+        <value>BirthSelWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Grade Birth Selection</value>
+      </attribute>
+      <attribute name="InputDimVar">
+        <value>GBRT</value>
+      </attribute>
+      <attribute name="InputMeasNameTplVar">
+        <value>BirthIndMeasVar</value>
+      </attribute>
+      <attribute name="OutputVar">
+        <value>ClrevSelBirthVar</value>
+      </attribute>
+      <attribute name="InputMeasTokenVar">
+        <value>BirthTokenVar</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrevwz1wg1</value>
+        </attribute>
+        <attribute name="locx">
+          <value>4</value>
+        </attribute>
+        <attribute name="locy">
+          <value>5</value>
+        </attribute>
+        <attribute name="width">
+          <value>42</value>
+        </attribute>
+        <attribute name="height">
+          <value>54</value>
+        </attribute>
+        <attribute name="type">
+          <value>Group</value>
+        </attribute>
+        <attribute name="text">
+          <value>Select Grade Birth to Review</value>
+        </attribute>
+        <attribute name="func">
+          <value>static</value>
+        </attribute>
+      </data_model>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrevwz1wg2</value>
+        </attribute>
+        <attribute name="locx">
+          <value>9</value>
+        </attribute>
+        <attribute name="locy">
+          <value>15</value>
+        </attribute>
+        <attribute name="width">
+          <value>30</value>
+        </attribute>
+        <attribute name="height">
+          <value>38</value>
+        </attribute>
+        <attribute name="type">
+          <value>ListBox</value>
+        </attribute>
+        <attribute name="func">
+          <value>dynamic</value>
+        </attribute>
+        <attribute name="action">
+          <value>StorePropertyAsToken _B ClrevSelBirthVar", "StoreExpressionAsProperty GroupByIntVar gradeTmpString=clbgi_B", "StoreExpressionAsProperty ClusterHierVar gradeTmpString=hiername(cld_B)", "StoreExpressionAsProperty ClusterOverHierVar gradeTmpString=hiername(clod_B)", "StorePropertyAsToken _GROUPBYINT GroupByIntVar", "StorePropertyAsToken _CLUSTERHIER ClusterHierVar", "StorePropertyAsToken _CLUSTEROVERHIER ClusterOverHierVar", "StoreExpressionAsProperty ClusterMethodName gradeTmpString=clmth_B", "AddWorkbookPositionsByMask clvd_B clsel_B", "InsertRuleToGroup clusterMethodName \"BREAKPOINT\" clrev_calc clcn_B, cldc_B, clcnv_B, clpor_B, clele_B &lt;- bpstatistics(clpm_B, clsrc_B,  \"_GROUPBYINT\")", "InsertRuleToGroup clusterMethodName \"BANG\" clrev_calc DistFromCentroid:CLDC_B,Cohesion:CLCOH_B,ClusterPortion:CLPOR_B,Centroid:CLCN_B,CentroidToAvg:CLCNV_B,ClosestCluster:CLCC_B,ClosestClusterDist:CLDCC_B,ClusterElementNo:CLELE_B&lt;-CalculateClusterStatistics(Measure:CLSRC_B,PointMembership:CLPM_B,ClusterHier:\"_CLUSTERHIER\",ClusterOverHier:\"_CLUSTEROVERHIER\",ByGroupDims:\"_GROUPBYINT\")", "AddTemplateAction TRUE TRUE TemplateActionNow Act2 CreateNewWindow Win2 \"Source_Data\" 0 \"Cluster_Result\" _ clsrc_B", "AddTemplateAction ClusterMethodName BANG TemplateActionNow Act3 CreateNewWindow Win3 \"Cluster_Centroid_Statistics\" 0 \"Cluster_Result\" _ clcn_B clcnv_B", "AddTemplateAction ClusterMethodName BreakPoint TemplateActionNow Act3 CreateNewWindow Win3 \"Cluster_Statistics\" 0 \"Cluster_Result\" _ clcn_B clcnv_B clpor_B clele_B clnms_B", "AddTemplateAction TRUE TRUE TemplateActionNow Act4 CreateNewWindow Win4 \"Cluster_Membership\" 0 \"Cluster_Result\" _ clpm_B cldc_B", "AddTemplateAction ClusterMethodName BANG TemplateActionNow Act5 CreateNewWindow Win5 \"Cluster_Statistics\" 0 \"Cluster_Result\" _ clcoh_B clpor_B cldcc_B clcc_B clele_B clnms_B", "StoreExpressionAsProperty LastClusterIndex gradeTmpInt=clnum_B", "AddWorkbookPositions clsh clst FirstClusterIndex LastClusterIndex", "InsertRuleToGroup TRUE TRUE clrev_load clpm_B = clpm_B.master", "InsertRuleToGroup TRUE TRUE clrev_load clsrc_B = clsrc_B.master", "InsertRuleToGroup TRUE TRUE clrev_load clnms_B = clnms_B.master", "InsertRuleToGroup TRUE TRUE clrev_refresh clpm_B = clpm_B.master", "InsertRuleToGroup TRUE TRUE clrev_refresh clsrc_B = clsrc_B.master", "InsertRuleToGroup TRUE TRUE clrev_refresh clnms_B = clnms_B.master", "InsertRuleToGroup TRUE TRUE clrev_commit clpm_B.master = clpm_B", "InsertRuleToGroup TRUE TRUE clrev_commit cldc_B.master = cldc_B", "InsertRuleToGroup clusterMethodName BANG clrev_commit clcoh_B.master = clcoh_B", "InsertRuleToGroup TRUE TRUE clrev_commit clpor_B.master = clpor_B", "InsertRuleToGroup TRUE TRUE clrev_commit clcn_B.master = clcn_B", "InsertRuleToGroup TRUE TRUE clrev_commit clcnv_B.master = clcnv_B", "InsertRuleToGroup TRUE TRUE clrev_commit clele_B.master = clele_B", "InsertRuleToGroup TRUE TRUE clrev_commit clnms_B.master = clnms_B", "InsertRuleToGroup clusterMethodName BANG clrev_commit clcc_B.master = clcc_B", "InsertRuleToGroup clusterMethodName BANG clrev_commit cldcc_B.master = cldcc_B</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>clrevwz2</value>
+      </attribute>
+      <attribute name="Type">
+        <value>RdfExtraMeasuresWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Extra Measure Selection</value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select additional measures to include in the workbook.</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrevwz2wg1</value>
+        </attribute>
+        <attribute name="type">
+          <value>Group</value>
+        </attribute>
+        <attribute name="text">
+          <value>Select Extra Measures</value>
+        </attribute>
+        <attribute name="func">
+          <value>static</value>
+        </attribute>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="Wizard">
+    <attribute name="name">
+      <value> clrunbp </value>
+    </attribute>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>clrunbpwz1</value>
+      </attribute>
+      <attribute name="Type">
+        <value>SrcMeasSelWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Source Measure Selection</value>
+      </attribute>
+      <attribute name="InputSrcMeasVar">
+        <value>SrcMeasListVar</value>
+      </attribute>
+      <attribute name="OutputMeasVar">
+        <value>SrcMeasVar</value>
+      </attribute>
+      <attribute name="OutputIntVar">
+        <value>SrcIntVar</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunbpwz1wg1</value>
+        </attribute>
+        <attribute name="locx">
+          <value>9</value>
+        </attribute>
+        <attribute name="locy">
+          <value>15</value>
+        </attribute>
+        <attribute name="width">
+          <value>30</value>
+        </attribute>
+        <attribute name="height">
+          <value>38</value>
+        </attribute>
+        <attribute name="type">
+          <value>ListBox</value>
+        </attribute>
+        <attribute name="func">
+          <value>dynamic</value>
+        </attribute>
+      </data_model>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunbpwz1wg2</value>
+        </attribute>
+        <attribute name="locx">
+          <value>4</value>
+        </attribute>
+        <attribute name="locy">
+          <value>5</value>
+        </attribute>
+        <attribute name="width">
+          <value>42</value>
+        </attribute>
+        <attribute name="height">
+          <value>54</value>
+        </attribute>
+        <attribute name="type">
+          <value>Group</value>
+        </attribute>
+        <attribute name="text">
+          <value>Select Source Measure for Cluster Analysis</value>
+        </attribute>
+        <attribute name="func">
+          <value>static</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>clrunbpwz2</value>
+      </attribute>
+      <attribute name="Type">
+        <value>HierDimSelWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Cluster on Dimension Selection</value>
+      </attribute>
+      <attribute name="InputSrcIntVar">
+        <value>SrcIntVar</value>
+      </attribute>
+      <attribute name="InputBaseIntVar">
+        <value>SrcIntVar</value>
+      </attribute>
+      <attribute name="OutputVar">
+        <value>ClusterDimVar</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunbpwz2wg1</value>
+        </attribute>
+        <attribute name="locx">
+          <value>4</value>
+        </attribute>
+        <attribute name="locy">
+          <value>5</value>
+        </attribute>
+        <attribute name="width">
+          <value>42</value>
+        </attribute>
+        <attribute name="height">
+          <value>54</value>
+        </attribute>
+        <attribute name="type">
+          <value>Group</value>
+        </attribute>
+        <attribute name="text">
+          <value>Select Hierarchy and Dimension to Cluster on</value>
+        </attribute>
+        <attribute name="func">
+          <value>static</value>
+        </attribute>
+      </data_model>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunbpwz2wg2</value>
+        </attribute>
+        <attribute name="locx">
+          <value>9</value>
+        </attribute>
+        <attribute name="locy">
+          <value>15</value>
+        </attribute>
+        <attribute name="width">
+          <value>30</value>
+        </attribute>
+        <attribute name="height">
+          <value>40</value>
+        </attribute>
+        <attribute name="action">
+          <value>StorePropertyAsToken _CLST_DIM_ ClusterDimVar", "StorePropertyAsToken _SRC_INT_ SrcIntVar", "StoreExpressionAsProperty UprIntVar GradeTmpString = union_int_high(\"_SRC_INT_\", \"_CLST_DIM_\")</value>
+        </attribute>
+        <attribute name="type">
+          <value>RADIO</value>
+        </attribute>
+        <attribute name="func">
+          <value>dynamic</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>clrunbpwz3</value>
+      </attribute>
+      <attribute name="Type">
+        <value>HierDimSelGroupByWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Group by DImension Selection</value>
+      </attribute>
+      <attribute name="InputSrcIntVar">
+        <value>SrcIntVar</value>
+      </attribute>
+      <attribute name="InputBaseIntVar">
+        <value>UprIntVar</value>
+      </attribute>
+      <attribute name="InputExcludeDimsVar">
+        <value>ClusterDimVar</value>
+      </attribute>
+      <attribute name="OutputVar">
+        <value>ClusterGroupIntVar</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunbpwz3wg1</value>
+        </attribute>
+        <attribute name="locx">
+          <value>4</value>
+        </attribute>
+        <attribute name="locy">
+          <value>5</value>
+        </attribute>
+        <attribute name="width">
+          <value>42</value>
+        </attribute>
+        <attribute name="height">
+          <value>54</value>
+        </attribute>
+        <attribute name="type">
+          <value>Group</value>
+        </attribute>
+        <attribute name="text">
+          <value>Optional: Select Hierarchy and Dimension to Group By</value>
+        </attribute>
+        <attribute name="func">
+          <value>static</value>
+        </attribute>
+      </data_model>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunbpwz3wg2</value>
+        </attribute>
+        <attribute name="locx">
+          <value>9</value>
+        </attribute>
+        <attribute name="locy">
+          <value>15</value>
+        </attribute>
+        <attribute name="width">
+          <value>30</value>
+        </attribute>
+        <attribute name="height">
+          <value>38</value>
+        </attribute>
+        <attribute name="type">
+          <value>ListBox</value>
+        </attribute>
+        <attribute name="func">
+          <value>dynamic</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>clrunbpwz4</value>
+      </attribute>
+      <attribute name="Type">
+        <value>RdfDynTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>SrcIntVar</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>clrunbpwz5</value>
+      </attribute>
+      <attribute name="Type">
+        <value>RdfDynTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>SrcIntVar</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>clrunbpwz6</value>
+      </attribute>
+      <attribute name="Type">
+        <value>RdfDynTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>SrcIntVar</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select time periods.</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>clrunbpwz7</value>
+      </attribute>
+      <attribute name="Type">
+        <value>MaskPosSelWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Grade Run Name Input</value>
+      </attribute>
+      <attribute name="InputDimVar">
+        <value>CnfgDimVar</value>
+      </attribute>
+      <attribute name="InputMaskMeasVar">
+        <value>CnfgMaskMeasVar</value>
+      </attribute>
+      <attribute name="InputAggMethodVar">
+        <value>B_OR</value>
+      </attribute>
+      <attribute name="OutputVar">
+        <value>CnfgNameVar</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunbpwz7wg1</value>
+        </attribute>
+        <attribute name="locx">
+          <value>6</value>
+        </attribute>
+        <attribute name="locy">
+          <value>10</value>
+        </attribute>
+        <attribute name="width">
+          <value>30</value>
+        </attribute>
+        <attribute name="height">
+          <value>15</value>
+        </attribute>
+        <attribute name="type">
+          <value>ListBox</value>
+        </attribute>
+        <attribute name="func">
+          <value>dynamic</value>
+        </attribute>
+      </data_model>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunbpwz7wg2</value>
+        </attribute>
+        <attribute name="locx">
+          <value>6</value>
+        </attribute>
+        <attribute name="locy">
+          <value>33</value>
+        </attribute>
+        <attribute name="width">
+          <value>30</value>
+        </attribute>
+        <attribute name="height">
+          <value>5</value>
+        </attribute>
+        <attribute name="action">
+          <value> StoreExpressionAsProperty NameVar GradeTmpString=\"$WIDGET\"</value>
+        </attribute>
+        <attribute name="type">
+          <value>Edit</value>
+        </attribute>
+        <attribute name="func">
+          <value>static</value>
+        </attribute>
+      </data_model>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunbpwz7wg3</value>
+        </attribute>
+        <attribute name="locx">
+          <value>6</value>
+        </attribute>
+        <attribute name="locy">
+          <value>6</value>
+        </attribute>
+        <attribute name="width">
+          <value>30</value>
+        </attribute>
+        <attribute name="height">
+          <value>2</value>
+        </attribute>
+        <attribute name="type">
+          <value>Text</value>
+        </attribute>
+        <attribute name="text">
+          <value>Select Configuration Name</value>
+        </attribute>
+        <attribute name="func">
+          <value>static</value>
+        </attribute>
+      </data_model>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunbpwz7wg4</value>
+        </attribute>
+        <attribute name="locx">
+          <value>6</value>
+        </attribute>
+        <attribute name="locy">
+          <value>29</value>
+        </attribute>
+        <attribute name="width">
+          <value>30</value>
+        </attribute>
+        <attribute name="height">
+          <value>2</value>
+        </attribute>
+        <attribute name="type">
+          <value>Text</value>
+        </attribute>
+        <attribute name="text">
+          <value>Set Grade Run Name</value>
+        </attribute>
+        <attribute name="func">
+          <value>static</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>clrunbpwz8</value>
+      </attribute>
+      <attribute name="Type">
+        <value>RunBreakPointWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Run Status</value>
+      </attribute>
+      <attribute name="SucceedMsg">
+        <value>Break Point Run Succeeded</value>
+      </attribute>
+      <attribute name="FailMsg">
+        <value>Break Point Run Failed</value>
+      </attribute>
+      <attribute name="RunName">
+        <value>NameVar</value>
+      </attribute>
+      <attribute name="SrcMeas">
+        <value>SrcMeasVar</value>
+      </attribute>
+      <attribute name="SrcInt">
+        <value>SrcIntVar</value>
+      </attribute>
+      <attribute name="DimCluster">
+        <value>ClusterDimVar</value>
+      </attribute>
+      <attribute name="ByGroupInt">
+        <value>ClusterGroupIntVar</value>
+      </attribute>
+      <attribute name="CnfgMeas">
+        <value>CnfgMeasVar</value>
+      </attribute>
+      <attribute name="CnfgName">
+        <value>CnfgNameVar</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunbpwz8wg1</value>
+        </attribute>
+        <attribute name="locx">
+          <value>4</value>
+        </attribute>
+        <attribute name="locy">
+          <value>5</value>
+        </attribute>
+        <attribute name="width">
+          <value>0</value>
+        </attribute>
+        <attribute name="height">
+          <value>54</value>
+        </attribute>
+        <attribute name="type">
+          <value>Group</value>
+        </attribute>
+        <attribute name="text">
+          <value>Run BreakPoint Batch</value>
+        </attribute>
+        <attribute name="func">
+          <value>dynamic</value>
+        </attribute>
+        <attribute name="widht">
+          <value>42</value>
+        </attribute>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="Wizard">
+    <attribute name="name">
+      <value> clruncl </value>
+    </attribute>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>clrunclwz1</value>
+      </attribute>
+      <attribute name="Type">
+        <value>SrcMeasSelWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Source Measure Selection</value>
+      </attribute>
+      <attribute name="InputSrcMeasVar">
+        <value>SrcMeasListVar</value>
+      </attribute>
+      <attribute name="OutputMeasVar">
+        <value>SrcMeasVar</value>
+      </attribute>
+      <attribute name="OutputIntVar">
+        <value>SrcIntVar</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunclwz1wg1</value>
+        </attribute>
+        <attribute name="locx">
+          <value>9</value>
+        </attribute>
+        <attribute name="locy">
+          <value>15</value>
+        </attribute>
+        <attribute name="width">
+          <value>30</value>
+        </attribute>
+        <attribute name="height">
+          <value>38</value>
+        </attribute>
+        <attribute name="action">
+          <value>StoreExpressionAsProperty MinClusters GradeTmpInt=1","StoreExpressionAsProperty MaxClusters GradeTmpInt=count([grch].[grcd])","StorePropertyFromDim NumClustersList NoDim MinClusters MaxClusters Index None ,</value>
+        </attribute>
+        <attribute name="type">
+          <value>ListBox</value>
+        </attribute>
+        <attribute name="func">
+          <value>dynamic</value>
+        </attribute>
+      </data_model>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunclwz1wg2</value>
+        </attribute>
+        <attribute name="locx">
+          <value>4</value>
+        </attribute>
+        <attribute name="locy">
+          <value>5</value>
+        </attribute>
+        <attribute name="width">
+          <value>42</value>
+        </attribute>
+        <attribute name="height">
+          <value>54</value>
+        </attribute>
+        <attribute name="type">
+          <value>Group</value>
+        </attribute>
+        <attribute name="text">
+          <value>Select Source Measure for Cluster Analysis</value>
+        </attribute>
+        <attribute name="func">
+          <value>static</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>clrunclwz2</value>
+      </attribute>
+      <attribute name="Type">
+        <value>HierDimSelWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Cluster on Dimension Selection</value>
+      </attribute>
+      <attribute name="InputSrcIntVar">
+        <value>SrcIntVar</value>
+      </attribute>
+      <attribute name="InputBaseIntVar">
+        <value>SrcIntVar</value>
+      </attribute>
+      <attribute name="OutputVar">
+        <value>ClusterDimVar</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunclwz2wg1</value>
+        </attribute>
+        <attribute name="locx">
+          <value>4</value>
+        </attribute>
+        <attribute name="locy">
+          <value>5</value>
+        </attribute>
+        <attribute name="width">
+          <value>42</value>
+        </attribute>
+        <attribute name="height">
+          <value>54</value>
+        </attribute>
+        <attribute name="type">
+          <value>Group</value>
+        </attribute>
+        <attribute name="text">
+          <value>Select Hierarchy and Dimension to Cluster on</value>
+        </attribute>
+        <attribute name="func">
+          <value>static</value>
+        </attribute>
+      </data_model>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunclwz2wg2</value>
+        </attribute>
+        <attribute name="locx">
+          <value>9</value>
+        </attribute>
+        <attribute name="locy">
+          <value>15</value>
+        </attribute>
+        <attribute name="width">
+          <value>30</value>
+        </attribute>
+        <attribute name="height">
+          <value>40</value>
+        </attribute>
+        <attribute name="type">
+          <value>RADIO</value>
+        </attribute>
+        <attribute name="func">
+          <value>dynamic</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>clrunclwz3</value>
+      </attribute>
+      <attribute name="Type">
+        <value>HierDimSelWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Cluster over Dimension Selection</value>
+      </attribute>
+      <attribute name="InputSrcIntVar">
+        <value>SrcIntVar</value>
+      </attribute>
+      <attribute name="InputExcludeIntVar">
+        <value>ClusterDimVar</value>
+      </attribute>
+      <attribute name="InputBaseIntVar">
+        <value>SrcIntVar</value>
+      </attribute>
+      <attribute name="OutputVar">
+        <value>ClusterOverDimVar</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunclwz3wg1</value>
+        </attribute>
+        <attribute name="locx">
+          <value>4</value>
+        </attribute>
+        <attribute name="locy">
+          <value>5</value>
+        </attribute>
+        <attribute name="width">
+          <value>42</value>
+        </attribute>
+        <attribute name="height">
+          <value>54</value>
+        </attribute>
+        <attribute name="type">
+          <value>Group</value>
+        </attribute>
+        <attribute name="text">
+          <value>Select Hierarchy and Dimension to Cluster over</value>
+        </attribute>
+        <attribute name="func">
+          <value>static</value>
+        </attribute>
+      </data_model>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunclwz3wg2</value>
+        </attribute>
+        <attribute name="locx">
+          <value>9</value>
+        </attribute>
+        <attribute name="locy">
+          <value>15</value>
+        </attribute>
+        <attribute name="width">
+          <value>30</value>
+        </attribute>
+        <attribute name="height">
+          <value>40</value>
+        </attribute>
+        <attribute name="type">
+          <value>RADIO</value>
+        </attribute>
+        <attribute name="func">
+          <value>dynamic</value>
+        </attribute>
+        <attribute name="action">
+          <value>StorePropertyAsToken _CLST_DIM_ ClusterDimVar", "StorePropertyAsToken _CLST_OVER_DIM_ ClusterOverDimVar","StorePropertyAsToken _SRC_INT_ SrcIntVar", "StoreExpressionAsProperty UprIntVar GradeTmpString = union_int_high(\"_SRC_INT_\", \"_CLST_DIM_\", \"_CLST_OVER_DIM_\")</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>clrunclwz4</value>
+      </attribute>
+      <attribute name="Type">
+        <value>HierDimSelGroupByWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Group by Dimension Selection</value>
+      </attribute>
+      <attribute name="InputSrcIntVar">
+        <value>SrcIntVar</value>
+      </attribute>
+      <attribute name="InputBaseIntVar">
+        <value>UprIntVar</value>
+      </attribute>
+      <attribute name="InputExcludeDimsVar">
+        <value>ClusterDImVar</value>
+      </attribute>
+      <attribute name="OutputVar">
+        <value>ClusterGroupIntVar</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunclwz4wg1</value>
+        </attribute>
+        <attribute name="locx">
+          <value>4</value>
+        </attribute>
+        <attribute name="locy">
+          <value>5</value>
+        </attribute>
+        <attribute name="width">
+          <value>42</value>
+        </attribute>
+        <attribute name="height">
+          <value>54</value>
+        </attribute>
+        <attribute name="type">
+          <value>Group</value>
+        </attribute>
+        <attribute name="text">
+          <value>Optional: Select Hierarchy and Dimension to Group By</value>
+        </attribute>
+        <attribute name="func">
+          <value>static</value>
+        </attribute>
+      </data_model>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunclwz4wg2</value>
+        </attribute>
+        <attribute name="locx">
+          <value>9</value>
+        </attribute>
+        <attribute name="locy">
+          <value>15</value>
+        </attribute>
+        <attribute name="width">
+          <value>30</value>
+        </attribute>
+        <attribute name="height">
+          <value>38</value>
+        </attribute>
+        <attribute name="type">
+          <value>ListBox</value>
+        </attribute>
+        <attribute name="func">
+          <value>dynamic</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>clrunclwz5</value>
+      </attribute>
+      <attribute name="Type">
+        <value>RdfDynTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Product Selection</value>
+      </attribute>
+      <attribute name="hier">
+        <value>prod</value>
+      </attribute>
+      <attribute name="dim">
+        <value>SrcIntVar</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select products.</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Products</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Products</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>clrunclwz6</value>
+      </attribute>
+      <attribute name="Type">
+        <value>RdfDynTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Location Selection</value>
+      </attribute>
+      <attribute name="hier">
+        <value>loc</value>
+      </attribute>
+      <attribute name="dim">
+        <value>SrcIntVar</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select locations.</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Locations</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Locations</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>clrunclwz7</value>
+      </attribute>
+      <attribute name="Type">
+        <value>RdfDynTwoTreeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Calendar Selection</value>
+      </attribute>
+      <attribute name="hier">
+        <value>clnd</value>
+      </attribute>
+      <attribute name="dim">
+        <value>SrcIntVar</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="title">
+        <value>Please select time periods.</value>
+      </attribute>
+      <attribute name="lLabel">
+        <value>Available Dates</value>
+      </attribute>
+      <attribute name="rLabel">
+        <value>Selected Dates</value>
+      </attribute>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>clrunclwz8</value>
+      </attribute>
+      <attribute name="Type">
+        <value>RdfDynamicWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Cluster Name Input</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunclwz8wg1</value>
+        </attribute>
+        <attribute name="locx">
+          <value>9</value>
+        </attribute>
+        <attribute name="locy">
+          <value>15</value>
+        </attribute>
+        <attribute name="width">
+          <value>30</value>
+        </attribute>
+        <attribute name="height">
+          <value>5</value>
+        </attribute>
+        <attribute name="type">
+          <value>Edit</value>
+        </attribute>
+        <attribute name="func">
+          <value>static</value>
+        </attribute>
+        <attribute name="action">
+          <value> StoreExpressionAsProperty NameVar GradeTmpString=\"$WIDGET\"</value>
+        </attribute>
+      </data_model>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunclwz8wg2</value>
+        </attribute>
+        <attribute name="locx">
+          <value>9</value>
+        </attribute>
+        <attribute name="locy">
+          <value>25</value>
+        </attribute>
+        <attribute name="width">
+          <value>30</value>
+        </attribute>
+        <attribute name="height">
+          <value>5</value>
+        </attribute>
+        <attribute name="type">
+          <value>DropDownList</value>
+        </attribute>
+        <attribute name="style">
+          <value>scrollbar</value>
+        </attribute>
+        <attribute name="func">
+          <value>dynamic</value>
+        </attribute>
+        <attribute name="TextFromProperty">
+          <value>NumClustersList</value>
+        </attribute>
+        <attribute name="action">
+          <value> StoreExpressionAsProperty NumberVar GradeTmpInt=$WIDGET</value>
+        </attribute>
+      </data_model>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunclwz8wg3</value>
+        </attribute>
+        <attribute name="locx">
+          <value>9</value>
+        </attribute>
+        <attribute name="locy">
+          <value>10</value>
+        </attribute>
+        <attribute name="width">
+          <value>30</value>
+        </attribute>
+        <attribute name="height">
+          <value>5</value>
+        </attribute>
+        <attribute name="type">
+          <value>Text</value>
+        </attribute>
+        <attribute name="text">
+          <value>Set Name for Cluster</value>
+        </attribute>
+        <attribute name="func">
+          <value>static</value>
+        </attribute>
+      </data_model>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunclwz8wg4</value>
+        </attribute>
+        <attribute name="locx">
+          <value>9</value>
+        </attribute>
+        <attribute name="locy">
+          <value>20</value>
+        </attribute>
+        <attribute name="width">
+          <value>30</value>
+        </attribute>
+        <attribute name="height">
+          <value>5</value>
+        </attribute>
+        <attribute name="type">
+          <value>Text</value>
+        </attribute>
+        <attribute name="text">
+          <value>Set Number of Clusters</value>
+        </attribute>
+        <attribute name="func">
+          <value>static</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="WizardPage">
+      <attribute name="name">
+        <value>clrunclwz9</value>
+      </attribute>
+      <attribute name="Type">
+        <value>RunGradeWizard</value>
+      </attribute>
+      <attribute name="label">
+        <value>Run Status</value>
+      </attribute>
+      <attribute name="SucceedMsg">
+        <value>Cluster Run Succeeded</value>
+      </attribute>
+      <attribute name="FailMsg">
+        <value>Cluster Run Failed</value>
+      </attribute>
+      <attribute name="RunName">
+        <value>NameVar</value>
+      </attribute>
+      <attribute name="SrcMeas">
+        <value>SrcMeasVar</value>
+      </attribute>
+      <attribute name="SrcInt">
+        <value>SrcIntVar</value>
+      </attribute>
+      <attribute name="DimCluster">
+        <value>ClusterDimVar</value>
+      </attribute>
+      <attribute name="DimClusterOver">
+        <value>ClusterOverDimVar</value>
+      </attribute>
+      <attribute name="ByGroupInt">
+        <value>ClusterGroupIntVar</value>
+      </attribute>
+      <attribute name="ClusterMethod">
+        <value>BANG</value>
+      </attribute>
+      <attribute name="ClusterNum">
+        <value>NumberVar</value>
+      </attribute>
+      <attribute name="AggMethod">
+        <value>Total</value>
+      </attribute>
+      <attribute name="granularityX">
+        <value> 50 </value>
+      </attribute>
+      <attribute name="granularityY">
+        <value> 50 </value>
+      </attribute>
+      <data_model type="WizardComponent">
+        <attribute name="name">
+          <value>clrunclwz9wg1</value>
+        </attribute>
+        <attribute name="locx">
+          <value>4</value>
+        </attribute>
+        <attribute name="locy">
+          <value>5</value>
+        </attribute>
+        <attribute name="width">
+          <value>0</value>
+        </attribute>
+        <attribute name="height">
+          <value>54</value>
+        </attribute>
+        <attribute name="type">
+          <value>Group</value>
+        </attribute>
+        <attribute name="text">
+          <value>Run Cluster Batch</value>
+        </attribute>
+        <attribute name="func">
+          <value>dynamic</value>
+        </attribute>
+        <attribute name="widht">
+          <value>42</value>
+        </attribute>
+      </data_model>
+    </data_model>
+  </data_model>
+</data_set>

@@ -1,0 +1,788 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="ClassScheme">
+  <attribute name="name">
+    <value>scheme</value>
+  </attribute>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>GMTR</value>
+    </attribute>
+    <attribute name="label">
+      <value>Grade Metric - GMTR</value>
+    </attribute>
+    <attribute name="insertable">
+      <value>true</value>
+    </attribute>
+    <attribute name="materialized">
+      <value>0</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>Realized</value>
+      </attribute>
+      <attribute name="label">
+        <value>Realized Measures</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>false</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>cfgmask</value>
+        </attribute>
+        <attribute name="label">
+          <value>Grade Configuration Indicator</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="naval">
+          <value>false</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>GRCD</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>or</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>none</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/gmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>gcfg</value>
+        </attribute>
+        <attribute name="label">
+          <value>Cluster Config</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>CLST_GRCD</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/gmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>Not_Realized</value>
+      </attribute>
+      <attribute name="label">
+        <value>Not Realized Measures</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>clcc</value>
+        </attribute>
+        <attribute name="label">
+          <value>Closest Cluster</value>
+        </attribute>
+        <attribute name="type">
+          <value>int</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>clcn</value>
+        </attribute>
+        <attribute name="label">
+          <value>Cluster Centroid</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>clcnv</value>
+        </attribute>
+        <attribute name="label">
+          <value>Cluster Centroid to Average Ratio</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>clcoh</value>
+        </attribute>
+        <attribute name="label">
+          <value>Cluster Cohesion</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>cldc</value>
+        </attribute>
+        <attribute name="label">
+          <value>Squared Distance From Centroid</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>cldcc</value>
+        </attribute>
+        <attribute name="label">
+          <value>Squared Closest Cluster Distance</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>clnms</value>
+        </attribute>
+        <attribute name="label">
+          <value>Cluster Names</value>
+        </attribute>
+        <attribute name="type">
+          <value>string</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>clpm</value>
+        </attribute>
+        <attribute name="label">
+          <value>Cluster Membership</value>
+        </attribute>
+        <attribute name="type">
+          <value>int</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>clpor</value>
+        </attribute>
+        <attribute name="label">
+          <value>Cluster Portion</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>clele</value>
+        </attribute>
+        <attribute name="label">
+          <value>Number of Elements</value>
+        </attribute>
+        <attribute name="type">
+          <value>int</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>clsel</value>
+        </attribute>
+        <attribute name="label">
+          <value>Mask Array For Clustering</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>clsrc</value>
+        </attribute>
+        <attribute name="label">
+          <value>Clustering Data Source</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0.00</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>clvd</value>
+        </attribute>
+        <attribute name="label">
+          <value>Valid Cluster Run</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="naval">
+          <value>false</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>WBK_B</value>
+      </attribute>
+      <attribute name="label">
+        <value>Cross with WORKBOOK and _B</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>clagg</value>
+        </attribute>
+        <attribute name="label">
+          <value>Aggregation Method</value>
+        </attribute>
+        <attribute name="type">
+          <value>string</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>Scalar</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/gmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>clbgi</value>
+        </attribute>
+        <attribute name="label">
+          <value>Cluster By Group Intersection</value>
+        </attribute>
+        <attribute name="type">
+          <value>string</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>Scalar</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/gmaint</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>cld</value>
+        </attribute>
+        <attribute name="label">
+          <value>Dimension to Cluster</value>
+        </attribute>
+        <attribute name="type">
+          <value>string</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>Scalar</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/gmaint</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>clm</value>
+        </attribute>
+        <attribute name="label">
+          <value>Measure to Cluster</value>
+        </attribute>
+        <attribute name="type">
+          <value>string</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>Scalar</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/gmaint</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>clmth</value>
+        </attribute>
+        <attribute name="label">
+          <value>Cluster Method</value>
+        </attribute>
+        <attribute name="type">
+          <value>string</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>Scalar</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/gmaint</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>clnam</value>
+        </attribute>
+        <attribute name="label">
+          <value>Cluster Run Name</value>
+        </attribute>
+        <attribute name="type">
+          <value>string</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>Scalar</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/gmaint</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>clnum</value>
+        </attribute>
+        <attribute name="label">
+          <value>Number Of Clusters</value>
+        </attribute>
+        <attribute name="type">
+          <value>int</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>Scalar</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/gmaint</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>clod</value>
+        </attribute>
+        <attribute name="label">
+          <value>Dimension to Cluster Over</value>
+        </attribute>
+        <attribute name="type">
+          <value>string</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>Scalar</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/gmaint</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>GBRT</value>
+    </attribute>
+    <attribute name="materialized">
+      <value>0</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>_B</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>false</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>WORKBOOK</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>false</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>XB</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>false</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>GTMP</value>
+    </attribute>
+    <attribute name="label">
+      <value>Grade Temp</value>
+    </attribute>
+    <attribute name="insertable">
+      <value>false</value>
+    </attribute>
+    <attribute name="materialized">
+      <value>0</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>gradesrcmeas</value>
+      </attribute>
+      <attribute name="label">
+        <value>Grade Source Measure List</value>
+      </attribute>
+      <attribute name="type">
+        <value>string</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>Scalar</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/gmaint</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>gradetmpbool</value>
+      </attribute>
+      <attribute name="label">
+        <value>Grade Temp Scalar Boolean</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>Scalar</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>or</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>none</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/gmaint</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>gradetmpint</value>
+      </attribute>
+      <attribute name="label">
+        <value>Grade Temp Scalar Int</value>
+      </attribute>
+      <attribute name="type">
+        <value>int</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>Scalar</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>none</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/gmaint</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>gradetmpreal</value>
+      </attribute>
+      <attribute name="label">
+        <value>Grade Temp Scalar Real</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>Scalar</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>none</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/gmaint</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>gradetmpstring</value>
+      </attribute>
+      <attribute name="label">
+        <value>Grade Temp Scalar String</value>
+      </attribute>
+      <attribute name="type">
+        <value>string</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>Scalar</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>ambig</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>none</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/gmaint</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

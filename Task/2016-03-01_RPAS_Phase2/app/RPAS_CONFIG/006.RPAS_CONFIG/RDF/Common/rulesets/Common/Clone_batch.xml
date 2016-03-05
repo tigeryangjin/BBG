@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="com.retek.ride.rule.newmodel.RuleGroup">
+  <attribute name="name">
+    <value>Clone_batch</value>
+  </attribute>
+  <attribute name="description">
+    <value>a rule group</value>
+  </attribute>
+  <attribute name="role">
+    <value>user</value>
+  </attribute>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>clone_rule1</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>DEST:clnadj &lt;- Clone(SRC: pos, SKUMAP1:prodcln101xb, SKURATIO1:prodcnt101xb, SKUMAP2:prodcln201xb, SKURATIO2:prodcnt201xb, SKUMAP3:prodcln301xb, SKURATIO3:prodcnt301xb, STRMAP1:loccln101xb, STRRATIO1:loccnt101xb, STRMAP2:loccln201xb, STRRATIO2:loccnt201xb, STRMAP3:loccln301xb, STRRATIO3:loccnt301xb, SKUADJRATIO:prodadjpct01xb, STRADJRATIO:locadjpct01xb, MASK:clnmask01xb)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

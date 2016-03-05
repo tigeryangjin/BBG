@@ -1,0 +1,2478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="ClassScheme">
+  <attribute name="name">
+    <value>scheme</value>
+  </attribute>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>STYP</value>
+    </attribute>
+    <attribute name="label">
+      <value>Sales Type</value>
+    </attribute>
+    <attribute name="type">
+      <value>real</value>
+    </attribute>
+    <attribute name="baseint">
+      <value>week_item_str</value>
+    </attribute>
+    <attribute name="defagg">
+      <value>total</value>
+    </attribute>
+    <attribute name="defspread">
+      <value>prop</value>
+    </attribute>
+    <attribute name="basestate">
+      <value>read</value>
+    </attribute>
+    <attribute name="aggstate">
+      <value>read</value>
+    </attribute>
+    <attribute name="db">
+      <value>data/sales</value>
+    </attribute>
+    <attribute name="materialized">
+      <value>0</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>csal</value>
+      </attribute>
+      <attribute name="label">
+        <value>Weekly Sales - Clearance</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/csal</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>dpos</value>
+      </attribute>
+      <attribute name="label">
+        <value>Daily Sales</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>day_item_str</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/dpos</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>pos</value>
+      </attribute>
+      <attribute name="label">
+        <value>Weekly Sales</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/pos</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>psal</value>
+      </attribute>
+      <attribute name="label">
+        <value>Weekly Sales - Promo</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/psal</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>rsal</value>
+      </attribute>
+      <attribute name="label">
+        <value>Weekly Sales - Regular</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/rsal</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>fakhstadj</value>
+      </attribute>
+      <attribute name="label">
+        <value>Fake History Adjustments</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>true</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>usradj</value>
+      </attribute>
+      <attribute name="label">
+        <value>User Adjustments</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>true</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>totadjsls</value>
+      </attribute>
+      <attribute name="label">
+        <value>Total Adjusted Sales</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>true</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>outind</value>
+      </attribute>
+      <attribute name="label">
+        <value>Outage Indicator</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>or</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>true</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>totslsly</value>
+      </attribute>
+      <attribute name="label">
+        <value>Total Sales LY</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>true</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>totslslly</value>
+      </attribute>
+      <attribute name="label">
+        <value>Total Sales Two Years Ago</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>true</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>totadjslsly</value>
+      </attribute>
+      <attribute name="label">
+        <value>Total Adjusted Sales LY</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>true</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>totadjslslly</value>
+      </attribute>
+      <attribute name="label">
+        <value>Total Adjusted Sales Two Years Ago</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>true</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>clnadj</value>
+      </attribute>
+      <attribute name="label">
+        <value>Cloned Sales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>lstoday</value>
+      </attribute>
+      <attribute name="label">
+        <value>Today</value>
+      </attribute>
+      <attribute name="type">
+        <value>int</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>Scalar</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>ambig</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/ppo</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>true</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>ppoprom</value>
+      </attribute>
+      <attribute name="label">
+        <value>PPO Promotion Flag</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>day_item_area</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>or</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/ppo</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>true</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>pposale</value>
+      </attribute>
+      <attribute name="label">
+        <value>PPO Final Sale</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>day_item_area</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/ppo</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>true</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>pposaleorg</value>
+      </attribute>
+      <attribute name="label">
+        <value>PPO Original Sale</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>day_item_area</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/ppo</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>true</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>pposaleadj</value>
+      </attribute>
+      <attribute name="label">
+        <value>PPO Adjusted Sale</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>day_item_area</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/ppo</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>true</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>ppoforday</value>
+      </attribute>
+      <attribute name="label">
+        <value>PPO Day Forecast</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>day_item_area</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/ppo</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>true</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>ppoforweek</value>
+      </attribute>
+      <attribute name="label">
+        <value>PPO Week Forecast</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_area</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/ppo</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>true</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>ppofordaily</value>
+      </attribute>
+      <attribute name="label">
+        <value>PPO Daily Forecast Profile</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>day_item_area</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/ppo</value>
+      </attribute>
+      <attribute name="viewtype">
+        <value>#UNSPECIFIED#</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>true</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>daypos</value>
+      </attribute>
+      <attribute name="label">
+        <value>Day Week Position</value>
+      </attribute>
+      <attribute name="type">
+        <value>string</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>day</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>ambig</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/ppo</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>weekpos</value>
+      </attribute>
+      <attribute name="label">
+        <value>Week Position</value>
+      </attribute>
+      <attribute name="type">
+        <value>string</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>ambig</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/ppo</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>mskEligProdLoc</value>
+      </attribute>
+      <attribute name="label">
+        <value>Component0000</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>or</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>write</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>write</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/clone</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>mskClnAdjExcl</value>
+      </attribute>
+      <attribute name="label">
+        <value>Exclude from clone adjust calculation</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>or</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>write</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>write</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/clone</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>clnAdjMask</value>
+      </attribute>
+      <attribute name="label">
+        <value>Included in clone adj calculation</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>or</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>write</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>write</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/clone</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>salesprice</value>
+      </attribute>
+      <attribute name="label">
+        <value>Sales Price</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>tmpsalesprice</value>
+      </attribute>
+      <attribute name="label">
+        <value>Temp Sales Price</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>apcroexptmask</value>
+      </attribute>
+      <attribute name="label">
+        <value>Export to APC-RO Mask</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>or</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/apcroexptmask</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>PriceDropRatio</value>
+    </attribute>
+    <attribute name="label">
+      <value>Price Drop Ratio Metrics</value>
+    </attribute>
+    <attribute name="type">
+      <value>real</value>
+    </attribute>
+    <attribute name="db">
+      <value>data/pricedropratio</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>pdritemprice</value>
+      </attribute>
+      <attribute name="label">
+        <value>Item Price</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>pdrbaseprice</value>
+      </attribute>
+      <attribute name="label">
+        <value>Item Base Price</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0.001</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>pdrtmpbaseprice</value>
+      </attribute>
+      <attribute name="label">
+        <value>Temp. Base Price</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0.001</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>pdrcalbaseprice</value>
+      </attribute>
+      <attribute name="label">
+        <value>Temp. Calc. Base Price</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0.001</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>pdrpriceratio</value>
+      </attribute>
+      <attribute name="label">
+        <value>Item Price Drop Ratio</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>pdruseprevbase</value>
+      </attribute>
+      <attribute name="label">
+        <value>Use Previous Base Flag</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="naval">
+        <value>false</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>pdrblindupdate</value>
+      </attribute>
+      <attribute name="label">
+        <value>Blind Update Flag</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="naval">
+        <value>false</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>pdrwindowstart</value>
+      </attribute>
+      <attribute name="label">
+        <value>Window Start Position Name</value>
+      </attribute>
+      <attribute name="type">
+        <value>string</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>pdrwindowend</value>
+      </attribute>
+      <attribute name="label">
+        <value>Window End Position Name</value>
+      </attribute>
+      <attribute name="type">
+        <value>string</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>pdrtmpbaseclnd</value>
+      </attribute>
+      <attribute name="label">
+        <value>Temp. Base Price with Clnd Dimension</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0.001</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>pdrtmpbasepr2</value>
+      </attribute>
+      <attribute name="label">
+        <value>Temp. Base Price 2</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0.001</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>itemalts</value>
+    </attribute>
+    <attribute name="label">
+      <value>Item Alerts</value>
+    </attribute>
+    <attribute name="description">
+      <value>Item Alerts</value>
+    </attribute>
+    <attribute name="db">
+      <value>data/itemalerts</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>newflag</value>
+      </attribute>
+      <attribute name="label">
+        <value>New Item Flag</value>
+      </attribute>
+      <attribute name="description">
+        <value>true means this is a new item</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="naval">
+        <value>false</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>#UNSPECIFIED#</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>discontflag</value>
+      </attribute>
+      <attribute name="label">
+        <value>Discontinued Item Flag</value>
+      </attribute>
+      <attribute name="description">
+        <value>true means this item is discontinued</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="naval">
+        <value>false</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>newalt</value>
+      </attribute>
+      <attribute name="label">
+        <value>New Item Alert</value>
+      </attribute>
+      <attribute name="description">
+        <value>new item alert</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="naval">
+        <value>false</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>discontalt</value>
+      </attribute>
+      <attribute name="label">
+        <value>Discontinued Item Alert</value>
+      </attribute>
+      <attribute name="description">
+        <value>discontinued item alert</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="naval">
+        <value>false</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>PRC</value>
+    </attribute>
+    <attribute name="label">
+      <value>Regular Price Effects</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>rdfgamma</value>
+      </attribute>
+      <attribute name="label">
+        <value>Price Elasticity</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_iter_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>average_pop</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/regprice</value>
+      </attribute>
+      <attribute name="viewtype">
+        <value>#UNSPECIFIED#</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>true</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>rdfprice</value>
+      </attribute>
+      <attribute name="label">
+        <value>Regular Price</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>average</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/regprice</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>true</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>rdfpromoind</value>
+      </attribute>
+      <attribute name="label">
+        <value>Promotion Indicators</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>or</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/regprice</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>true</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>rdfanchprc</value>
+      </attribute>
+      <attribute name="label">
+        <value>Anchor Price</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>ambig</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/regprice</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>rdfmaxprc</value>
+      </attribute>
+      <attribute name="label">
+        <value>Maximum Historical Price</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>max</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/regprice</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>CausalSLC</value>
+    </attribute>
+    <attribute name="label">
+      <value>Causal SLC</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>causslcros</value>
+      </attribute>
+      <attribute name="label">
+        <value>Causal SLC - Rate of Sales</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/ros</value>
+      </attribute>
+      <attribute name="viewtype">
+        <value>#UNSPECIFIED#</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcpos</value>
+      </attribute>
+      <attribute name="label">
+        <value>Weekly Sales Data Source for Causal SLC</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcdprcover</value>
+      </attribute>
+      <attribute name="label">
+        <value>Depriced Sales - SLC</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcdpmtover</value>
+      </attribute>
+      <attribute name="label">
+        <value>Depromoted Sales - SLC</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcsmthover</value>
+      </attribute>
+      <attribute name="label">
+        <value>Smoothed Baseline Sales - SLC</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcdprcadj</value>
+      </attribute>
+      <attribute name="label">
+        <value>Deprice Adjustment - SLC</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcdpmtadj</value>
+      </attribute>
+      <attribute name="label">
+        <value>Depromote Adjustment - SLC</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcsmthadj</value>
+      </attribute>
+      <attribute name="label">
+        <value>Smoothing Adjustment - SLC</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcposindex</value>
+      </attribute>
+      <attribute name="label">
+        <value>SLC Baseline POS Index</value>
+      </attribute>
+      <attribute name="type">
+        <value>int</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>min_pop</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcstindx</value>
+      </attribute>
+      <attribute name="label">
+        <value>SLC Baseline POS Item/Store Index</value>
+      </attribute>
+      <attribute name="type">
+        <value>int</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>min_pop</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcslsstdate</value>
+      </attribute>
+      <attribute name="label">
+        <value>Sales Start Date - SLC</value>
+      </attribute>
+      <attribute name="type">
+        <value>date</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>ambig</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>write</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>write</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcparams</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcslsstindx</value>
+      </attribute>
+      <attribute name="label">
+        <value>Sales Start Index - SLC</value>
+      </attribute>
+      <attribute name="type">
+        <value>int</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>min_pop</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcparams</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcshftoffset</value>
+      </attribute>
+      <attribute name="label">
+        <value>Sales Shift Offset</value>
+      </attribute>
+      <attribute name="type">
+        <value>int</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>max_pop</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcshftover</value>
+      </attribute>
+      <attribute name="label">
+        <value>Shifted Sales - SLC</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcaggover</value>
+      </attribute>
+      <attribute name="label">
+        <value>Aggregated Shifted Sales - SLC</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>#SLCCAUSHIPOS#</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcslsenddate</value>
+      </attribute>
+      <attribute name="label">
+        <value>Sales End Date - SLC</value>
+      </attribute>
+      <attribute name="type">
+        <value>date</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>ambig</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>write</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>write</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcparams</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcslsendindx</value>
+      </attribute>
+      <attribute name="label">
+        <value>Sales End Index - SLC</value>
+      </attribute>
+      <attribute name="type">
+        <value>int</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>max_pop</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcparams</value>
+      </attribute>
+      <attribute name="viewtype">
+        <value>#UNSPECIFIED#</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcendindx</value>
+      </attribute>
+      <attribute name="label">
+        <value>End Index - SLC</value>
+      </attribute>
+      <attribute name="type">
+        <value>int</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>min_pop</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcaggros</value>
+      </attribute>
+      <attribute name="label">
+        <value>Aggregated ROS -SLC</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>clss_dstr</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcrossprdratio</value>
+      </attribute>
+      <attribute name="label">
+        <value>Spreading Profile Based on ROS- SLC</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slclccorg</value>
+      </attribute>
+      <attribute name="label">
+        <value>Original Life Cycle Curve - SLC</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+      <attribute name="viewtype">
+        <value>#UNSPECIFIED#</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcpreseasbl</value>
+      </attribute>
+      <attribute name="label">
+        <value>Preseason Baseline Before Shift - SLC</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcitemind</value>
+      </attribute>
+      <attribute name="label">
+        <value>Short Lifecycle Item Flag</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>ambig</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>write</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>write</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcparams</value>
+      </attribute>
+      <attribute name="viewtype">
+        <value>#UNSPECIFIED#</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slclccorglen</value>
+      </attribute>
+      <attribute name="label">
+        <value>SLC Original Lifecycle Curve Length</value>
+      </attribute>
+      <attribute name="type">
+        <value>int</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>max_pop</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slclcclen</value>
+      </attribute>
+      <attribute name="label">
+        <value>SLC Lifecycle Curve Length</value>
+      </attribute>
+      <attribute name="type">
+        <value>int</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>max_pop</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+      <attribute name="viewtype">
+        <value>#UNSPECIFIED#</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcseasstart</value>
+      </attribute>
+      <attribute name="label">
+        <value>SLC Season Start Date</value>
+      </attribute>
+      <attribute name="type">
+        <value>date</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>ambig</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>write</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>write</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcparams</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcseasend</value>
+      </attribute>
+      <attribute name="label">
+        <value>SLC Season End Date</value>
+      </attribute>
+      <attribute name="type">
+        <value>date</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>ambig</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>write</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>write</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcparams</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcblorg</value>
+      </attribute>
+      <attribute name="label">
+        <value>Unshifted Preseaon Baseline - SLC</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+      <attribute name="viewtype">
+        <value>#UNSPECIFIED#</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcseasoffset</value>
+      </attribute>
+      <attribute name="label">
+        <value>Seasonal Start Date Shift Offset</value>
+      </attribute>
+      <attribute name="type">
+        <value>int</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>ambig</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcmask</value>
+      </attribute>
+      <attribute name="label">
+        <value>Short Lifecycle Item Store Flag</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>ambig</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcparams</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slcpreseaspl</value>
+      </attribute>
+      <attribute name="label">
+        <value>Preseason Baseline -SLC</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcsales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slccausover</value>
+      </attribute>
+      <attribute name="label">
+        <value>SLC Depromted POS</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slccaussales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slccausadj</value>
+      </attribute>
+      <attribute name="label">
+        <value>SLC Depromote Adjustment</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slcscausales</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slccaussrc</value>
+      </attribute>
+      <attribute name="label">
+        <value>SLC Causal Data Source</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/slccaussales</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>XPromo</value>
+    </attribute>
+    <attribute name="label">
+      <value>Cross Promo Preprocess</value>
+    </attribute>
+    <attribute name="type">
+      <value>real</value>
+    </attribute>
+    <attribute name="baseint">
+      <value>#UNSPECIFIED#</value>
+    </attribute>
+    <attribute name="defagg">
+      <value>total</value>
+    </attribute>
+    <attribute name="defspread">
+      <value>prop</value>
+    </attribute>
+    <attribute name="basestate">
+      <value>read</value>
+    </attribute>
+    <attribute name="aggstate">
+      <value>read</value>
+    </attribute>
+    <attribute name="db">
+      <value>data/xpromodata</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slshalo</value>
+      </attribute>
+      <attribute name="label">
+        <value>Weekly Sales - Cross Promo Halo Level</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>#XPROM_HALO#</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/xpromodata</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slscann</value>
+      </attribute>
+      <attribute name="label">
+        <value>Weekly Sales - Cross Promo Cannibalization Level</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>#XPROM_CANN#</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/xpromodata</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>promoindhalo</value>
+      </attribute>
+      <attribute name="label">
+        <value>Weekly Promotion Variable - Halo Level</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>#XPROM_HALO#</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/xpromodata</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>promoindcann</value>
+      </attribute>
+      <attribute name="label">
+        <value>Weekly Promotion Variable - Cannibalization Level</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>#XPROM_CANN#</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/xpromodata</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>normprchalo</value>
+      </attribute>
+      <attribute name="label">
+        <value>Weekly Normalized Price - Halo Level</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>#XPROM_HALO#</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/xpromodata</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>normprccann</value>
+      </attribute>
+      <attribute name="label">
+        <value>Weekly Normalizated Price -  Cannibalization Level</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>#XPROM_CANN#</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/xpromodata</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>normprcbase</value>
+      </attribute>
+      <attribute name="label">
+        <value>Weekly Normalizated Price - Base Level</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>average</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/xpromodata</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slsbaseline</value>
+      </attribute>
+      <attribute name="label">
+        <value>Weekly Sales Baseline - Base Level</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/xpromodata</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slsbaselinehalo</value>
+      </attribute>
+      <attribute name="label">
+        <value>Weekly Sales Baseline - Halo Level</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>#XPROM_HALO#</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>slsbaselinecann</value>
+      </attribute>
+      <attribute name="label">
+        <value>Weekly Sales Baseline - Cannibalization Level</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>#XPROM_CANN#</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>read</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>promoindnum</value>
+      </attribute>
+      <attribute name="label">
+        <value>Weekly Promotion Numeric Indicator</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>average</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>appcanneff</value>
+      </attribute>
+      <attribute name="label">
+        <value>Approved Promo Cannibalization Effect</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>scls_rgn_sclr</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>average_pop</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>apphaloeff</value>
+      </attribute>
+      <attribute name="label">
+        <value>Approved Promo Halo Effect</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>clss_rgn_clsr</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>average_pop</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>repl</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>Components</value>
+    </attribute>
+    <attribute name="label">
+      <value>Forecast Components</value>
+    </attribute>
+    <attribute name="type">
+      <value>real</value>
+    </attribute>
+    <attribute name="baseint">
+      <value>week_item_str</value>
+    </attribute>
+    <attribute name="defagg">
+      <value>total</value>
+    </attribute>
+    <attribute name="defspread">
+      <value>prop</value>
+    </attribute>
+    <attribute name="db">
+      <value>data/components</value>
+    </attribute>
+    <attribute name="insertable">
+      <value>true</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>compbaseline</value>
+      </attribute>
+      <attribute name="label">
+        <value>Forecast Component - Baseline</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0.0</value>
+      </attribute>
+      <attribute name="viewtype">
+        <value>#UNSPECIFIED#</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>compprice</value>
+      </attribute>
+      <attribute name="label">
+        <value>Forecast Component - Regular Price Lift</value>
+      </attribute>
+      <attribute name="naval">
+        <value>1.0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>comppromo</value>
+      </attribute>
+      <attribute name="label">
+        <value>Forecast Component - Promotional Lift</value>
+      </attribute>
+      <attribute name="naval">
+        <value>1.0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>compintv</value>
+      </attribute>
+      <attribute name="label">
+        <value>Forecast Component - Intervals</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0.0</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

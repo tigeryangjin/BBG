@@ -1,0 +1,1546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="ClassScheme">
+  <attribute name="name">
+    <value>scheme</value>
+  </attribute>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>PTYP</value>
+    </attribute>
+    <attribute name="label">
+      <value>Promo Metric - PTYP</value>
+    </attribute>
+    <attribute name="defagg">
+      <value>ambig</value>
+    </attribute>
+    <attribute name="defspread">
+      <value>repl</value>
+    </attribute>
+    <attribute name="basestate">
+      <value>read</value>
+    </attribute>
+    <attribute name="aggstate">
+      <value>read</value>
+    </attribute>
+    <attribute name="insertable">
+      <value>false</value>
+    </attribute>
+    <attribute name="materialized">
+      <value>0</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>NL_NPD</value>
+      </attribute>
+      <attribute name="label">
+        <value>No Location</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pagg</value>
+        </attribute>
+        <attribute name="label">
+          <value>Promotion Variable Aggregation</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pvar</value>
+        </attribute>
+        <attribute name="label">
+          <value>Promotion Variable</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>ambig</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/promo</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>true</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pagb</value>
+        </attribute>
+        <attribute name="label">
+          <value>Promotion Variable Aggregation Copy</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>NP_NPD</value>
+      </attribute>
+      <attribute name="label">
+        <value>No Promotions</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pfb</value>
+        </attribute>
+        <attribute name="label">
+          <value>Forecasted Baseline</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>psf</value>
+        </attribute>
+        <attribute name="label">
+          <value>Promotional Self Lift Forecast</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pcsf</value>
+        </attribute>
+        <attribute name="label">
+          <value>Promotional Forecast With Cross Effects</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pcsrf</value>
+        </attribute>
+        <attribute name="label">
+          <value>Promotional Forecast With Regular Price lift</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pff</value>
+        </attribute>
+        <attribute name="label">
+          <value>Promotional Forecast with Promote Lift Override</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>promoind</value>
+        </attribute>
+        <attribute name="label">
+          <value>Merged Promo Indicator</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>or</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>totprmlift</value>
+        </attribute>
+        <attribute name="label">
+          <value>Total Promotional Lift Unit</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>totprclift</value>
+        </attribute>
+        <attribute name="label">
+          <value>Total Regular Price Lift Unit</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>prmliftovr</value>
+        </attribute>
+        <attribute name="label">
+          <value>Promotional Lift Override</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>calprmlift</value>
+        </attribute>
+        <attribute name="label">
+          <value>Calculated Promotional Lift unit</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>prmslfun</value>
+        </attribute>
+        <attribute name="label">
+          <value>Promotion Self Lift Units</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>prmhaloun</value>
+        </attribute>
+        <attribute name="label">
+          <value>Promotion Halo Lift Units</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>prmcanun</value>
+        </attribute>
+        <attribute name="label">
+          <value>Promotion Cannibalization Lift Unit</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>prcslfun</value>
+        </attribute>
+        <attribute name="label">
+          <value>Price Self Lift Units</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>prchaloun</value>
+        </attribute>
+        <attribute name="label">
+          <value>Price Halo Lift Units</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>prccanun</value>
+        </attribute>
+        <attribute name="label">
+          <value>Price Cannibalization Lift Unit</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>calprclift</value>
+        </attribute>
+        <attribute name="label">
+          <value>Calculated Regular Price lift</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>ALEX_NPD</value>
+      </attribute>
+      <attribute name="label">
+        <value>No Calendar</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>ambig</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pce</value>
+        </attribute>
+        <attribute name="label">
+          <value>Simulated Effect</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>average</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>peff</value>
+        </attribute>
+        <attribute name="label">
+          <value>System Calculated Effect</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>1.00</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>average</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>true</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>povr</value>
+        </attribute>
+        <attribute name="label">
+          <value>System Effect Override</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>1.00</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>average</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>true</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pse</value>
+        </attribute>
+        <attribute name="label">
+          <value>Approved Effect</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>average</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>ptyp</value>
+        </attribute>
+        <attribute name="label">
+          <value>Promo Effect Type</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>ambig</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pmaint</value>
+        </attribute>
+        <attribute name="uitype">
+          <value>picklist</value>
+        </attribute>
+        <attribute name="range">
+          <value>0(Automatic), 1(Forced In), 2(Disabled), 3(Override All), 4(Override Future Only), 5(Override From Higher Level), 6(Automatic Boolean)</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>NPEX_NPD</value>
+      </attribute>
+      <attribute name="label">
+        <value>No Calendar, No Promotions</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>caus_hi_log</value>
+        </attribute>
+        <attribute name="label">
+          <value>Higher Effect Log - Temp</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0.0</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>prop</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/causalTemp</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>caus_ht_log</value>
+        </attribute>
+        <attribute name="label">
+          <value>Highest Effect Log - Temp</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0.0</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>prop</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/causalTemp</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>causal_pop</value>
+        </attribute>
+        <attribute name="label">
+          <value>Pop - Temp</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0.0</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>prop</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/causalTemp</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>caus_bs_log</value>
+        </attribute>
+        <attribute name="label">
+          <value>Base Effect Log Temp</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0.0</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>prop</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/causalTemp</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>NP_LABEL_NPD</value>
+      </attribute>
+      <attribute name="label">
+        <value>No Promotions Label Intersection No Partition Dimension</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>endidx</value>
+        </attribute>
+        <attribute name="label">
+          <value>End Index</value>
+        </attribute>
+        <attribute name="type">
+          <value>int</value>
+        </attribute>
+        <attribute name="naval">
+          <value>-1</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>#clndint_C_#</value>
+        </attribute>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>FLVL</value>
+    </attribute>
+    <attribute name="materialized">
+      <value>0</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>XL</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>01</value>
+      </attribute>
+      <attribute name="label">
+        <value>1 - itm/str/week-Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>02</value>
+      </attribute>
+      <attribute name="label">
+        <value>2 - itm/str/week</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>06</value>
+      </attribute>
+      <attribute name="label">
+        <value>6 - itm/str/day-Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>day_item_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>08</value>
+      </attribute>
+      <attribute name="label">
+        <value>8 - itm/dst/week</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_dstr</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>10</value>
+      </attribute>
+      <attribute name="label">
+        <value>10 - itm/area/day-Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>day_item_area</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>15</value>
+      </attribute>
+      <attribute name="label">
+        <value>15 - itm/str/week-Final - Causal SLC</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>PROM</value>
+    </attribute>
+    <attribute name="materialized">
+      <value>0</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>XP</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>ptyp</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>xmas</value>
+      </attribute>
+      <attribute name="label">
+        <value>Christmas</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>day_clss</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/promo</value>
+      </attribute>
+      <attribute name="PVARDB">
+        <value>data/promo</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>xmss</value>
+      </attribute>
+      <attribute name="label">
+        <value>Christmas Season</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/promo</value>
+      </attribute>
+      <attribute name="PVARDB">
+        <value>data/promo</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>nyd</value>
+      </attribute>
+      <attribute name="label">
+        <value>New Years Day</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>day_item</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/promo</value>
+      </attribute>
+      <attribute name="PVARDB">
+        <value>data/promo</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>eas</value>
+      </attribute>
+      <attribute name="label">
+        <value>Easter</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>day_item</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/promo</value>
+      </attribute>
+      <attribute name="PVARDB">
+        <value>data/promo</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>bts</value>
+      </attribute>
+      <attribute name="label">
+        <value>Back to School</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/promo</value>
+      </attribute>
+      <attribute name="PVARDB">
+        <value>data/promo</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>circ</value>
+      </attribute>
+      <attribute name="label">
+        <value>Circular</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/promo</value>
+      </attribute>
+      <attribute name="PVARDB">
+        <value>data/promo</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>isd</value>
+      </attribute>
+      <attribute name="label">
+        <value>In-Store Display</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/promo</value>
+      </attribute>
+      <attribute name="PVARDB">
+        <value>data/promo</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>dml</value>
+      </attribute>
+      <attribute name="label">
+        <value>Direct Mail</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>day_item_str</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/promo</value>
+      </attribute>
+      <attribute name="PVARDB">
+        <value>data/promo</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>sgn</value>
+      </attribute>
+      <attribute name="label">
+        <value>Signage</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>day_item_str</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/promo</value>
+      </attribute>
+      <attribute name="PVARDB">
+        <value>data/promo</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>pprc</value>
+      </attribute>
+      <attribute name="label">
+        <value>Promotional Price</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/promo</value>
+      </attribute>
+      <attribute name="PVARDB">
+        <value>data/promo</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>TMP</value>
+    </attribute>
+    <attribute name="label">
+      <value>Promo Temp</value>
+    </attribute>
+    <attribute name="materialized">
+      <value>0</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>FNHBI</value>
+      </attribute>
+      <attribute name="label">
+        <value>Forced Non HBI measures</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>caus_ht_pop</value>
+        </attribute>
+        <attribute name="label">
+          <value>Highest Pop - Temp</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0.0</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>Scalar</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>prop</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/causalTemp</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>caus_ht_eff</value>
+        </attribute>
+        <attribute name="label">
+          <value>Highest Effect - Temp</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0.0</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>Scalar</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>prop</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/causalTemp</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>SINGLE</value>
+      </attribute>
+      <attribute name="label">
+        <value>Single</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>promoenable</value>
+        </attribute>
+        <attribute name="label">
+          <value>Enable Promotions</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="naval">
+          <value>true</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>PRMO_PRML</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>or</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pmaint</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>promoallowneg</value>
+        </attribute>
+        <attribute name="label">
+          <value>Promotion Allow Negative Lift</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="naval">
+          <value>true</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>PRMO</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>ambig</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pmaint</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>fpromoenable</value>
+        </attribute>
+        <attribute name="label">
+          <value>Final Level Enabled Promotion</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="naval">
+          <value>false</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>PRMO_PRML</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>or</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pmaint</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>finalpromolvls</value>
+        </attribute>
+        <attribute name="label">
+          <value>Causal Enabled Final Level</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="naval">
+          <value>false</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>PRML</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>ambig</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pmaint</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>promomodeltype</value>
+        </attribute>
+        <attribute name="label">
+          <value>Model Type for promotional variable</value>
+        </attribute>
+        <attribute name="description">
+          <value>Model Type for promotional variable</value>
+        </attribute>
+        <attribute name="type">
+          <value>int</value>
+        </attribute>
+        <attribute name="naval">
+          <value>1</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>PRMO</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>ambig</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pmaint</value>
+        </attribute>
+        <attribute name="uitype">
+          <value>picklist</value>
+        </attribute>
+        <attribute name="range">
+          <value>1(Linear), 2(Exponential)</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>startindex</value>
+        </attribute>
+        <attribute name="label">
+          <value>Start Index</value>
+        </attribute>
+        <attribute name="type">
+          <value>int</value>
+        </attribute>
+        <attribute name="naval">
+          <value>-1</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>Scalar</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>endindex</value>
+        </attribute>
+        <attribute name="label">
+          <value>End Index</value>
+        </attribute>
+        <attribute name="type">
+          <value>int</value>
+        </attribute>
+        <attribute name="naval">
+          <value>-1</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>Scalar</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>modelxp</value>
+        </attribute>
+        <attribute name="label">
+          <value>Causal Method Used</value>
+        </attribute>
+        <attribute name="type">
+          <value>int</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>#partdimint#</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>reqmthxp</value>
+        </attribute>
+        <attribute name="label">
+          <value>Required Forecast Method</value>
+        </attribute>
+        <attribute name="type">
+          <value>int</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>#partdimint#</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>arltxp</value>
+        </attribute>
+        <attribute name="label">
+          <value>Apply Regular Price Lift</value>
+        </attribute>
+        <attribute name="type">
+          <value>int</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>#partdimint#</value>
+        </attribute>
+        <attribute name="uitype">
+          <value>picklist</value>
+        </attribute>
+        <attribute name="range">
+          <value>0(Do Not Apply),1(Apply Sytem),2(Apply Override)</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>roprxp</value>
+        </attribute>
+        <attribute name="label">
+          <value>Apply Regular Price Lift Over Promotion</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="naval">
+          <value>false</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>#partdimint#</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>appslfxp</value>
+        </attribute>
+        <attribute name="label">
+          <value>Apply Self Lift Price Effect</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="naval">
+          <value>false</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>#partdimint#</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>apphaloxp</value>
+        </attribute>
+        <attribute name="label">
+          <value>Apply Halo Lift Price Effect</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="naval">
+          <value>false</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>#partdimint#</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>appcanxp</value>
+        </attribute>
+        <attribute name="label">
+          <value>Apply Cannibalization Price Effect</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="naval">
+          <value>false</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>#partdimint#</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>apprmslfxp</value>
+        </attribute>
+        <attribute name="label">
+          <value>Apply Self Lift Promotion Effect</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="naval">
+          <value>false</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>#partdimint#</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>apprmhaloxp</value>
+        </attribute>
+        <attribute name="label">
+          <value>Apply Halo Lift Promotion Effect</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="naval">
+          <value>false</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>#partdimint#</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>apprmcanxp</value>
+        </attribute>
+        <attribute name="label">
+          <value>Apply Cannibalization Promotion Effect</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="naval">
+          <value>false</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>#partdimint#</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>derivedpromo</value>
+        </attribute>
+        <attribute name="label">
+          <value>Derived Promotion</value>
+        </attribute>
+        <attribute name="description">
+          <value>Derived Promotion Indicator</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="naval">
+          <value>false</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>PRMO</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>or</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>none</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pmaint</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>promoencur</value>
+        </attribute>
+        <attribute name="label">
+          <value>current enablue promotions</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="naval">
+          <value>true</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>PRMO</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>or</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pmaint</value>
+        </attribute>
+      </data_model>
+    </data_model>
+  </data_model>
+</data_set>

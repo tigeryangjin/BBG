@@ -1,0 +1,2909 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="ClassScheme">
+  <attribute name="name">
+    <value>scheme</value>
+  </attribute>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>CMTR</value>
+    </attribute>
+    <attribute name="label">
+      <value>Curve Metric</value>
+    </attribute>
+    <attribute name="type">
+      <value>real</value>
+    </attribute>
+    <attribute name="defagg">
+      <value>ambig</value>
+    </attribute>
+    <attribute name="defspread">
+      <value>repl</value>
+    </attribute>
+    <attribute name="basestate">
+      <value>read</value>
+    </attribute>
+    <attribute name="aggstate">
+      <value>read</value>
+    </attribute>
+    <attribute name="insertable">
+      <value>false</value>
+    </attribute>
+    <attribute name="materialized">
+      <value>0</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>F_AG_C_NPD</value>
+      </attribute>
+      <attribute name="label">
+        <value>Final</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>cpgappby</value>
+        </attribute>
+        <attribute name="label">
+          <value>Cached Profile Approved By</value>
+        </attribute>
+        <attribute name="type">
+          <value>string</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>ambig</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>cpgappdate</value>
+        </attribute>
+        <attribute name="label">
+          <value>Cached Profile Approval Date</value>
+        </attribute>
+        <attribute name="type">
+          <value>date</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>ambig</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pgapfh</value>
+        </attribute>
+        <attribute name="label">
+          <value>Profile Approval Flag (Hi)</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>ambig</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmpdateagg</value>
+        </attribute>
+        <attribute name="label">
+          <value>temp date at aggint</value>
+        </attribute>
+        <attribute name="description">
+          <value>TMPDATE_AGGINT</value>
+        </attribute>
+        <attribute name="type">
+          <value>date</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgappdate_F</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmpstragg</value>
+        </attribute>
+        <attribute name="label">
+          <value>temp string at aggint</value>
+        </attribute>
+        <attribute name="description">
+          <value>TMPSTR_AGGINT</value>
+        </attribute>
+        <attribute name="type">
+          <value>string</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgappby_F</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pgappmth</value>
+        </attribute>
+        <attribute name="label">
+          <value>Profile Approval Method</value>
+        </attribute>
+        <attribute name="description">
+          <value>APPROVAL_METHOD</value>
+        </attribute>
+        <attribute name="type">
+          <value>int</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>ambig</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgappmth</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="uitype">
+          <value>picklist</value>
+        </attribute>
+        <attribute name="range">
+          <value>0(No Override), 1(Approve Use System), 2(Do Not Approve)</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pgmask</value>
+        </attribute>
+        <attribute name="label">
+          <value>Source Profile Override</value>
+        </attribute>
+        <attribute name="description">
+          <value>MASK</value>
+        </attribute>
+        <attribute name="type">
+          <value>int</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>ambig</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmask</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="uitype">
+          <value>picklist</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>F_S_C_NPD</value>
+      </attribute>
+      <attribute name="label">
+        <value>Final w/Exception</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>adjp</value>
+        </attribute>
+        <attribute name="label">
+          <value>Adjusted Profile</value>
+        </attribute>
+        <attribute name="description">
+          <value>ADJUSTED</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>prop</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgadj_F</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>adjptemp</value>
+        </attribute>
+        <attribute name="label">
+          <value>Temporary Adjusted Profile</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>ambig</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>prop</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>adjptmp</value>
+        </attribute>
+        <attribute name="label">
+          <value>Adjusted Profile</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>prop</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgadjtmp_F</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>apvp</value>
+        </attribute>
+        <attribute name="label">
+          <value>Approved Profile</value>
+        </attribute>
+        <attribute name="description">
+          <value>APPROVED</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>prop</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/apvp_F</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>true</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>cadjp</value>
+        </attribute>
+        <attribute name="label">
+          <value>Cached Adjusted Profile</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>ambig</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>prop</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/cadjp_F</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>cmanapp</value>
+        </attribute>
+        <attribute name="label">
+          <value>Cached Manual Approval Mask</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>ambig</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/cmanapp_F</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tempapvp</value>
+        </attribute>
+        <attribute name="label">
+          <value>Temp Approved Profile</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>prop</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmpstore</value>
+        </attribute>
+        <attribute name="label">
+          <value>temp measure1 at store int</value>
+        </attribute>
+        <attribute name="description">
+          <value>TMP1_STOREINT</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/tmpstore_F</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmp2store</value>
+        </attribute>
+        <attribute name="label">
+          <value>temp measure2 at store int</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/tmp2store_F</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>adjmask</value>
+        </attribute>
+        <attribute name="label">
+          <value>Adjustment mask</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="naval">
+          <value>false</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>or</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>FS_S_C_NPD</value>
+      </attribute>
+      <attribute name="label">
+        <value>Final, Src w/Exception</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>sysp</value>
+        </attribute>
+        <attribute name="label">
+          <value>System Profile</value>
+        </attribute>
+        <attribute name="description">
+          <value>SYSTEM</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>prop</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/sysp_F</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>NFNS_NPD</value>
+      </attribute>
+      <attribute name="label">
+        <value>Neither Lvl</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>clvl</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>false</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>dataint</value>
+        </attribute>
+        <attribute name="label">
+          <value>Data Base Intersection</value>
+        </attribute>
+        <attribute name="description">
+          <value>DATA_INTERSECTION</value>
+        </attribute>
+        <attribute name="type">
+          <value>string</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>flprof</value>
+        </attribute>
+        <attribute name="label">
+          <value>Final Level Profiles</value>
+        </attribute>
+        <attribute name="description">
+          <value>FINAL_LEVEL</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>clvl</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>prfaggint</value>
+        </attribute>
+        <attribute name="label">
+          <value>Profile Agg Intersection</value>
+        </attribute>
+        <attribute name="description">
+          <value>AGG_INTERSECTION</value>
+        </attribute>
+        <attribute name="type">
+          <value>string</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>clvl</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>prfaprvint</value>
+        </attribute>
+        <attribute name="label">
+          <value>Profile Approval Intersection</value>
+        </attribute>
+        <attribute name="description">
+          <value>APPROVAL_INTERSECTION</value>
+        </attribute>
+        <attribute name="type">
+          <value>string</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>clvl</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>prfint</value>
+        </attribute>
+        <attribute name="label">
+          <value>Profile Intersection</value>
+        </attribute>
+        <attribute name="description">
+          <value>PROF_INTERSECTION</value>
+        </attribute>
+        <attribute name="type">
+          <value>string</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>clvl</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>prflabel</value>
+        </attribute>
+        <attribute name="label">
+          <value>Profile Label</value>
+        </attribute>
+        <attribute name="type">
+          <value>string</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>clvl</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>proftype</value>
+        </attribute>
+        <attribute name="label">
+          <value>Profile Type</value>
+        </attribute>
+        <attribute name="description">
+          <value>PROF_TYPE_ID</value>
+        </attribute>
+        <attribute name="type">
+          <value>int</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>clvl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>read</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>read</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="uitype">
+          <value>picklist</value>
+        </attribute>
+        <attribute name="range">
+          <value>0(StoreContribution),1(DailySeasonal),2(LifeCycle),3(Daily),4(UserDefined),5(Size),6(Hourly),7(Product),8(Diff)</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>slprof</value>
+        </attribute>
+        <attribute name="label">
+          <value>Source Level Profiles</value>
+        </attribute>
+        <attribute name="description">
+          <value>SOURCE_LEVEL</value>
+        </attribute>
+        <attribute name="type">
+          <value>int</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>clvl</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>strint</value>
+        </attribute>
+        <attribute name="label">
+          <value>Stored Intersection</value>
+        </attribute>
+        <attribute name="description">
+          <value>STORED_INTERSECTION</value>
+        </attribute>
+        <attribute name="type">
+          <value>string</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>clvl</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>F_DA_NC_NPD</value>
+      </attribute>
+      <attribute name="label">
+        <value>Source Only</value>
+      </attribute>
+      <attribute name="insertable">
+        <value>false</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>systwb</value>
+        </attribute>
+        <attribute name="label">
+          <value>System Training Window Begin</value>
+        </attribute>
+        <attribute name="description">
+          <value>SYSTEM_TWB</value>
+        </attribute>
+        <attribute name="type">
+          <value>date</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/systwb</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>systwe</value>
+        </attribute>
+        <attribute name="label">
+          <value>System Training Window End</value>
+        </attribute>
+        <attribute name="description">
+          <value>SYSTEM_TWE</value>
+        </attribute>
+        <attribute name="type">
+          <value>date</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/systwe</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmpdate1data</value>
+        </attribute>
+        <attribute name="label">
+          <value>temp date1 at dataint with no calendar</value>
+        </attribute>
+        <attribute name="description">
+          <value>TMPDATE1_DATAINT</value>
+        </attribute>
+        <attribute name="type">
+          <value>date</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgtemp</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmpdate2data</value>
+        </attribute>
+        <attribute name="label">
+          <value> temp date2 at data int with no calendar</value>
+        </attribute>
+        <attribute name="description">
+          <value>TMPDATE2_DATAINT</value>
+        </attribute>
+        <attribute name="type">
+          <value>date</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgtemp</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>FS_P_NC_NPD</value>
+      </attribute>
+      <attribute name="label">
+        <value>Final and Src</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>xform</value>
+        </attribute>
+        <attribute name="label">
+          <value>Transform</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/xform</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>F_P_C_NPD</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pgapfl</value>
+        </attribute>
+        <attribute name="label">
+          <value>Profile Approval Flag</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>ambig</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmpmaskprof</value>
+        </attribute>
+        <attribute name="label">
+          <value>temp mask at profile int</value>
+        </attribute>
+        <attribute name="description">
+          <value>TMPMASK_PROFINT</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="naval">
+          <value>false</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>or</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/tmpmaskprof_F</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>F_AP_C_NPD</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>manapp</value>
+        </attribute>
+        <attribute name="label">
+          <value>Manually Approve</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>ambig</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pgappby</value>
+        </attribute>
+        <attribute name="label">
+          <value>Profile Approved By</value>
+        </attribute>
+        <attribute name="description">
+          <value>APPROVED_BY</value>
+        </attribute>
+        <attribute name="type">
+          <value>string</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>ambig</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgappby_F</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>true</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pgappdate</value>
+        </attribute>
+        <attribute name="label">
+          <value>Profile Approval Date</value>
+        </attribute>
+        <attribute name="description">
+          <value>APPROVED_DATE</value>
+        </attribute>
+        <attribute name="type">
+          <value>date</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>ambig</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgappdate_F</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>true</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>F_CPA_C_NPD</value>
+      </attribute>
+      <attribute name="label">
+        <value>Final Common Int</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmpmask1com</value>
+        </attribute>
+        <attribute name="label">
+          <value>temp mask1 at common int</value>
+        </attribute>
+        <attribute name="description">
+          <value>TMPMASK1_COMINT</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="naval">
+          <value>false</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>or</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/tmpmask1com_F</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmpmask2com</value>
+        </attribute>
+        <attribute name="label">
+          <value>temp mask2 at common int</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="naval">
+          <value>false</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>or</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/tmpmask2com_F</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>FS_AG_C_NPD</value>
+      </attribute>
+      <attribute name="label">
+        <value>Final Source Agg</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmp1agg</value>
+        </attribute>
+        <attribute name="label">
+          <value>temp measure 1 at agg int</value>
+        </attribute>
+        <attribute name="description">
+          <value>TMP1_AGGINT</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgappmth</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmp2agg</value>
+        </attribute>
+        <attribute name="label">
+          <value>temp measure 2 at agg int</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgappmth</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>FS_CPA_C_NPD</value>
+      </attribute>
+      <attribute name="label">
+        <value>Final Source Common int</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmp1com</value>
+        </attribute>
+        <attribute name="label">
+          <value>temp measure 1 at common int</value>
+        </attribute>
+        <attribute name="description">
+          <value>TMP1_COMINT</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/tmp1com_F</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmp2com</value>
+        </attribute>
+        <attribute name="label">
+          <value>temp measure 2 at common int</value>
+        </attribute>
+        <attribute name="description">
+          <value>TMP2_COMINT</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/tmp2com_F</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmp3com</value>
+        </attribute>
+        <attribute name="label">
+          <value>temp measure 3 at common int</value>
+        </attribute>
+        <attribute name="description">
+          <value>TMP3_COMINT</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/tmp3com_F</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>FS_P_C_NPD</value>
+      </attribute>
+      <attribute name="label">
+        <value>Final Souce Profile int</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmpprof</value>
+        </attribute>
+        <attribute name="label">
+          <value>tmp measure at profile int</value>
+        </attribute>
+        <attribute name="description">
+          <value>TMP_PROFINT</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/tmpprof_F</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>F_DA_C_NPD</value>
+      </attribute>
+      <attribute name="label">
+        <value>Final Data int</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmp1data</value>
+        </attribute>
+        <attribute name="label">
+          <value>temp measure1 at data int</value>
+        </attribute>
+        <attribute name="description">
+          <value>TMP1_DATAINT</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/tmp1data_F</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmp2data</value>
+        </attribute>
+        <attribute name="label">
+          <value>temp measure 2 at data int</value>
+        </attribute>
+        <attribute name="description">
+          <value>TMP2_DATAINT</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/tmp2data_F</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmp3data</value>
+        </attribute>
+        <attribute name="label">
+          <value>temp measure 3 at data int</value>
+        </attribute>
+        <attribute name="description">
+          <value>TMP3_DATAINT</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/tmp3data_F</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmp4data</value>
+        </attribute>
+        <attribute name="label">
+          <value>temp measure 4 at data int</value>
+        </attribute>
+        <attribute name="description">
+          <value>TMP4_DATAINT</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/tmp4data_F</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>F_S_NC_NPD</value>
+      </attribute>
+      <attribute name="label">
+        <value>Final Stored Int no calendar</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>phaseend</value>
+        </attribute>
+        <attribute name="label">
+          <value>Phase End Override</value>
+        </attribute>
+        <attribute name="description">
+          <value>SYSTEM_PHASE_END</value>
+        </attribute>
+        <attribute name="type">
+          <value>date</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>phasestart</value>
+        </attribute>
+        <attribute name="label">
+          <value>phase start override</value>
+        </attribute>
+        <attribute name="description">
+          <value>SYSTEM_PHASE_START</value>
+        </attribute>
+        <attribute name="type">
+          <value>date</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmpdate1store</value>
+        </attribute>
+        <attribute name="label">
+          <value>temp date1 at dataint with no calendar</value>
+        </attribute>
+        <attribute name="description">
+          <value>TMPDATE1_STOREINT</value>
+        </attribute>
+        <attribute name="type">
+          <value>date</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgtemp</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmpdate2store</value>
+        </attribute>
+        <attribute name="label">
+          <value>temp date2 at dataint with no calendar</value>
+        </attribute>
+        <attribute name="description">
+          <value>TMPDATE2_STOREINT</value>
+        </attribute>
+        <attribute name="type">
+          <value>date</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgtemp</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>FS_CSP_NC_NPD</value>
+      </attribute>
+      <attribute name="label">
+        <value>Final Source lcbi of store int and profint</value>
+      </attribute>
+      <attribute name="aggstate">
+        <value>read</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmpcomstrprof</value>
+        </attribute>
+        <attribute name="label">
+          <value>temp measure at the lcbi of store int and profint</value>
+        </attribute>
+        <attribute name="description">
+          <value>TMP_LCBI_STORE_PROF</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgtemp</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>F_DP_C_NPD</value>
+      </attribute>
+      <attribute name="label">
+        <value>Final combo of dataint and profint</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>tmpdataprof</value>
+        </attribute>
+        <attribute name="label">
+          <value>temp measure at the combination of dataint and profint</value>
+        </attribute>
+        <attribute name="description">
+          <value>TMP_DATA_PROF</value>
+        </attribute>
+        <attribute name="naval">
+          <value>0</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>total</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/tmpdataprof_F</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>NFNS_PD</value>
+      </attribute>
+      <attribute name="label">
+        <value>Neither lvl Partition Dimension</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pgdata</value>
+        </attribute>
+        <attribute name="label">
+          <value>Profile Data Source</value>
+        </attribute>
+        <attribute name="description">
+          <value>DATA_SOURCE</value>
+        </attribute>
+        <attribute name="type">
+          <value>string</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>clvl</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pgdefapmth</value>
+        </attribute>
+        <attribute name="label">
+          <value>Default Profile Approval Method</value>
+        </attribute>
+        <attribute name="description">
+          <value>DEFAULT_APPROVAL_METHOD</value>
+        </attribute>
+        <attribute name="type">
+          <value>int</value>
+        </attribute>
+        <attribute name="naval">
+          <value>1</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>clvl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="uitype">
+          <value>picklist</value>
+        </attribute>
+        <attribute name="range">
+          <value>0(Do Not Approve), 1(Approve Use System)</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pgdefmask</value>
+        </attribute>
+        <attribute name="label">
+          <value>Default Source Profile</value>
+        </attribute>
+        <attribute name="description">
+          <value>DEFAULT_MASK</value>
+        </attribute>
+        <attribute name="type">
+          <value>int</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>clvl</value>
+        </attribute>
+        <attribute name="defagg">
+          <value>ambig</value>
+        </attribute>
+        <attribute name="defspread">
+          <value>repl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="uitype">
+          <value>picklist</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pgdefphe</value>
+        </attribute>
+        <attribute name="label">
+          <value>Default Phase End</value>
+        </attribute>
+        <attribute name="description">
+          <value>DEFAULT_PHE</value>
+        </attribute>
+        <attribute name="type">
+          <value>date</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>clvl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pgdefphs</value>
+        </attribute>
+        <attribute name="label">
+          <value>Default Phase Start</value>
+        </attribute>
+        <attribute name="description">
+          <value>DEFAULT_PHS</value>
+        </attribute>
+        <attribute name="type">
+          <value>date</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>clvl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pgdeftwe</value>
+        </attribute>
+        <attribute name="label">
+          <value>Default Training Window End</value>
+        </attribute>
+        <attribute name="description">
+          <value>DEFAULT_TWE</value>
+        </attribute>
+        <attribute name="type">
+          <value>date</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>clvl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pgdeftws</value>
+        </attribute>
+        <attribute name="label">
+          <value>Default Training Window Start</value>
+        </attribute>
+        <attribute name="description">
+          <value>DEFAULT_TWS</value>
+        </attribute>
+        <attribute name="type">
+          <value>date</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>clvl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pgmthtw</value>
+        </attribute>
+        <attribute name="label">
+          <value>Training Window Method</value>
+        </attribute>
+        <attribute name="description">
+          <value>METHOD_TW</value>
+        </attribute>
+        <attribute name="type">
+          <value>int</value>
+        </attribute>
+        <attribute name="naval">
+          <value>1</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>clvl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="uitype">
+          <value>picklist</value>
+        </attribute>
+        <attribute name="range">
+          <value>1(Default And Override), 2(Phase Definitions And Override), 3(Use Training Window)</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pgnv</value>
+        </attribute>
+        <attribute name="label">
+          <value>Normal Value</value>
+        </attribute>
+        <attribute name="description">
+          <value>NORMAL_VALUE</value>
+        </attribute>
+        <attribute name="type">
+          <value>real</value>
+        </attribute>
+        <attribute name="naval">
+          <value>1.00</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>clvl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>pgrenorm</value>
+        </attribute>
+        <attribute name="label">
+          <value>Renormalize</value>
+        </attribute>
+        <attribute name="description">
+          <value>Renormalize</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="naval">
+          <value>FALSE</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>clvl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>systwlen</value>
+        </attribute>
+        <attribute name="label">
+          <value>System Training Window Length</value>
+        </attribute>
+        <attribute name="description">
+          <value>TW_WIN_LEN</value>
+        </attribute>
+        <attribute name="type">
+          <value>int</value>
+        </attribute>
+        <attribute name="naval">
+          <value>10</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>clvl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgsystwlen</value>
+        </attribute>
+        <attribute name="insertable">
+          <value>false</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>proftypep</value>
+        </attribute>
+        <attribute name="label">
+          <value>Profile Type</value>
+        </attribute>
+        <attribute name="description">
+          <value>PROF_TYPE_ID</value>
+        </attribute>
+        <attribute name="type">
+          <value>int</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>clvl</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="uitype">
+          <value>picklist</value>
+        </attribute>
+        <attribute name="range">
+          <value>0(StoreContribution),1(DailySeasonal),2(LifeCycle),3(Daily),4(UserDefined),5(Size),6(Hourly),7(Product),8(Diff)</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+      <data_model type="MeasureClass">
+        <attribute name="name">
+          <value>adprof</value>
+        </attribute>
+        <attribute name="label">
+          <value>Use Advanced Profile Features</value>
+        </attribute>
+        <attribute name="description">
+          <value>USE_ADVANCE_PROF</value>
+        </attribute>
+        <attribute name="type">
+          <value>boolean</value>
+        </attribute>
+        <attribute name="naval">
+          <value>TRUE</value>
+        </attribute>
+        <attribute name="baseint">
+          <value>clvl</value>
+        </attribute>
+        <attribute name="basestate">
+          <value>write</value>
+        </attribute>
+        <attribute name="aggstate">
+          <value>write</value>
+        </attribute>
+        <attribute name="db">
+          <value>data/pgmaint</value>
+        </attribute>
+        <attribute name="materialized">
+          <value>0</value>
+        </attribute>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>CLVL</value>
+    </attribute>
+    <attribute name="materialized">
+      <value>0</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>XL</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>01</value>
+      </attribute>
+      <attribute name="label">
+        <value>01 chn-str Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_chn</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>02</value>
+      </attribute>
+      <attribute name="label">
+        <value>02 chn-str</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_chn</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>03</value>
+      </attribute>
+      <attribute name="label">
+        <value>03 scls-item Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_scls_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>04</value>
+      </attribute>
+      <attribute name="label">
+        <value>04 scls-item</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_scls_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>05</value>
+      </attribute>
+      <attribute name="label">
+        <value>05 itg1-item Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_itg1_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>06</value>
+      </attribute>
+      <attribute name="label">
+        <value>06 itg1-item</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_itg1_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>07</value>
+      </attribute>
+      <attribute name="label">
+        <value>07 itgp-item Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_itgp_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>08</value>
+      </attribute>
+      <attribute name="label">
+        <value>08 itgp-item</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_itgp_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>09</value>
+      </attribute>
+      <attribute name="label">
+        <value>09 dstr-str Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_dstr</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>10</value>
+      </attribute>
+      <attribute name="label">
+        <value>10 dstr-str</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_dstr</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>11</value>
+      </attribute>
+      <attribute name="label">
+        <value>11 week-dow Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>12</value>
+      </attribute>
+      <attribute name="label">
+        <value>12 week-dow</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>13</value>
+      </attribute>
+      <attribute name="label">
+        <value>13 clss-scls Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>clss</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>14</value>
+      </attribute>
+      <attribute name="label">
+        <value>14 clss-scls</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>clss</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>15</value>
+      </attribute>
+      <attribute name="label">
+        <value>15 area-str Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>pgrp_area</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>16</value>
+      </attribute>
+      <attribute name="label">
+        <value>16 area-str</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>pgrp_area</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>17</value>
+      </attribute>
+      <attribute name="label">
+        <value>17 mnth-day Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>mnth_pgrp</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>18</value>
+      </attribute>
+      <attribute name="label">
+        <value>18 mnth-day</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>mnth_pgrp</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>19</value>
+      </attribute>
+      <attribute name="label">
+        <value>19 splr\chn-item\str Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_splr_chn</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>20</value>
+      </attribute>
+      <attribute name="label">
+        <value>20 splr\chn-item\str</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_splr_chn</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>21</value>
+      </attribute>
+      <attribute name="label">
+        <value>21 dept\dstr-scls\dstr\wk Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>dept_dstr</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>22</value>
+      </attribute>
+      <attribute name="label">
+        <value>22 dept\dstr-scls\dstr\wk</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>dept_dstr</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>23</value>
+      </attribute>
+      <attribute name="label">
+        <value>23 cls\dstr\wk-cls\dstr\day Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_clss_dstr</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>24</value>
+      </attribute>
+      <attribute name="label">
+        <value>24 cls\dstr\wk-cls\dstr\day</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_clss_dstr</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>25</value>
+      </attribute>
+      <attribute name="label">
+        <value>25 cls\dept\wk-cls\dstr\day</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_dept_dstr</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>26</value>
+      </attribute>
+      <attribute name="label">
+        <value>26 cls\str\qtr-cls\str\wk Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>qrtr_clss_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>27</value>
+      </attribute>
+      <attribute name="label">
+        <value>27 cls\str\qtr-cls\str\wk</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>qrtr_clss_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>28</value>
+      </attribute>
+      <attribute name="label">
+        <value>28 scls\dstr-scls\dstr\dow Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>scls_dstr</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>29</value>
+      </attribute>
+      <attribute name="label">
+        <value>29 scls\dstr-scls\dstrdow</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>scls_dstr</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>30</value>
+      </attribute>
+      <attribute name="label">
+        <value>30 gpd1\str Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>itgp_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>31</value>
+      </attribute>
+      <attribute name="label">
+        <value>31 dept\str-gpd1\str</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>dept_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>32</value>
+      </attribute>
+      <attribute name="label">
+        <value>32 cls\str-gpd1\str</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>clss_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>33</value>
+      </attribute>
+      <attribute name="label">
+        <value>33 scls\str-gpd1\str</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>scls_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>34</value>
+      </attribute>
+      <attribute name="label">
+        <value>34 itgp\str-gpd1\str</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>itgp_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>35</value>
+      </attribute>
+      <attribute name="label">
+        <value>35 scd1\str Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>scls_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>36</value>
+      </attribute>
+      <attribute name="label">
+        <value>36 dept\str-scd1\str</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>dept_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>37</value>
+      </attribute>
+      <attribute name="label">
+        <value>37 clss\str-scd1\str</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>clss_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>38</value>
+      </attribute>
+      <attribute name="label">
+        <value>38 scls\str-scd1\str</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>scls_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>39</value>
+      </attribute>
+      <attribute name="label">
+        <value>39 cld1\str Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>clss_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>40</value>
+      </attribute>
+      <attribute name="label">
+        <value>40 dept\str-cld1\str</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>dept_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>41</value>
+      </attribute>
+      <attribute name="label">
+        <value>41 clss\str-cld1\str</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>clss_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>42</value>
+      </attribute>
+      <attribute name="label">
+        <value>42 dpd1\str Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>dept_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>43</value>
+      </attribute>
+      <attribute name="label">
+        <value>43 dept\str-dpd1\str</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>dept_str</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>44</value>
+      </attribute>
+      <attribute name="label">
+        <value>44 it\ar\wk-it\ar\day Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_area</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>45</value>
+      </attribute>
+      <attribute name="label">
+        <value>45 it\ar\wk-it\ar\day</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_area</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>46</value>
+      </attribute>
+      <attribute name="label">
+        <value>46 sc\ar\wk-it\ar\day Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>scls_area</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>47</value>
+      </attribute>
+      <attribute name="label">
+        <value>47 sc\ar\wk-it\ar\day</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>scls_area</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>48</value>
+      </attribute>
+      <attribute name="label">
+        <value>48 cl\ar\wk-it\ar\day Final</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>clss_area</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>49</value>
+      </attribute>
+      <attribute name="label">
+        <value>49 cl\ar\wk-it\ar\day</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>clss_area</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>TMP</value>
+    </attribute>
+    <attribute name="label">
+      <value>Curve Temp</value>
+    </attribute>
+    <attribute name="materialized">
+      <value>0</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>tmpscalarbool</value>
+      </attribute>
+      <attribute name="label">
+        <value>Temp Scalar Bool for wkbk</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>Scalar</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>or</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>none</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/rdftemp</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>tmpscalarint</value>
+      </attribute>
+      <attribute name="label">
+        <value>Temp Scalar Integer</value>
+      </attribute>
+      <attribute name="type">
+        <value>int</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>Scalar</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>none</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/rdftemp</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>tmpscalarstr</value>
+      </attribute>
+      <attribute name="label">
+        <value>Temp Scalar String for wkbk</value>
+      </attribute>
+      <attribute name="type">
+        <value>string</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>Scalar</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>ambig</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>none</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/rdftemp</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>TNPD</value>
+    </attribute>
+    <attribute name="label">
+      <value>Curve Temp - No Partition Dimension</value>
+    </attribute>
+    <attribute name="materialized">
+      <value>0</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>tmpnpdbool</value>
+      </attribute>
+      <attribute name="label">
+        <value>Temp Scalar Bool NPD</value>
+      </attribute>
+      <attribute name="type">
+        <value>boolean</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>Scalar</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>or</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>none</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/rdftemp</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>tmpnpdint</value>
+      </attribute>
+      <attribute name="label">
+        <value>Temp Scalar Integer NPD</value>
+      </attribute>
+      <attribute name="type">
+        <value>int</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>Scalar</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>none</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/rdftemp</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>tmpnpdstr</value>
+      </attribute>
+      <attribute name="label">
+        <value>Temp Scalar String NPD</value>
+      </attribute>
+      <attribute name="type">
+        <value>string</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>Scalar</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>ambig</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>none</value>
+      </attribute>
+      <attribute name="db">
+        <value>data/rdftemp</value>
+      </attribute>
+      <attribute name="materialized">
+        <value>0</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

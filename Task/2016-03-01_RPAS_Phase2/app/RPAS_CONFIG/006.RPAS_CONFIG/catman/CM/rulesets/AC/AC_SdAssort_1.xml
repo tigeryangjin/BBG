@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="com.retek.ride.rule.newmodel.RuleGroup">
+  <attribute name="name">
+    <value>AC_SdAssort_1</value>
+  </attribute>
+  <attribute name="description">
+    <value>a rule group</value>
+  </attribute>
+  <attribute name="role">
+    <value>user</value>
+  </attribute>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>sdassort_1</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACWPAsrtCoreB = if (ACWPSdAssortTx == "IPI", ACWPIPICoreB, if (ACWPSdAssortTx == "MC", ACWPMCCoreB, if (ACWPSdAssortTx == "LY", ACLYAsrtCoreB, if (ACWPSdAssortTx == "LP", ACLPAsrtCoreB, if (ACWPSdAssortTx == "CP", ACCPAsrtCoreB,  ignore )))))</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>sdassort_2</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACWPAsrtOptnB = if (ACWPSdAssortTx == "IPI", ACWPIPIOptnB, if (ACWPSdAssortTx == "MC", ACWPMCOptnB, if (ACWPSdAssortTx == "LY", ACLYAsrtOptnB,  if (ACWPSdAssortTx == "LP", ACLPAsrtOptnB,  if (ACWPSdAssortTx == "CP", ACCPAsrtOptnB, ignore )))))</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>sd_dt_1</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACWPDTAsrtSlsU = if (ACWPSdAssortTx == "IPI", ACWPDTIPIAsrtSlsU, if(ACWPSdAssortTx == "MC", ACWPDTMCAsrtSlsU, ignore ))</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>sd_dt_2</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACDVAsrtSigSkuV = if (ACWPSdAssortTx == "IPI", ACDVIPISigSkuV, if(ACWPSdAssortTx == "MC", ACDVMCSigSkuV, ignore ))</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>sd_dt_3</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACDVAsrtSigSkup = if (ACWPSdAssortTx == "IPI", ACDVIPISigSkup, if(ACWPSdAssortTx == "MC", ACDVMCSigSkup, ignore ))</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

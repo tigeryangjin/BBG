@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="com.retek.ride.rule.newmodel.RuleGroup">
+  <attribute name="name">
+    <value>MSO_Dept_Opt2</value>
+  </attribute>
+  <attribute name="description">
+    <value>Follow up calcs after MSOSpace execution.</value>
+  </attribute>
+  <attribute name="role">
+    <value>user</value>
+  </attribute>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>mdhdoptspacev_calc</value>
+    </attribute>
+    <attribute name="description">
+      <value>For locked departments, set recommended space to the locked space.</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>MDWPoptspaceV = if(MDWPlockspaceB, MDWPlockspaceSu, MDHdoptspaceV)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>mdhdoptprofitr_calc</value>
+    </attribute>
+    <attribute name="description">
+      <value>For locked departments, set recommended profit to the locked profit.</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>MDWPoptprofitR = if(MDWPlockspaceB, MDWPGPR, MDHdoptprofitR)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

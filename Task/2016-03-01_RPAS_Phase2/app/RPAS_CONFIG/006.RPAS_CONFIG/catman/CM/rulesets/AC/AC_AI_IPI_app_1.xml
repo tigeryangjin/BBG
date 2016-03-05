@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="com.retek.ride.rule.newmodel.RuleGroup">
+  <attribute name="name">
+    <value>AC_AI_IPI_app_1</value>
+  </attribute>
+  <attribute name="description">
+    <value>Apply IPI Assortment Improvement</value>
+  </attribute>
+  <attribute name="role">
+    <value>user</value>
+  </attribute>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acwpairunmaskb_ai1</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACAIRunMaskB = ACWPIPIInclClusB</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acwpinclstrb_calc</value>
+    </attribute>
+    <attribute name="description">
+      <value>Calculate Include Store Mask</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACWPInclStrB = ACWPIPIInclClusB</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acwpeligibleskub_calc</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACWPEligibleSKUB = if (ACWPInclStrB &amp;&amp; ACDVEligibilityB &amp;&amp; ACWPSlsU &gt; 0 &amp;&amp; ACWPSlsR &gt; 0, true, false)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acwpinitasstb_calc</value>
+    </attribute>
+    <attribute name="description">
+      <value>Calculate Initial Assortment</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACWPInitAsstB = if (ACWPInclStrB, ACWPIPICoreB, false)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acwpkeepskusb_calc</value>
+    </attribute>
+    <attribute name="description">
+      <value>Calculate Must Keep SKUs</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACWPKeepSKUsB = if (ACWPInclStrB &amp;&amp; ACWPMandB, TRUE, FALSE)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>achdmetricimprv_calc</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACHdMetricImprV = if (ACWPMetricImprTx == "1",  ACWPSlsR / ACWPSlsU, if  (ACWPMetricImprTx == "2", 1.0, if (ACWPMetricImprTx == "3", ACWPGPR / ACWPSlsU, 0.0)))</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acwpmetricimprv_calc</value>
+    </attribute>
+    <attribute name="description">
+      <value>Calculate the Metric to Improve Value for the Assortment Improvement Special Expression. The Metric is one of Sales R, Sales U or Gross Profit, but this value will be multiplied by Base Rate of Sales in the special expression, so compensate for Base ROS in this calculation.</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACWPMetricImprV = ACHdMetricImprV</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acwpskuprocv_calc</value>
+    </attribute>
+    <attribute name="description">
+      <value>Calculate Number of Items to Process (Add with Swap, Remove with Swap, Swap, Add, Remove) in AI Special Expression</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACWPSKUProcV = if(ACWPInclStrB, ACWPIPISKUProcV, 0)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>achdopttgtv_ai1</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACHdOptTgtV = if (ACWPOptTgtTx == "1",  if (ACWPMetricImprTx == "1",  ACMfSlsR, if  (ACWPMetricImprTx == "2", ACMfSlsU, if (ACWPMetricImprTx == "3", ACMfGPR, 0.0))),if (ACWPOptTgtTx == "2",  if (ACWPMetricImprTx == "1",  ACOPSlsR, if  (ACWPMetricImprTx == "2", ACOPSlsU, if (ACWPMetricImprTx == "3", ACOPGPR, 0.0))), 0.0))</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acwpopttgtv_ai1</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACWPOptTgtV = ACHdOptTgtV</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acwpmodetv_calc</value>
+    </attribute>
+    <attribute name="description">
+      <value>Calculate Improve Action (Add with Swap, Remove with Swap, Swap, Add, Remove) for AI Special Expression</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACWPModeV = if(ACWPInclStrB, if(ACWPIPIModeV == "1", 1, if(ACWPIPIModeV == "2", 2, if(ACWPIPIModeV == "3", 3, if(ACWPIPIModeV == "4", 4, if(ACWPIPIModeV == "5", 5, 0))))), 0)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acwpipiminkeepp_ai1</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACWPIPIMinKeepp = 1 - ACWPMaxSwapp</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acwpminkeepp_calc</value>
+    </attribute>
+    <attribute name="description">
+      <value>Calculate Minimum SKUs to Keep in AI Special Expression</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACWPMinKeepp = if (ACWPInclStrB, ACWPIPIMinKeepp, 0)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acdvsimoutp_ai_app1</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACDVSimOutp &lt;- CMNewItemSimilarityExpr(DRTYSimInV, ADWPAttrValTx, DRTYAttrWgtV, ACDVDTModeX, DRTYFuncFitB, ACDVSkuItemMapB, ADDVCatAttrMapB)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acdvasrtslsrateu_1</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACHdIPISlsRateU &lt;- CMNewItemRateSalesExpr(ACDVRunMaskB, ACDVSimOutp, ACDVAsrtROSX, ACDVAsrtROSU, ACDVSkuItemMapB)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acdvcurverosu_ai2</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACHdCurveROSU = if(ACDVCurveROSU == 0, ACHdIPISlsRateU * ACDVWkCountV, ACDVCurveROSU )</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acdvipislsrateu_ai2</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACDVIPISlsRateU = if (ACDVAsrtROSX == 1, ACHdIPISlsRateU, ACDVAsrtROSU )</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acdvbaseslsu_calc</value>
+    </attribute>
+    <attribute name="description">
+      <value>Calculate Base Rate of Sales</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACDVBaseSlsU = ACHdCurveROSU</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acaiipiasrtslsu_ai_app1</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACAIIPIAsrtSlsU = if (ACWPInclStrB, 0, ignore)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acwpipicarriedb_ai1</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACWPIPICarriedB = true</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acwpipicomptolytx_ai1</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACWPIPIComptoLYTx =  if (ACLYCarriedB &amp;&amp; ACWPIPICarriedB, "K", if( ACLYCarriedB &amp;&amp;  !ACWPIPICarriedB , "D", if (!ACLYCarriedB &amp;&amp; ACWPIPICarriedB , "A", "NA")))</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acwpipicomptocptx_ai1</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACWPIPIComptoCPTx =  if (ACCPCarriedB &amp;&amp; ACWPIPICarriedB, "K", if( ACCPCarriedB &amp;&amp;  !ACWPIPICarriedB , "D", if (!ACCPCarriedB &amp;&amp; ACWPIPICarriedB , "A", "NA")))</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acdvipikadx_ai1</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACDVIPIKADX = if(ACWPIPIKADTx == "1", if(ACWPIPIComptoLYTx == "A", 1, if(ACWPIPIComptoLYTx == "K", 2, if(ACWPIPIComptoLYTx == "D", 3, 0 ) )),if( ACWPIPIKADTx == "2", if(ACWPIPIComptoCPTx == "A", 1, if(ACWPIPIComptoCPTx == "K", 2, if(ACWPIPIComptoCPTx == "D", 3, 0 ))),0))</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acwpnewitemb_calc</value>
+    </attribute>
+    <attribute name="description">
+      <value>Calculate New Item Flag</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACWPNewItemB = if (ACWPInclStrB &amp;&amp; ACWPEligibilityB.or &amp;&amp; ACDVIPIKADX != 2 ,true, false)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acdvipikadtx_ai1</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACDVIPIKADTx = ACWPIPIKADTx</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acaiipiimprasstb_ai_app1</value>
+    </attribute>
+    <attribute name="description">
+      <value>Calculate the Assortment Improvement for IPI</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACAIIPIImprAsstB = false</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acaiipiimprasstu_ai_app1</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACAIIPIImprAsstU = 0</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

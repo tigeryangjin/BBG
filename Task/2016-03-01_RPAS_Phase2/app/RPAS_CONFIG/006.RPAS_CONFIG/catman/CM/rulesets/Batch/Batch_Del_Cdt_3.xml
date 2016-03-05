@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="com.retek.ride.rule.newmodel.RuleGroup">
+  <attribute name="name">
+    <value>Batch_Del_Cdt_3</value>
+  </attribute>
+  <attribute name="description">
+    <value>Rules to delete a CDT from a domain</value>
+  </attribute>
+  <attribute name="role">
+    <value>user</value>
+  </attribute>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>adwpcdtprerngb_cl</value>
+    </attribute>
+    <attribute name="description">
+      <value>Clear WP CDT Prerange</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ADWPCDTPrerngB = if(ADWPCDTDelB, FALSE, ignore)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>addvcdtprngb_calc</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ADDVCDTPrerngB = if(position([prod].[clss]) == position([pror].[clsr] ) &amp;&amp; ADWPCDTPrerngB, TRUE, FALSE )</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>adwpcdtlbltx_cl</value>
+    </attribute>
+    <attribute name="description">
+      <value>Clear WP CDT Label</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>CEWPCDTLblTx = if(ADWPCDTDelB, navalue(ACDVNavalTx), ignore)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>cewpcdtslotv_cl</value>
+    </attribute>
+    <attribute name="description">
+      <value>Clear WP CDT Empty Slot Flag</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>CEWPCDTSlotV = if(ADWPCDTDelB, TRUE, ignore)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>cewpcdtslotb_cl</value>
+    </attribute>
+    <attribute name="description">
+      <value>Clear Empty Slot Flag</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>CEWPCDTSlotB = if(ADWPCDTDelB, FALSE, ignore)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>cewpapprdt_cl</value>
+    </attribute>
+    <attribute name="description">
+      <value>Clear CDT Approved Date</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>CEWPApprDt = if(ADWPCDTDelB, navalue(ACDVNavalDt), ignore)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>cewpapprby_cl</value>
+    </attribute>
+    <attribute name="description">
+      <value>Clear CDT Approved By</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>CEWPApprBy = if(ADWPCDTDelB, navalue(ACDVNavalTx), ignore)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>cewpapprtx_cl</value>
+    </attribute>
+    <attribute name="description">
+      <value>Clear CDT Approval Comment</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>CEWPApprTx = if(ADWPCDTDelB, navalue(ACDVNavalTx), ignore)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

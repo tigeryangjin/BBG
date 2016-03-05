@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="com.retek.ride.rule.newmodel.RuleGroup">
+  <attribute name="name">
+    <value>AC_AI_IPI_app_2</value>
+  </attribute>
+  <attribute name="description">
+    <value>Post-Apply IPI Assortment Approvmenet</value>
+  </attribute>
+  <attribute name="role">
+    <value>user</value>
+  </attribute>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acaiipiimprasstu_ai_app2</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACAIIPIImprAsstB, ACAIIPIImprAsstU &lt;- CMAssortImprovementExpr(ACAIRunMaskB, ACDVBaseSlsU, ACDVSkuItemMapB, ACDVSimOutp, ACWPNewItemB, ACWPInitAsstB, ACWPMetricImprV, ACWPEligibleSKUB, ACWPSKUProcV, ACWPMinKeepp, ACWPModeV, DRTYAssrtElasV, ACWPKeepSKUsB, ACWPOptTgtV)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acaiipiasrtslsu_ai_app2</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACAIIPIAsrtSlsU = if (ACWPInclStrB.or, ACAIIPIImprAsstU, ignore)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acaiipislsr_ai_app2</value>
+    </attribute>
+    <attribute name="description">
+      <value>Calculate IPI Assortment Improved Sales Revenue</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACAIIPIAsrtSlsR = if (ACWPInclStrB, if (ACAIIPIImprAsstB, ACAIIPIAsrtSlsU * (ACWPSlsR / ACWPSlsU), 0), 0)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acaiipigpr_ai_app2</value>
+    </attribute>
+    <attribute name="description">
+      <value>Calculate IPI Assortment Improved Gross Profit Retail</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACAIIPIGPR = if (ACWPInclStrB, if (ACAIIPIImprAsstB, (ACAIIPIAsrtSlsR * (ACWPGPR / ACWPSlsR)), 0), 0)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>acaiipigpp_ai_app2</value>
+    </attribute>
+    <attribute name="description">
+      <value>Calculate IPI Assortment Improved Gross Profit Percent.  This rule is needed in order to calculate this value at aggregated levels.</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>ACAIIPIGPp = ACAIIPIGPR / ACAIIPIAsrtSlsR</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

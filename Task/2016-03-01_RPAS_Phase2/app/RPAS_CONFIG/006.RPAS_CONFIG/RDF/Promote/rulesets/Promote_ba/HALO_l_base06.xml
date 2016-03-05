@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="com.retek.ride.rule.newmodel.RuleGroup">
+  <attribute name="name">
+    <value>HALO_l_base06</value>
+  </attribute>
+  <attribute name="description">
+    <value></value>
+  </attribute>
+  <attribute name="creator">
+    <value>Promote</value>
+  </attribute>
+  <attribute name="role">
+    <value>user</value>
+  </attribute>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>HALO_l_base0601</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>appktmp06XB = appf06XB - appk06XB</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>HALO_l_base0602</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>START_INDEX:fstidx06XB,END_INDEX:fedidx06XB&lt;-activeindex(SOURCEDATA:appktmp06XB)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>HALO_l_base0603</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>FORECAST:appsysftmp06XB&lt;-promoselfeffexpr(BASELINE:appktmp06XB,MODELTYPE:cslmthused06xb,PROMOMODELTYPE:promomodeltype,PROMOENABLE:promoencur,FCST_START_INDEX:fstidx06XB,FCST_END_INDEX:fedidx06XB,PROMOCAL0:paggXLxmas,PROMOTYPE0:ptyp06xmas,PROMOEFF0:peff06xmas,PROMOEFFOVR0:povr06xmas,PROMOCAL1:paggXLxmss,PROMOTYPE1:ptyp06xmss,PROMOEFF1:peff06xmss,PROMOEFFOVR1:povr06xmss,PROMOCAL2:paggXLnyd,PROMOTYPE2:ptyp06nyd,PROMOEFF2:peff06nyd,PROMOEFFOVR2:povr06nyd,PROMOCAL3:paggXLeas,PROMOTYPE3:ptyp06eas,PROMOEFF3:peff06eas,PROMOEFFOVR3:povr06eas,PROMOCAL4:paggXLbts,PROMOTYPE4:ptyp06bts,PROMOEFF4:peff06bts,PROMOEFFOVR4:povr06bts,PROMOCAL5:paggXLcirc,PROMOTYPE5:ptyp06circ,PROMOEFF5:peff06circ,PROMOEFFOVR5:povr06circ,PROMOCAL6:paggXLisd,PROMOTYPE6:ptyp06isd,PROMOEFF6:peff06isd,PROMOEFFOVR6:povr06isd,PROMOCAL7:paggXLdml,PROMOTYPE7:ptyp06dml,PROMOEFF7:peff06dml,PROMOEFFOVR7:povr06dml,PROMOCAL8:paggXLsgn,PROMOTYPE8:ptyp06sgn,PROMOEFF8:peff06sgn,PROMOEFFOVR8:povr06sgn,PROMOCAL9:paggXLpprc,PROMOTYPE9:ptyp06pprc,PROMOEFF9:peff06pprc,PROMOEFFOVR9:povr06pprc)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

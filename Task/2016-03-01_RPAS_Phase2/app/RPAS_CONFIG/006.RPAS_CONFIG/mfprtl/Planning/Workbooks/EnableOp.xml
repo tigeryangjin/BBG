@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="Workbook">
+  <attribute name="name">
+    <value>EnableOp</value>
+  </attribute>
+  <attribute name="Label">
+    <value>Enable OP Approval</value>
+  </attribute>
+  <attribute name="WorkbookGroup">
+    <value>Plnadmin</value>
+  </attribute>
+  <attribute name="WorkbookLib">
+    <value>Templates</value>
+  </attribute>
+  <attribute name="WorkbookType">
+    <value>DynamicTemplate</value>
+  </attribute>
+  <attribute name="IsWizardOnly">
+    <value>false</value>
+  </attribute>
+  <attribute name="IsImageEnabled">
+    <value>false</value>
+  </attribute>
+  <attribute name="RuleSet">
+    <value>AdminOpAp</value>
+  </attribute>
+  <attribute name="LoadRules">
+    <value>AdminOpAp_load</value>
+  </attribute>
+  <attribute name="CommitRules">
+    <value>AdminOpAp_commit</value>
+  </attribute>
+  <attribute name="CalcRules">
+    <value>AdminOpAp_calc</value>
+  </attribute>
+  <attribute name="RefreshRules">
+    <value>AdminOpAp_refresh</value>
+  </attribute>
+  <attribute name="IsUseDefaults">
+    <value>true</value>
+  </attribute>
+  <attribute name="DpmDimensions">
+    <value></value>
+  </attribute>
+  <attribute name="IsCustomWizard">
+    <value>false</value>
+  </attribute>
+  <data_model type="AxisInfo">
+    <attribute name="name">
+      <value>AxisInfo</value>
+    </attribute>
+    <attribute name="MEASAxis">
+      <value>XAxis</value>
+    </attribute>
+    <attribute name="MEASOrder">
+      <value>0</value>
+    </attribute>
+    <attribute name="PRODAxis">
+      <value>YAxis</value>
+    </attribute>
+    <attribute name="PRODOrder">
+      <value>0</value>
+    </attribute>
+    <attribute name="CLNDAxis">
+      <value>ZAxis</value>
+    </attribute>
+    <attribute name="CLNDOrder">
+      <value>0</value>
+    </attribute>
+    <attribute name="LOCAxis">
+      <value>ZAxis</value>
+    </attribute>
+    <attribute name="LOCOrder">
+      <value>1</value>
+    </attribute>
+  </data_model>
+  <data_model type="Wizards">
+    <attribute name="name">
+      <value>Wizards</value>
+    </attribute>
+    <data_model type="Wizard">
+      <attribute name="name">
+        <value>CLNDWizard</value>
+      </attribute>
+      <attribute name="CLNDOrder">
+        <value>0</value>
+      </attribute>
+      <attribute name="CLNDDim">
+        <value>ssn</value>
+      </attribute>
+      <attribute name="CLNDLLabel">
+        <value>Select the Half</value>
+      </attribute>
+      <attribute name="CLNDRLabel">
+        <value></value>
+      </attribute>
+      <attribute name="CLNDMaxPos">
+        <value>-1</value>
+      </attribute>
+      <attribute name="CLNDWizardLabel">
+        <value>Select Calendar Position(s)</value>
+      </attribute>
+    </data_model>
+    <data_model type="Wizard">
+      <attribute name="name">
+        <value>PRODWizard</value>
+      </attribute>
+      <attribute name="PRODOrder">
+        <value>1</value>
+      </attribute>
+      <attribute name="PRODDim">
+        <value>dept</value>
+      </attribute>
+      <attribute name="PRODLLabel">
+        <value>Select the Dept</value>
+      </attribute>
+      <attribute name="PRODRLabel">
+        <value></value>
+      </attribute>
+      <attribute name="PRODMaxPos">
+        <value>-1</value>
+      </attribute>
+      <attribute name="PRODWizardLabel">
+        <value>Select Product(s)</value>
+      </attribute>
+    </data_model>
+    <data_model type="Wizard">
+      <attribute name="name">
+        <value>LOCWizard</value>
+      </attribute>
+      <attribute name="LOCOrder">
+        <value>2</value>
+      </attribute>
+      <attribute name="LOCDim">
+        <value>chnl</value>
+      </attribute>
+      <attribute name="LOCLLabel">
+        <value>Select the Channel</value>
+      </attribute>
+      <attribute name="LOCRLabel">
+        <value></value>
+      </attribute>
+      <attribute name="LOCMaxPos">
+        <value>-1</value>
+      </attribute>
+      <attribute name="LOCWizardLabel">
+        <value>Select Location(s)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="WorkbookTabs">
+    <attribute name="name">
+      <value>WorkbookTabs</value>
+    </attribute>
+    <data_model type="WorkbookTab">
+      <attribute name="name">
+        <value>AllowOp</value>
+      </attribute>
+      <attribute name="Label">
+        <value>Allow OP Approval</value>
+      </attribute>
+      <data_model type="Worksheets">
+        <attribute name="name">
+          <value>Worksheets</value>
+        </attribute>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>AllowOpApp</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Allow OP Approval</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>ssn_dept_chnl</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>true</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>IPOpAppEnbB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>IPOpAppEnbB</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>IPOpAppEnbB</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>IPOpAppEnbB</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="CLNDAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="CLNDOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="LOCAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="LOCOrder">
+              <value>1</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="DynHiers">
+    <attribute name="name">
+      <value>DynHiers</value>
+    </attribute>
+  </data_model>
+  <data_model type="EditedMeasures">
+    <attribute name="name">
+      <value>EditedMeasures</value>
+    </attribute>
+  </data_model>
+  <data_model type="PercentToParents">
+    <attribute name="name">
+      <value>PercentToParents</value>
+    </attribute>
+  </data_model>
+</data_set>

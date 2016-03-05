@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="com.retek.ride.rule.newmodel.RuleGroup">
+  <attribute name="name">
+    <value>Export_price</value>
+  </attribute>
+  <attribute name="description">
+    <value>Export_price</value>
+  </attribute>
+  <attribute name="role">
+    <value>user</value>
+  </attribute>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>expprice2</value>
+    </attribute>
+    <attribute name="description">
+      <value>expprice2</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>salesprice = if(current&gt;=today, tmpsalesprice, ignore)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>expprice1</value>
+    </attribute>
+    <attribute name="description">
+      <value>expprice1</value>
+    </attribute>
+    <attribute name="creator">
+      <value>user</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>tmpsalesprice=if(regprice01xb&gt;0, (1-pvarxlpprc)*regprice01xb, 0)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

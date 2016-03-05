@@ -1,6 +1,7 @@
 --2015-7-10 5:04:10
 --插入数:413278
 --执行时间:2500秒
+--不允许提交。
 merge /*+ APPEND */
 into RADM.BBG_RA_SLS_IT_LC_DY_A T
 using (Select /*+ APPEND */

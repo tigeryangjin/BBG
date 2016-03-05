@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="com.retek.ride.rule.newmodel.RuleGroup">
+  <attribute name="name">
+    <value>HALO_l_base01</value>
+  </attribute>
+  <attribute name="description">
+    <value></value>
+  </attribute>
+  <attribute name="creator">
+    <value>Promote</value>
+  </attribute>
+  <attribute name="role">
+    <value>user</value>
+  </attribute>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>HALO_l_base0101</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>appktmp01XB = appf01XB - appk01XB</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>HALO_l_base0102</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>START_INDEX:fstidx01XB,END_INDEX:fedidx01XB&lt;-activeindex(SOURCEDATA:appktmp01XB)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+  <data_model type="com.retek.ride.rule.newmodel.Rule">
+    <attribute name="name">
+      <value>HALO_l_base0103</value>
+    </attribute>
+    <attribute name="description">
+      <value>a rule</value>
+    </attribute>
+    <attribute name="creator">
+      <value>Promote</value>
+    </attribute>
+    <data_model type="java.lang.String">
+      <attribute name="name">
+        <value>E0</value>
+      </attribute>
+      <attribute name="formula">
+        <value>FORECAST:appsysftmp01XB&lt;-promoselfeffexpr(BASELINE:appktmp01XB,MODELTYPE:cslmthused01xb,PROMOMODELTYPE:promomodeltype,PROMOENABLE:promoencur,FCST_START_INDEX:fstidx01XB,FCST_END_INDEX:fedidx01XB,PROMOCAL0:paggXLxmas.level([CLND].[week]).average,PROMOTYPE0:ptyp01xmas,PROMOEFF0:peff01xmas,PROMOEFFOVR0:povr01xmas,PROMOCAL1:paggXLxmss,PROMOTYPE1:ptyp01xmss,PROMOEFF1:peff01xmss,PROMOEFFOVR1:povr01xmss,PROMOCAL2:paggXLnyd.level([CLND].[week]).average,PROMOTYPE2:ptyp01nyd,PROMOEFF2:peff01nyd,PROMOEFFOVR2:povr01nyd,PROMOCAL3:paggXLeas.level([CLND].[week]).average,PROMOTYPE3:ptyp01eas,PROMOEFF3:peff01eas,PROMOEFFOVR3:povr01eas,PROMOCAL4:paggXLbts,PROMOTYPE4:ptyp01bts,PROMOEFF4:peff01bts,PROMOEFFOVR4:povr01bts,PROMOCAL5:paggXLcirc,PROMOTYPE5:ptyp01circ,PROMOEFF5:peff01circ,PROMOEFFOVR5:povr01circ,PROMOCAL6:paggXLisd,PROMOTYPE6:ptyp01isd,PROMOEFF6:peff01isd,PROMOEFFOVR6:povr01isd,PROMOCAL7:paggXLdml.level([CLND].[week]).average,PROMOTYPE7:ptyp01dml,PROMOEFF7:peff01dml,PROMOEFFOVR7:povr01dml,PROMOCAL8:paggXLsgn.level([CLND].[week]).average,PROMOTYPE8:ptyp01sgn,PROMOEFF8:peff01sgn,PROMOEFFOVR8:povr01sgn,PROMOCAL9:paggXLpprc,PROMOTYPE9:ptyp01pprc,PROMOEFF9:peff01pprc,PROMOEFFOVR9:povr01pprc)</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>

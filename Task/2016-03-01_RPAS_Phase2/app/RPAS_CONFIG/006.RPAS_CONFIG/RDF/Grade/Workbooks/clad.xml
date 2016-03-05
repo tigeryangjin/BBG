@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="Workbook">
+  <attribute name="name">
+    <value>clad</value>
+  </attribute>
+  <attribute name="Label">
+    <value>Breakpoint Administration</value>
+  </attribute>
+  <attribute name="WorkbookGroup">
+    <value>Grade</value>
+  </attribute>
+  <attribute name="WorkbookLib">
+    <value>RdfTemplates</value>
+  </attribute>
+  <attribute name="WorkbookType">
+    <value>RdfDynamicTemplate</value>
+  </attribute>
+  <attribute name="IsWizardOnly">
+    <value>false</value>
+  </attribute>
+  <attribute name="IsImageEnabled">
+    <value>false</value>
+  </attribute>
+  <attribute name="RuleSet">
+    <value>clad</value>
+  </attribute>
+  <attribute name="LoadRules">
+    <value>clad_load</value>
+  </attribute>
+  <attribute name="CommitRules">
+    <value>clad_commit</value>
+  </attribute>
+  <attribute name="CalcRules">
+    <value>clad_calc</value>
+  </attribute>
+  <attribute name="RefreshRules">
+    <value>clad_refresh</value>
+  </attribute>
+  <attribute name="IsUseDefaults">
+    <value>true</value>
+  </attribute>
+  <attribute name="DpmDimensions">
+    <value></value>
+  </attribute>
+  <attribute name="IsCustomWizard">
+    <value>false</value>
+  </attribute>
+  <attribute name="properties">
+    <value>propertymap</value>
+    <value>maxmeas</value>
+    <value>action</value>
+    <value>CREATOR</value>
+    <value>maxdb</value>
+  </attribute>
+  <attribute name="propertymap">
+    <value>"CanOpenInGlobal", "true", "JUNK", "JUNK"</value>
+  </attribute>
+  <attribute name="maxmeas">
+    <value>100</value>
+  </attribute>
+  <attribute name="action">
+    <value>"AddWorkbookPositions CLSH CLST JUNK JUNK Hide"</value>
+  </attribute>
+  <attribute name="CREATOR">
+    <value>Grade</value>
+  </attribute>
+  <attribute name="maxdb">
+    <value>100</value>
+  </attribute>
+  <data_model type="AxisInfo">
+    <attribute name="name">
+      <value>AxisInfo</value>
+    </attribute>
+    <attribute name="MEASAxis">
+      <value>YAxis</value>
+    </attribute>
+    <attribute name="MEASOrder">
+      <value>0</value>
+    </attribute>
+  </data_model>
+  <data_model type="Wizards">
+    <attribute name="name">
+      <value>Wizards</value>
+    </attribute>
+  </data_model>
+  <data_model type="WorkbookTabs">
+    <attribute name="name">
+      <value>WorkbookTabs</value>
+    </attribute>
+    <data_model type="WorkbookTab">
+      <attribute name="name">
+        <value>GRAD_TAB01</value>
+      </attribute>
+      <attribute name="Label">
+        <value>Breakpoint Configuration</value>
+      </attribute>
+      <data_model type="Worksheets">
+        <attribute name="name">
+          <value>Worksheets</value>
+        </attribute>
+        <data_model type="Worksheet">
+          <attribute name="name">
+            <value>wingrad1</value>
+          </attribute>
+          <attribute name="Label">
+            <value>Breakpoint Administration</value>
+          </attribute>
+          <attribute name="WorksheetIntersection">
+            <value>CLST_GRCD_pgrp</value>
+          </attribute>
+          <attribute name="IsUseDefaultAxis">
+            <value>false</value>
+          </attribute>
+          <attribute name="properties">
+            <value>subst_measure</value>
+            <value>subst_intersection</value>
+          </attribute>
+          <data_model type="Profiles">
+            <attribute name="name">
+              <value>Profiles</value>
+            </attribute>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Viewable</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>gcfg</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>gcfg</value>
+              </attribute>
+            </data_model>
+            <data_model type="Profile">
+              <attribute name="name">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Label">
+                <value>Default</value>
+              </attribute>
+              <attribute name="Measures">
+                <value>gcfg</value>
+              </attribute>
+              <attribute name="MeasureName">
+                <value>gcfg</value>
+              </attribute>
+            </data_model>
+          </data_model>
+          <data_model type="AxisInfo">
+            <attribute name="name">
+              <value>AxisInfo</value>
+            </attribute>
+            <attribute name="GRCHAxis">
+              <value>XAxis</value>
+            </attribute>
+            <attribute name="GRCHOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="CLSHAxis">
+              <value>YAxis</value>
+            </attribute>
+            <attribute name="CLSHOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="MEASAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="MEASOrder">
+              <value>0</value>
+            </attribute>
+            <attribute name="PRODAxis">
+              <value>ZAxis</value>
+            </attribute>
+            <attribute name="PRODOrder">
+              <value>1</value>
+            </attribute>
+          </data_model>
+          <data_model type="PositionQueries">
+            <attribute name="name">
+              <value>PositionQueries</value>
+            </attribute>
+          </data_model>
+          <data_model type="StyleORs">
+            <attribute name="name">
+              <value>StyleORs</value>
+            </attribute>
+          </data_model>
+        </data_model>
+      </data_model>
+    </data_model>
+  </data_model>
+  <data_model type="DynHiers">
+    <attribute name="name">
+      <value>DynHiers</value>
+    </attribute>
+  </data_model>
+  <data_model type="EditedMeasures">
+    <attribute name="name">
+      <value>EditedMeasures</value>
+    </attribute>
+  </data_model>
+</data_set>

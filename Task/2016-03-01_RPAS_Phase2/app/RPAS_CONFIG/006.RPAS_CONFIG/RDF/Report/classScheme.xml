@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_set type="ClassScheme">
+  <attribute name="name">
+    <value>scheme</value>
+  </attribute>
+  <data_model type="MeasureClass">
+    <attribute name="name">
+      <value>rpt</value>
+    </attribute>
+    <attribute name="label">
+      <value>Report</value>
+    </attribute>
+    <attribute name="description">
+      <value>SCM demo report</value>
+    </attribute>
+    <attribute name="db">
+      <value>data/report</value>
+    </attribute>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>rptFcErr</value>
+      </attribute>
+      <attribute name="label">
+        <value>MAPE Forecast Error - Item/str</value>
+      </attribute>
+      <attribute name="description">
+        <value>MAPE Forecast error - item/str</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0.0</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>reclc</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>none</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>rptFcErrItem</value>
+      </attribute>
+      <attribute name="label">
+        <value>MAPE Forecast Error - Item</value>
+      </attribute>
+      <attribute name="description">
+        <value>MAPE Forecast error - item</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0.0</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>reclc</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>none</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>rptFcErrStr</value>
+      </attribute>
+      <attribute name="label">
+        <value>MAPE Forecast Error - Str</value>
+      </attribute>
+      <attribute name="description">
+        <value>MAPE Forecast error - str</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0.0</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>reclc</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>none</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>rptFcStaIdx</value>
+      </attribute>
+      <attribute name="label">
+        <value>MAPE Forecast Start Week Index</value>
+      </attribute>
+      <attribute name="description">
+        <value>MAPE Forecast start week index</value>
+      </attribute>
+      <attribute name="type">
+        <value>int</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>Scalar</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>#UNSPECIFIED#</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>rptFcEndIdx</value>
+      </attribute>
+      <attribute name="label">
+        <value>MAPE Forecast End Week Index</value>
+      </attribute>
+      <attribute name="description">
+        <value>MAPE Forecast end week index</value>
+      </attribute>
+      <attribute name="type">
+        <value>int</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>Scalar</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>lsover1</value>
+      </attribute>
+      <attribute name="label">
+        <value>POS with Lost Sales Adjustment</value>
+      </attribute>
+      <attribute name="description">
+        <value>POS with Lost Sales Adjustment</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0.0</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+      <attribute name="basestate">
+        <value>#UNSPECIFIED#</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>lostsales</value>
+      </attribute>
+      <attribute name="label">
+        <value>Lost Sales Adjustment</value>
+      </attribute>
+      <attribute name="description">
+        <value>Lost Sales Adjustment</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0.0</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>week_item_str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>LostSalesItem</value>
+      </attribute>
+      <attribute name="label">
+        <value>Lost Sales Adjustment  by Item</value>
+      </attribute>
+      <attribute name="description">
+        <value>Lost Sales Adjustment  by item</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0.0</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>item</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+    </data_model>
+    <data_model type="MeasureClass">
+      <attribute name="name">
+        <value>LostSalesStr</value>
+      </attribute>
+      <attribute name="label">
+        <value>Lost Sales Adjustment  by Str</value>
+      </attribute>
+      <attribute name="description">
+        <value>Lost Sales Adjustment  by str</value>
+      </attribute>
+      <attribute name="type">
+        <value>real</value>
+      </attribute>
+      <attribute name="naval">
+        <value>0.0</value>
+      </attribute>
+      <attribute name="baseint">
+        <value>str</value>
+      </attribute>
+      <attribute name="defagg">
+        <value>total</value>
+      </attribute>
+      <attribute name="defspread">
+        <value>prop</value>
+      </attribute>
+    </data_model>
+  </data_model>
+</data_set>
