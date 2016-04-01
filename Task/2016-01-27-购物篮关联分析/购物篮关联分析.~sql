@@ -4,6 +4,10 @@ SELECT *
   FROM RABATCHER.BBG_RA_SLS_MBA_LC_DY_FV T
  WHERE T.DT_WID = 120160301000;
 
+SELECT *
+  FROM RABATCHER.BBG_RA_SLS_MBA_LC_MN_FV T
+ WHERE T.MN_WID = 201602;
+
 --CREATE TABLE 
 --BBG_RA_SLS_MBA_LC_DY_TMP
 CREATE TABLE RABATCHER.BBG_RA_SLS_MBA_LC_DY_TMP AS
@@ -86,3 +90,32 @@ SELECT *
 --数据从2016.1.1开始
 --***************************************************************************************************************
 
+--数据调取
+SELECT T.ORG_NUM,
+       T.A_DEPT,
+       T.A_CLASS,
+       T.A_SUBCLASS,
+       T.A_PROD_NUM,
+       T.A_PROD_NAME,
+       T.B_DEPT,
+       T.B_CLASS,
+       T.B_SUBCLASS,
+       T.B_PROD_NUM,
+       T.B_PROD_NAME,
+       SUM(T.A_CNT) A_CNT,
+       SUM(T.B_CNT) B_CNT,
+       SUM(T.AB_CNT) AB_CNT,
+       SUM(T.LOC_CNT) LOC_CNT
+  FROM RADM.BBG_RA_SLS_MBA_LC_DY_A T
+ WHERE T.ORG_NUM = '120033'
+ GROUP BY T.ORG_NUM,
+          T.A_DEPT,
+          T.A_CLASS,
+          T.A_SUBCLASS,
+          T.A_PROD_NUM,
+          T.A_PROD_NAME,
+          T.B_DEPT,
+          T.B_CLASS,
+          T.B_SUBCLASS,
+          T.B_PROD_NUM,
+          T.B_PROD_NAME;
