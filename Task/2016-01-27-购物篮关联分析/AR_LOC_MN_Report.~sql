@@ -62,20 +62,24 @@ SELECT MBA.MN_WID,
        MBA.ORG_WID,
        MBA.ORG_DH_WID,
        MBA.ORG_SCD1_WID,
-       A_PROD.DEPT         A_DEPT,
-       A_PROD.CLASS        A_CLASS,
-       A_PROD.SUBCLASS     A_SUBCLASS,
-       A_PROD.PROD_NUM     A_PROD_NUM,
+       A_PROD.DEPT A_DEPT,
+       A_PROD.CLASS A_CLASS,
+       A_PROD.SUBCLASS A_SUBCLASS,
+       A_PROD.PROD_NUM A_PROD_NUM,
        A_PROD.PRODUCT_NAME A_PROD_NAME,
-       B_PROD.DEPT         B_DEPT,
-       B_PROD.CLASS        B_CLASS,
-       B_PROD.SUBCLASS     B_SUBCLASS,
-       B_PROD.PROD_NUM     B_PROD_NUM,
+       B_PROD.DEPT B_DEPT,
+       B_PROD.CLASS B_CLASS,
+       B_PROD.SUBCLASS B_SUBCLASS,
+       B_PROD.PROD_NUM B_PROD_NUM,
        B_PROD.PRODUCT_NAME B_PROD_NAME,
        MBA.A_CNT,
        MBA.B_CNT,
        MBA.AB_CNT,
-       MBA.LOC_CNT
+       MBA.LOC_CNT,
+       MBA.AB_CNT / MBA.LOC_CNT AB_SUPPORT,
+       MBA.AN_CNT / MBA.A_CNT A_CONFIDENCE,
+       MBA.AN_CNT / MBA.B_CNT B_CONFIDENCE,
+       (MBA.LOC_CNT * MBA.AB_CNT) / (MBA.A_CNT * MBA.B_CNT) UPGRADES
   FROM (SELECT TT1.MN_WID,
                TT1.ORG_WID,
                TT1.ORG_DH_WID,
@@ -116,8 +120,11 @@ SELECT MBA.MN_WID,
                            AND A.ORG_SCD1_WID = B.ORG_SCD1_WID
                            AND A.PROD_WID < B.PROD_WID
                            AND A.DT_WID BETWEEN &BEGIN_DT_WID AND &END_DT_WID
-                        /*AND A.ORG_WID = 58*/
-                        ) AB
+                           AND EXISTS
+                         (SELECT 1
+                                  FROM RADM.W_INT_ORG_D O
+                                 WHERE O.ROW_WID = A.ORG_WID
+                                   AND O.ORG_NUM = &ORG_NUM)) AB
                  GROUP BY AB.MN_WID,
                           AB.ORG_WID,
                           AB.ORG_DH_WID,

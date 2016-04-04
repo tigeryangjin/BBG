@@ -119,6 +119,9 @@ SELECT /*+PARALLEL(16)*/
          WHERE A.SLS_TRX_ID = B.SLS_TRX_ID
            AND B.HYK_NO IS NOT NULL);
 
+--11.每日RA batch报错信息记录
+SELECT * FROM RADM.RA_BATCH_ERR_LOG ORDER BY RUN_DATE DESC FOR UPDATE;
+
 --****************************************************************************************
 --****************************************************************************************
 /*
