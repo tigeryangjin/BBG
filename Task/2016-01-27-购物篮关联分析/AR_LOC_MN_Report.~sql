@@ -96,11 +96,11 @@ SELECT AR.MN_WID,
                MBA.B_CNT,
                MBA.AB_CNT,
                MBA.LOC_CNT,
-               ROUND((MBA.AB_CNT / MBA.LOC_CNT) * 100, 2) || '%' AB_SUPPORT,
-               ROUND((MBA.AB_CNT / MBA.A_CNT) * 100, 2) || '%' A_CONFIDENCE,
-               ROUND((MBA.AB_CNT / MBA.B_CNT) * 100, 2) || '%' B_CONFIDENCE,
-               ROUND(((MBA.LOC_CNT * MBA.AB_CNT) / (MBA.A_CNT * MBA.B_CNT)) * 100,
-                     2) || '%' UPGRADES
+               ROUND((MBA.AB_CNT / MBA.LOC_CNT), 4) AB_SUPPORT,
+               ROUND((MBA.AB_CNT / MBA.A_CNT), 4) A_CONFIDENCE,
+               ROUND((MBA.AB_CNT / MBA.B_CNT), 4) B_CONFIDENCE,
+               ROUND(((MBA.LOC_CNT * MBA.AB_CNT) / (MBA.A_CNT * MBA.B_CNT)),
+                     4) UPGRADES
           FROM (SELECT TT1.MN_WID,
                        TT1.ORG_WID,
                        TT1.ORG_DH_WID,
@@ -219,5 +219,6 @@ SELECT AR.MN_WID,
                (SELECT ROW_WID, ORG_NUM FROM RADM.W_INT_ORG_D) O
          WHERE MBA.A_PROD_WID = A_PROD.PROD_WID
            AND MBA.B_PROD_WID = B_PROD.PROD_WID
-           AND MBA.ORG_WID = O.ROW_WID) AR
- ORDER BY AR.AB_SUPPORT DESC, AR.UPGRADES DESC;
+           AND MBA.ORG_WID = O.ROW_WID
+         ORDER BY MBA.AB_CNT / MBA.LOC_CNT DESC,
+                  (MBA.LOC_CNT * MBA.AB_CNT) / (MBA.A_CNT * MBA.B_CNT) DESC) AR;

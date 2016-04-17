@@ -43,7 +43,13 @@ SELECT AR.MN_WID,
        AR.AB_SUPPORT,
        AR.A_CONFIDENCE,
        AR.B_CONFIDENCE,
-       AR.UPGRADES
+       AR.UPGRADES,
+       CASE
+         WHEN AR.A_DEPT = AR.B_DEPT THEN
+          1
+         ELSE
+          0
+       END SAME_CATEGORY
   FROM (SELECT MBA.MN_WID,
                A_PROD.DEPT A_DEPT,
                A_PROD.CLASS A_CLASS,
@@ -59,11 +65,11 @@ SELECT AR.MN_WID,
                MBA.B_CNT,
                MBA.AB_CNT,
                MBA.LOC_CNT,
-               ROUND((MBA.AB_CNT / MBA.LOC_CNT) * 100, 2) || '%' AB_SUPPORT,
-               ROUND((MBA.AB_CNT / MBA.A_CNT) * 100, 2) || '%' A_CONFIDENCE,
-               ROUND((MBA.AB_CNT / MBA.B_CNT) * 100, 2) || '%' B_CONFIDENCE,
-               ROUND(((MBA.LOC_CNT * MBA.AB_CNT) / (MBA.A_CNT * MBA.B_CNT)) * 100,
-                     2) || '%' UPGRADES
+               ROUND((MBA.AB_CNT / MBA.LOC_CNT), 4) AB_SUPPORT,
+               ROUND((MBA.AB_CNT / MBA.A_CNT), 4) A_CONFIDENCE,
+               ROUND((MBA.AB_CNT / MBA.B_CNT), 4) B_CONFIDENCE,
+               ROUND(((MBA.LOC_CNT * MBA.AB_CNT) / (MBA.A_CNT * MBA.B_CNT)),
+                     4) UPGRADES
           FROM (SELECT TT1.MN_WID,
                        TT1.A_PROD_WID,
                        TT1.A_PROD_SCD1_WID,
@@ -155,5 +161,5 @@ SELECT AR.MN_WID,
                    AND L.LANGUAGE_CODE = 'ZHS') B_PROD --BÉÌÆ·±àÂë+Ãû³Æ+DEPT+CLASS+SUBCLASS
          WHERE MBA.A_PROD_WID = A_PROD.PROD_WID
            AND MBA.B_PROD_WID = B_PROD.PROD_WID
-					 ORDER BY MBA.AB_CNT / MBA.LOC_CNT DESC,
+         ORDER BY MBA.AB_CNT / MBA.LOC_CNT DESC,
                   (MBA.LOC_CNT * MBA.AB_CNT) / (MBA.A_CNT * MBA.B_CNT) DESC) AR;
