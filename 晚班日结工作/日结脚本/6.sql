@@ -35,17 +35,17 @@ SELECT td.loc, td.item, td.qty - (cils.qty - ils.qty)
                SUM(DECODE(tran_code, 1, d.units, 0)) qty
           FROM tran_data d
          WHERE d.tran_code IN (1, 3)
-           and d.location = 120173
+           and d.location = 120135
          GROUP BY d.location, d.item) td,
        (SELECT il.loc, il.item, SUM(il.stock_on_hand) qty
           FROM item_loc_soh il
          WHERE il.loc_type = 'S'
-           and il.loc = 120173
+           and il.loc = 120135
          GROUP BY il.loc, il.item) ils,
        (SELECT il.loc, il.item, SUM(il.stock_on_hand) qty
           FROM cmx_item_loc_soh_13 il
          WHERE il.loc_type = 'S'
-           and il.loc = 120173
+           and il.loc = 120135
          GROUP BY il.loc, il.item) cils
  WHERE td.loc = ils.loc
    AND ils.loc = cils.loc
