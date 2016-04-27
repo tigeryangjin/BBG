@@ -18,11 +18,11 @@ SELECT TRUNC(AH_TIMESTAMP2 + NUMTODSINTERVAL(8, 'hour')) 日期,
        END 是否0800之前完成,
        SUBSTR(NUMTODSINTERVAL(AH_TIMESTAMP4 - AH_TIMESTAMP2, 'DAY'), 12, 8) 执行时间,
        CASE
-         WHEN AH_TIMESTAMP4 - AH_TIMESTAMP2 < 6 / 24 THEN
+         WHEN AH_TIMESTAMP4 - AH_TIMESTAMP2 < 5.5 / 24 THEN
           1
          ELSE
           0
-       END "是否6小时之内完成",
+       END "是否5.5小时之内完成",
        CASE
          WHEN AH_STATUS = 1900 THEN
           'ENDED_OK-ended normally'
