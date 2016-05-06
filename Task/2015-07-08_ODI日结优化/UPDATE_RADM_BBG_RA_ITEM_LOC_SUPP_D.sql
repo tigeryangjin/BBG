@@ -1,4 +1,8 @@
 /* SCD Overwrite on change columns set */
+--2016-5-6 1:30:23
+--执行时间:4847
+--更新记录:171224
+
 --2016-4-28 2:35:03
 --执行时间:6763
 --更新记录:181464
@@ -50,7 +54,7 @@ update RADM.BBG_RA_ITEM_LOC_SUPP_D T
                        100 ETL_PROC_WID,
                        STG.INTEGRATION_ID INTEGRATION_ID,
                        COALESCE(STG.SRC_EFF_FROM_DT,
-                                TO_DATE('2016-04-27',
+                                TO_DATE('2016-05-05',
                                         'YYYY-MM-DD')) EFFECTIVE_FROM_DT
                   from RADM.BBG_RA_ITEM_LOC_SUPP_DS STG
                  where (1 = 1)
@@ -106,7 +110,7 @@ update RADM.BBG_RA_ITEM_LOC_SUPP_D T
                        100 ETL_PROC_WID,
                        STG.INTEGRATION_ID INTEGRATION_ID,
                        COALESCE(STG.SRC_EFF_FROM_DT,
-                                TO_DATE('2016-04-27',
+                                TO_DATE('2016-05-05',
                                         'YYYY-MM-DD')) EFFECTIVE_FROM_DT
                   from RADM.BBG_RA_ITEM_LOC_SUPP_DS STG
                  where (1 = 1)

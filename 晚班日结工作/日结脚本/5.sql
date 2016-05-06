@@ -1,5 +1,2 @@
-update sa_store_day d
-   set d.store_status = 'C', d.data_status = 'F'
- where d.files_loaded > 0
-   and d.store_status = 'W';
-commit;
+drop table cmx_item_loc_soh_13;              --先删掉历史表
+create table cmx_item_loc_soh_13 as   select * from item_loc_soh il where il.loc_type = 'S';   
