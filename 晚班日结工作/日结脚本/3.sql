@@ -1,3 +1,3 @@
 begin
-  shop_rtk_saledataaudit_pro@sale
+	shop_rtk_saledataaudit_pro@sale;
 end;

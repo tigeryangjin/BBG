@@ -167,38 +167,38 @@ select d.subclass,
          end total_retail_20,
          --21-30
          case
-           when c.age > 21 and c.age <= 30 then
+           when c.age >= 21 and c.age <= 30 then
             count(c.vip_id)
          end vip_count_21_30,
          case
-           when c.age > 21 and c.age <= 30 then
+           when c.age >= 21 and c.age <= 30 then
             sum(c.total_retail)
          end total_retail_21_30,
          --31-40
          case
-           when c.age > 31 and c.age <= 40 then
+           when c.age >= 31 and c.age <= 40 then
             count(c.vip_id)
          end vip_count_31_40,
          case
-           when c.age > 31 and c.age <= 40 then
+           when c.age >= 31 and c.age <= 40 then
             sum(c.total_retail)
          end total_retail_31_40,
          --41-50
          case
-           when c.age > 41 and c.age <= 50 then
+           when c.age >= 41 and c.age <= 50 then
             count(c.vip_id)
          end vip_count_41_50,
          case
-           when c.age > 41 and c.age <= 50 then
+           when c.age >= 41 and c.age <= 50 then
             sum(c.total_retail)
          end total_retail_41_50,
          --51-60
          case
-           when c.age > 51 and c.age <= 60 then
+           when c.age >= 51 and c.age <= 60 then
             count(c.vip_id)
          end vip_count_51_60,
          case
-           when c.age > 51 and c.age <= 60 then
+           when c.age >= 51 and c.age <= 60 then
             sum(c.total_retail)
          end total_retail_51_60,
          -->=61
@@ -207,7 +207,7 @@ select d.subclass,
             count(c.vip_id)
          end vip_count_61,
          case
-           when c.age <= 61 then
+           when c.age >= 61 then
             sum(c.total_retail)
          end total_retail_61
           from (select a.subclass,
