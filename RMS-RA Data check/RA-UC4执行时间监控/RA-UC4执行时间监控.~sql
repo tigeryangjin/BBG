@@ -102,9 +102,14 @@ SELECT *
                           'ENDED_CANCEL-manually canceled'
                        end STATUS
                   FROM ah@rms_uc4,
-                       (SELECT COUNT(*) ROWCOUNT
+                       (SELECT /*+PARALLEL(16)*/
+                         COUNT(*) ROWCOUNT
                           FROM cmx_item_supp_country_loc T
-                         WHERE TRUNC(T.LAST_UPDATE_DATE) = TRUNC(SYSDATE - 1))
+                         WHERE T.LAST_UPDATE_DATE BETWEEN TRUNC(SYSDATE - 1) AND
+                               (SELECT MAX(ah_timestamp2) +
+                                       NUMTODSINTERVAL(8, 'hour')
+                                  FROM ah@rms_uc4
+                                 WHERE ah_name = 'BBG_RA_ITEM_LOC_SUPP_SIL.KSH'))
                  WHERE ah_client = 80
                    AND AH_STATUS IN (1800, 1850, 1900)
                    AND TRUNC(ah_timestamp2 + NUMTODSINTERVAL(8, 'hour')) =

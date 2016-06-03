@@ -104,8 +104,7 @@ SELECT *
                   FROM ah@rms_uc4,
                        (SELECT /*+PARALLEL(16)*/
                          COUNT(*) ROWCOUNT
-                          FROM cmx_item_supp_country_loc T
-                         WHERE TRUNC(T.LAST_UPDATE_DATE) = TRUNC(SYSDATE - 1))
+                          FROM BBG_RA_ITEM_LOC_SUPP_DS@RMS_RA T)
                  WHERE ah_client = 80
                    AND AH_STATUS IN (1800, 1850, 1900)
                    AND TRUNC(ah_timestamp2 + NUMTODSINTERVAL(8, 'hour')) =
