@@ -10,34 +10,58 @@ SELECT * FROM RA_RMS.W_RTL_ITEM_LANG_TMP;
 -- Add/modify columns 
 alter table RA_RMS.W_RTL_ITEM_D_TMP add bbg_primary_barcode VARCHAR2(25 CHAR);
 -- Add comments to the columns 
-comment on column RA_RMS.W_RTL_ITEM_D_TMP.bbg_primary_barcode
-  is '商品主条码';
-	
+comment on column RA_RMS.W_RTL_ITEM_D_TMP.bbg_primary_barcode is '商品主条码';
+
 --4.RADM.W_PRODUCT_ATTR_DS add column BBG_PRIMARY_BARCODE(VARCHAR2(25))
 -- Add/modify columns 
 alter table W_PRODUCT_ATTR_DS add bbg_primary_barcode varchar2(25);
 -- Add comments to the columns 
-comment on column W_PRODUCT_ATTR_DS.bbg_primary_barcode
-  is '商品主条码';
-	
+comment on column W_PRODUCT_ATTR_DS.bbg_primary_barcode is '商品主条码';
+
 --5.RADM.W_PRODUCT_ATTR_D add column BBG_PRIMARY_BARCODE(VARCHAR2(25))
 -- Add/modify columns 
 alter table W_PRODUCT_ATTR_D add bbg_primary_barcode varchar2(25);
 -- Add comments to the columns 
-comment on column W_PRODUCT_ATTR_D.bbg_primary_barcode
-  is '商品主条码';
+comment on column W_PRODUCT_ATTR_D.bbg_primary_barcode is '商品主条码';
 
+--6.UPDATE W_PRODUCT_ATTR_D
+UPDATE RADM.W_PRODUCT_ATTR_D A
+   SET A.BBG_PRIMARY_BARCODE =
+       (SELECT B.BBG_PRIMARY_BARCODE
+          FROM (SELECT T.ITEM ITEM, T.BARCODE BBG_PRIMARY_BARCODE
+                  FROM BARCODE_V@RA_RMS_DBLINK T
+                 WHERE T.PRIMARY_BARCODE_IND = 'Y') B
+         WHERE A.PROD_NUM = B.ITEM)
+ WHERE A.BBG_PRIMARY_BARCODE IS NULL
+   AND A.PRODUCT_ATTR11_NAME = A.PRODUCT_ATTR12_NAME
+   AND EXISTS
+ (SELECT 1
+          FROM (SELECT T.ITEM ITEM, T.BARCODE BBG_PRIMARY_BARCODE
+                  FROM BARCODE_V@RA_RMS_DBLINK T
+                 WHERE T.PRIMARY_BARCODE_IND = 'Y') C
+         WHERE A.PROD_NUM = C.ITEM);
 
-
-SELECT T.PROD_NUM,
-       T.PRODUCT_ATTR11_NAME,
-       T.PRODUCT_ATTR12_NAME,
-       T.SCD1_WID,
-       T.PRODUCT_ATTR13_NAME,
-       T.PRODUCT_ATTR14_NAME,
-       T.PRODUCT_ATTR15_NAME,
-       T.INTEGRATION_ID
+--7.CHECK 
+SELECT *
   FROM RADM.W_PRODUCT_ATTR_D T
- WHERE T.PRODUCT_ATTR13_NAME = '900020341';
+ WHERE T.BBG_PRIMARY_BARCODE IS NULL
+   AND T.PRODUCT_ATTR11_NAME = T.PRODUCT_ATTR12_NAME
+   AND LENGTH(T.PROD_NUM) <> 13
+	 AND T.PROD_NUM NOT LIKE '24%';
 
+SELECT *
+  FROM (SELECT T.ITEM_PARENT ITEM, T.ITEM BBG_PRIMARY_BARCODE
+          FROM ITEM_MASTER@RA_RMS_DBLINK T
+         WHERE T.ITEM_LEVEL = 3
+              --AND T.TRAN_LEVEL = 2
+           AND T.PRIMARY_REF_ITEM_IND = 'Y') A
+ WHERE A.ITEM = '700007112';
 
+SELECT *
+  FROM ITEM_MASTER@RA_RMS_DBLINK T
+ WHERE T.ITEM_PARENT = '100670415';
+SELECT * FROM RADM.W_PRODUCT_ATTR_D T WHERE T.PROD_NUM='100670415'; 
+
+SELECT * FROM BARCODE_V@RA_RMS_DBLINK T WHERE T.item = '100670415';
+
+SELECT * FROM RDW_DELETE_ITEM;

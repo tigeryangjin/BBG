@@ -1,4 +1,10 @@
 --在192.168.2.228的SQL Server上创建用户bbg，密码：bbg
+--创建登陆帐户（create login）
+create login bbg with password='bbg', default_database=zktime8;
+--为登陆账户创建数据库用户（create user）,在mydb数据库中的security中的user下可以找到新创建的dba
+create user bbg for login bbg with default_schema=dbo;
+--通过加入数据库角色，赋予数据库用户“db_owner”权限
+exec sp_addrolemember 'db_owner', 'bbg';
 
 USE ZKTIME8
 --KSL

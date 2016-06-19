@@ -1,0 +1,31 @@
+--活动周定义
+SELECT * FROM RADM.BBG_RA_PROMO_STAMP_WK_D;
+select * from bbg_ra_promo_stamp_wk_tmp;
+--插入数据(正式)
+INSERT INTO BBG_RA_PROMO_STAMP_WK_D
+  (ROW_WID,
+   PROMO_WK_KEY,
+   PROMO_WK,
+   PROMO_NAMES,
+   DT_WID,
+   WEEK_START_DT,
+   WEEK_END_DT,
+   W_INSERT_DT,
+   W_UPDATE_DT)
+  SELECT BBG_RA_PROMO_STAMP_WK_D_SEQ.NEXTVAL,
+         T.PROMO_WK_KEY,
+         T.PROMO_WK,
+         'klasique',
+         DV.ROW_WID,
+         T.WEEK_START_DT,
+         T.WEEK_END_DT,
+         SYSDATE,
+         SYSDATE
+    FROM W_MCAL_DAY_DV DV, bbg_ra_promo_stamp_wk_tmp T
+   WHERE DV.MCAL_DAY_DT BETWEEN T.WEEK_START_DT AND T.WEEK_END_DT;
+
+--消费段定义
+SELECT * FROM RADM.BBG_RA_SLS_SEGMENT_D FOR UPDATE;
+
+--门店印花数量统计，来源于RMS.Bbg_Ticketsheet_Result
+SELECT * FROM RADM.BBG_RA_TICKET_V;

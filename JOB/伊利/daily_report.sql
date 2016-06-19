@@ -34,7 +34,7 @@ SELECT TDH.TRAN_DATE 销售日期,
        TDH.LY_TOTAL_RETAIL 去年销售金额,
        TDH.LY_TOTAL_RETAIL - TDH.LY_TOTAL_COST 去年毛利额
   FROM (SELECT T.TRAN_DATE TRAN_DATE,
-               NVL(L.TRAN_DATE, TRUNC(SYSDATE-1) - 366) LY_TRAN_DATE,
+               NVL(L.TRAN_DATE, :TODAY - 366) LY_TRAN_DATE,
                T.SUBCLASS,
                T.ITEM,
                T.LOCATION,
@@ -52,7 +52,7 @@ SELECT TDH.TRAN_DATE 销售日期,
                        SUM(TDH.TOTAL_COST) TOTAL_COST,
                        SUM(TDH.TOTAL_RETAIL) TOTAL_RETAIL
                   FROM RMS.TRAN_DATA_HISTORY TDH
-                 WHERE TDH.TRAN_DATE = TRUNC(SYSDATE-1)
+                 WHERE TDH.TRAN_DATE = :TODAY
                    AND EXISTS (SELECT 1
                           FROM uda_item_lov UIL
                          WHERE UIL.UDA_ID = 3
@@ -69,7 +69,7 @@ SELECT TDH.TRAN_DATE 销售日期,
                        SUM(TDH.TOTAL_COST) TOTAL_COST,
                        SUM(TDH.TOTAL_RETAIL) TOTAL_RETAIL
                   FROM RMS.TRAN_DATA_HISTORY TDH
-                 WHERE TDH.TRAN_DATE = TRUNC(SYSDATE-1) - 366
+                 WHERE TDH.TRAN_DATE = :TODAY - 366
                    AND EXISTS (SELECT 1
                           FROM uda_item_lov UIL
                          WHERE UIL.UDA_ID = 3
@@ -82,7 +82,7 @@ SELECT TDH.TRAN_DATE 销售日期,
            AND T.LOCATION = L.LOCATION(+)
         UNION
         SELECT L.TRAN_DATE + 366 TRAN_DATE,
-               NVL(L.TRAN_DATE, TRUNC(SYSDATE-1) - 366) LY_TRAN_DATE,
+               NVL(L.TRAN_DATE, :TODAY - 366) LY_TRAN_DATE,
                L.SUBCLASS,
                L.ITEM,
                L.LOCATION,
@@ -100,7 +100,7 @@ SELECT TDH.TRAN_DATE 销售日期,
                        SUM(TDH.TOTAL_COST) TOTAL_COST,
                        SUM(TDH.TOTAL_RETAIL) TOTAL_RETAIL
                   FROM RMS.TRAN_DATA_HISTORY TDH
-                 WHERE TDH.TRAN_DATE = TRUNC(SYSDATE-1)
+                 WHERE TDH.TRAN_DATE = :TODAY
                    AND EXISTS (SELECT 1
                           FROM uda_item_lov UIL
                          WHERE UIL.UDA_ID = 3
@@ -117,7 +117,7 @@ SELECT TDH.TRAN_DATE 销售日期,
                        SUM(TDH.TOTAL_COST) TOTAL_COST,
                        SUM(TDH.TOTAL_RETAIL) TOTAL_RETAIL
                   FROM RMS.TRAN_DATA_HISTORY TDH
-                 WHERE TDH.TRAN_DATE = TRUNC(SYSDATE-1) - 366
+                 WHERE TDH.TRAN_DATE = :TODAY - 366
                    AND EXISTS (SELECT 1
                           FROM uda_item_lov UIL
                          WHERE UIL.UDA_ID = 3

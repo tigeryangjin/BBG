@@ -1,0 +1,51 @@
+SELECT RMS.TRAN_DATE,
+       RMS.AMT,
+       RMS.COST,
+       RA.AMT,
+       RA.COST,
+       ROUND(RMS.AMT - NVL(RA.AMT, 0), 2) AMT_DIFF,
+       ROUND(RMS.COST - NVL(RA.COST, 0), 2) COST_AMT
+  FROM (SELECT /*+PARALLEL(16)*/
+         T.TRAN_DATE,
+         SUM(T.UNITS) QTY,
+         SUM(T.TOTAL_RETAIL / (1 + (CASE
+               WHEN T.TRAN_CODE = 3 THEN
+                T.VAT_RATE / 100
+               ELSE
+                0
+             END))) AMT,
+         SUM(T.TOTAL_COST / (1 + (CASE
+               WHEN T.TRAN_CODE = 3 THEN
+                (SELECT VAT_RATE / 100
+                   FROM VAT_ITEM
+                  WHERE ACTIVE_DATE =
+                        (SELECT MAX(V.ACTIVE_DATE)
+                           FROM VAT_ITEM V
+                          WHERE V.ITEM = T.ITEM
+                            AND V.VAT_REGION = 1000
+                            AND V.VAT_TYPE IN ('C', 'B')
+                            AND V.ACTIVE_DATE <= T.TRAN_DATE)
+                    AND ITEM = T.ITEM
+                    AND VAT_REGION = 1000
+                    AND VAT_TYPE IN ('C', 'B'))
+               ELSE
+                0
+             END))) COST
+          FROM RA_RMS.TRAN_DATA_HISTORY_PACK_V T
+         WHERE T.TRAN_CODE IN (2, 3)
+           AND T.TRAN_DATE BETWEEN &TRAN_DATE_BEGIN AND &TRAN_DATE_END
+         GROUP BY T.TRAN_DATE) RMS,
+       (SELECT /*+PARALLEL(16)*/
+         TO_DATE(SUBSTR(T.DT_WID, 2, 8), 'YYYYMMDD') TRAN_DATE,
+         SUM(NVL(T.SLS_QTY, 0) - NVL(T.RET_QTY, 0)) QTY,
+         SUM((NVL(T.SLS_AMT_LCL, 0) - NVL(T.SLS_TAX_AMT_LCL, 0)) -
+             (T.RET_AMT_LCL - T.RET_TAX_AMT_LCL)) AMT,
+         SUM((NVL(T.SLS_AMT_LCL, 0) - NVL(T.RET_AMT_LCL, 0)) -
+             (NVL(T.SLS_TAX_AMT_LCL, 0) - NVL(T.RET_TAX_AMT_LCL, 0)) -
+             (NVL(T.SLS_PROFIT_AMT_LCL, 0) - NVL(T.RET_PROFIT_AMT_LCL, 0))) COST
+          FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F@RMS_RA T
+         WHERE NVL(T.BBG_SERVICE_SATISFACTION, 0) <> 3.5
+           AND T.DT_WID BETWEEN &DT_WID_BEGIN AND &DT_WID_END
+         GROUP BY T.DT_WID) RA
+ WHERE RMS.TRAN_DATE = RA.TRAN_DATE(+)
+ ORDER BY 1;
