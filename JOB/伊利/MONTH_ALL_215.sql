@@ -1,33 +1,33 @@
-SELECT TO_CHAR(TDH.TRAN_DATE, 'YYYYMM') é”€å”®æ—¥æœŸ,
-       TDH.SUBCLASS å°ç±»,
+SELECT TO_CHAR(TDH.TRAN_DATE, 'YYYYMM') ÏúÊÛÈÕÆÚ,
+       TDH.SUBCLASS Ð¡Àà,
        (SELECT SC.SUB_NAME
           FROM RMS.SUBCLASS SC
-         WHERE TDH.SUBCLASS = SC.SUBCLASS) å°ç±»åç§°,
+         WHERE TDH.SUBCLASS = SC.SUBCLASS) Ð¡ÀàÃû³Æ,
        (SELECT IL.PRIMARY_SUPP
           FROM RMS.ITEM_LOC IL
          WHERE IL.ITEM(+) = TDH.ITEM
-           AND IL.LOC(+) = TDH.LOCATION) ä¾›åº”å•†ç¼–ç ,
+           AND IL.LOC(+) = TDH.LOCATION) ¹©Ó¦ÉÌ±àÂë,
        (SELECT su.sup_name
           FROM rms.sups su, RMS.ITEM_LOC IL
          where IL.ITEM(+) = TDH.ITEM
            AND IL.LOC(+) = TDH.LOCATION
-           and su.supplier(+) = IL.PRIMARY_SUPP) ä¾›åº”å•†åç§°,
-       TDH.LOCATION é—¨åº—ç¼–ç ,
-       (SELECT S.STORE_NAME FROM STORE S WHERE TDH.LOCATION = S.STORE(+)) é—¨åº—åç§°,
+           and su.supplier(+) = IL.PRIMARY_SUPP) ¹©Ó¦ÉÌÃû³Æ,
+       TDH.LOCATION ÃÅµê±àÂë,
+       (SELECT S.STORE_NAME FROM STORE S WHERE TDH.LOCATION = S.STORE(+)) ÃÅµêÃû³Æ,
        (SELECT DCV.chain_name
           FROM RMS.DISTRICT_CHAIN_V DCV
-         WHERE DCV.store(+) = TDH.LOCATION) ä¸šæ€,
+         WHERE DCV.store(+) = TDH.LOCATION) ÒµÌ¬,
        (SELECT DCV.region_name
           FROM RMS.DISTRICT_CHAIN_V DCV
-         WHERE DCV.store(+) = TDH.LOCATION) åŒºåŸŸ,
-       TDH.ITEM å•†å“,
+         WHERE DCV.store(+) = TDH.LOCATION) ÇøÓò,
+       TDH.ITEM ÉÌÆ·,
        (SELECT IM.ITEM_DESC
           FROM RMS.ITEM_MASTER IM
-         WHERE IM.ITEM(+) = TDH.ITEM) å•†å“åç§°,
-       SUM(TDH.UNITS) é”€å”®æ•°é‡,
-       SUM(TDH.TOTAL_COST) é”€å”®æˆæœ¬,
-       SUM(TDH.TOTAL_RETAIL) é”€å”®é‡‘é¢,
-       SUM(TDH.TOTAL_RETAIL) - SUM(TDH.TOTAL_COST) æ¯›åˆ©é¢
+         WHERE IM.ITEM(+) = TDH.ITEM) ÉÌÆ·Ãû³Æ,
+       SUM(TDH.UNITS) ÏúÊÛÊýÁ¿,
+       SUM(TDH.TOTAL_COST) ÏúÊÛ³É±¾,
+       SUM(TDH.TOTAL_RETAIL) ÏúÊÛ½ð¶î,
+       SUM(TDH.TOTAL_RETAIL) - SUM(TDH.TOTAL_COST) Ã«Àû¶î
   FROM RMS.TRAN_DATA_HISTORY TDH
  WHERE TDH.TRAN_DATE BETWEEN :BDATE AND :EDATE
    AND TDH.TRAN_CODE IN (1, 3)
