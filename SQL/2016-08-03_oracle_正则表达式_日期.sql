@@ -1,0 +1,27 @@
+--年
+SELECT 1 FROM DUAL WHERE REGEXP_LIKE('9999-','^[0-9]{4}-');
+--月
+SELECT 1 FROM DUAL WHERE REGEXP_LIKE('-13-','-((0?[1-9])|(1[0-2]))-');
+--31天
+SELECT 1 FROM DUAL WHERE REGEXP_LIKE('-31-','-(0?[1-9]|[12][0-9]|3[01])-');
+--31天月份，1、3、5、7、8、10、12月份中每月有31天
+SELECT REGEXP_INSTR('07', '0?[13578]|1[02]') FROM DUAL;
+--30天
+SELECT REGEXP_INSTR('31', '([0-2][1-9])|30') FROM DUAL;
+--30天月份，4、6、9、11月份中每月有30天
+SELECT REGEXP_INSTR('10', '0[469]|11') FROM DUAL;
+--28天
+
+--29天
+
+
+SELECT 1 FROM DUAL WHERE REGEXP_LIKE('9999-', '-((0?[1-9])|(1[0-2]))-');
+
+
+
+
+SELECT * FROM RADM.W_DAY_D ORDER BY CALENDAR_DATE;
+
+--
+SELECT REGEXP_INSTR('2016-08-31', '^((((19|20)\d{2})-(0?(1|[3-9])|1[012])-(0?[1-9]|[12]\d|30))|(((19|20)\d{2})-(0?[13578]|1[02])-31)|(((19|20)\d{2})-0?2-(0?[1-9]|1\d|2[0-8]))|((((19|20)([13579][26]|[2468][048]|0[48]))|(2000))-0?2-29))$') FROM DUAL;
+
