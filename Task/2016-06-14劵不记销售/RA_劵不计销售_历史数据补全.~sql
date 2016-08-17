@@ -203,13 +203,17 @@ INTO RABATCHER.W_RTL_SLS_TRX_IT_LC_DY_TMP_BK
   SELECT /*+PARALLEL(16)*/
    *
     FROM RABATCHER.W_RTL_SLS_TRX_IT_LC_DY_TMP;
+COMMIT;
 
 
-
-
-
-
-
+--********************************************
+--SIL
+--********************************************
+--2016.6.21~2016.7.26
+begin
+  -- Call the procedure
+  jin_pkg.p_del_sls_agg(dtwid => :dtwid);
+end;
 
 
 

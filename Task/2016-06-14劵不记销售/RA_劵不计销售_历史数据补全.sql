@@ -197,7 +197,7 @@ INTO RADM.W_RTL_SLS_TRX_IT_LC_DY_FS T
    WHERE S.DAY_DT BETWEEN DATE '2016-06-21' AND DATE '2016-06-30';
 COMMIT;
 
---2.
+--2.±¸·Ý
 INSERT /*+PARALLEL(16)*/
 INTO RABATCHER.W_RTL_SLS_TRX_IT_LC_DY_TMP_BK
   SELECT /*+PARALLEL(16)*/
@@ -206,10 +206,14 @@ INTO RABATCHER.W_RTL_SLS_TRX_IT_LC_DY_TMP_BK
 COMMIT;
 
 
-
-
-
-
+--********************************************
+--SIL
+--********************************************
+--2016.6.21~2016.7.26
+begin
+  -- Call the procedure
+  jin_pkg.p_del_sls_agg(120160621000);
+end;
 
 
 
