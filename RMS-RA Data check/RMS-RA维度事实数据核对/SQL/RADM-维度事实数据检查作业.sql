@@ -122,6 +122,34 @@ SELECT /*+PARALLEL(16)*/
 --11.每日RA batch报错信息记录
 SELECT * FROM RADM.RA_BATCH_ERR_LOG ORDER BY RUN_DATE DESC FOR UPDATE;
 
+--12.RA商品主条码更新
+UPDATE RADM.W_PRODUCT_ATTR_D A
+   SET A.BBG_PRIMARY_BARCODE =
+       (SELECT B.BBG_PRIMARY_BARCODE
+          FROM (SELECT T.ITEM ITEM, T.BARCODE BBG_PRIMARY_BARCODE
+                  FROM BARCODE_V@RA_RMS_DBLINK T
+                 WHERE T.PRIMARY_BARCODE_IND = 'Y') B
+         WHERE A.PROD_NUM = B.ITEM)
+ WHERE A.BBG_PRIMARY_BARCODE IS NULL
+   AND A.PRODUCT_ATTR11_NAME = A.PRODUCT_ATTR12_NAME
+   AND EXISTS
+ (SELECT 1
+          FROM (SELECT T.ITEM ITEM, T.BARCODE BBG_PRIMARY_BARCODE
+                  FROM BARCODE_V@RA_RMS_DBLINK T
+                 WHERE T.PRIMARY_BARCODE_IND = 'Y') C
+         WHERE A.PROD_NUM = C.ITEM);
+COMMIT;
+
+
+
+
+--13.ODI日志记录备份
+begin
+  -- Call the procedure
+jin_pkg.p_backup_odi_log;
+end;
+
+
 --****************************************************************************************
 --****************************************************************************************
 /*

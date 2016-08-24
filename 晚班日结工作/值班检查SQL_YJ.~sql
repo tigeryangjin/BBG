@@ -90,7 +90,7 @@ SELECT *
 select * from BBG_CONCURRENT_REQUESTS where status = 'E';
 --值班注意点：如果上面的语句查出有记录，则用以下语句更新报错的记录重新处理，
 --隔10分钟后再用上面的语句查询是否仍报错，如果仍报错请与丁勇联系
-update BBG_CONCURRENT_REQUESTS set run_time = 0 where status = 'E';
+--update BBG_CONCURRENT_REQUESTS set run_time = 0 where status = 'E';
 
 --8
 --检查时间点：19：30   22：00    

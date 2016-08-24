@@ -23,13 +23,13 @@ select T.DAY_DT,
                SLS_EMP_DISC_AMT_LCL,
                SLS_MANUAL_COUNT,
                SLS_SCAN_COUNT,
-               -RET_QTY RET_QTY,
-               -RET_AMT_LCL RET_AMT_LCL,
-               -RET_PROFIT_AMT_LCL RET_PROFIT_AMT_LCL,
-               -RET_TAX_AMT_LCL RET_TAX_AMT_LCL,
-               -RET_EMP_DISC_AMT_LCL RET_EMP_DISC_AMT_LCL,
-               -RET_MANUAL_COUNT RET_MANUAL_COUNT,
-               -RET_SCAN_COUNT RET_SCAN_COUNT,
+               -RET_QTY                 RET_QTY,
+               -RET_AMT_LCL             RET_AMT_LCL,
+               -RET_PROFIT_AMT_LCL      RET_PROFIT_AMT_LCL,
+               -RET_TAX_AMT_LCL         RET_TAX_AMT_LCL,
+               -RET_EMP_DISC_AMT_LCL    RET_EMP_DISC_AMT_LCL,
+               -RET_MANUAL_COUNT        RET_MANUAL_COUNT,
+               -RET_SCAN_COUNT          RET_SCAN_COUNT,
                SLS_MANUAL_MKDN_AMT_LCL,
                SLS_MANUAL_MKUP_AMT_LCL,
                -RET_MANUAL_MKDN_AMT_LCL RET_MANUAL_MKDN_AMT_LCL,
@@ -37,8 +37,14 @@ select T.DAY_DT,
                BBG_RETAIL_TYPE_ID
           FROM BBG_RA_SLS_TRX_JL_V@RA_JL
          WHERE DAY_DT = &DAY_DT) T,
-       (SELECT DISTINCT A.PROD_NUM, A.PROD_CAT5
-          FROM BBG_RA_PRODUCT_JL_V@RA_JL A) P
+       (SELECT DISTINCT A.PROD_IT_NUM PROD_NUM,
+                        A.PROD_DV_NUM || '~' || A.PROD_GP_NUM || '~' ||
+                        A.PROD_DP_NUM || '~' || A.PROD_CL_NUM || '~' ||
+                        A.PROD_SC_NUM PROD_CAT5
+          FROM RABATCHER.W_PRODUCT_D_RTL_TMP A
+         WHERE A.CURRENT_FLG = 'Y'
+           AND A.PROD_DV_NUM = 7
+           AND A.PROD_DP_NUM NOT IN (75, 76)) P
  WHERE T.PROD_IT_NUM = P.PROD_NUM
  GROUP BY T.DAY_DT,
           SUBSTR(P.PROD_CAT5,

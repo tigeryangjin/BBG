@@ -1,3 +1,5 @@
+SELECT * FROM CMX_WYY_ZHIBAN_CHECK_T;
+
 --1
 --检查时间点：19：30
 --如果上面的语句查出的记录数字段结果提示超过10万，
@@ -92,7 +94,7 @@ select * from BBG_CONCURRENT_REQUESTS where status = 'E';
 --隔10分钟后再用上面的语句查询是否仍报错，如果仍报错请与丁勇联系
 --update BBG_CONCURRENT_REQUESTS set run_time = 0 where status = 'E';
 
---8
+--8n
 --检查时间点：19：30   22：00    
 select count(*) 记录数
   from CMX_IF_PRICE_PUBLISH_DATA

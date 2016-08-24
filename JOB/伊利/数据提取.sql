@@ -69,7 +69,7 @@ SELECT TDH.TRAN_DATE 销售日期,
                        SUM(TDH.UNITS) UNITS,
                        SUM(TDH.TOTAL_COST) TOTAL_COST,
                        SUM(TDH.TOTAL_RETAIL) TOTAL_RETAIL
-                  FROM RMS.TRAN_DATA_HISTORY TDH
+                  FROM TRAN_DATA_HISTORY@RTKHIST TDH
                  WHERE TDH.TRAN_DATE = &TODAY - 366
                    AND EXISTS (SELECT 1
                           FROM uda_item_lov UIL
@@ -82,6 +82,7 @@ SELECT TDH.TRAN_DATE 销售日期,
          WHERE T.ITEM = L.ITEM(+)
            AND T.LOCATION = L.LOCATION(+)
         UNION
+				--去年有销售而今年没有销售
         SELECT L.TRAN_DATE + 366 TRAN_DATE,
                NVL(L.TRAN_DATE, &TODAY - 366) LY_TRAN_DATE,
                L.SUBCLASS,
@@ -117,13 +118,13 @@ SELECT TDH.TRAN_DATE 销售日期,
                        SUM(TDH.UNITS) UNITS,
                        SUM(TDH.TOTAL_COST) TOTAL_COST,
                        SUM(TDH.TOTAL_RETAIL) TOTAL_RETAIL
-                  FROM RMS.TRAN_DATA_HISTORY TDH
+                  FROM TRAN_DATA_HISTORY@RTKHIST TDH
                  WHERE TDH.TRAN_DATE = &TODAY - 366
                    AND EXISTS (SELECT 1
                           FROM uda_item_lov UIL
                          WHERE UIL.UDA_ID = 3
                            AND UIL.UDA_VALUE IN (5057, 8430)
-                           AND TDH.ITEM = UIL.ITEM)
+                           AND TDH.ITEM = UIL.ITEM) 
                    AND TDH.TRAN_CODE IN (1, 3)
                    AND TDH.CLASS = 215
                  GROUP BY TDH.TRAN_DATE, TDH.ITEM, TDH.LOCATION, TDH.SUBCLASS) L
@@ -245,7 +246,7 @@ SELECT --TDH.TRAN_DATE 销售日期,
   FROM RMS.TRAN_DATA_HISTORY TDH
  WHERE TDH.TRAN_DATE BETWEEN &BDATE AND &EDATE
    AND TDH.ITEM IN
-       (102555402 )
+       (101825837，101942671，800003583，102747771，800002917 )
    AND TDH.TRAN_CODE IN (1, 3)
  GROUP BY TDH.ITEM, TDH.SUBCLASS, TDH.LOCATION --, TDH.TRAN_DATE
  ORDER BY /*TDH.TRAN_DATE,*/ TDH.LOCATION, TDH.ITEM;
