@@ -254,10 +254,11 @@ SELECT *
                    '2016-07-01'
                      AND DATE '2016-07-21'
                      AND M.ah_hostdst = 'RA_AGENT'
-                     AND EXISTS (SELECT 1
+                     AND EXISTS
+                   (SELECT 1
                             FROM AH@RMS_UC4 TP
                            WHERE M.AH_TOPNR = TP.AH_IDNR
-													 AND TP.AH_NAME = 'PF.ORACLE_RETAIL_BATCH')
+                             AND TP.AH_NAME = 'PF.ORACLE_RETAIL_BATCH')
                      AND M.ah_name = D.AH_NAME) P_RUN_ITME
                   FROM ah@rms_uc4 D
                  WHERE D.ah_client = 80
@@ -266,10 +267,11 @@ SELECT *
                  '2016-08-01'
                    AND DATE '2016-08-23'
                    AND D.ah_hostdst = 'RA_AGENT'
-                   AND EXISTS (SELECT 1
+                   AND EXISTS
+                 (SELECT 1
                           FROM AH@RMS_UC4 TP
                          WHERE D.AH_TOPNR = TP.AH_IDNR
-												 AND TP.AH_NAME = 'PF.ORACLE_RETAIL_BATCH')
+                           AND TP.AH_NAME = 'PF.ORACLE_RETAIL_BATCH')
                  GROUP BY ah_name) A)
  ORDER BY 1;
 

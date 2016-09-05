@@ -254,6 +254,7 @@ SELECT *
                    '2016-07-01'
                      AND DATE '2016-07-21'
                      AND M.ah_hostdst = 'RA_AGENT'
+										 
                      AND EXISTS
                    (SELECT 1
                             FROM AH@RMS_UC4 TP
