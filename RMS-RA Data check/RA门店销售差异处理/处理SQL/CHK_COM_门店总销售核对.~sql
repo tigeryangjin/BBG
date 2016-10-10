@@ -9,7 +9,7 @@ SELECT
         T.VAT_RATE / 100
        ELSE
         0
-     END))) AMT,
+     END))) + SUM(NVL(C.coupon_amt, 0)) AMT,
  SUM(T.TOTAL_COST / (1 + (CASE
        WHEN T.TRAN_CODE = 3 THEN
         (SELECT VAT_RATE / 100

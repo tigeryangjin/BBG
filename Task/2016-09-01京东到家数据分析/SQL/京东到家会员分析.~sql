@@ -1,0 +1,464 @@
+--日期范围（2016.08.23~2016.09.05），门店范围（120036）
+--确定手机号码
+SELECT DISTINCT T.BUYERMOBILE
+  FROM ORDER_HDR T
+ WHERE TO_DATE(SUBSTR(T.ORDERSTATUSTIME, 1, 10), 'YYYY-MM-DD') BETWEEN DATE
+ '2016-08-23'
+   AND DATE '2016-09-05'
+ ORDER BY T.BUYERMOBILE;
+--通过手机号码找会员卡号
+SELECT * FROM BBG_MEMBER T WHERE T.PHONE_NUMBER IN ();
+
+DROP TABLE BBG_VIP_TMP;
+CREATE TABLE BBG_VIP_TMP(CARD_NUM VARCHAR2(64), PHONE_NUMBER VARCHAR2(50));
+SELECT * FROM BBG_VIP_TMP FOR UPDATE;
+
+CREATE TABLE BBG_ORDER_VIP_TMP AS
+  SELECT H.ORDERID,
+         H.BUYERMOBILE,
+         TO_DATE(SUBSTR(H.ORDERSTATUSTIME, 1, 10), 'YYYY-MM-DD') ORDER_DATE,
+         H.ORDERTOTALMONEY,
+         D.ORDER_QTY,
+         (SELECT NVL(MAX(1), 0)
+            FROM BBG_VIP_TMP V
+           WHERE H.BUYERMOBILE = V.PHONE_NUMBER) ISVIP
+    FROM ORDER_HDR H,
+         (SELECT T.ORDERID, SUM(T.SKUCOUNT) ORDER_QTY
+            FROM ORDER_DTL T
+           GROUP BY T.ORDERID) D
+   WHERE H.ORDERID = D.ORDERID
+     AND H.ORDERSTATUS = 2;
+
+CREATE TABLE RADM.BBG_VIP_JDDJ_TMP(card_num VARCHAR2(64),
+                                   phone_number VARCHAR2(50));
+																	 
+ CREATE TABLE BBG_ALL_VIP_TMP AS
+ SELECT * FROM BBG_VIP_TMP WHERE 1=2;
+ 
+SELECT * FROM BBG_ALL_VIP_TMP FOR UPDATE;
+
+--1.  购买人数中会员占比
+SELECT COUNT(B.BUYERMOBILE) SHOP_COUNT,
+       SUM(B.ISVIP) SHOP_VIP_COUNT,
+       SUM(B.ISVIP) / COUNT(B.BUYERMOBILE) SHOP_VIP_PER
+  FROM (SELECT DISTINCT A.BUYERMOBILE, A.ISVIP
+          FROM BBG_ORDER_VIP_TMP A
+         WHERE A.ORDER_DATE BETWEEN DATE '2016-08-23' AND DATE '2016-09-05') B;
+
+--2.  交易笔数的会员占比
+SELECT COUNT(B.ORDERID) TRAN_COUNT,
+       SUM(B.ISVIP) TRAN_VIP_COUNT,
+       SUM(B.ISVIP) / COUNT(B.ORDERID) TRAN_VIP_PER
+  FROM (SELECT DISTINCT A.ORDERID, A.ISVIP
+          FROM BBG_ORDER_VIP_TMP A
+         WHERE A.ORDER_DATE BETWEEN DATE '2016-08-23' AND DATE '2016-09-05') B;
+
+--3.  销售总数量,总金额,会员占比
+--4.  总的客单价,会员客单价
+SELECT SUM(A.ORDER_QTY) ORDER_QTY,
+       SUM(A.ORDERTOTALMONEY) ORDER_AMT,
+       SUM(CASE
+             WHEN A.ISVIP = 1 THEN
+              A.ORDER_QTY
+             ELSE
+              0
+           END) ORDER_VIP_QTY,
+       SUM(CASE
+             WHEN A.ISVIP = 1 THEN
+              A.ORDERTOTALMONEY
+             ELSE
+              0
+           END) ORDER_VIP_AMT,
+       SUM(A.ORDERTOTALMONEY) / COUNT(A.ORDERID) PER_CUSTOMER_TRANSACTION,
+       SUM(CASE
+             WHEN A.ISVIP = 1 THEN
+              A.ORDERTOTALMONEY
+             ELSE
+              0
+           END) / SUM(A.ISVIP) VIP_PER_CUSTOMER_TRANSACTION
+  FROM BBG_ORDER_VIP_TMP A
+ WHERE A.ORDER_DATE BETWEEN DATE '2016-08-23' AND DATE '2016-09-05';
+
+--5.  总的复购次数, 会员复购次数,总的复购人数, 会员复购人数
+SELECT COUNT(B.ORDERID) REPEAT_TRAN_COUNT,
+       COUNT(DISTINCT B.BUYERMOBILE) REPEAT_CUSTOMER_COUNT
+  FROM BBG_ORDER_VIP_TMP B
+ WHERE EXISTS (SELECT 1
+          FROM (SELECT A.BUYERMOBILE
+                  FROM BBG_ORDER_VIP_TMP A
+                 WHERE A.ORDER_DATE BETWEEN DATE '2016-08-23' AND DATE
+                 '2016-09-05'
+                 GROUP BY A.BUYERMOBILE
+                HAVING COUNT(1) > 1) C
+         WHERE C.BUYERMOBILE = B.BUYERMOBILE);
+
+SELECT COUNT(B.ORDERID) VIP_REPEAT_TRAN_COUNT,
+       COUNT(DISTINCT B.BUYERMOBILE) VIP_REPEAT_CUSTOMER_COUNT
+  FROM BBG_ORDER_VIP_TMP B
+ WHERE EXISTS (SELECT 1
+          FROM (SELECT A.BUYERMOBILE
+                  FROM BBG_ORDER_VIP_TMP A
+                 WHERE A.ORDER_DATE BETWEEN DATE '2016-08-23' AND DATE
+                 '2016-09-05'
+                   AND A.ISVIP = 1
+                 GROUP BY A.BUYERMOBILE
+                HAVING COUNT(1) > 1) C
+         WHERE C.BUYERMOBILE = B.BUYERMOBILE);
+--6.  购买次数较多的顾客分析- 是否会员,购买商品类型, 购买时间段,是否影响在步步高的购买
+--6.1京东到家消费频次和金额
+SELECT B.BUYERMOBILE, B.ISVIP, C.CARD_NUM, B.CNT, B.ORDER_AMT
+  FROM (SELECT A.BUYERMOBILE,
+               A.ISVIP,
+               COUNT(1) CNT,
+               SUM(A.ORDERTOTALMONEY) ORDER_AMT
+          FROM BBG_ORDER_VIP_TMP A
+         GROUP BY A.BUYERMOBILE, A.ISVIP
+        HAVING COUNT(1) > 1
+         ORDER BY COUNT(1) DESC) B,
+       BBG_ALL_VIP_TMP C
+ WHERE B.BUYERMOBILE = C.PHONE_NUMBER(+);
+
+--6.1.1 京东到家消费频次和金额,购物频次为0的
+--会员0次购物
+SELECT COUNT(DISTINCT C.CARD_NUM), COUNT(DISTINCT A.ORDERID),SUM(A.ORDERTOTALMONEY)
+  FROM ORDER_HDR A, BBG_ALL_VIP_TMP C
+ WHERE A.BUYERMOBILE = C.PHONE_NUMBER
+   AND A.BBGORDERSTATUS <> 10
+   AND TO_DATE(SUBSTR(A.ORDERSTATUSTIME, 1, 10), 'YYYY-MM-DD') BETWEEN DATE
+ '2016-08-23'
+   AND DATE '2016-09-11'
+   AND NOT EXISTS
+ (SELECT 1 FROM BBG_ORDER_VIP_TMP B WHERE A.ORDERID = B.ORDERID);
+--手机O次购物
+SELECT COUNT(DISTINCT A.BUYERMOBILE), COUNT(DISTINCT A.ORDERID),SUM(A.ORDERTOTALMONEY)
+  FROM ORDER_HDR A
+ WHERE A.BBGORDERSTATUS <> 10
+   AND TO_DATE(SUBSTR(A.ORDERSTATUSTIME, 1, 10), 'YYYY-MM-DD') BETWEEN DATE
+ '2016-08-23'
+   AND DATE '2016-09-11'
+   AND NOT EXISTS
+ (SELECT 1 FROM BBG_ORDER_VIP_TMP B WHERE A.ORDERID = B.ORDERID);
+
+
+--6.2京东到家时段销售
+SELECT TO_CHAR(TO_DATE(T.ORDERSTATUSTIME, 'yyyy-mm-dd hh24:mi:ss'), 'HH24') HH24,COUNT(T.)
+       SUM(T.ORDERTOTALMONEY) ORDERTOTALMONEY
+  FROM ORDER_HDR T
+ WHERE TO_DATE(SUBSTR(T.ORDERSTATUSTIME, 1, 10), 'YYYY-MM-DD') BETWEEN DATE
+ '2016-08-23'
+   AND DATE '2016-09-05'
+   AND T.BBGORDERSTATUS = 10
+ GROUP BY TO_CHAR(TO_DATE(T.ORDERSTATUSTIME, 'yyyy-mm-dd hh24:mi:ss'),
+                  'HH24')
+ ORDER BY 1;
+
+--7.  门店同期对比销售,客单,客流
+--8.  京东单品销售分析,如单品排名,商品的复购
+--7.1单品排名
+SELECT ROWNUM, A.*
+  FROM (SELECT D.SKUIDISV ITEM,
+               D.SKUNAME,
+               SUM(D.SKUCOUNT) QTY,
+               SUM(D.SKUCOUNT * D.SKUJDPRICE) SALE_AMT
+          FROM ORDER_HDR H, ORDER_DTL D
+         WHERE H.ORDERID = D.ORDERID
+           AND H.ORDERSTATUS = 2
+           AND TO_DATE(SUBSTR(H.ORDERSTATUSTIME, 1, 10), 'YYYY-MM-DD') BETWEEN DATE
+         '2016-08-23'
+           AND DATE '2016-09-05'
+         GROUP BY D.SKUIDISV, D.SKUNAME
+         ORDER BY 4 DESC) A;
+
+--7.2线上会员线下购物
+SELECT * FROM RADM.BBG_ALL_VIP_JDDJ_TMP;
+
+SELECT COUNT(DISTINCT A.HYK_NO) HYK_COUNT,
+       COUNT(A.SLS_TRX_ID) TRAN_COUNT,
+       SUM(A.SLS_AMT_LCL - A.RET_AMT_LCL) SALES_AMT
+  FROM RADM.BBG_RA_RFM_VIP_F A
+ WHERE EXISTS (SELECT 1
+          FROM RADM.BBG_ALL_VIP_JDDJ_TMP B
+         WHERE A.HYK_NO = B.CARD_NUM)
+ ORDER BY 1;
+
+SELECT /*+PARALLEL(16)*/
+ COUNT(DISTINCT A.HYK_NO) HYK_COUNT,
+ COUNT(A.SLS_TRX_ID) TRAN_COUNT,
+ SUM(A.SLS_AMT_LCL - A.RET_AMT_LCL) SALES_AMT
+  FROM RADM.BBG_RA_RFM_VIP_F A
+ WHERE EXISTS (SELECT /*+PARALLEL(16)*/
+         1
+          FROM RADM.BBG_ALL_VIP_JDDJ_TMP B
+         WHERE A.HYK_NO = B.CARD_NUM)
+   AND A.DT_WID BETWEEN 120140101000 AND 120160911000
+ ORDER BY 1;
+
+--7.3会员RFM
+SELECT T.HYK_NO,
+       T.MN_WID,
+       T.VIP_RECENCY_DATE,
+       T.VIP_MONTH_FREQ,
+       T.VIP_YEAR_FREQ,
+       T.VIP_MONTH_SLS_AMT_LCL - T.VIP_MONTH_RET_AMT_LCL MONTH_SALE_AMT,
+       T.VIP_YEAR_SLS_AMT_LCL - T.VIP_YEAR_RET_AMT_LCL YEAR_SALE_AMT
+  FROM RADM.BBG_RA_RFM_VIP_MN_A T
+ WHERE EXISTS
+ (SELECT 1 FROM RADM.BBG_VIP_JDDJ_TMP V WHERE T.HYK_NO = V.CARD_NUM)
+   AND T.MN_WID = 201608
+ ORDER BY 6 DESC;
+
+SELECT T.MN_WID,
+       SUM(T.VIP_MONTH_FREQ) VIP_MONTH_FREQ,
+       SUM(T.VIP_MONTH_SLS_AMT_LCL - T.VIP_MONTH_RET_AMT_LCL) VIP_MONTH_SALE_AMT
+  FROM RADM.BBG_RA_RFM_VIP_MN_A T
+ WHERE EXISTS
+ (SELECT 1 FROM RADM.BBG_VIP_JDDJ_TMP V WHERE T.HYK_NO = V.CARD_NUM)
+   AND T.MN_WID BETWEEN 201601 AND 201608
+ GROUP BY T.MN_WID
+ ORDER BY 1;
+
+--7.4会员年龄段和性别分析
+DROP TABLE RADM.BBG_JDDJ_VIP_BIRTHDAY;
+CREATE TABLE RADM.BBG_JDDJ_VIP_BIRTHDAY(CARD_NUM VARCHAR2(64),
+                                        PHONE_NUMBER VARCHAR2(50),
+                                        BIRTHDAY DATE,
+                                        GENDER VARCHAR2(4));
+SELECT * FROM RADM.BBG_JDDJ_VIP_BIRTHDAY FOR UPDATE;
+--7.5年龄段分析明细
+SELECT /*+PARALLEL(16)*/
+ T.HYK_NO,
+ ROUND((DATE '2016-09-11' - NVL(V.BIRTHDAY, DATE '1986-01-01')) / 365) AGE_GROUP,
+ COUNT(T.SLS_TRX_ID) TRAN_COUNT,
+ SUM(T.SLS_AMT_LCL - T.RET_AMT_LCL) SALES_AMT
+  FROM RADM.BBG_RA_RFM_VIP_F T, RADM.BBG_JDDJ_VIP_BIRTHDAY V
+ WHERE T.HYK_NO = V.CARD_NUM
+   AND T.DT_WID BETWEEN 120160301000 AND 120160531000
+ GROUP BY T.HYK_NO, V.BIRTHDAY
+ ORDER BY 1;
+
+--7.6年龄段汇总
+SELECT D.MONTH,
+       SUM(NVL(D.HYK_COUNT_LESS_0, 0)) HYK_COUNT_LESS_0,
+       SUM(NVL(D.TRAN_COUNT_LESS_0, 0)) TRAN_COUNT_LESS_0,
+       SUM(NVL(D.SALES_AMT_LESS_0, 0)) SALES_AMT_LESS_0,
+       --
+       SUM(NVL(D.HYK_COUNT_0_9, 0)) HYK_COUNT_0_9,
+       SUM(NVL(D.TRAN_COUNT_0_9, 0)) TRAN_COUNT_0_9,
+       SUM(NVL(D.SALES_AMT_0_9, 0)) SALES_AMT_0_9,
+       --
+       SUM(NVL(D.HYK_COUNT_10_19, 0)) HYK_COUNT_10_19,
+       SUM(NVL(D.TRAN_COUNT_10_19, 0)) TRAN_COUNT_10_19,
+       SUM(NVL(D.SALES_AMT_10_19, 0)) SALES_AMT_10_19,
+       --
+       SUM(NVL(D.HYK_COUNT_20_29, 0)) HYK_COUNT_20_29,
+       SUM(NVL(D.TRAN_COUNT_20_29, 0)) TRAN_COUNT_20_29,
+       SUM(NVL(D.SALES_AMT_20_29, 0)) SALES_AMT_20_29,
+       --
+       SUM(NVL(D.HYK_COUNT_30_39, 0)) HYK_COUNT_30_39,
+       SUM(NVL(D.TRAN_COUNT_30_39, 0)) TRAN_COUNT_30_39,
+       SUM(NVL(D.SALES_AMT_30_39, 0)) SALES_AMT_30_39,
+       --
+       SUM(NVL(D.HYK_COUNT_40_49, 0)) HYK_COUNT_40_49,
+       SUM(NVL(D.TRAN_COUNT_40_49, 0)) TRAN_COUNT_40_49,
+       SUM(NVL(D.SALES_AMT_40_49, 0)) SALES_AMT_40_49,
+       --
+       SUM(NVL(D.HYK_COUNT_50_59, 0)) HYK_COUNT_50_59,
+       SUM(NVL(D.TRAN_COUNT_50_59, 0)) TRAN_COUNT_50_59,
+       SUM(NVL(D.SALES_AMT_50_59, 0)) SALES_AMT_50_59,
+       --
+       SUM(NVL(D.HYK_COUNT_60_69, 0)) HYK_COUNT_60_69,
+       SUM(NVL(D.TRAN_COUNT_60_69, 0)) TRAN_COUNT_60_69,
+       SUM(NVL(D.SALES_AMT_60_69, 0)) SALES_AMT_60_69,
+       --
+       SUM(NVL(D.HYK_COUNT_70_79, 0)) HYK_COUNT_70_79,
+       SUM(NVL(D.TRAN_COUNT_70_79, 0)) TRAN_COUNT_70_79,
+       SUM(NVL(D.SALES_AMT_70_79, 0)) SALES_AMT_70_79,
+       --
+       SUM(NVL(D.HYK_COUNT_80_89, 0)) HYK_COUNT_80_89,
+       SUM(NVL(D.TRAN_COUNT_80_89, 0)) TRAN_COUNT_80_89,
+       SUM(NVL(D.SALES_AMT_80_89, 0)) SALES_AMT_80_89,
+       --
+       SUM(NVL(D.HYK_COUNT_90_99, 0)) HYK_COUNT_90_99,
+       SUM(NVL(D.TRAN_COUNT_90_99, 0)) TRAN_COUNT_90_99,
+       SUM(NVL(D.SALES_AMT_90_99, 0)) SALES_AMT_90_99,
+       --
+       SUM(NVL(D.HYK_COUNT_MORE_99, 0)) HYK_COUNT_MORE_99,
+       SUM(NVL(D.TRAN_COUNT_MORE_99, 0)) TRAN_COUNT_MORE_99,
+       SUM(NVL(D.SALES_AMT_MORE_99, 0)) SALES_AMT_MORE_99
+  FROM (SELECT C.MONTH,
+               CASE
+                 WHEN C.AGE < 0 THEN
+                  COUNT(DISTINCT C.HYK_NO)
+               END HYK_COUNT_LESS_0,
+               CASE
+                 WHEN C.AGE < 0 THEN
+                  SUM(C.TRAN_COUNT)
+               END TRAN_COUNT_LESS_0,
+               CASE
+                 WHEN C.AGE < 0 THEN
+                  SUM(C.SALES_AMT)
+               END SALES_AMT_LESS_0,
+               --0-9
+               CASE
+                 WHEN C.AGE BETWEEN 0 AND 9 THEN
+                  COUNT(DISTINCT C.HYK_NO)
+               END HYK_COUNT_0_9,
+               CASE
+                 WHEN C.AGE BETWEEN 0 AND 9 THEN
+                  SUM(C.TRAN_COUNT)
+               END TRAN_COUNT_0_9,
+               CASE
+                 WHEN C.AGE BETWEEN 0 AND 9 THEN
+                  SUM(C.SALES_AMT)
+               END SALES_AMT_0_9,
+               --10-19
+               CASE
+                 WHEN C.AGE BETWEEN 10 AND 19 THEN
+                  COUNT(DISTINCT C.HYK_NO)
+               END HYK_COUNT_10_19,
+               CASE
+                 WHEN C.AGE BETWEEN 10 AND 19 THEN
+                  SUM(C.TRAN_COUNT)
+               END TRAN_COUNT_10_19,
+               CASE
+                 WHEN C.AGE BETWEEN 10 AND 19 THEN
+                  SUM(C.SALES_AMT)
+               END SALES_AMT_10_19,
+               --20-29
+               CASE
+                 WHEN C.AGE BETWEEN 20 AND 29 THEN
+                  COUNT(DISTINCT C.HYK_NO)
+               END HYK_COUNT_20_29,
+               CASE
+                 WHEN C.AGE BETWEEN 20 AND 29 THEN
+                  SUM(C.TRAN_COUNT)
+               END TRAN_COUNT_20_29,
+               CASE
+                 WHEN C.AGE BETWEEN 20 AND 29 THEN
+                  SUM(C.SALES_AMT)
+               END SALES_AMT_20_29,
+               --30-39
+               CASE
+                 WHEN C.AGE BETWEEN 30 AND 39 THEN
+                  COUNT(DISTINCT C.HYK_NO)
+               END HYK_COUNT_30_39,
+               CASE
+                 WHEN C.AGE BETWEEN 30 AND 39 THEN
+                  SUM(C.TRAN_COUNT)
+               END TRAN_COUNT_30_39,
+               CASE
+                 WHEN C.AGE BETWEEN 30 AND 39 THEN
+                  SUM(C.SALES_AMT)
+               END SALES_AMT_30_39,
+               --40-49
+               CASE
+                 WHEN C.AGE BETWEEN 40 AND 49 THEN
+                  COUNT(DISTINCT C.HYK_NO)
+               END HYK_COUNT_40_49,
+               CASE
+                 WHEN C.AGE BETWEEN 40 AND 49 THEN
+                  SUM(C.TRAN_COUNT)
+               END TRAN_COUNT_40_49,
+               CASE
+                 WHEN C.AGE BETWEEN 40 AND 49 THEN
+                  SUM(C.SALES_AMT)
+               END SALES_AMT_40_49,
+               --50-59
+               CASE
+                 WHEN C.AGE BETWEEN 50 AND 59 THEN
+                  COUNT(DISTINCT C.HYK_NO)
+               END HYK_COUNT_50_59,
+               CASE
+                 WHEN C.AGE BETWEEN 50 AND 59 THEN
+                  SUM(C.TRAN_COUNT)
+               END TRAN_COUNT_50_59,
+               CASE
+                 WHEN C.AGE BETWEEN 50 AND 59 THEN
+                  SUM(C.SALES_AMT)
+               END SALES_AMT_50_59,
+               --60-69
+               CASE
+                 WHEN C.AGE BETWEEN 60 AND 69 THEN
+                  COUNT(DISTINCT C.HYK_NO)
+               END HYK_COUNT_60_69,
+               CASE
+                 WHEN C.AGE BETWEEN 60 AND 69 THEN
+                  SUM(C.TRAN_COUNT)
+               END TRAN_COUNT_60_69,
+               CASE
+                 WHEN C.AGE BETWEEN 60 AND 69 THEN
+                  SUM(C.SALES_AMT)
+               END SALES_AMT_60_69,
+               --70-79
+               CASE
+                 WHEN C.AGE BETWEEN 70 AND 79 THEN
+                  COUNT(DISTINCT C.HYK_NO)
+               END HYK_COUNT_70_79,
+               CASE
+                 WHEN C.AGE BETWEEN 70 AND 79 THEN
+                  SUM(C.TRAN_COUNT)
+               END TRAN_COUNT_70_79,
+               CASE
+                 WHEN C.AGE BETWEEN 70 AND 79 THEN
+                  SUM(C.SALES_AMT)
+               END SALES_AMT_70_79,
+               --80-89
+               CASE
+                 WHEN C.AGE BETWEEN 80 AND 89 THEN
+                  COUNT(DISTINCT C.HYK_NO)
+               END HYK_COUNT_80_89,
+               CASE
+                 WHEN C.AGE BETWEEN 80 AND 89 THEN
+                  SUM(C.TRAN_COUNT)
+               END TRAN_COUNT_80_89,
+               CASE
+                 WHEN C.AGE BETWEEN 80 AND 89 THEN
+                  SUM(C.SALES_AMT)
+               END SALES_AMT_80_89,
+               --90-99
+               CASE
+                 WHEN C.AGE BETWEEN 90 AND 99 THEN
+                  COUNT(DISTINCT C.HYK_NO)
+               END HYK_COUNT_90_99,
+               CASE
+                 WHEN C.AGE BETWEEN 90 AND 99 THEN
+                  SUM(C.TRAN_COUNT)
+               END TRAN_COUNT_90_99,
+               CASE
+                 WHEN C.AGE BETWEEN 90 AND 99 THEN
+                  SUM(C.SALES_AMT)
+               END SALES_AMT_90_99,
+               -->99
+               CASE
+                 WHEN C.AGE > 99 THEN
+                  COUNT(DISTINCT C.HYK_NO)
+               END HYK_COUNT_MORE_99,
+               CASE
+                 WHEN C.AGE > 99 THEN
+                  SUM(C.TRAN_COUNT)
+               END TRAN_COUNT_MORE_99,
+               CASE
+                 WHEN C.AGE > 99 THEN
+                  SUM(C.SALES_AMT)
+               END SALES_AMT_MORE_99
+          FROM (SELECT /*+PARALLEL(16)*/
+                 T.HYK_NO,
+                 SUBSTR(T.DT_WID, 2, 6) MONTH,
+                 ROUND((DATE '2016-09-11' - NVL(V.BIRTHDAY, DATE '2100-12-31')) / 365) AGE,
+                 COUNT(T.SLS_TRX_ID) TRAN_COUNT,
+                 SUM(T.SLS_AMT_LCL - T.RET_AMT_LCL) SALES_AMT
+                  FROM RADM.BBG_RA_RFM_VIP_F T, RADM.BBG_JDDJ_VIP_BIRTHDAY V
+                 WHERE T.HYK_NO = V.CARD_NUM
+                   AND T.DT_WID BETWEEN 120150901000 AND 120160911000
+                 GROUP BY T.HYK_NO, SUBSTR(T.DT_WID, 2, 6), V.BIRTHDAY) C
+         GROUP BY C.MONTH, C.AGE) D
+ GROUP BY D.MONTH
+ ORDER BY 1;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

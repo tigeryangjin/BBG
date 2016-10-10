@@ -36,7 +36,8 @@ select T.DAY_DT,
                -RET_MANUAL_MKUP_AMT_LCL RET_MANUAL_MKUP_AMT_LCL,
                BBG_RETAIL_TYPE_ID
           FROM BBG_RA_SLS_TRX_JL_V@RA_JL
-         WHERE DAY_DT BETWEEN &BDAY_DT AND &EDAY_DT) T,
+         WHERE DAY_DT BETWEEN &BDAY_DT AND &EDAY_DT
+           /*AND ORG_NUM = '130003'*/) T,
        (SELECT DISTINCT A.PROD_NUM, A.PROD_CAT5
           FROM BBG_RA_PRODUCT_JL_V@RA_JL A) P
  WHERE T.PROD_IT_NUM = P.PROD_NUM
@@ -98,9 +99,9 @@ select T.DAY_DT,
           FROM BBG_RA_PRODUCT_JL_V@RA_JL A) P
  WHERE T.PROD_IT_NUM = P.PROD_NUM
 /*   and SUBSTR(P.PROD_CAT5,
-              INSTR(P.PROD_CAT5, '~', 1, 2) + 1,
-              INSTR(P.PROD_CAT5, '~', 1, 3) -
-              (INSTR(P.PROD_CAT5, '~', 1, 2) + 1)) = 73*/
+INSTR(P.PROD_CAT5, '~', 1, 2) + 1,
+INSTR(P.PROD_CAT5, '~', 1, 3) -
+(INSTR(P.PROD_CAT5, '~', 1, 2) + 1)) = 73*/
  GROUP BY T.DAY_DT, t.org_num, t.prod_it_num
 /*,
 SUBSTR(P.PROD_CAT5,

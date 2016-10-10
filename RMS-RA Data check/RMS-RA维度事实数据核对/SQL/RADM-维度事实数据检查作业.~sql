@@ -122,14 +122,7 @@ SELECT /*+PARALLEL(16)*/
 --11.每日RA batch报错信息记录
 SELECT * FROM RADM.RA_BATCH_ERR_LOG ORDER BY RUN_DATE DESC FOR UPDATE;
 
---12.ODI日志记录备份
-begin
-  -- Call the procedure
-jin_pkg.p_backup_odi_log;
-end;
-
---13.RA商品主条码更新
-
+--12.RA商品主条码更新
 UPDATE RADM.W_PRODUCT_ATTR_D A
    SET A.BBG_PRIMARY_BARCODE =
        (SELECT B.BBG_PRIMARY_BARCODE
@@ -146,6 +139,17 @@ UPDATE RADM.W_PRODUCT_ATTR_D A
                  WHERE T.PRIMARY_BARCODE_IND = 'Y') C
          WHERE A.PROD_NUM = C.ITEM);
 COMMIT;
+
+
+
+
+--13.ODI日志记录备份
+begin
+  -- Call the procedure
+jin_pkg.p_backup_odi_log;
+end;
+
+
 --****************************************************************************************
 --****************************************************************************************
 /*
