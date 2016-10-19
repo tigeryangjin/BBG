@@ -30,9 +30,7 @@ update RADM.BBG_RA_ITEM_LOC_SUPP_D T
         SRC_EFF_FROM_DT,
         SRC_EFF_TO_DT,
         ETL_PROC_WID,
-        W_UPDATE_DT
-        
-        ) =
+        W_UPDATE_DT) =
        (select S.DESC_CHINESE,
                S.DESC_ENGLISH,
                S.REF_NO1,
@@ -43,7 +41,6 @@ update RADM.BBG_RA_ITEM_LOC_SUPP_D T
                S.SRC_EFF_TO_DT,
                S.ETL_PROC_WID,
                SYSDATE
-        
           from (select STG.ITEM ITEM,
                        STG.SUPPLIER SUPPLIER,
                        STG.ORIGIN_COUNTRY_ID ORIGIN_COUNTRY_ID,
@@ -64,9 +61,7 @@ update RADM.BBG_RA_ITEM_LOC_SUPP_D T
                                 TO_DATE('2016-05-05',
                                         'YYYY-MM-DD')) EFFECTIVE_FROM_DT
                   from RADM.BBG_RA_ITEM_LOC_SUPP_DS STG
-                 where (1 = 1)
-                
-                ) S
+                 where (1 = 1)) S
          where S.DATASOURCE_NUM_ID = T.DATASOURCE_NUM_ID
            and S.INTEGRATION_ID = T.INTEGRATION_ID
            AND NOT EXISTS
@@ -95,9 +90,7 @@ update RADM.BBG_RA_ITEM_LOC_SUPP_D T
                    and CURRENT_FLG = 'Y'
                    and EFFECTIVE_TO_DT =
                        to_date('2100-01-01',
-                               'YYYY-MM-DD'))
-        
-        )
+                               'YYYY-MM-DD')))
  where (T.DATASOURCE_NUM_ID, T.INTEGRATION_ID) in
        (select S.DATASOURCE_NUM_ID, S.INTEGRATION_ID
           from (select STG.ITEM ITEM,

@@ -36,6 +36,7 @@ SELECT T.LOCATION,
  ORDER BY T.LOCATION, T.ITEM;
 
 --*************************************************************************************
+--º”»Øœ˙ €
 SELECT T.LOCATION,
        T.ITEM,
        SUM(T.UNITS) QTY,
@@ -102,10 +103,10 @@ SELECT T.LOCATION,
    AND T.LOCATION = C.STORE(+)
    AND T.TRAN_DATE = C.business_date(+)
       --AND T.TOTAL_RETAIL<>0
-   AND T.TRAN_DATE = DATE '2016-08-12'
-   AND T.DEPT IN ('12')
+   AND T.TRAN_DATE = DATE '2016-09-05'
+   AND T.DEPT = '42'
       -- AND T.LOCATION IN ('120036','120113','120151','120170')
-   AND T.LOCATION = '120033'
+   --AND T.LOCATION = '120033'
 --and t.ITEM='800333348'
  GROUP BY T.LOCATION, T.ITEM
  ORDER BY T.LOCATION, T.ITEM;
