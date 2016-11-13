@@ -149,7 +149,23 @@ begin
 jin_pkg.p_backup_odi_log;
 end;
 
-
+--14.大家电商品地点维度经营属性不一致处理。
+SELECT D.ITEM, D.BUSINESS_MODE, MAX(D.EFFECTIVE_FROM_DT) EFFECTIVE_FROM_DT
+  FROM RADM.BBG_RA_ITEM_LOC_D D
+ WHERE LENGTH(D.ITEM) = 13
+   AND D.CURRENT_FLG = 'Y'
+   AND EXISTS (SELECT 1
+          FROM (SELECT A.ITEM, COUNT(A.BUSINESS_MODE)
+                  FROM (SELECT DISTINCT B.ITEM, B.BUSINESS_MODE
+                          FROM RADM.BBG_RA_ITEM_LOC_D B
+                         WHERE LENGTH(B.ITEM) = 13
+                           AND B.CURRENT_FLG = 'Y') A
+                 GROUP BY A.ITEM
+                HAVING COUNT(A.BUSINESS_MODE) > 1) C
+         WHERE D.ITEM = C.ITEM)
+ GROUP BY D.ITEM, D.BUSINESS_MODE
+ ORDER BY 1, 3;
+ 
 --****************************************************************************************
 --****************************************************************************************
 /*

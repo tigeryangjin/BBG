@@ -1,0 +1,42 @@
+--INSERT INTO RA_RMS.BBG_JL_ITEM_LOC_DAY
+SELECT ITEM,
+       LOC,
+       SRC_EFF_FROM_DT,
+       NBB,
+       NBO,
+       --SALE_TYPE,
+       STANDARD_GROSS_MARGIN,
+       PROMO_GROSS_MARGIN,
+       BUSINESS_MODE,
+       ZC_IND,
+       BBG_ZG_IND,
+       HERO_ITEM_IND,
+       --START_DATE,
+       --END_DATE,
+       NEW_ITEM_FLAG,
+       --REF_NO1,
+       REF_NO2 /*,
+           REF_NO3,
+           REF_NO4*/
+  FROM BBG_RA_ITEM_LOC_JL_V@RMS_JL
+UNION ALL
+--insert into if sales's item loc dimension not in RA item loc 
+SELECT DISTINCT A.PROD_IT_NUM ITEM,
+                A.ORG_NUM LOC,
+                A.DAY_DT SRC_EFF_FROM_DT,
+                'N' NBB,
+                'N' NBO,
+                0 STANDARD_GROSS_MARGIN,
+                0 PROMO_GROSS_MARGIN,
+                'JX' BUSINESS_MODE,
+                'Y' ZC_IND,
+                'Y' BBG_ZG_IND,
+                'N' HERO_ITEM_IND,
+                'N' NEW_ITEM_FLAG,
+                '110001' REF_NO2
+  FROM BBG_RA_SLS_TRX_JL_V@RMS_JL A
+ WHERE A.DAY_DT = TRUNC(SYSDATE - 1)
+   AND NOT EXISTS (SELECT 1
+          FROM BBG_RA_ITEM_LOC_D@RMS_RA B
+         WHERE A.PROD_IT_NUM = B.ITEM
+           AND A.ORG_NUM = B.LOC)
