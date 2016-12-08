@@ -153,7 +153,12 @@ SELECT /*+PARALLEL(16)*/
 --****************************************************************************************
 --12.每日RA batch报错信息记录
 --****************************************************************************************
-SELECT * FROM RADM.RA_BATCH_ERR_LOG ORDER BY RUN_DATE DESC FOR UPDATE;
+INSERT INTO RADM.RA_BATCH_ERR_LOG
+  (RUN_DATE, ERR_INFO, AFFECT_PROGRESS, NOTES)
+VALUES
+  (&RUN_DATE, &ERR_INFO, &AFFECT_PROGRESS, &NOTES);
+COMMIT;
+--SELECT * FROM RADM.RA_BATCH_ERR_LOG ORDER BY RUN_DATE DESC;
 
 --****************************************************************************************
 --13.RA商品主条码更新

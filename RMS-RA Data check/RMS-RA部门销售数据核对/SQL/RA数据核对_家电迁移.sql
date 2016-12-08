@@ -1,0 +1,6 @@
+select *
+  from RADM.BBG_RA_RMS_JL_SALES_CHECK_V T
+ WHERE T.TRAN_DATE = &TRAN_DATE
+ ORDER BY 1, 2;
+
+
