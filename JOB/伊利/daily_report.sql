@@ -68,7 +68,7 @@ SELECT TDH.TRAN_DATE 销售日期,
                        SUM(TDH.UNITS) UNITS,
                        SUM(TDH.TOTAL_COST) TOTAL_COST,
                        SUM(TDH.TOTAL_RETAIL) TOTAL_RETAIL
-                  FROM TRAN_DATA_HISTORY@RTKHIST TDH
+                  FROM TRAN_DATA_HISTORY TDH /*TRAN_DATA_HISTORY@RTKHIST*/
                  WHERE TDH.TRAN_DATE = :TODAY - 366
                    AND EXISTS (SELECT 1
                           FROM uda_item_lov UIL
@@ -117,7 +117,7 @@ SELECT TDH.TRAN_DATE 销售日期,
                        SUM(TDH.UNITS) UNITS,
                        SUM(TDH.TOTAL_COST) TOTAL_COST,
                        SUM(TDH.TOTAL_RETAIL) TOTAL_RETAIL
-                  FROM TRAN_DATA_HISTORY@RTKHIST TDH
+                  FROM TRAN_DATA_HISTORY TDH /*TRAN_DATA_HISTORY@RTKHIST*/
                  WHERE TDH.TRAN_DATE = :TODAY - 366
                    AND EXISTS (SELECT 1
                           FROM uda_item_lov UIL

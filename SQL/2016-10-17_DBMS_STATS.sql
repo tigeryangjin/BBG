@@ -10,7 +10,7 @@ END;
 
 --2.
 BEGIN
-  DBMS_STATS.gather_schema_stats(OWNNAME          => 'ODI_WREP_USER',
+  DBMS_STATS.GATHER_SCHEMA_STATS(OWNNAME          => 'ODI_WREP_USER',
                                  GRANULARITY      => 'ALL',
                                  DEGREE           => 8,
                                  CASCADE          => TRUE,
