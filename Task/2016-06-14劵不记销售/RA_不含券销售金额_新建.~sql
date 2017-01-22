@@ -683,7 +683,7 @@ COMMENT ON COLUMN RADM.W_RTL_SLS_LC_MN_A.RET_TAX_COUPON_AMT_LCL
   IS '券退货金额(50,51,52)税额';
 
 
---知而行劵，厂商券，sibel劵
+--知而行劵，厂商券，siebel劵
 --CN_Retail_As-Was_Sales_-----Net_Sales_Coupon-----
 --CD_Retail_As-Was_Sales_-----Net_Sales_Coupon-----
 --CN_Retail_As-Was_Sales_Net_Sales_Coupon_Amt
@@ -710,3 +710,5 @@ COMMENT ON COLUMN RADM.W_RTL_SLS_LC_MN_A.RET_TAX_COUPON_AMT_LCL
 --CD_Retail_As-Was_Sales_Net_Sales_Coupon_Amt_Inc_Tax_MTD
 --CN_Retail_As-Was_Sales_Net_Sales_Coupon_Amt_Inc_Tax_YTD
 --CD_Retail_As-Was_Sales_Net_Sales_Coupon_Amt_Inc_Tax_YTD
+
+SELECT * FROM RADM.W_LOCALIZED_STRING_G T WHERE T.MSG_NUM LIKE '%Net_Sales_Coupon%' FOR UPDATE;

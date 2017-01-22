@@ -445,6 +445,14 @@ ALTER TABLE RADM.BBG_RA_INVADJ_DP_LC_DY_A ADD (
   ENABLE VALIDATE);
 	
 --1.5.BBG_RA_INVADJ_IT_DY_A
+-- Create sequence 
+create sequence BBG_RA_INVADJ_IT_DY_A_SEQ
+minvalue 1
+maxvalue 9999999999999999999999999999
+start with 1
+increment by 1
+cache 20;
+
 CREATE TABLE RADM.BBG_RA_INVADJ_IT_DY_A
 (
   ROW_WID                NUMBER(15),
