@@ -1,0 +1,7 @@
+XLODBC
+1
+DRIVER=SQL Server;SERVER=192.168.2.228;UID=sa;APP=Microsoft Office 2013;WSID=YANGJIN;DATABASE=zktime8
+SELECT checkinout.id, checkinout.userid, checkinout.badgenumber, checkinout.checktime, checkinout.checktype, checkinout.verifycode, checkinout.SN, checkinout.sensorid, checkinout.WorkCode, checkinout.Reserved, checkinout.sn_name, checkinout.pin  FROM zktime8.dbo.checkinout checkinout  WHERE (checkinout.pin='0006320835')  ORDER BY checkinout.checktime DESC
+
+
+id	userid	badgenumber	checktime	checktype	verifycode	SN	sensorid	WorkCode	Reserved	sn_name	pin
