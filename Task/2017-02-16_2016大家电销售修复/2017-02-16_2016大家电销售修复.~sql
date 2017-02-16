@@ -1,0 +1,179 @@
+--1.BBG_RA_JL_FIX_2016
+CALL BBG_RA_JL_FIX_2016();
+--2.
+CREATE TABLE RADM.BBG_RA_JL_FIX_2016_LOG(DAY_DT DATE);
+--3.
+ 
+BEGIN
+  BBG_RA_JL_FIX_2016(DATE '2016-03-01');
+END;
+/
+--4.
+SELECT D.MCAL_DAY_DT           DAY_DT,
+       O.ORG_NUM,
+       P.PROD_NUM              PROD_IT_NUM,
+       T.SLS_TRX_ID,
+       T.SLS_QTY,
+       SLS_AMT_LCL,
+       SLS_PROFIT_AMT_LCL,
+       SLS_TAX_AMT_LCL,
+       SLS_EMP_DISC_AMT_LCL,
+       SLS_MANUAL_COUNT,
+       SLS_SCAN_COUNT,
+       RET_QTY,
+       RET_AMT_LCL,
+       RET_PROFIT_AMT_LCL,
+       RET_TAX_AMT_LCL,
+       RET_EMP_DISC_AMT_LCL,
+       RET_MANUAL_COUNT,
+       RET_SCAN_COUNT,
+       SLS_MANUAL_MKDN_AMT_LCL,
+       SLS_MANUAL_MKUP_AMT_LCL,
+       RET_MANUAL_MKDN_AMT_LCL,
+       RET_MANUAL_MKUP_AMT_LCL
+  FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F T,
+       RADM.W_INT_ORG_D              O,
+       RADM.W_PRODUCT_D              P,
+       RADM.W_MCAL_DAY_D             D
+ WHERE T.ORG_WID = O.ROW_WID
+   AND T.PROD_WID = P.ROW_WID
+   AND T.DT_WID = D.ROW_WID
+   AND D.MCAL_DAY_DT = DATE '2016-03-01'
+   AND T.BBG_SERVICE_SATISFACTION = 3.5
+ ORDER BY 1, 2, 3, 4;
+
+SELECT DAY_DT,
+       ORG_NUM,
+       PROD_IT_NUM,
+       SLS_TRX_ID,
+       SLS_QTY,
+       SLS_AMT_LCL,
+       SLS_PROFIT_AMT_LCL,
+       SLS_TAX_AMT_LCL,
+       SLS_EMP_DISC_AMT_LCL,
+       SLS_MANUAL_COUNT,
+       SLS_SCAN_COUNT,
+       -RET_QTY                 RET_QTY,
+       -RET_AMT_LCL             RET_AMT_LCL,
+       -RET_PROFIT_AMT_LCL      RET_PROFIT_AMT_LCL,
+       -RET_TAX_AMT_LCL         RET_TAX_AMT_LCL,
+       -RET_EMP_DISC_AMT_LCL    RET_EMP_DISC_AMT_LCL,
+       -RET_MANUAL_COUNT        RET_MANUAL_COUNT,
+       -RET_SCAN_COUNT          RET_SCAN_COUNT,
+       SLS_MANUAL_MKDN_AMT_LCL,
+       SLS_MANUAL_MKUP_AMT_LCL,
+       -RET_MANUAL_MKDN_AMT_LCL RET_MANUAL_MKDN_AMT_LCL,
+       -RET_MANUAL_MKUP_AMT_LCL RET_MANUAL_MKUP_AMT_LCL,
+       VOUCHER_ID,
+       RTL_TYPE_CODE,
+       MIN_NUM,
+       BBG_RETAIL_TYPE_ID,
+       HYK_NO
+  FROM BBG_RA_SLS_TRX_JL_V@RA_JL
+ WHERE DAY_DT = DATE '2016-03-01'
+ ORDER BY 1, 2, 3, 4;
+
+SELECT J.SLS_TRX_ID,
+       J.PROD_IT_NUM,
+       J.ORG_NUM,
+       J.DAY_DT,
+       J.VOUCHER_ID,
+       J.RTL_TYPE_CODE,
+       J.MIN_NUM,
+       J.SLS_QTY,
+       J.SLS_AMT_LCL,
+       J.SLS_PROFIT_AMT_LCL,
+       J.SLS_TAX_AMT_LCL,
+       J.SLS_EMP_DISC_AMT_LCL,
+       J.SLS_MANUAL_COUNT,
+       J.SLS_SCAN_COUNT,
+       J.RET_QTY,
+       J.RET_AMT_LCL,
+       J.RET_PROFIT_AMT_LCL,
+       J.RET_TAX_AMT_LCL,
+       J.RET_EMP_DISC_AMT_LCL,
+       J.RET_MANUAL_COUNT,
+       J.RET_SCAN_COUNT,
+       J.SLS_MANUAL_MKDN_AMT_LCL,
+       J.SLS_MANUAL_MKUP_AMT_LCL,
+       J.RET_MANUAL_MKDN_AMT_LCL,
+       J.RET_MANUAL_MKUP_AMT_LCL,
+       J.BBG_RETAIL_TYPE_ID,
+       J.HYK_NO
+  FROM (SELECT D.MCAL_DAY_DT           DAY_DT,
+               O.ORG_NUM,
+               P.PROD_NUM              PROD_IT_NUM,
+               T.SLS_TRX_ID,
+               T.SLS_QTY,
+               SLS_AMT_LCL,
+               SLS_PROFIT_AMT_LCL,
+               SLS_TAX_AMT_LCL,
+               SLS_EMP_DISC_AMT_LCL,
+               SLS_MANUAL_COUNT,
+               SLS_SCAN_COUNT,
+               RET_QTY,
+               RET_AMT_LCL,
+               RET_PROFIT_AMT_LCL,
+               RET_TAX_AMT_LCL,
+               RET_EMP_DISC_AMT_LCL,
+               RET_MANUAL_COUNT,
+               RET_SCAN_COUNT,
+               SLS_MANUAL_MKDN_AMT_LCL,
+               SLS_MANUAL_MKUP_AMT_LCL,
+               RET_MANUAL_MKDN_AMT_LCL,
+               RET_MANUAL_MKUP_AMT_LCL
+          FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_F T,
+               RADM.W_INT_ORG_D              O,
+               RADM.W_PRODUCT_D              P,
+               RADM.W_MCAL_DAY_D             D
+         WHERE T.ORG_WID = O.ROW_WID
+           AND T.PROD_WID = P.ROW_WID
+           AND T.DT_WID = D.ROW_WID
+           AND D.MCAL_DAY_DT = DATE
+         '2016-03-01'
+           AND T.BBG_SERVICE_SATISFACTION = 3.5) R,
+       (SELECT DAY_DT,
+               ORG_NUM,
+               PROD_IT_NUM,
+               SLS_TRX_ID,
+               SLS_QTY,
+               SLS_AMT_LCL,
+               SLS_PROFIT_AMT_LCL,
+               SLS_TAX_AMT_LCL,
+               SLS_EMP_DISC_AMT_LCL,
+               SLS_MANUAL_COUNT,
+               SLS_SCAN_COUNT,
+               -RET_QTY                 RET_QTY,
+               -RET_AMT_LCL             RET_AMT_LCL,
+               -RET_PROFIT_AMT_LCL      RET_PROFIT_AMT_LCL,
+               -RET_TAX_AMT_LCL         RET_TAX_AMT_LCL,
+               -RET_EMP_DISC_AMT_LCL    RET_EMP_DISC_AMT_LCL,
+               -RET_MANUAL_COUNT        RET_MANUAL_COUNT,
+               -RET_SCAN_COUNT          RET_SCAN_COUNT,
+               SLS_MANUAL_MKDN_AMT_LCL,
+               SLS_MANUAL_MKUP_AMT_LCL,
+               -RET_MANUAL_MKDN_AMT_LCL RET_MANUAL_MKDN_AMT_LCL,
+               -RET_MANUAL_MKUP_AMT_LCL RET_MANUAL_MKUP_AMT_LCL,
+               VOUCHER_ID,
+               RTL_TYPE_CODE,
+               MIN_NUM,
+               BBG_RETAIL_TYPE_ID,
+               HYK_NO
+          FROM BBG_RA_SLS_TRX_JL_V@RA_JL
+         WHERE DAY_DT = DATE '2016-03-01') J
+ WHERE R.DAY_DT = J.DAY_DT
+   AND R.LOC = J.LOC
+   AND R.ITEM = J.ITEM
+   AND R.SLS_TRX_ID = J.SLS_TRX_ID;
+
+--5.
+
+--TMP
+SELECT * FROM ALL_SOURCE T WHERE T.OWNER='RADM' AND T.TEXT LIKE '%IF%THEN%';
+INSERT INTO RADM.BBG_RA_JL_FIX_2016_LOG t
+SELECT DATE'2016-03-01' FROM DUAL;
+COMMIT;
+SELECT * FROM RADM.BBG_RA_JL_FIX_2016_LOG;
+
+
+
