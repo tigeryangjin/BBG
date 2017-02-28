@@ -1,5 +1,5 @@
 --1.
-SELECT * FROM V_CMX_FUND_ALL H WHERE H.post_date=DATE'2017-01-17';
+SELECT * FROM V_CMX_FUND_ALL H ;
 
 --2.create table radm.bbg_ra_fund_it_lc_supp_dy_fs
 CREATE TABLE RADM.BBG_RA_FUND_IT_LC_SUPP_DY_FS
@@ -165,12 +165,12 @@ partition by range (ETL_THREAD_VAL)
 --3.create table rabatcher.bbg_ra_fund_it_lc_supp_dy_tmp
 CREATE TABLE RABATCHER.BBG_RA_FUND_IT_LC_SUPP_DY_TMP
 (
-	PROD_IT_NUM                VARCHAR2(25),
-  PROD_SC_NUM                VARCHAR2(25),
-  PROD_CL_NUM                VARCHAR2(25),
-  PROD_DP_NUM                VARCHAR2(25),
-  PROD_GP_NUM                VARCHAR2(25),
-  PROD_DV_NUM                VARCHAR2(25),
+	PROD_IT_NUM                VARCHAR2(30),
+  PROD_SC_NUM                VARCHAR2(30),
+  PROD_CL_NUM                VARCHAR2(30),
+  PROD_DP_NUM                VARCHAR2(30),
+  PROD_GP_NUM                VARCHAR2(30),
+  PROD_DV_NUM                VARCHAR2(30),
 	prod_it_wid                NUMBER(10),
   prod_scd1_wid              NUMBER(10),
 	PROD_SC_WID                NUMBER(10),
@@ -201,7 +201,7 @@ CREATE TABLE RABATCHER.BBG_RA_FUND_IT_LC_SUPP_DY_TMP
 	FUND_METHOD                VARCHAR2(10),
 	FUND_SOURCE                VARCHAR2(10),
   COST_CODE                  NUMBER(10),
-  FUND_AMOUNT_ID             NUMBER(20,4),
+  FUND_AMOUNT_IN             NUMBER(20,4),
   FUND_AMOUNT                NUMBER(20,4),
   ETL_THREAD_VAL             NUMBER(4),
   INTEGRATION_ID             VARCHAR2(80),
@@ -350,6 +350,7 @@ partition by range (ETL_THREAD_VAL)
 --4.create table radm.bbg_ra_fund_it_lc_supp_dy_f
 CREATE TABLE RADM.BBG_RA_FUND_IT_LC_SUPP_DY_F
 (
+  ROW_WID                    NUMBER(10),
   prod_it_wid                NUMBER(10),
   prod_scd1_wid              NUMBER(10),
 	org_lc_wid                 NUMBER(10),
@@ -364,7 +365,7 @@ CREATE TABLE RADM.BBG_RA_FUND_IT_LC_SUPP_DY_F
   FUND_METHOD                VARCHAR2(10),
   FUND_SOURCE                VARCHAR2(10),
   COST_CODE                  NUMBER(10),
-  FUND_AMOUNT_ID             NUMBER(20,4),
+  FUND_AMOUNT_IN             NUMBER(20,4),
   FUND_AMOUNT                NUMBER(20,4),
   ETL_THREAD_VAL             NUMBER(4),
   INTEGRATION_ID             VARCHAR2(80),
@@ -510,7 +511,16 @@ partition by range (ETL_THREAD_VAL)
     )
 );
 
+
 --5.
+-- Create sequence 
+create sequence BBG_RA_FUND_IT_LC_SP_DY_F_SEQ
+minvalue 1
+maxvalue 9999999999999999999999999999
+start with 1
+increment by 1
+cache 20000;
+
 
 --6.
 
@@ -522,6 +532,16 @@ SELECT * FROM V_CMX_FUND_ALL T WHERE T.post_date IS NULL;
 SELECT DISTINCT T.FUND_SOURCE FROM V_CMX_FUND_ALL T;
 SELECT DISTINCT T.FUND_METHOD FROM V_CMX_FUND_ALL T;
 SELECT * FROM RADM.W_RTL_SLS_TRX_IT_LC_DY_FS;
+SELECT * FROM RADM.BBG_RA_SLS_IT_LC_DY_FS;
+SELECT * FROM RABATCHER.W_PRODUCT_D_RTL_TMP;
+SELECT * FROM RABATCHER.BBG_RA_SUPP_SLS_IT_LC_DY_TMP;
+SELECT MAX(LENGTH(T.PROD_IT_NUM)),
+       MAX(LENGTH(T.PROD_SC_NUM)),
+       MAX(LENGTH(T.PROD_CL_NUM)),
+       MAX(LENGTH(T.PROD_DP_NUM)),
+			 MAX(LENGTH(T.PROD_GP_NUM)),
+			 MAX(LENGTH(T.PROD_DV_NUM))
+  FROM RABATCHER.W_PRODUCT_D_RTL_TMP T;
 
 C_ODI_PARAM 
 
