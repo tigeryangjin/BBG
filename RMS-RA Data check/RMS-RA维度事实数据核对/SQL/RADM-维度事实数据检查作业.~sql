@@ -153,7 +153,12 @@ SELECT /*+PARALLEL(16)*/
 --****************************************************************************************
 --12.每日RA batch报错信息记录
 --****************************************************************************************
-SELECT * FROM RADM.RA_BATCH_ERR_LOG ORDER BY RUN_DATE DESC FOR UPDATE;
+INSERT INTO RADM.RA_BATCH_ERR_LOG
+  (RUN_DATE, ERR_INFO, AFFECT_PROGRESS, NOTES)
+VALUES
+  (&RUN_DATE, &ERR_INFO, &AFFECT_PROGRESS, &NOTES);
+COMMIT;
+--SELECT * FROM RADM.RA_BATCH_ERR_LOG ORDER BY RUN_DATE DESC;
 
 --****************************************************************************************
 --13.RA商品主条码更新
@@ -186,10 +191,50 @@ jin_pkg.p_backup_odi_log;
 end;
 /
 
+
 --****************************************************************************************
---15.大家电商品地点维度经营属性不一致处理。
+--15.
 --****************************************************************************************
---15.1
+UPDATE /*+PARALLEL(32)*/ RADM.W_PRODUCT_D E
+   SET E.BBG_ITEM_BRAND =
+       (SELECT F.DOMAIN_MEMBER_NAME
+          FROM (SELECT D.PROD_WID, D.DOMAIN_MEMBER_CODE, C.DOMAIN_MEMBER_NAME
+                  FROM (SELECT A.DOMAIN_MEMBER_CODE, A.DOMAIN_MEMBER_NAME
+                          FROM W_DOMAIN_MEMBER_LKP_TL A
+                         WHERE A.DOMAIN_CODE = 'ITEM_UDA'
+                           AND A.DOMAIN_TYPE_CODE = 'S'
+                           AND A.LANGUAGE_CODE = 'ZHS') C,
+                       (SELECT B.PROD_WID,
+                               B.FLEX_ATTRIB_1_CHAR || '~' ||
+                               B.FLEX_ATTRIB_3_CHAR DOMAIN_MEMBER_CODE
+                          FROM RADM.W_RTL_ITEM_GRP1_D B
+                         WHERE B.PROD_GRP_TYPE = 'ITEMUDA'
+                           AND B.FLEX_ATTRIB_1_CHAR = 3) D
+                 WHERE C.DOMAIN_MEMBER_CODE = D.DOMAIN_MEMBER_CODE) F
+         WHERE E.ROW_WID = F.PROD_WID)
+ WHERE EXISTS
+ (SELECT 1
+          FROM (SELECT D.PROD_WID, D.DOMAIN_MEMBER_CODE, C.DOMAIN_MEMBER_NAME
+                  FROM (SELECT A.DOMAIN_MEMBER_CODE, A.DOMAIN_MEMBER_NAME
+                          FROM W_DOMAIN_MEMBER_LKP_TL A
+                         WHERE A.DOMAIN_CODE = 'ITEM_UDA'
+                           AND A.DOMAIN_TYPE_CODE = 'S'
+                           AND A.LANGUAGE_CODE = 'ZHS') C,
+                       (SELECT B.PROD_WID,
+                               B.FLEX_ATTRIB_1_CHAR || '~' ||
+                               B.FLEX_ATTRIB_3_CHAR DOMAIN_MEMBER_CODE
+                          FROM RADM.W_RTL_ITEM_GRP1_D B
+                         WHERE B.PROD_GRP_TYPE = 'ITEMUDA'
+                           AND B.FLEX_ATTRIB_1_CHAR = 3) D
+                 WHERE C.DOMAIN_MEMBER_CODE = D.DOMAIN_MEMBER_CODE) G
+         WHERE E.ROW_WID = G.PROD_WID
+           AND E.BBG_ITEM_BRAND <> G.DOMAIN_MEMBER_NAME);
+COMMIT;
+
+--****************************************************************************************
+--16.大家电商品地点维度经营属性不一致处理。
+--****************************************************************************************
+--16.1
 SELECT D.ITEM, D.BUSINESS_MODE, MAX(D.EFFECTIVE_FROM_DT) EFFECTIVE_FROM_DT
   FROM RADM.BBG_RA_ITEM_LOC_D D
  WHERE LENGTH(D.ITEM) = 13

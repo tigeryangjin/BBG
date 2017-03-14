@@ -522,7 +522,332 @@ increment by 1
 cache 20000;
 
 
---6.
+--6.aggregate table
+--6.1.BBG_RA_FUND_IT_LC_DY_A
+CREATE TABLE RADM.BBG_RA_FUND_IT_LC_DY_A
+(
+  ROW_WID                    NUMBER(10),
+  prod_it_wid                NUMBER(10),
+  prod_scd1_wid              NUMBER(10),
+	org_lc_wid                 NUMBER(10),
+  DT_WID                     NUMBER(15),
+  bbg_item_loc_wid           NUMBER(10),
+  FUND_AMOUNT_IN             NUMBER(20,4),
+  FUND_AMOUNT                NUMBER(20,4),
+  ETL_THREAD_VAL             NUMBER(4),
+  INTEGRATION_ID             VARCHAR2(80),
+  W_INSERT_DT                DATE,
+  W_UPDATE_DT                DATE,
+  BBG_REFERENCE_DO1          VARCHAR2(250),
+  BBG_REFERENCE_DO2          VARCHAR2(250),
+  BBG_REFERENCE_DO3          VARCHAR2(250),
+  BBG_REFERENCE_DO4          VARCHAR2(250),
+  BBG_REFERENCE_DO5          VARCHAR2(250),
+  BBG_REFERENCE_FO1          NUMBER(20,4),
+  BBG_REFERENCE_FO2          NUMBER(20,4),
+  BBG_REFERENCE_FO3          NUMBER(20,4),
+  BBG_REFERENCE_FO4          NUMBER(20,4),
+  BBG_REFERENCE_FO5          NUMBER(20,4),
+  BBG_REFERENCE_FO6          NUMBER(20,4),
+  BBG_REFERENCE_FO7          NUMBER(20,4),
+  BBG_REFERENCE_FO8          NUMBER(20,4),
+  BBG_REFERENCE_FO9          NUMBER(20,4),
+  BBG_REFERENCE_FO10         NUMBER(20,4)
+)
+partition by range (ETL_THREAD_VAL)
+(
+  partition P_01 values less than (2)
+    tablespace DM_FACT_DATA
+    pctfree 10
+    initrans 6
+    maxtrans 255
+    storage
+    (
+      initial 8M
+      next 1M
+      minextents 1
+      maxextents unlimited
+    ),
+  partition P_02 values less than (3)
+    tablespace DM_FACT_DATA
+    pctfree 10
+    initrans 6
+    maxtrans 255
+    storage
+    (
+      initial 8M
+      next 1M
+      minextents 1
+      maxextents unlimited
+    ),
+  partition P_03 values less than (4)
+    tablespace DM_FACT_DATA
+    pctfree 10
+    initrans 6
+    maxtrans 255
+    storage
+    (
+      initial 8M
+      next 1M
+      minextents 1
+      maxextents unlimited
+    ),
+  partition P_04 values less than (5)
+    tablespace DM_FACT_DATA
+    pctfree 10
+    initrans 6
+    maxtrans 255
+    storage
+    (
+      initial 8M
+      next 1M
+      minextents 1
+      maxextents unlimited
+    ),
+  partition P_05 values less than (6)
+    tablespace DM_FACT_DATA
+    pctfree 10
+    initrans 6
+    maxtrans 255
+    storage
+    (
+      initial 8M
+      next 1M
+      minextents 1
+      maxextents unlimited
+    ),
+  partition P_06 values less than (7)
+    tablespace DM_FACT_DATA
+    pctfree 10
+    initrans 6
+    maxtrans 255
+    storage
+    (
+      initial 8M
+      next 1M
+      minextents 1
+      maxextents unlimited
+    ),
+  partition P_07 values less than (8)
+    tablespace DM_FACT_DATA
+    pctfree 10
+    initrans 6
+    maxtrans 255
+    storage
+    (
+      initial 8M
+      next 1M
+      minextents 1
+      maxextents unlimited
+    ),
+  partition P_08 values less than (9)
+    tablespace DM_FACT_DATA
+    pctfree 10
+    initrans 6
+    maxtrans 255
+    storage
+    (
+      initial 8M
+      next 1M
+      minextents 1
+      maxextents unlimited
+    ),
+  partition P_09 values less than (10)
+    tablespace DM_FACT_DATA
+    pctfree 10
+    initrans 6
+    maxtrans 255
+    storage
+    (
+      initial 8M
+      next 1M
+      minextents 1
+      maxextents unlimited
+    ),
+  partition P_10 values less than (MAXVALUE)
+    tablespace DM_FACT_DATA
+    pctfree 10
+    initrans 6
+    maxtrans 255
+    storage
+    (
+      initial 8M
+      next 1M
+      minextents 1
+      maxextents unlimited
+    )
+);
+-- Create sequence 
+create sequence BBG_RA_FUND_IT_LC_DY_A_SEQ
+minvalue 1
+maxvalue 9999999999999999999999999999
+start with 1
+increment by 1
+cache 20000;
+
+--6.2.
+CREATE TABLE RADM.BBG_RA_FUND_IT_LC_SUPP_DY_A
+(
+  ROW_WID                    NUMBER(10),
+  prod_it_wid                NUMBER(10),
+  prod_scd1_wid              NUMBER(10),
+	org_lc_wid                 NUMBER(10),
+  SUPPLIER_WID               NUMBER(10),
+  DT_WID                     NUMBER(15),
+  bbg_item_loc_wid           NUMBER(10),
+  bbg_item_loc_supp_wid      NUMBER(10),
+  FUND_AMOUNT_IN             NUMBER(20,4),
+  FUND_AMOUNT                NUMBER(20,4),
+  ETL_THREAD_VAL             NUMBER(4),
+  INTEGRATION_ID             VARCHAR2(80),
+  W_INSERT_DT                DATE,
+  W_UPDATE_DT                DATE,
+  BBG_REFERENCE_DO1          VARCHAR2(250),
+  BBG_REFERENCE_DO2          VARCHAR2(250),
+  BBG_REFERENCE_DO3          VARCHAR2(250),
+  BBG_REFERENCE_DO4          VARCHAR2(250),
+  BBG_REFERENCE_DO5          VARCHAR2(250),
+  BBG_REFERENCE_FO1          NUMBER(20,4),
+  BBG_REFERENCE_FO2          NUMBER(20,4),
+  BBG_REFERENCE_FO3          NUMBER(20,4),
+  BBG_REFERENCE_FO4          NUMBER(20,4),
+  BBG_REFERENCE_FO5          NUMBER(20,4),
+  BBG_REFERENCE_FO6          NUMBER(20,4),
+  BBG_REFERENCE_FO7          NUMBER(20,4),
+  BBG_REFERENCE_FO8          NUMBER(20,4),
+  BBG_REFERENCE_FO9          NUMBER(20,4),
+  BBG_REFERENCE_FO10         NUMBER(20,4)
+)
+partition by range (ETL_THREAD_VAL)
+(
+  partition P_01 values less than (2)
+    tablespace DM_FACT_DATA
+    pctfree 10
+    initrans 6
+    maxtrans 255
+    storage
+    (
+      initial 8M
+      next 1M
+      minextents 1
+      maxextents unlimited
+    ),
+  partition P_02 values less than (3)
+    tablespace DM_FACT_DATA
+    pctfree 10
+    initrans 6
+    maxtrans 255
+    storage
+    (
+      initial 8M
+      next 1M
+      minextents 1
+      maxextents unlimited
+    ),
+  partition P_03 values less than (4)
+    tablespace DM_FACT_DATA
+    pctfree 10
+    initrans 6
+    maxtrans 255
+    storage
+    (
+      initial 8M
+      next 1M
+      minextents 1
+      maxextents unlimited
+    ),
+  partition P_04 values less than (5)
+    tablespace DM_FACT_DATA
+    pctfree 10
+    initrans 6
+    maxtrans 255
+    storage
+    (
+      initial 8M
+      next 1M
+      minextents 1
+      maxextents unlimited
+    ),
+  partition P_05 values less than (6)
+    tablespace DM_FACT_DATA
+    pctfree 10
+    initrans 6
+    maxtrans 255
+    storage
+    (
+      initial 8M
+      next 1M
+      minextents 1
+      maxextents unlimited
+    ),
+  partition P_06 values less than (7)
+    tablespace DM_FACT_DATA
+    pctfree 10
+    initrans 6
+    maxtrans 255
+    storage
+    (
+      initial 8M
+      next 1M
+      minextents 1
+      maxextents unlimited
+    ),
+  partition P_07 values less than (8)
+    tablespace DM_FACT_DATA
+    pctfree 10
+    initrans 6
+    maxtrans 255
+    storage
+    (
+      initial 8M
+      next 1M
+      minextents 1
+      maxextents unlimited
+    ),
+  partition P_08 values less than (9)
+    tablespace DM_FACT_DATA
+    pctfree 10
+    initrans 6
+    maxtrans 255
+    storage
+    (
+      initial 8M
+      next 1M
+      minextents 1
+      maxextents unlimited
+    ),
+  partition P_09 values less than (10)
+    tablespace DM_FACT_DATA
+    pctfree 10
+    initrans 6
+    maxtrans 255
+    storage
+    (
+      initial 8M
+      next 1M
+      minextents 1
+      maxextents unlimited
+    ),
+  partition P_10 values less than (MAXVALUE)
+    tablespace DM_FACT_DATA
+    pctfree 10
+    initrans 6
+    maxtrans 255
+    storage
+    (
+      initial 8M
+      next 1M
+      minextents 1
+      maxextents unlimited
+    )
+);
+-- Create sequence 
+create sequence BBG_RA_FUND_IT_LC_SUP_DY_A_SEQ
+minvalue 1
+maxvalue 9999999999999999999999999999
+start with 1
+increment by 1
+cache 20000;
 
 --TMP
 SELECT DISTINCT T.DT_WID FROM RADM.BBG_RA_FUND_IT_LC_SUPP_DY_F T;
