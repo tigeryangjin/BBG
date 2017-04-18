@@ -230,9 +230,14 @@ CREATE OR REPLACE PACKAGE BODY JIN_PKG AS
                SUM(T.SUPP_SALES_COST) RA_SUPP_COST,
                SUM(T.SUPP_SALES_AMT) RA_SUPP_NET_AMT,
                SUM(T.BBG_REFERENCE_FO1) RA_SUPP_AMT
-                FROM RADM.BBG_RA_SLS_IT_LC_DY_A T, RADM.W_MCAL_DAY_DV MCAL
+                FROM RADM.BBG_RA_SLS_IT_LC_DY_A T,
+                     RADM.W_MCAL_DAY_DV         MCAL,
+                     RADM.W_INT_ORG_D           O
                WHERE MCAL.ROW_WID = T.DT_WID
+                 AND T.ORG_WID = O.ROW_WID
                  AND MCAL.MCAL_DAY_DT BETWEEN BDATE AND EDATE
+                    --剔除118001的批发销售
+                 AND O.ORG_NUM <> 118001
                GROUP BY MCAL.MCAL_DAY_DT) RA_SUPP_SALES
        WHERE RMS_SUPP_SALES.DAY_DT = RA_SUPP_SALES.DAY_DT
          AND RMS_SUPP_SALES.DAY_DT = RA_ITEM_SALES.DAY_DT
@@ -361,6 +366,8 @@ CREATE OR REPLACE PACKAGE BODY JIN_PKG AS
                      RADM.W_INT_ORG_D           O
                WHERE MCAL.ROW_WID = T.DT_WID
                  AND T.ORG_WID = O.ROW_WID
+                    --剔出118001的批发销售
+                 AND O.ORG_NUM <> 118001
                  AND MCAL.MCAL_DAY_DT BETWEEN BDATE AND EDATE
                GROUP BY MCAL.MCAL_DAY_DT, O.ORG_NUM) RA_SUPP_SALES
        WHERE RMS_SUPP_SALES.DAY_DT = RA_SUPP_SALES.DAY_DT(+)
@@ -550,6 +557,8 @@ CREATE OR REPLACE PACKAGE BODY JIN_PKG AS
                WHERE MCAL.ROW_WID = T.DT_WID
                  AND T.PROD_WID = P.ROW_WID
                  AND T.ORG_WID = O.ROW_WID
+                    --剔除118001的批发销售
+                 AND O.ORG_NUM <> 118001
                  AND MCAL.MCAL_DAY_DT BETWEEN BDATE AND EDATE
                GROUP BY MCAL.MCAL_DAY_DT, P.PROD_NUM, O.ORG_NUM) RA_SUPP_SALES
        WHERE RMS_SUPP_SALES.DAY_DT = RA_SUPP_SALES.DAY_DT(+)
